@@ -3,15 +3,16 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hello World | azer3D</title>
+  <title>Tessellation Devnotes | azer3D</title>
   <meta name="author" content="lenxyang@gmail.com">
   
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in ">
+  <meta name="description" content="Tessellation (DevNotes)Troubles Shooting渲染 quad 时只能出现两个对角三角形，而非4个三角形问题发生在插值函数上
+12345DsOutput ds_main(...) &amp;#123;  float3 v1 = lerp(quad[0].position.xy">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="Hello World"/>
+  <meta property="og:title" content="Tessellation Devnotes"/>
   <meta property="og:site_name" content="azer3D"/>
 
   
@@ -51,25 +52,19 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-01-25T08:39:37.552Z"><a href="/2016/01/25/hello-world/">2016-01-25</a></time>
+        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/d3d11/tessellation_devnotes/">2016-01-25</a></time>
       
       
   
-    <h1 class="title">Hello World</h1>
+    <h1 class="title">Tessellation Devnotes</h1>
   
 
     </header>
     <div class="entry">
       
-        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start"><a href="#Quick_Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create_a_new_post"><a href="#Create_a_new_post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server"><a href="#Run_server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files"><a href="#Generate_static_files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites"><a href="#Deploy_to_remote_sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <h1 id="Tessellation__28DevNotes_29"><a href="#Tessellation__28DevNotes_29" class="headerlink" title="Tessellation (DevNotes)"></a>Tessellation (DevNotes)</h1><h2 id="Troubles_Shooting"><a href="#Troubles_Shooting" class="headerlink" title="Troubles Shooting"></a>Troubles Shooting</h2><h3 id="u6E32_u67D3_quad__u65F6_u53EA_u80FD_u51FA_u73B0_u4E24_u4E2A_u5BF9_u89D2_u4E09_u89D2_u5F62_uFF0C_u800C_u975E4_u4E2A_u4E09_u89D2_u5F62"><a href="#u6E32_u67D3_quad__u65F6_u53EA_u80FD_u51FA_u73B0_u4E24_u4E2A_u5BF9_u89D2_u4E09_u89D2_u5F62_uFF0C_u800C_u975E4_u4E2A_u4E09_u89D2_u5F62" class="headerlink" title="渲染 quad 时只能出现两个对角三角形，而非4个三角形"></a>渲染 quad 时只能出现两个对角三角形，而非4个三角形</h3><p>问题发生在插值函数上</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">DsOutput <span class="title">ds_main</span><span class="params">(...)</span> </span>&#123;</span><br><span class="line">  float3 v1 = lerp(quad[<span class="number">0</span>].position.xyz, quad[<span class="number">1</span>].position.xyz, uv.x);</span><br><span class="line">  float3 v2 = lerp(quad[<span class="number">3</span>].position.xyz, quad[<span class="number">2</span>].position.xyz, uv.x);</span><br><span class="line">  output.position = mul(pvw, float4(lerp(v1, v2, uv.y), <span class="number">1.0f</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>开始是将 v2 的插值顺序写反了 (quad[3], quad[2])<br>注意：azer3d 采用的是右手坐标系</p>
 
       
     </div>
@@ -77,6 +72,11 @@
       
         
         
+  
+  <div class="tags">
+    <a href="/tags/direct3d/">direct3d</a>
+  </div>
+
         
       
       <div class="clearfix"></div>
@@ -100,7 +100,7 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="fb-comments" data-href="http://lenxyang.github.io/2016/01/25/hello-world/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="http://lenxyang.github.io/2016/01/25/d3d11/tessellation_devnotes/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
 </section>
