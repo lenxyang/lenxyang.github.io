@@ -6,8 +6,7 @@
   <title>hexo-setup | azer3D</title>
   <meta name="author" content="lenxyang@gmail.com">
   
-  <meta name="description" content="Hexo-setup安装 hexo部署到 github安装主题将主题保存在 themes 目录下1git clone https://github.com/hexojs/hexo-theme-light.git themes/light
-修改 _config.yaml12345# Extension">
+  <meta name="description" content="Hexo-setup安装 hexohexo 基础操作部署到 github建立信任关系hexo 需要将生成的内容 push 到 git 服务器上。 使用 ssh 的协议能够免密码 push。具体操作是将 ssh-keygen 生成的 public key 文件添加到 github 的 deploy k">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -62,7 +61,9 @@
     </header>
     <div class="entry">
       
-        <h1 id="Hexo-setup"><a href="#Hexo-setup" class="headerlink" title="Hexo-setup"></a>Hexo-setup</h1><h2 id="u5B89_u88C5_hexo"><a href="#u5B89_u88C5_hexo" class="headerlink" title="安装 hexo"></a>安装 hexo</h2><h2 id="u90E8_u7F72_u5230_github"><a href="#u90E8_u7F72_u5230_github" class="headerlink" title="部署到 github"></a>部署到 github</h2><h2 id="u5B89_u88C5_u4E3B_u9898"><a href="#u5B89_u88C5_u4E3B_u9898" class="headerlink" title="安装主题"></a>安装主题</h2><h3 id="u5C06_u4E3B_u9898_u4FDD_u5B58_u5728_themes__u76EE_u5F55_u4E0B"><a href="#u5C06_u4E3B_u9898_u4FDD_u5B58_u5728_themes__u76EE_u5F55_u4E0B" class="headerlink" title="将主题保存在 themes 目录下"></a>将主题保存在 themes 目录下</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/hexojs/hexo-theme-light.git themes/light</span><br></pre></td></tr></table></figure>
+        <h1 id="Hexo-setup"><a href="#Hexo-setup" class="headerlink" title="Hexo-setup"></a>Hexo-setup</h1><h2 id="u5B89_u88C5_hexo"><a href="#u5B89_u88C5_hexo" class="headerlink" title="安装 hexo"></a>安装 hexo</h2><h2 id="hexo__u57FA_u7840_u64CD_u4F5C"><a href="#hexo__u57FA_u7840_u64CD_u4F5C" class="headerlink" title="hexo 基础操作"></a>hexo 基础操作</h2><h2 id="u90E8_u7F72_u5230_github"><a href="#u90E8_u7F72_u5230_github" class="headerlink" title="部署到 github"></a>部署到 github</h2><h3 id="u5EFA_u7ACB_u4FE1_u4EFB_u5173_u7CFB"><a href="#u5EFA_u7ACB_u4FE1_u4EFB_u5173_u7CFB" class="headerlink" title="建立信任关系"></a>建立信任关系</h3><p>hexo 需要将生成的内容 push 到 git 服务器上。 使用 ssh 的协议能够免密码 push。具体操作是将 ssh-keygen 生成的 public key 文件添加到 github 的 deploy key 当中。</p>
+<h3 id="u4FEE_u6539__config"><a href="#u4FEE_u6539__config" class="headerlink" title="修改 _config"></a>修改 _config</h3><p>修改 _config.yaml<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: http://hexo.io/docs/deployment.html</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: git@github.com:lenxyang/lenxyang.github.io.git</span><br></pre></td></tr></table></figure></p>
+<h2 id="u5B89_u88C5_u4E3B_u9898"><a href="#u5B89_u88C5_u4E3B_u9898" class="headerlink" title="安装主题"></a>安装主题</h2><h3 id="u5C06_u4E3B_u9898_u4FDD_u5B58_u5728_themes__u76EE_u5F55_u4E0B"><a href="#u5C06_u4E3B_u9898_u4FDD_u5B58_u5728_themes__u76EE_u5F55_u4E0B" class="headerlink" title="将主题保存在 themes 目录下"></a>将主题保存在 themes 目录下</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/hexojs/hexo-theme-light.git themes/light</span><br></pre></td></tr></table></figure>
 <h3 id="u4FEE_u6539__config-yaml"><a href="#u4FEE_u6539__config-yaml" class="headerlink" title="修改 _config.yaml"></a>修改 _config.yaml</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Extensions</span></span><br><span class="line"><span class="comment">## Plugins: http://hexo.io/plugins/</span></span><br><span class="line"><span class="comment">## Themes: http://hexo.io/themes/</span></span><br><span class="line"><span class="comment">## theme: landscape</span></span><br><span class="line">theme: light</span><br></pre></td></tr></table></figure>
 <h2 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h2><h3 id="u8FD0_u884C_hexo__u662F_u63D0_u793A__u201C/usr/bin/env_3A_node_3A_No_such_file_or_directory_u201D"><a href="#u8FD0_u884C_hexo__u662F_u63D0_u793A__u201C/usr/bin/env_3A_node_3A_No_such_file_or_directory_u201D" class="headerlink" title="运行 hexo 是提示 “/usr/bin/env: node: No such file or directory”"></a>运行 hexo 是提示 “/usr/bin/env: node: No such file or directory”</h3><p>最简单的办法是</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install nodejs-legacy</span><br></pre></td></tr></table></figure>
@@ -127,6 +128,8 @@
 <div class="widget tag">
   <h3 class="title">標籤</h3>
   <ul class="entry">
+  
+    <li><a href="/tags/hdfs-docker/">hdfs docker</a><small>1</small></li>
   
     <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
   
