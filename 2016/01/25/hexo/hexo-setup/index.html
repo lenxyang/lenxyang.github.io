@@ -6,8 +6,8 @@
   <title>hexo-setup | azer3D</title>
   <meta name="author" content="lenxyang@gmail.com">
   
-  <meta name="description" content="Hexo-setup安装 hexo部署到 github安装主题Trouble Shooting运行 hexo 是提示 “/usr/bin/env: node: No such file or directory”最简单的办法是
-1$ sudo apt-get install nodejs-legac">
+  <meta name="description" content="Hexo-setup安装 hexo部署到 github安装主题将主题保存在 themes 目录下1git clone https://github.com/hexojs/hexo-theme-light.git themes/light
+修改 _config.yaml12345# Extension">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -62,12 +62,15 @@
     </header>
     <div class="entry">
       
-        <h1 id="Hexo-setup"><a href="#Hexo-setup" class="headerlink" title="Hexo-setup"></a>Hexo-setup</h1><h2 id="u5B89_u88C5_hexo"><a href="#u5B89_u88C5_hexo" class="headerlink" title="安装 hexo"></a>安装 hexo</h2><h2 id="u90E8_u7F72_u5230_github"><a href="#u90E8_u7F72_u5230_github" class="headerlink" title="部署到 github"></a>部署到 github</h2><h2 id="u5B89_u88C5_u4E3B_u9898"><a href="#u5B89_u88C5_u4E3B_u9898" class="headerlink" title="安装主题"></a>安装主题</h2><h2 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h2><h3 id="u8FD0_u884C_hexo__u662F_u63D0_u793A__u201C/usr/bin/env_3A_node_3A_No_such_file_or_directory_u201D"><a href="#u8FD0_u884C_hexo__u662F_u63D0_u793A__u201C/usr/bin/env_3A_node_3A_No_such_file_or_directory_u201D" class="headerlink" title="运行 hexo 是提示 “/usr/bin/env: node: No such file or directory”"></a>运行 hexo 是提示 “/usr/bin/env: node: No such file or directory”</h3><p>最简单的办法是</p>
+        <h1 id="Hexo-setup"><a href="#Hexo-setup" class="headerlink" title="Hexo-setup"></a>Hexo-setup</h1><h2 id="u5B89_u88C5_hexo"><a href="#u5B89_u88C5_hexo" class="headerlink" title="安装 hexo"></a>安装 hexo</h2><h2 id="u90E8_u7F72_u5230_github"><a href="#u90E8_u7F72_u5230_github" class="headerlink" title="部署到 github"></a>部署到 github</h2><h2 id="u5B89_u88C5_u4E3B_u9898"><a href="#u5B89_u88C5_u4E3B_u9898" class="headerlink" title="安装主题"></a>安装主题</h2><h3 id="u5C06_u4E3B_u9898_u4FDD_u5B58_u5728_themes__u76EE_u5F55_u4E0B"><a href="#u5C06_u4E3B_u9898_u4FDD_u5B58_u5728_themes__u76EE_u5F55_u4E0B" class="headerlink" title="将主题保存在 themes 目录下"></a>将主题保存在 themes 目录下</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/hexojs/hexo-theme-light.git themes/light</span><br></pre></td></tr></table></figure>
+<h3 id="u4FEE_u6539__config-yaml"><a href="#u4FEE_u6539__config-yaml" class="headerlink" title="修改 _config.yaml"></a>修改 _config.yaml</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Extensions</span></span><br><span class="line"><span class="comment">## Plugins: http://hexo.io/plugins/</span></span><br><span class="line"><span class="comment">## Themes: http://hexo.io/themes/</span></span><br><span class="line"><span class="comment">## theme: landscape</span></span><br><span class="line">theme: light</span><br></pre></td></tr></table></figure>
+<h2 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h2><h3 id="u8FD0_u884C_hexo__u662F_u63D0_u793A__u201C/usr/bin/env_3A_node_3A_No_such_file_or_directory_u201D"><a href="#u8FD0_u884C_hexo__u662F_u63D0_u793A__u201C/usr/bin/env_3A_node_3A_No_such_file_or_directory_u201D" class="headerlink" title="运行 hexo 是提示 “/usr/bin/env: node: No such file or directory”"></a>运行 hexo 是提示 “/usr/bin/env: node: No such file or directory”</h3><p>最简单的办法是</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install nodejs-legacy</span><br></pre></td></tr></table></figure>
 <h3 id="hexo_deploy_3A_ERROR_Deployer_not_found_3A_github"><a href="#hexo_deploy_3A_ERROR_Deployer_not_found_3A_github" class="headerlink" title="hexo deploy: ERROR Deployer not found: github"></a>hexo deploy: ERROR Deployer not found: github</h3><p>hexo 从 3.0 以后，type 由 github 变为了 git。毕竟主要有一个 git repository 就可以部署了，并非 github 不可。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: http://hexo.io/docs/deployment.html</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: git@github.com:lenxyang/lenxyang.github.io.git</span><br></pre></td></tr></table></figure>
 <h2 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h2><ul>
 <li><a href="https://nodejs.org/en/download/package-manager/" target="_blank" rel="external">Installing Node.js via package manager</a></li>
+<li><a href="https://www.zhihu.com/question/24422335" target="_blank" rel="external">知乎: 有哪些好看的 Hexo 主题？</a></li>
 </ul>
 
       
@@ -82,23 +85,6 @@
   </div>
 
         
-  <div class="addthis addthis_toolbox addthis_default_style">
-    
-      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-    
-    
-      <a class="addthis_button_tweet"></a>
-    
-    
-      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
-    
-    
-      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
-    
-    <a class="addthis_counter addthis_pill_style"></a>
-  </div>
-  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
-
       
       <div class="clearfix"></div>
     </footer>
