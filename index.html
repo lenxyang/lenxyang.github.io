@@ -50,6 +50,41 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-01-26T07:12:55.000Z"><a href="/2016/01/26/svn/svn-setup/">2016-01-26</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/01/26/svn/svn-setup/">svn-setup</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="u67B6_u8BBE_svn__u670D_u52A1_u5668"><a href="#u67B6_u8BBE_svn__u670D_u52A1_u5668" class="headerlink" title="架设 svn 服务器"></a>架设 svn 服务器</h2><h3 id="u67B6_u8BBE_http_28https_29__u670D_u52A1_u5668"><a href="#u67B6_u8BBE_http_28https_29__u670D_u52A1_u5668" class="headerlink" title="架设 http(https) 服务器"></a>架设 http(https) 服务器</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># &#23433;&#35013; apache svn &#27169;&#22359;&#10;apt-get install apache2 libapache2-mod-svn&#10;&#10;# &#36890;&#36807; htpasswd &#29983;&#25104;&#23494;&#30721;&#10;apt-get install apache2-utils</span><br></pre></td></tr></table></figure>
+<p>在  etc/apache2/sites-available/000-default.conf 当中增加一下配置<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">Location</span> /<span class="attribute">svn</span>&gt;</span></span><br><span class="line">   DAV svn</span><br><span class="line">   SVNParentPath /home/svn/repo</span><br><span class="line">   AuthName "SVN Repositories"</span><br><span class="line">   AuthType Basic</span><br><span class="line">   AuthUserFile /home/svn/repo/.svn-auth-file</span><br><span class="line">   Require valid-user</span><br><span class="line"><span class="tag">&lt;/<span class="title">Location</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="u521B_u5EFA_u53EF_u4EE5_u53EF_u4EE5_u8D26_u6237_u7528_u4E8E_u8BBF_u95EE_svn__u5E76_u91CD_u65B0_u542F_u52A8_httpd"><a href="#u521B_u5EFA_u53EF_u4EE5_u53EF_u4EE5_u8D26_u6237_u7528_u4E8E_u8BBF_u95EE_svn__u5E76_u91CD_u65B0_u542F_u52A8_httpd" class="headerlink" title="创建可以可以账户用于访问 svn 并重新启动 httpd"></a>创建可以可以账户用于访问 svn 并重新启动 httpd</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo htpasswd -cs /home/svn/repo/.svn-auth-file yanglei</span><br><span class="line">$ sudo /etc/init.d/apache2 restart</span><br></pre></td></tr></table></figure>
+<h2 id="svn__u6743_u9650_u7BA1_u7406"><a href="#svn__u6743_u9650_u7BA1_u7406" class="headerlink" title="svn 权限管理"></a>svn 权限管理</h2><h2 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h2>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/docker/fast-introduce-to-docker/">2016-01-25</a></time>
       
       
@@ -92,6 +127,191 @@
 <li><a href="https://en.wikipedia.org/wiki/UnionFS" target="_blank" rel="external">Wiki: UnionFS</a></li>
 <li><a href="http://dockerpool.com/static/books/docker_practice/index.html" target="_blank" rel="external">Docker</a></li>
 </ul>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/skia/skia-tricks/">2016-01-25</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/01/25/skia/skia-tricks/">Skia Tricks</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="Skia_Ticks"><a href="#Skia_Ticks" class="headerlink" title="Skia Ticks"></a>Skia Ticks</h1><h2 id="Common"><a href="#Common" class="headerlink" title="Common"></a>Common</h2><h3 id="Save_SkBitmap_2C_gfx_3A_3AImageSkia"><a href="#Save_SkBitmap_2C_gfx_3A_3AImageSkia" class="headerlink" title="Save SkBitmap, gfx::ImageSkia"></a>Save SkBitmap, gfx::ImageSkia</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#!c++</span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">"base/files/file_path.h"</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">"base/files/file_util.h"</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">"ui/gfx/codec/png_codec.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">SaveImageSkia</span><span class="params">(<span class="keyword">const</span> gfx::ImageSkia* img, base::FilePath&amp; path)</span> </span>&#123;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;uint8&gt; vec;</span><br><span class="line">  gfx::PNGCodec::EncodeBGRASkBitmap(*img-&gt;bitmap(), <span class="literal">false</span>, &amp;vec);</span><br><span class="line">  <span class="keyword">return</span> base::WriteFile(path, (<span class="keyword">const</span> <span class="keyword">char</span>*)&amp;(vec[<span class="number">0</span>]), vec.size());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h2><h3 id="views_3A_3AImageView__u4E0D_u80FD_u663E_u793A_SkBitmap"><a href="#views_3A_3AImageView__u4E0D_u80FD_u663E_u793A_SkBitmap" class="headerlink" title="views::ImageView 不能显示 SkBitmap"></a>views::ImageView 不能显示 SkBitmap</h3><p>在实现图片显示工具过程中，遇到了一个问题，通过SkBitmap创建的gfx::ImageSkia无法显示在::views::ImageView 控件上。</p>
+<p>以下是创建SkBitmap的代码<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#!c++</span></span><br><span class="line">SkImageInfo info = SkImageInfo::Make(mipmap.width, mipmap.height,</span><br><span class="line">                                       kRGBA_8888_SkColorType,</span><br><span class="line">                                       kOpaque_SkAlphaType);</span><br><span class="line">SkBitmap* bitmap = <span class="keyword">new</span> SkBitmap;</span><br><span class="line">bitmap-&gt;setInfo(info);</span><br><span class="line">bitmap-&gt;allocPixels(info);</span><br><span class="line"><span class="comment">// 开始时，使用的是 bitmap-&gt;SetPiexl(mipmap.data);</span></span><br><span class="line"><span class="built_in">memcpy</span>(bitmap-&gt;getAddr32(<span class="number">0</span>, <span class="number">0</span>), mipmap.data, <span class="number">4</span> * mipmap.width * mipmap.height);</span><br><span class="line">gfx::ImageSkia image = gfx::ImageSkia::CreateFrom1xBitmap(*bitmap);</span><br></pre></td></tr></table></figure></p>
+<p>views::ImageView始终无法显示图像，但采用 gfx::JPEGCodec::Decode 从文件当中读去的数据就可以显示<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#!c++</span></span><br><span class="line">scoped_ptr&lt;SkBitmap&gt; skbitmap(</span><br><span class="line">      gfx::JPEGCodec::Decode((<span class="keyword">unsigned</span> <span class="keyword">char</span>*)contents.c_str(), contents.length()));</span><br><span class="line">gfx::ImageSkia image = gfx::ImageSkia::CreateFrom1xBitmap(*skbitmap.get());</span><br></pre></td></tr></table></figure></p>
+<p>最终按照gfx::JPEGCodec的方式创建SkBitmap问题解决，但还没有找到原因</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!c++</span></span><br><span class="line">  SkBitmap* bitmap = new SkBitmap<span class="comment">;</span></span><br><span class="line">  bitmap-&gt;allocN32Pixels<span class="list">(<span class="keyword">mipmap</span>.width, mipmap.height)</span><span class="comment">;</span></span><br><span class="line">  memcpy<span class="list">(<span class="keyword">bitmap-&gt;getAddr32</span><span class="list">(<span class="number">0</span>, <span class="number">0</span>)</span>, mipmap.data, <span class="number">4</span> <span class="variable">* mipmap.width *</span> mipmap.height)</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<h3 id="IDirect3D11Texture2D_u65E0_u6CD5_u8F6C_u6362_u4E3ASkBitmap"><a href="#IDirect3D11Texture2D_u65E0_u6CD5_u8F6C_u6362_u4E3ASkBitmap" class="headerlink" title="IDirect3D11Texture2D无法转换为SkBitmap"></a>IDirect3D11Texture2D无法转换为SkBitmap</h3><p>创建具有CPURead模式的Texture并将它读入SkBitmap，通过canvas-&gt;Draw 显示出来以后会发现他的 蓝色和红色是相反的，无论SkBitmap设置成什么模式都不行<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#!c++</span><br><span class="line">  info_ = SkImageInfo::MakeN32(<span class="built_in">size</span>.<span class="variable">width</span>(), <span class="built_in">size</span>.<span class="variable">height</span>(), kOpaque_SkAlphaType);</span><br><span class="line">  info_ = SkImageInfo::Make(<span class="built_in">size</span>.<span class="variable">width</span>(), <span class="built_in">size</span>.<span class="variable">height</span>(),</span><br><span class="line">                              kBGRA_8888_SkColorType, kOpaque_SkAlphaType);</span><br><span class="line">  info_ = SkImageInfo::Make(<span class="built_in">size</span>.<span class="variable">width</span>(), <span class="built_in">size</span>.<span class="variable">height</span>(),</span><br><span class="line">                              kRGBA_8888_SkColorType, kOpaque_SkAlphaType);</span><br><span class="line">  bitmap_.allocN32Pixels(<span class="built_in">size</span>.<span class="variable">width</span>(), <span class="built_in">size</span>.<span class="variable">height</span>());</span><br><span class="line">  bitmap_.allocPixels(info_);</span><br><span class="line"></span><br><span class="line">  TexturePtr tex = overlay_-&gt;GetTexture();</span><br><span class="line">  CHECK(tex-&gt;CopyTo(texture_.<span class="built_in">get</span>()));</span><br><span class="line">  Texture::MapData mapdata = texture_-&gt;<span class="built_in">map</span>(kReadOnly);</span><br><span class="line">  <span class="comment">// bitmap_.installPixels(info_, mapdata.pdata, mapdata.row_pitch);</span></span><br><span class="line">  memcpy(bitmap_.getPixels(), mapdata.pdata, <span class="number">256</span> * <span class="number">256</span> * <span class="number">4</span>);</span><br><span class="line">  texture_-&gt;unmap();</span><br><span class="line">  gfx::ImageSkia img = gfx::ImageSkia::CreateFrom1xBitmap(bitmap_);</span><br><span class="line">  canvas-&gt;DrawImageInt(img, <span class="number">0</span>, <span class="number">0</span>, <span class="number">256</span>, <span class="number">256</span>,</span><br><span class="line">                       <span class="number">0</span>, <span class="number">0</span>, <span class="keyword">this</span>-&gt;<span class="variable">width</span>(), <span class="keyword">this</span>-&gt;<span class="variable">height</span>(), <span class="keyword">true</span>);</span><br></pre></td></tr></table></figure></p>
+<p>但是用 KRGBA_8888 时，似乎连颜色都没有了，通过 shader 将 B 和 R 交换位置后输出，通过MakeN32模式就没有问题了。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/hexo/hexo-setup/">2016-01-25</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/01/25/hexo/hexo-setup/">hexo-setup</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="Hexo-setup"><a href="#Hexo-setup" class="headerlink" title="Hexo-setup"></a>Hexo-setup</h1><h2 id="u5B89_u88C5_hexo"><a href="#u5B89_u88C5_hexo" class="headerlink" title="安装 hexo"></a>安装 hexo</h2><h2 id="hexo__u57FA_u7840_u64CD_u4F5C"><a href="#hexo__u57FA_u7840_u64CD_u4F5C" class="headerlink" title="hexo 基础操作"></a>hexo 基础操作</h2><h2 id="u90E8_u7F72_u5230_github"><a href="#u90E8_u7F72_u5230_github" class="headerlink" title="部署到 github"></a>部署到 github</h2><h3 id="u5EFA_u7ACB_u4FE1_u4EFB_u5173_u7CFB"><a href="#u5EFA_u7ACB_u4FE1_u4EFB_u5173_u7CFB" class="headerlink" title="建立信任关系"></a>建立信任关系</h3><p>hexo 需要将生成的内容 push 到 git 服务器上。 使用 ssh 的协议能够免密码 push。具体操作是将 ssh-keygen 生成的 public key 文件添加到 github 的 deploy key 当中。</p>
+<h3 id="u4FEE_u6539__config"><a href="#u4FEE_u6539__config" class="headerlink" title="修改 _config"></a>修改 _config</h3><p>修改 _config.yaml<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: http://hexo.io/docs/deployment.html</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: git@github.com:lenxyang/lenxyang.github.io.git</span><br></pre></td></tr></table></figure></p>
+<h2 id="u5B89_u88C5_u4E3B_u9898"><a href="#u5B89_u88C5_u4E3B_u9898" class="headerlink" title="安装主题"></a>安装主题</h2><h3 id="u5C06_u4E3B_u9898_u4FDD_u5B58_u5728_themes__u76EE_u5F55_u4E0B"><a href="#u5C06_u4E3B_u9898_u4FDD_u5B58_u5728_themes__u76EE_u5F55_u4E0B" class="headerlink" title="将主题保存在 themes 目录下"></a>将主题保存在 themes 目录下</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/hexojs/hexo-theme-light.git themes/light</span><br></pre></td></tr></table></figure>
+<h3 id="u4FEE_u6539__config-yaml"><a href="#u4FEE_u6539__config-yaml" class="headerlink" title="修改 _config.yaml"></a>修改 _config.yaml</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Extensions</span></span><br><span class="line"><span class="comment">## Plugins: http://hexo.io/plugins/</span></span><br><span class="line"><span class="comment">## Themes: http://hexo.io/themes/</span></span><br><span class="line"><span class="comment">## theme: landscape</span></span><br><span class="line">theme: light</span><br></pre></td></tr></table></figure>
+<h2 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h2><h3 id="u8FD0_u884C_hexo__u662F_u63D0_u793A__u201C/usr/bin/env_3A_node_3A_No_such_file_or_directory_u201D"><a href="#u8FD0_u884C_hexo__u662F_u63D0_u793A__u201C/usr/bin/env_3A_node_3A_No_such_file_or_directory_u201D" class="headerlink" title="运行 hexo 是提示 “/usr/bin/env: node: No such file or directory”"></a>运行 hexo 是提示 “/usr/bin/env: node: No such file or directory”</h3><p>最简单的办法是</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install nodejs-legacy</span><br></pre></td></tr></table></figure>
+<h3 id="hexo_deploy_3A_ERROR_Deployer_not_found_3A_github"><a href="#hexo_deploy_3A_ERROR_Deployer_not_found_3A_github" class="headerlink" title="hexo deploy: ERROR Deployer not found: github"></a>hexo deploy: ERROR Deployer not found: github</h3><p>hexo 从 3.0 以后，type 由 github 变为了 git。毕竟主要有一个 git repository 就可以部署了，并非 github 不可。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: http://hexo.io/docs/deployment.html</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: git@github.com:lenxyang/lenxyang.github.io.git</span><br></pre></td></tr></table></figure>
+<h2 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://nodejs.org/en/download/package-manager/" target="_blank" rel="external">Installing Node.js via package manager</a></li>
+<li><a href="https://www.zhihu.com/question/24422335" target="_blank" rel="external">知乎: 有哪些好看的 Hexo 主题？</a></li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/hdfs/setup-hdfs-on-docker/">2016-01-25</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/01/25/hdfs/setup-hdfs-on-docker/">Setup HDFS on Docker</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="u4F7F_u7528_Docker__u5EFA_u7ACB_HDFS__u96C6_u7FA4"><a href="#u4F7F_u7528_Docker__u5EFA_u7ACB_HDFS__u96C6_u7FA4" class="headerlink" title="使用 Docker 建立 HDFS 集群"></a>使用 Docker 建立 HDFS 集群</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">$ sudo docker pull docker.io/centos</span><br></pre></td></tr></table></figure>
+<h2 id="u521B_u5EFA_u955C_u50CF"><a href="#u521B_u5EFA_u955C_u50CF" class="headerlink" title="创建镜像"></a>创建镜像</h2><h3 id="u914D_u7F6E_DNS__u670D_u52A1_u5668"><a href="#u914D_u7F6E_DNS__u670D_u52A1_u5668" class="headerlink" title="配置 DNS 服务器"></a>配置 DNS 服务器</h3><p>Docker 配置静态 IP 比较麻烦，/etc/hosts 文件在启动 docker 时自动生成，之前的更改可能被覆盖，为 docker 集群提供一个 DNS 服务是个不错的方法，一个 DNS 缓存服务器就足够用了，完全不需要完整的服务（架设，配置都比较麻烦）。</p>
+<p>DNS 缓存服务我们采用 dnsmasq，具体方法参考 <a href="https://wiredcraft.com/blog/dns-and-docker-containers/" target="_blank" rel="external">DNS AND DOCKER CONTAINERS</a></p>
+<h4 id="u542F_u52A8_u670D_u52A1"><a href="#u542F_u52A8_u670D_u52A1" class="headerlink" title="启动服务"></a>启动服务</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">docker run <span class="operator">-d</span> dnsmasq /bin/sh -c <span class="string">"/sbin/dnsmasq; while true; do echo sleep; sleep 1; done"</span></span><br></pre></td></tr></table></figure>
+<h3 id="u914D_u7F6E_DNS"><a href="#u914D_u7F6E_DNS" class="headerlink" title="配置 DNS"></a>配置 DNS</h3><p>启动是通过 docker 参数指定 dns 服务及机器名</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">$ sudo docker run -dns <span class="number">177.17</span>.<span class="number">0.1</span> -h hostname imagename binary</span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过 nscenter 连接 docker</span></span><br><span class="line">$ PID=$(docker inspect --format <span class="string">"&#123;&#123; .State.Pid &#125;&#125;"</span> &lt;container&gt;) <span class="comment"># 获得容器的第一个进程 id</span></span><br><span class="line">$ nsenter --target <span class="variable">$PID</span> --mount --uts --ipc --net --pid</span><br></pre></td></tr></table></figure>
+<h2 id="u914D_u7F6E_Hadoop"><a href="#u914D_u7F6E_Hadoop" class="headerlink" title="配置 Hadoop"></a>配置 Hadoop</h2><h3 id="u914D_u7F6E_u4FE1_u4EFB_u5173_u7CFB"><a href="#u914D_u7F6E_u4FE1_u4EFB_u5173_u7CFB" class="headerlink" title="配置信任关系"></a>配置信任关系</h3><p>hadoop 通过 RASPublicKey 认证的 ssh 访问，必须为所有机器建立信任关系。</p>
+<h3 id="u914D_u7F6E_Single_Node"><a href="#u914D_u7F6E_Single_Node" class="headerlink" title="配置 Single Node"></a>配置 Single Node</h3><h4 id="u914D_u7F6E_/etc/hadoop/core-site-xml"><a href="#u914D_u7F6E_/etc/hadoop/core-site-xml" class="headerlink" title="配置 /etc/hadoop/core-site.xml"></a>配置 /etc/hadoop/core-site.xml</h4><figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">&lt;configuration&gt;</span></span><br><span class="line">  <span class="variable">&lt;property&gt;</span></span><br><span class="line">    <span class="variable">&lt;name&gt;</span>fs.<span class="keyword">default</span>.name<span class="variable">&lt;/name&gt;</span></span><br><span class="line">    <span class="variable">&lt;value&gt;</span>hdfs://node1:<span class="number">49000</span><span class="variable">&lt;/value&gt;</span></span><br><span class="line">  <span class="variable">&lt;/property&gt;</span></span><br><span class="line">  <span class="variable">&lt;property&gt;</span></span><br><span class="line">    <span class="variable">&lt;name&gt;</span>hadoop.tmp.dir<span class="variable">&lt;/name&gt;</span></span><br><span class="line">    <span class="variable">&lt;value&gt;</span>/home/hadoop/var<span class="variable">&lt;/value&gt;</span></span><br><span class="line">  <span class="variable">&lt;/property&gt;</span></span><br><span class="line"><span class="variable">&lt;/configuration&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="u914D_u7F6E_/etc/hadoop/hdfs-site-xml"><a href="#u914D_u7F6E_/etc/hadoop/hdfs-site-xml" class="headerlink" title="配置 /etc/hadoop/hdfs-site.xml"></a>配置 /etc/hadoop/hdfs-site.xml</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">configuration</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">name</span>&gt;</span>dfs.replication<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">value</span>&gt;</span>1<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="u683C_u5F0F_u5316_dfs"><a href="#u683C_u5F0F_u5316_dfs" class="headerlink" title="格式化 dfs"></a>格式化 dfs</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">hadoop namenode -format</span><br></pre></td></tr></table></figure>
+<h3 id="u542F_u52A8_hdfs"><a href="#u542F_u52A8_hdfs" class="headerlink" title="启动 hdfs"></a>启动 hdfs</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">~/hadoop-<span class="number">2.6</span>.<span class="number">0</span>/sbin/start-dfs.sh</span><br></pre></td></tr></table></figure>
+<h2 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h2><h3 id="u90E8_u7F72_dnsmasq__u65F6_u51FA_u73B0_u9519_u8BEF__u201Csetting_capabilities_failed_3A_Operation_not_permitted_u201D"><a href="#u90E8_u7F72_dnsmasq__u65F6_u51FA_u73B0_u9519_u8BEF__u201Csetting_capabilities_failed_3A_Operation_not_permitted_u201D" class="headerlink" title="部署 dnsmasq 时出现错误 “setting capabilities failed: Operation not permitted”"></a>部署 dnsmasq 时出现错误 “setting capabilities failed: Operation not permitted”</h3><p>具体解决办法，修改 /etc/dnsmaqs.conf<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">user=root</span><br></pre></td></tr></table></figure></p>
+<p>参考 <a href="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=514214" target="_blank" rel="external">Debian Bug report logs - #514214 dnsmasq crashes if fails to set capabilities</a></p>
+<h3 id="u8FDE_u63A5_ssh__u670D_u52A1_u662F_u51FA_u73B0__u201Cssh_Read_from_socket_failed_3A_Connection_reset_by_peer_u201D"><a href="#u8FDE_u63A5_ssh__u670D_u52A1_u662F_u51FA_u73B0__u201Cssh_Read_from_socket_failed_3A_Connection_reset_by_peer_u201D" class="headerlink" title="连接 ssh 服务是出现 “ssh Read from socket failed: Connection reset by peer”"></a>连接 ssh 服务是出现 “ssh Read from socket failed: Connection reset by peer”</h3><p>docker image 可能是安装非常初步的操作系统，各种错误都用可能出现。这个问题是 sshd 异常中断导致的，可以使用 /sbin/sshd -d 启动程序，而后通过 ssh 连接服务，sshd 会打印足够的日志来诊断问题。</p>
+<h1 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="http://tecadmin.net/setup-dns-server-on-centos-redhat/" target="_blank" rel="external">How to Setup DNS (Bind) Server on CentOS/RHEL 7/6/5</a></li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/hdfs/fuse-on-hdfs/">2016-01-25</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/01/25/hdfs/fuse-on-hdfs/">fuse driver for HDFS</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h1><h2 id="u7F16_u8BD1_libhdfs"><a href="#u7F16_u8BD1_libhdfs" class="headerlink" title="编译 libhdfs"></a>编译 libhdfs</h2><p>使用 cdh 版本的 hadoop, 默认 libhdfs 不会编译</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="variable">$&#123;hadoop_client&#125;</span>/src/hadoop-mapreduce1-project/src/c++/libhdfs</span><br><span class="line">./bootstrap.sh</span><br><span class="line">./configure</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
+<h2 id="u53EF_u80FD_u9047_u5230_u7684_u95EE_u9898"><a href="#u53EF_u80FD_u9047_u5230_u7684_u95EE_u9898" class="headerlink" title="可能遇到的问题"></a>可能遇到的问题</h2><ul>
+<li>cc1: error: unrecognized command line option “-m”</li>
+</ul>
+<p>gcc 使用 -m 选项指定 target arch, 出现这个错误的原因是 -m 后面没有跟参数。在所有没有参数的 -m 后面增加 64 即可</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CFLAGS = -g -O2 -DOS_LINUX -DDSO_DLFCN -DCPU=\<span class="string">"amd64\" -m64</span><br><span class="line">LDFLAGS =  -m64 -L/usr/jdk_home/jre/lib/amd64/server</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>include/stddef.h:211: error: duplicate ‘unsigned</li>
+</ul>
+<p>这个错误是因为 Makefile 当中包含</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-Dsize_t=unsigned\ int</span><br></pre></td></tr></table></figure>
+<h2 id="fuse__u603B_u662F_u4EE5_4096__u4E3A_u5355_u4F4D_u8BFB_u5199"><a href="#fuse__u603B_u662F_u4EE5_4096__u4E3A_u5355_u4F4D_u8BFB_u5199" class="headerlink" title="fuse 总是以 4096 为单位读写"></a>fuse 总是以 4096 为单位读写</h2><p>启动时增加 options, 注意 big_writes 必须启用，否则其他选项不起作用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-o max_readahead=<span class="number">1024000</span> -omax_write=<span class="number">1024000</span> -obig_writes</span><br></pre></td></tr></table></figure>
+<h2 id="u5176_u4ED6_u7528_u6237_u65E0_u6CD5_u8BBF_u95EE_fuse__u8DEF_u5F84"><a href="#u5176_u4ED6_u7528_u6237_u65E0_u6CD5_u8BBF_u95EE_fuse__u8DEF_u5F84" class="headerlink" title="其他用户无法访问 fuse 路径"></a>其他用户无法访问 fuse 路径</h2><p>在挂载 mdfs 之后，如果使用其他账户进行操作会出现 “ls: cannot access test: Permission denied” 错误。这是 fuse 的配置导致</p>
+<p>修改 /etc/fuse.conf</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user_allow_other</span><br></pre></td></tr></table></figure>
+<p>此外运行 mdfs 时增加 <strong><em> -oallow_other </em></strong> ， 问题就解决了</p>
+<h2 id="java-lang-UnsupportedClassVersionError"><a href="#java-lang-UnsupportedClassVersionError" class="headerlink" title="java.lang.UnsupportedClassVersionError"></a>java.lang.UnsupportedClassVersionError</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Exception <span class="keyword">in</span> thread <span class="string">"main"</span> java.lang.UnsupportedClassVersionError: org/apache/hadoop/conf/Configuration : Unsupported major.minor version <span class="number">51.0</span></span><br><span class="line">   at java.lang.ClassLoader.defineClass1(Native Method)</span><br><span class="line">   at java.lang.ClassLoader.defineClass(ClassLoader.java:<span class="number">634</span>)</span><br><span class="line">   ...</span><br></pre></td></tr></table></figure>
+<p>这很有可能是机器上安装了多个 java 版本且使用了错误的版本导致的</p>
 
       
     </div>
@@ -274,191 +494,6 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/hexo/hexo-setup/">2016-01-25</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/01/25/hexo/hexo-setup/">hexo-setup</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="Hexo-setup"><a href="#Hexo-setup" class="headerlink" title="Hexo-setup"></a>Hexo-setup</h1><h2 id="u5B89_u88C5_hexo"><a href="#u5B89_u88C5_hexo" class="headerlink" title="安装 hexo"></a>安装 hexo</h2><h2 id="hexo__u57FA_u7840_u64CD_u4F5C"><a href="#hexo__u57FA_u7840_u64CD_u4F5C" class="headerlink" title="hexo 基础操作"></a>hexo 基础操作</h2><h2 id="u90E8_u7F72_u5230_github"><a href="#u90E8_u7F72_u5230_github" class="headerlink" title="部署到 github"></a>部署到 github</h2><h3 id="u5EFA_u7ACB_u4FE1_u4EFB_u5173_u7CFB"><a href="#u5EFA_u7ACB_u4FE1_u4EFB_u5173_u7CFB" class="headerlink" title="建立信任关系"></a>建立信任关系</h3><p>hexo 需要将生成的内容 push 到 git 服务器上。 使用 ssh 的协议能够免密码 push。具体操作是将 ssh-keygen 生成的 public key 文件添加到 github 的 deploy key 当中。</p>
-<h3 id="u4FEE_u6539__config"><a href="#u4FEE_u6539__config" class="headerlink" title="修改 _config"></a>修改 _config</h3><p>修改 _config.yaml<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: http://hexo.io/docs/deployment.html</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: git@github.com:lenxyang/lenxyang.github.io.git</span><br></pre></td></tr></table></figure></p>
-<h2 id="u5B89_u88C5_u4E3B_u9898"><a href="#u5B89_u88C5_u4E3B_u9898" class="headerlink" title="安装主题"></a>安装主题</h2><h3 id="u5C06_u4E3B_u9898_u4FDD_u5B58_u5728_themes__u76EE_u5F55_u4E0B"><a href="#u5C06_u4E3B_u9898_u4FDD_u5B58_u5728_themes__u76EE_u5F55_u4E0B" class="headerlink" title="将主题保存在 themes 目录下"></a>将主题保存在 themes 目录下</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/hexojs/hexo-theme-light.git themes/light</span><br></pre></td></tr></table></figure>
-<h3 id="u4FEE_u6539__config-yaml"><a href="#u4FEE_u6539__config-yaml" class="headerlink" title="修改 _config.yaml"></a>修改 _config.yaml</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Extensions</span></span><br><span class="line"><span class="comment">## Plugins: http://hexo.io/plugins/</span></span><br><span class="line"><span class="comment">## Themes: http://hexo.io/themes/</span></span><br><span class="line"><span class="comment">## theme: landscape</span></span><br><span class="line">theme: light</span><br></pre></td></tr></table></figure>
-<h2 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h2><h3 id="u8FD0_u884C_hexo__u662F_u63D0_u793A__u201C/usr/bin/env_3A_node_3A_No_such_file_or_directory_u201D"><a href="#u8FD0_u884C_hexo__u662F_u63D0_u793A__u201C/usr/bin/env_3A_node_3A_No_such_file_or_directory_u201D" class="headerlink" title="运行 hexo 是提示 “/usr/bin/env: node: No such file or directory”"></a>运行 hexo 是提示 “/usr/bin/env: node: No such file or directory”</h3><p>最简单的办法是</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install nodejs-legacy</span><br></pre></td></tr></table></figure>
-<h3 id="hexo_deploy_3A_ERROR_Deployer_not_found_3A_github"><a href="#hexo_deploy_3A_ERROR_Deployer_not_found_3A_github" class="headerlink" title="hexo deploy: ERROR Deployer not found: github"></a>hexo deploy: ERROR Deployer not found: github</h3><p>hexo 从 3.0 以后，type 由 github 变为了 git。毕竟主要有一个 git repository 就可以部署了，并非 github 不可。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: http://hexo.io/docs/deployment.html</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: git@github.com:lenxyang/lenxyang.github.io.git</span><br></pre></td></tr></table></figure>
-<h2 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h2><ul>
-<li><a href="https://nodejs.org/en/download/package-manager/" target="_blank" rel="external">Installing Node.js via package manager</a></li>
-<li><a href="https://www.zhihu.com/question/24422335" target="_blank" rel="external">知乎: 有哪些好看的 Hexo 主题？</a></li>
-</ul>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/hdfs/setup-hdfs-on-docker/">2016-01-25</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/01/25/hdfs/setup-hdfs-on-docker/">Setup HDFS on Docker</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="u4F7F_u7528_Docker__u5EFA_u7ACB_HDFS__u96C6_u7FA4"><a href="#u4F7F_u7528_Docker__u5EFA_u7ACB_HDFS__u96C6_u7FA4" class="headerlink" title="使用 Docker 建立 HDFS 集群"></a>使用 Docker 建立 HDFS 集群</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">$ sudo docker pull docker.io/centos</span><br></pre></td></tr></table></figure>
-<h2 id="u521B_u5EFA_u955C_u50CF"><a href="#u521B_u5EFA_u955C_u50CF" class="headerlink" title="创建镜像"></a>创建镜像</h2><h3 id="u914D_u7F6E_DNS__u670D_u52A1_u5668"><a href="#u914D_u7F6E_DNS__u670D_u52A1_u5668" class="headerlink" title="配置 DNS 服务器"></a>配置 DNS 服务器</h3><p>Docker 配置静态 IP 比较麻烦，/etc/hosts 文件在启动 docker 时自动生成，之前的更改可能被覆盖，为 docker 集群提供一个 DNS 服务是个不错的方法，一个 DNS 缓存服务器就足够用了，完全不需要完整的服务（架设，配置都比较麻烦）。</p>
-<p>DNS 缓存服务我们采用 dnsmasq，具体方法参考 <a href="https://wiredcraft.com/blog/dns-and-docker-containers/" target="_blank" rel="external">DNS AND DOCKER CONTAINERS</a></p>
-<h4 id="u542F_u52A8_u670D_u52A1"><a href="#u542F_u52A8_u670D_u52A1" class="headerlink" title="启动服务"></a>启动服务</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">docker run <span class="operator">-d</span> dnsmasq /bin/sh -c <span class="string">"/sbin/dnsmasq; while true; do echo sleep; sleep 1; done"</span></span><br></pre></td></tr></table></figure>
-<h3 id="u914D_u7F6E_DNS"><a href="#u914D_u7F6E_DNS" class="headerlink" title="配置 DNS"></a>配置 DNS</h3><p>启动是通过 docker 参数指定 dns 服务及机器名</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">$ sudo docker run -dns <span class="number">177.17</span>.<span class="number">0.1</span> -h hostname imagename binary</span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过 nscenter 连接 docker</span></span><br><span class="line">$ PID=$(docker inspect --format <span class="string">"&#123;&#123; .State.Pid &#125;&#125;"</span> &lt;container&gt;) <span class="comment"># 获得容器的第一个进程 id</span></span><br><span class="line">$ nsenter --target <span class="variable">$PID</span> --mount --uts --ipc --net --pid</span><br></pre></td></tr></table></figure>
-<h2 id="u914D_u7F6E_Hadoop"><a href="#u914D_u7F6E_Hadoop" class="headerlink" title="配置 Hadoop"></a>配置 Hadoop</h2><h3 id="u914D_u7F6E_u4FE1_u4EFB_u5173_u7CFB"><a href="#u914D_u7F6E_u4FE1_u4EFB_u5173_u7CFB" class="headerlink" title="配置信任关系"></a>配置信任关系</h3><p>hadoop 通过 RASPublicKey 认证的 ssh 访问，必须为所有机器建立信任关系。</p>
-<h3 id="u914D_u7F6E_Single_Node"><a href="#u914D_u7F6E_Single_Node" class="headerlink" title="配置 Single Node"></a>配置 Single Node</h3><h4 id="u914D_u7F6E_/etc/hadoop/core-site-xml"><a href="#u914D_u7F6E_/etc/hadoop/core-site-xml" class="headerlink" title="配置 /etc/hadoop/core-site.xml"></a>配置 /etc/hadoop/core-site.xml</h4><figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">&lt;configuration&gt;</span></span><br><span class="line">  <span class="variable">&lt;property&gt;</span></span><br><span class="line">    <span class="variable">&lt;name&gt;</span>fs.<span class="keyword">default</span>.name<span class="variable">&lt;/name&gt;</span></span><br><span class="line">    <span class="variable">&lt;value&gt;</span>hdfs://node1:<span class="number">49000</span><span class="variable">&lt;/value&gt;</span></span><br><span class="line">  <span class="variable">&lt;/property&gt;</span></span><br><span class="line">  <span class="variable">&lt;property&gt;</span></span><br><span class="line">    <span class="variable">&lt;name&gt;</span>hadoop.tmp.dir<span class="variable">&lt;/name&gt;</span></span><br><span class="line">    <span class="variable">&lt;value&gt;</span>/home/hadoop/var<span class="variable">&lt;/value&gt;</span></span><br><span class="line">  <span class="variable">&lt;/property&gt;</span></span><br><span class="line"><span class="variable">&lt;/configuration&gt;</span></span><br></pre></td></tr></table></figure>
-<h4 id="u914D_u7F6E_/etc/hadoop/hdfs-site-xml"><a href="#u914D_u7F6E_/etc/hadoop/hdfs-site-xml" class="headerlink" title="配置 /etc/hadoop/hdfs-site.xml"></a>配置 /etc/hadoop/hdfs-site.xml</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">configuration</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">name</span>&gt;</span>dfs.replication<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">value</span>&gt;</span>1<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="u683C_u5F0F_u5316_dfs"><a href="#u683C_u5F0F_u5316_dfs" class="headerlink" title="格式化 dfs"></a>格式化 dfs</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">hadoop namenode -format</span><br></pre></td></tr></table></figure>
-<h3 id="u542F_u52A8_hdfs"><a href="#u542F_u52A8_hdfs" class="headerlink" title="启动 hdfs"></a>启动 hdfs</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">~/hadoop-<span class="number">2.6</span>.<span class="number">0</span>/sbin/start-dfs.sh</span><br></pre></td></tr></table></figure>
-<h2 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h2><h3 id="u90E8_u7F72_dnsmasq__u65F6_u51FA_u73B0_u9519_u8BEF__u201Csetting_capabilities_failed_3A_Operation_not_permitted_u201D"><a href="#u90E8_u7F72_dnsmasq__u65F6_u51FA_u73B0_u9519_u8BEF__u201Csetting_capabilities_failed_3A_Operation_not_permitted_u201D" class="headerlink" title="部署 dnsmasq 时出现错误 “setting capabilities failed: Operation not permitted”"></a>部署 dnsmasq 时出现错误 “setting capabilities failed: Operation not permitted”</h3><p>具体解决办法，修改 /etc/dnsmaqs.conf<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">user=root</span><br></pre></td></tr></table></figure></p>
-<p>参考 <a href="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=514214" target="_blank" rel="external">Debian Bug report logs - #514214 dnsmasq crashes if fails to set capabilities</a></p>
-<h3 id="u8FDE_u63A5_ssh__u670D_u52A1_u662F_u51FA_u73B0__u201Cssh_Read_from_socket_failed_3A_Connection_reset_by_peer_u201D"><a href="#u8FDE_u63A5_ssh__u670D_u52A1_u662F_u51FA_u73B0__u201Cssh_Read_from_socket_failed_3A_Connection_reset_by_peer_u201D" class="headerlink" title="连接 ssh 服务是出现 “ssh Read from socket failed: Connection reset by peer”"></a>连接 ssh 服务是出现 “ssh Read from socket failed: Connection reset by peer”</h3><p>docker image 可能是安装非常初步的操作系统，各种错误都用可能出现。这个问题是 sshd 异常中断导致的，可以使用 /sbin/sshd -d 启动程序，而后通过 ssh 连接服务，sshd 会打印足够的日志来诊断问题。</p>
-<h1 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h1><ul>
-<li><a href="http://tecadmin.net/setup-dns-server-on-centos-redhat/" target="_blank" rel="external">How to Setup DNS (Bind) Server on CentOS/RHEL 7/6/5</a></li>
-</ul>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/hdfs/fuse-on-hdfs/">2016-01-25</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/01/25/hdfs/fuse-on-hdfs/">fuse driver for HDFS</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h1><h2 id="u7F16_u8BD1_libhdfs"><a href="#u7F16_u8BD1_libhdfs" class="headerlink" title="编译 libhdfs"></a>编译 libhdfs</h2><p>使用 cdh 版本的 hadoop, 默认 libhdfs 不会编译</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="variable">$&#123;hadoop_client&#125;</span>/src/hadoop-mapreduce1-project/src/c++/libhdfs</span><br><span class="line">./bootstrap.sh</span><br><span class="line">./configure</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
-<h2 id="u53EF_u80FD_u9047_u5230_u7684_u95EE_u9898"><a href="#u53EF_u80FD_u9047_u5230_u7684_u95EE_u9898" class="headerlink" title="可能遇到的问题"></a>可能遇到的问题</h2><ul>
-<li>cc1: error: unrecognized command line option “-m”</li>
-</ul>
-<p>gcc 使用 -m 选项指定 target arch, 出现这个错误的原因是 -m 后面没有跟参数。在所有没有参数的 -m 后面增加 64 即可</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CFLAGS = -g -O2 -DOS_LINUX -DDSO_DLFCN -DCPU=\<span class="string">"amd64\" -m64</span><br><span class="line">LDFLAGS =  -m64 -L/usr/jdk_home/jre/lib/amd64/server</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>include/stddef.h:211: error: duplicate ‘unsigned</li>
-</ul>
-<p>这个错误是因为 Makefile 当中包含</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-Dsize_t=unsigned\ int</span><br></pre></td></tr></table></figure>
-<h2 id="fuse__u603B_u662F_u4EE5_4096__u4E3A_u5355_u4F4D_u8BFB_u5199"><a href="#fuse__u603B_u662F_u4EE5_4096__u4E3A_u5355_u4F4D_u8BFB_u5199" class="headerlink" title="fuse 总是以 4096 为单位读写"></a>fuse 总是以 4096 为单位读写</h2><p>启动时增加 options, 注意 big_writes 必须启用，否则其他选项不起作用</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-o max_readahead=<span class="number">1024000</span> -omax_write=<span class="number">1024000</span> -obig_writes</span><br></pre></td></tr></table></figure>
-<h2 id="u5176_u4ED6_u7528_u6237_u65E0_u6CD5_u8BBF_u95EE_fuse__u8DEF_u5F84"><a href="#u5176_u4ED6_u7528_u6237_u65E0_u6CD5_u8BBF_u95EE_fuse__u8DEF_u5F84" class="headerlink" title="其他用户无法访问 fuse 路径"></a>其他用户无法访问 fuse 路径</h2><p>在挂载 mdfs 之后，如果使用其他账户进行操作会出现 “ls: cannot access test: Permission denied” 错误。这是 fuse 的配置导致</p>
-<p>修改 /etc/fuse.conf</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user_allow_other</span><br></pre></td></tr></table></figure>
-<p>此外运行 mdfs 时增加 <strong><em> -oallow_other </em></strong> ， 问题就解决了</p>
-<h2 id="java-lang-UnsupportedClassVersionError"><a href="#java-lang-UnsupportedClassVersionError" class="headerlink" title="java.lang.UnsupportedClassVersionError"></a>java.lang.UnsupportedClassVersionError</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Exception <span class="keyword">in</span> thread <span class="string">"main"</span> java.lang.UnsupportedClassVersionError: org/apache/hadoop/conf/Configuration : Unsupported major.minor version <span class="number">51.0</span></span><br><span class="line">   at java.lang.ClassLoader.defineClass1(Native Method)</span><br><span class="line">   at java.lang.ClassLoader.defineClass(ClassLoader.java:<span class="number">634</span>)</span><br><span class="line">   ...</span><br></pre></td></tr></table></figure>
-<p>这很有可能是机器上安装了多个 java 版本且使用了错误的版本导致的</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/skia/skia-tricks/">2016-01-25</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/01/25/skia/skia-tricks/">Skia Tricks</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="Skia_Ticks"><a href="#Skia_Ticks" class="headerlink" title="Skia Ticks"></a>Skia Ticks</h1><h2 id="Common"><a href="#Common" class="headerlink" title="Common"></a>Common</h2><h3 id="Save_SkBitmap_2C_gfx_3A_3AImageSkia"><a href="#Save_SkBitmap_2C_gfx_3A_3AImageSkia" class="headerlink" title="Save SkBitmap, gfx::ImageSkia"></a>Save SkBitmap, gfx::ImageSkia</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#!c++</span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">"base/files/file_path.h"</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">"base/files/file_util.h"</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">"ui/gfx/codec/png_codec.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">SaveImageSkia</span><span class="params">(<span class="keyword">const</span> gfx::ImageSkia* img, base::FilePath&amp; path)</span> </span>&#123;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;uint8&gt; vec;</span><br><span class="line">  gfx::PNGCodec::EncodeBGRASkBitmap(*img-&gt;bitmap(), <span class="literal">false</span>, &amp;vec);</span><br><span class="line">  <span class="keyword">return</span> base::WriteFile(path, (<span class="keyword">const</span> <span class="keyword">char</span>*)&amp;(vec[<span class="number">0</span>]), vec.size());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h2><h3 id="views_3A_3AImageView__u4E0D_u80FD_u663E_u793A_SkBitmap"><a href="#views_3A_3AImageView__u4E0D_u80FD_u663E_u793A_SkBitmap" class="headerlink" title="views::ImageView 不能显示 SkBitmap"></a>views::ImageView 不能显示 SkBitmap</h3><p>在实现图片显示工具过程中，遇到了一个问题，通过SkBitmap创建的gfx::ImageSkia无法显示在::views::ImageView 控件上。</p>
-<p>以下是创建SkBitmap的代码<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#!c++</span></span><br><span class="line">SkImageInfo info = SkImageInfo::Make(mipmap.width, mipmap.height,</span><br><span class="line">                                       kRGBA_8888_SkColorType,</span><br><span class="line">                                       kOpaque_SkAlphaType);</span><br><span class="line">SkBitmap* bitmap = <span class="keyword">new</span> SkBitmap;</span><br><span class="line">bitmap-&gt;setInfo(info);</span><br><span class="line">bitmap-&gt;allocPixels(info);</span><br><span class="line"><span class="comment">// 开始时，使用的是 bitmap-&gt;SetPiexl(mipmap.data);</span></span><br><span class="line"><span class="built_in">memcpy</span>(bitmap-&gt;getAddr32(<span class="number">0</span>, <span class="number">0</span>), mipmap.data, <span class="number">4</span> * mipmap.width * mipmap.height);</span><br><span class="line">gfx::ImageSkia image = gfx::ImageSkia::CreateFrom1xBitmap(*bitmap);</span><br></pre></td></tr></table></figure></p>
-<p>views::ImageView始终无法显示图像，但采用 gfx::JPEGCodec::Decode 从文件当中读去的数据就可以显示<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#!c++</span></span><br><span class="line">scoped_ptr&lt;SkBitmap&gt; skbitmap(</span><br><span class="line">      gfx::JPEGCodec::Decode((<span class="keyword">unsigned</span> <span class="keyword">char</span>*)contents.c_str(), contents.length()));</span><br><span class="line">gfx::ImageSkia image = gfx::ImageSkia::CreateFrom1xBitmap(*skbitmap.get());</span><br></pre></td></tr></table></figure></p>
-<p>最终按照gfx::JPEGCodec的方式创建SkBitmap问题解决，但还没有找到原因</p>
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!c++</span></span><br><span class="line">  SkBitmap* bitmap = new SkBitmap<span class="comment">;</span></span><br><span class="line">  bitmap-&gt;allocN32Pixels<span class="list">(<span class="keyword">mipmap</span>.width, mipmap.height)</span><span class="comment">;</span></span><br><span class="line">  memcpy<span class="list">(<span class="keyword">bitmap-&gt;getAddr32</span><span class="list">(<span class="number">0</span>, <span class="number">0</span>)</span>, mipmap.data, <span class="number">4</span> <span class="variable">* mipmap.width *</span> mipmap.height)</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
-<h3 id="IDirect3D11Texture2D_u65E0_u6CD5_u8F6C_u6362_u4E3ASkBitmap"><a href="#IDirect3D11Texture2D_u65E0_u6CD5_u8F6C_u6362_u4E3ASkBitmap" class="headerlink" title="IDirect3D11Texture2D无法转换为SkBitmap"></a>IDirect3D11Texture2D无法转换为SkBitmap</h3><p>创建具有CPURead模式的Texture并将它读入SkBitmap，通过canvas-&gt;Draw 显示出来以后会发现他的 蓝色和红色是相反的，无论SkBitmap设置成什么模式都不行<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#!c++</span><br><span class="line">  info_ = SkImageInfo::MakeN32(<span class="built_in">size</span>.<span class="variable">width</span>(), <span class="built_in">size</span>.<span class="variable">height</span>(), kOpaque_SkAlphaType);</span><br><span class="line">  info_ = SkImageInfo::Make(<span class="built_in">size</span>.<span class="variable">width</span>(), <span class="built_in">size</span>.<span class="variable">height</span>(),</span><br><span class="line">                              kBGRA_8888_SkColorType, kOpaque_SkAlphaType);</span><br><span class="line">  info_ = SkImageInfo::Make(<span class="built_in">size</span>.<span class="variable">width</span>(), <span class="built_in">size</span>.<span class="variable">height</span>(),</span><br><span class="line">                              kRGBA_8888_SkColorType, kOpaque_SkAlphaType);</span><br><span class="line">  bitmap_.allocN32Pixels(<span class="built_in">size</span>.<span class="variable">width</span>(), <span class="built_in">size</span>.<span class="variable">height</span>());</span><br><span class="line">  bitmap_.allocPixels(info_);</span><br><span class="line"></span><br><span class="line">  TexturePtr tex = overlay_-&gt;GetTexture();</span><br><span class="line">  CHECK(tex-&gt;CopyTo(texture_.<span class="built_in">get</span>()));</span><br><span class="line">  Texture::MapData mapdata = texture_-&gt;<span class="built_in">map</span>(kReadOnly);</span><br><span class="line">  <span class="comment">// bitmap_.installPixels(info_, mapdata.pdata, mapdata.row_pitch);</span></span><br><span class="line">  memcpy(bitmap_.getPixels(), mapdata.pdata, <span class="number">256</span> * <span class="number">256</span> * <span class="number">4</span>);</span><br><span class="line">  texture_-&gt;unmap();</span><br><span class="line">  gfx::ImageSkia img = gfx::ImageSkia::CreateFrom1xBitmap(bitmap_);</span><br><span class="line">  canvas-&gt;DrawImageInt(img, <span class="number">0</span>, <span class="number">0</span>, <span class="number">256</span>, <span class="number">256</span>,</span><br><span class="line">                       <span class="number">0</span>, <span class="number">0</span>, <span class="keyword">this</span>-&gt;<span class="variable">width</span>(), <span class="keyword">this</span>-&gt;<span class="variable">height</span>(), <span class="keyword">true</span>);</span><br></pre></td></tr></table></figure></p>
-<p>但是用 KRGBA_8888 时，似乎连颜色都没有了，通过 shader 将 B 和 R 交换位置后输出，通过MakeN32模式就没有问题了。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
         <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/d3d11/tools/">2016-01-25</a></time>
       
       
@@ -564,81 +599,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/chromium/gpu-client-site-mode/">2016-01-25</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/01/25/chromium/gpu-client-site-mode/">GPU Server-Client Mode</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="GPU_Server-Client"><a href="#GPU_Server-Client" class="headerlink" title="GPU Server-Client"></a>GPU Server-Client</h1><h2 id="u5355_u8FDB_u7A0B_u521D_u59CB_u5316gpu_3A_3AGLInProcessContext"><a href="#u5355_u8FDB_u7A0B_u521D_u59CB_u5316gpu_3A_3AGLInProcessContext" class="headerlink" title="单进程初始化gpu::GLInProcessContext"></a>单进程初始化gpu::GLInProcessContext</h2><p>要理解Server-Client结构，最好的方式能够找到Server及Client创建并建立联系的代码，在//gpu当中类GLInProcessContext是单进程渲染的gpu初始化类，当//gpu的不进行快进程调用时，此类将负责初始化，理解他是理解//gpu的一个很好的开始</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> GLInProcessContextImpl</span><br><span class="line">    : <span class="keyword">public</span> GLInProcessContext,</span><br><span class="line">      <span class="keyword">public</span> base::SupportsWeakPtr&lt;GLInProcessContextImpl&gt; &#123;</span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">  <span class="function"><span class="keyword">bool</span> <span class="title">Initialize</span><span class="params">(scoped_refptr&lt;gfx::GLSurface&gt; surface,</span><br><span class="line">                  <span class="keyword">bool</span> is_offscreen,</span><br><span class="line">                  <span class="keyword">bool</span> use_global_share_group,</span><br><span class="line">                  GLInProcessContext* share_context,</span><br><span class="line">                  gfx::AcceleratedWidget window,</span><br><span class="line">                  <span class="keyword">const</span> gfx::Size&amp; size,</span><br><span class="line">                  <span class="keyword">const</span> gpu::gles2::ContextCreationAttribHelper&amp; attribs,</span><br><span class="line">                  gfx::GpuPreference gpu_preference,</span><br><span class="line">                  <span class="keyword">const</span> scoped_refptr&lt;InProcessCommandBuffer::Service&gt;&amp; service,</span><br><span class="line">                  GpuMemoryBufferManager* gpu_memory_buffer_manager,</span><br><span class="line">                  ImageFactory* image_factory)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// GLInProcessContext implementation:</span></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">SetContextLostCallback</span><span class="params">(<span class="keyword">const</span> base::Closure&amp; callback)</span> override</span>;</span><br><span class="line">  gles2::<span class="function">GLES2Implementation* <span class="title">GetImplementation</span><span class="params">()</span> override</span>;</span><br><span class="line">  <span class="keyword">size_t</span> GetMappedMemoryLimit() override;</span><br><span class="line"> <span class="keyword">private</span>:</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">Destroy</span><span class="params">()</span></span>;</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">OnContextLost</span><span class="params">()</span></span>;</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">OnSignalSyncPoint</span><span class="params">(<span class="keyword">const</span> base::Closure&amp; callback)</span></span>;</span><br><span class="line"></span><br><span class="line">  scoped_ptr&lt;gles2::GLES2CmdHelper&gt; gles2_helper_;</span><br><span class="line">  scoped_ptr&lt;TransferBuffer&gt; transfer_buffer_;</span><br><span class="line">  scoped_ptr&lt;gles2::GLES2Implementation&gt; gles2_implementation_;</span><br><span class="line">  scoped_ptr&lt;InProcessCommandBuffer&gt; command_buffer_;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> GLInProcessContextSharedMemoryLimits mem_limits_;</span><br><span class="line">  <span class="keyword">bool</span> context_lost_;</span><br><span class="line">  base::Closure context_lost_callback_;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>GLInProcessContext类本身只定义了接口已经一个静态函数，这是为了尽量避免外部API的更改。GLInProcessContext的所有功能都有在.cc文件当中的Impl类来完成。从类的成员能够看出这个类完成的功能。</p>
-<ul>
-<li>context_lost<em>callback</em> 这是为了应对 ContextLost 而设立的响应机制</li>
-<li>GLES2CmdHelper指针，</li>
-<li>GLES2Implementationd的指针，定义了接口，所有的GL的调用都将通过它完成。</li>
-<li>command<em>buffer</em>, 这是接受gpu请求的服务，是gpu c-s结构当中的s</li>
-</ul>
-<p>GLInProcessContextImpl的接口一望而知，我们主要关注他的初始化过程。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> GLInProcessContextImpl::Initialize(</span><br><span class="line">    scoped_refptr&lt;gfx::GLSurface&gt; surface,</span><br><span class="line">    <span class="keyword">bool</span> is_offscreen,</span><br><span class="line">    <span class="keyword">bool</span> use_global_share_group,</span><br><span class="line">    GLInProcessContext* share_context,</span><br><span class="line">    gfx::AcceleratedWidget window,</span><br><span class="line">    <span class="keyword">const</span> gfx::Size&amp; size,</span><br><span class="line">    <span class="keyword">const</span> gles2::ContextCreationAttribHelper&amp; attribs,</span><br><span class="line">    gfx::GpuPreference gpu_preference,</span><br><span class="line">    <span class="keyword">const</span> scoped_refptr&lt;InProcessCommandBuffer::Service&gt;&amp; service,</span><br><span class="line">    GpuMemoryBufferManager* gpu_memory_buffer_manager,</span><br><span class="line">    ImageFactory* image_factory) &#123;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;int32&gt; attrib_vector;</span><br><span class="line">  attribs.Serialize(&amp;attrib_vector);</span><br><span class="line"></span><br><span class="line">  base::Closure wrapped_callback =</span><br><span class="line">      base::Bind(&amp;GLInProcessContextImpl::OnContextLost, AsWeakPtr());</span><br><span class="line">  command_buffer_.reset(<span class="keyword">new</span> InProcessCommandBuffer(service));</span><br><span class="line"></span><br><span class="line">  <span class="comment">// share_group被忽略掉了</span></span><br><span class="line">  InProcessCommandBuffer* share_command_buffer = <span class="literal">NULL</span>;</span><br><span class="line">  <span class="keyword">if</span> (!command_buffer_-&gt;Initialize(surface,</span><br><span class="line">                                   is_offscreen,</span><br><span class="line">                                   window,</span><br><span class="line">                                   size,</span><br><span class="line">                                   attrib_vector,</span><br><span class="line">                                   gpu_preference,</span><br><span class="line">                                   wrapped_callback,</span><br><span class="line">                                   share_command_buffer,</span><br><span class="line">                                   gpu_memory_buffer_manager,</span><br><span class="line">                                   image_factory)) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Create the GLES2 helper, which writes the command buffer protocol.</span></span><br><span class="line">  gles2_helper_.reset(<span class="keyword">new</span> gles2::GLES2CmdHelper(command_buffer_.get()));</span><br><span class="line">  gles2_helper_-&gt;Initialize(mem_limits_.command_buffer_size)) </span><br><span class="line"></span><br><span class="line">  <span class="comment">// Create a transfer buffer.</span></span><br><span class="line">  transfer_buffer_.reset(<span class="keyword">new</span> TransferBuffer(gles2_helper_.get()));</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Check for consistency.</span></span><br><span class="line">  DCHECK(!attribs.bind_generates_resource);</span><br><span class="line">  <span class="keyword">const</span> <span class="keyword">bool</span> bind_generates_resource = <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">const</span> <span class="keyword">bool</span> support_client_side_arrays = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Create the object exposing the OpenGL API.</span></span><br><span class="line">  gles2_implementation_.reset(</span><br><span class="line">      <span class="keyword">new</span> gles2::GLES2Implementation(gles2_helper_.get(),</span><br><span class="line">                                     share_group.get(),</span><br><span class="line">                                     transfer_buffer_.get(),</span><br><span class="line">                                     bind_generates_resource,</span><br><span class="line">                                   attribs.lose_context_when_out_of_memory,</span><br><span class="line">                                     support_client_side_arrays,</span><br><span class="line">                                     command_buffer_.get()));</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!gles2_implementation_-&gt;Initialize(</span><br><span class="line">          mem_limits_.start_transfer_buffer_size,</span><br><span class="line">          mem_limits_.min_transfer_buffer_size,</span><br><span class="line">          mem_limits_.max_transfer_buffer_size,</span><br><span class="line">          mem_limits_.mapped_memory_reclaim_limit)) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="u5EFA_u7ACB_u8FDE_u63A5"><a href="#u5EFA_u7ACB_u8FDE_u63A5" class="headerlink" title="建立连接"></a>建立连接</h2><p>对象command<em>buffer</em>(类型InProcessCommandBuffer)是gpu的Service-Side, 而CommandBufferHelper是Client-Side，但然GLES2Implementation自然属于Client-Side，不过他们发起的通信都是通过CommandBufferHelper来完成的。 双发的通信是通过SharedMemory实现的RingBuffer做的，Service-Side会创建一个名为TransferBufferManager的对象，gles<em>helper</em>在创建过程中能够通过command<em>buffer</em>获得该对象的指针并用它来创建TransferBuffer。</p>
-<h3 id="GPU_Service-Side"><a href="#GPU_Service-Side" class="headerlink" title="GPU Service-Side"></a>GPU Service-Side</h3><p>我们仍然以GLInProcessContext为入手点，它创建了一个InProcessCommandBuffer对象并初始化它。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> GLInProcessContextImpl::Initialize(...) &#123;</span><br><span class="line">  command_buffer_.reset(<span class="keyword">new</span> InProcessCommandBuffer(service));</span><br><span class="line">     ...</span><br><span class="line">  <span class="keyword">if</span> (!command_buffer_-&gt;Initialize(surface,</span><br><span class="line">                                   is_offscreen,</span><br><span class="line">                                   window,</span><br><span class="line">                                   size,</span><br><span class="line">                                   attrib_vector,</span><br><span class="line">                                   gpu_preference,</span><br><span class="line">                                   wrapped_callback,</span><br><span class="line">                                   share_command_buffer,</span><br><span class="line">                                   gpu_memory_buffer_manager,</span><br><span class="line">                                   image_factory)) &#123;</span><br><span class="line">    LOG(ERROR) &lt;&lt; <span class="string">"Failed to initialize InProcessCommmandBuffer"</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="InProcessCommandBuffer"><a href="#InProcessCommandBuffer" class="headerlink" title="InProcessCommandBuffer"></a>InProcessCommandBuffer</h3><p>InProcessCommandBuffer的运行线程是单独创建，即使是初始化过程也在gpu进行中完成（虽然是同步方式调用）。这可能是因为GL的调用不一定是线程安全的，以Direct3D来说，D3D11DeviceContext就不能跨线程。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> InProcessCommandBuffer::Initialize(</span><br><span class="line">    scoped_refptr&lt;gfx::GLSurface&gt; surface,</span><br><span class="line">    <span class="keyword">bool</span> is_offscreen,</span><br><span class="line">    gfx::AcceleratedWidget window,</span><br><span class="line">    <span class="keyword">const</span> gfx::Size&amp; size,</span><br><span class="line">    <span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;int32&gt;&amp; attribs,</span><br><span class="line">    gfx::GpuPreference gpu_preference,</span><br><span class="line">    <span class="keyword">const</span> base::Closure&amp; context_lost_callback,</span><br><span class="line">    InProcessCommandBuffer* share_group,</span><br><span class="line">    GpuMemoryBufferManager* gpu_memory_buffer_manager,</span><br><span class="line">    ImageFactory* image_factory) &#123;</span><br><span class="line">  context_lost_callback_ = WrapCallback(context_lost_callback);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (surface.get()) &#123;</span><br><span class="line">    <span class="comment">// GPU thread must be the same as client thread due to GLSurface </span></span><br><span class="line">    <span class="comment">// not being thread safe.</span></span><br><span class="line">    sequence_checker_.reset(<span class="keyword">new</span> base::SequenceChecker);</span><br><span class="line">    surface_ = surface;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  gpu::Capabilities capabilities;</span><br><span class="line">  <span class="function">InitializeOnGpuThreadParams <span class="title">params</span><span class="params">(is_offscreen,</span><br><span class="line">                                     window,</span><br><span class="line">                                     size,</span><br><span class="line">                                     attribs,</span><br><span class="line">                                     gpu_preference,</span><br><span class="line">                                     &amp;capabilities,</span><br><span class="line">                                     share_group,</span><br><span class="line">                                     image_factory)</span></span>;</span><br><span class="line"></span><br><span class="line">  base::Callback&lt;<span class="keyword">bool</span>(<span class="keyword">void</span>)&gt; init_task =</span><br><span class="line">      base::Bind(&amp;InProcessCommandBuffer::InitializeOnGpuThread,</span><br><span class="line">                 base::Unretained(<span class="keyword">this</span>),</span><br><span class="line">                 params);</span><br><span class="line"></span><br><span class="line">  base::<span class="function">WaitableEvent <span class="title">completion</span><span class="params">(<span class="literal">true</span>, <span class="literal">false</span>)</span></span>;</span><br><span class="line">  <span class="keyword">bool</span> result = <span class="literal">false</span>;</span><br><span class="line">  QueueTask(base::Bind(&amp;RunTaskWithResult&lt;<span class="keyword">bool</span>&gt;, init_task, </span><br><span class="line">                       &amp;result, &amp;completion));</span><br><span class="line">  completion.Wait();</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>QueueTask将函数InProcessCommandBuffer::InitializeOnGpuThread运行，它完成CommandBuffer的真正的初始化工作，包括</p>
-<ul>
-<li>创建TransferBufferManager</li>
-<li>创建CommandBufferService并将设置接受消息的函数PumpCommands和ContextLoadCallback</li>
-<li>创建GLES2Decoder和GpuScheduler</li>
-<li>创建gfx::Surface和gfx::Context</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> InProcessCommandBuffer::InitializeOnGpuThread(</span><br><span class="line">    <span class="keyword">const</span> InitializeOnGpuThreadParams&amp; params) &#123;</span><br><span class="line">  CheckSequencedThread();</span><br><span class="line">  gpu_thread_weak_ptr_ = gpu_thread_weak_ptr_factory_.GetWeakPtr();</span><br><span class="line">  TransferBufferManager* manager = <span class="keyword">new</span> TransferBufferManager();</span><br><span class="line">  transfer_buffer_manager_.reset(manager);</span><br><span class="line">  manager-&gt;Initialize();</span><br><span class="line"></span><br><span class="line">  scoped_ptr&lt;CommandBufferService&gt; command_buffer(</span><br><span class="line">      <span class="keyword">new</span> CommandBufferService(transfer_buffer_manager_.get()));</span><br><span class="line">  command_buffer-&gt;SetPutOffsetChangeCallback(base::Bind(</span><br><span class="line">      &amp;InProcessCommandBuffer::PumpCommands, gpu_thread_weak_ptr_));</span><br><span class="line">  command_buffer-&gt;SetParseErrorCallback(base::Bind(</span><br><span class="line">      &amp;InProcessCommandBuffer::OnContextLost, gpu_thread_weak_ptr_));</span><br><span class="line">  command_buffer-&gt;Initialize();</span><br><span class="line"></span><br><span class="line">  gl_share_group_ = params.context_group</span><br><span class="line">                        ? params.context_group-&gt;gl_share_group_.get()</span><br><span class="line">                        : <span class="keyword">new</span> gfx::GLShareGroup;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">bool</span> bind_generates_resource = <span class="literal">false</span>;</span><br><span class="line">  decoder_.reset(gles2::GLES2Decoder::Create(</span><br><span class="line">      params.context_group</span><br><span class="line">          ? params.context_group-&gt;decoder_-&gt;GetContextGroup()</span><br><span class="line">          : <span class="keyword">new</span> gles2::ContextGroup(service_-&gt;mailbox_manager(),</span><br><span class="line">                                    <span class="literal">NULL</span>,</span><br><span class="line">                                    service_-&gt;shader_translator_cache(),</span><br><span class="line">                                    <span class="literal">NULL</span>,</span><br><span class="line">                                    bind_generates_resource)));</span><br><span class="line"></span><br><span class="line">  gpu_scheduler_.reset(<span class="keyword">new</span> GpuScheduler(command_buffer.get(),</span><br><span class="line">                                  decoder_.get(), decoder_.get()));</span><br><span class="line">  command_buffer-&gt;SetGetBufferChangeCallback(base::Bind(</span><br><span class="line">      &amp;GpuScheduler::SetGetBuffer, </span><br><span class="line">      base::Unretained(gpu_scheduler_.get())));</span><br><span class="line">  decoder_-&gt;set_engine(gpu_scheduler_.get());</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!surface_.get()) &#123;</span><br><span class="line">    <span class="keyword">if</span> (params.is_offscreen)</span><br><span class="line">      surface_ = gfx::GLSurface::CreateOffscreenGLSurface(params.size);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      surface_ = gfx::GLSurface::CreateViewGLSurface(params.window);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (service_-&gt;UseVirtualizedGLContexts()) &#123;</span><br><span class="line">    context_ = gl_share_group_-&gt;GetSharedContext();</span><br><span class="line">    <span class="keyword">if</span> (!context_.get()) &#123;</span><br><span class="line">      context_ = gfx::GLContext::CreateGLContext(</span><br><span class="line">          gl_share_group_.get(), surface_.get(), params.gpu_preference);</span><br><span class="line">      gl_share_group_-&gt;SetSharedContext(context_.get());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    context_ = <span class="keyword">new</span> GLContextVirtual(</span><br><span class="line">        gl_share_group_.get(), context_.get(), decoder_-&gt;AsWeakPtr());</span><br><span class="line">    context_-&gt;Initialize(surface_.get(), params.gpu_preference))；</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    context_ = gfx::GLContext::CreateGLContext(</span><br><span class="line">        gl_share_group_.get(), surface_.get(), params.gpu_preference);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  context_-&gt;MakeCurrent(surface_.get());</span><br><span class="line"> </span><br><span class="line">  gles2::DisallowedFeatures disallowed_features;</span><br><span class="line">  disallowed_features.gpu_memory_manager = <span class="literal">true</span>;</span><br><span class="line">  <span class="keyword">if</span> (!decoder_-&gt;Initialize(surface_,</span><br><span class="line">                            context_,</span><br><span class="line">                            params.is_offscreen,</span><br><span class="line">                            params.size,</span><br><span class="line">                            disallowed_features,</span><br><span class="line">                            params.attribs)) &#123;&#125;</span><br><span class="line">  <span class="keyword">if</span> (!params.is_offscreen) &#123;</span><br><span class="line">    decoder_-&gt;SetResizeCallback(base::Bind(</span><br><span class="line">        &amp;InProcessCommandBuffer::OnResizeView, gpu_thread_weak_ptr_));</span><br><span class="line">  &#125;</span><br><span class="line">  decoder_-&gt;SetWaitSyncPointCallback(</span><br><span class="line">      base::Bind(&amp;InProcessCommandBuffer::WaitSyncPointOnGpuThread,</span><br><span class="line">                 base::Unretained(<span class="keyword">this</span>)));</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="TransferBufferManager"><a href="#TransferBufferManager" class="headerlink" title="TransferBufferManager"></a>TransferBufferManager</h2><p>TransferBuffer(//gpu/command_buffer/client/transfer_buffer.h)和TransferBufferManager(//gpu/command_buffer/server/transfer_buffer_manager.h)封装了Client-Server的通信细节，实际是通过shared memory形式的ring buffer进行通信的。</p>
-<h3 id="gfx_3A_3ASurface_and_gfx_3A_3AGLContext"><a href="#gfx_3A_3ASurface_and_gfx_3A_3AGLContext" class="headerlink" title="gfx::Surface and gfx::GLContext"></a>gfx::Surface and gfx::GLContext</h3><p>这两个类是真正的GL绘制命令，但从代码上也能够看出，一个进程当中可能会创建多个gfx::GLContext和gfx::Surface，这在一般的GL程序中并不常见，我们需要分析一下这段代码的逻辑及用途。<br>gfx::GLContext的创建过程比较直接，按照指定的实现创建对应类型的GLContext，类型有可能是EGL， WGL,  MESA多种类型，Surface与之详细也有多种类型。<br>这两个对象创建过程中用到了了ShareGroup, 具体可以参考文档[ui/gl]。</p>
-<h3 id="GLES2Decoder_and_GpuSchedule"><a href="#GLES2Decoder_and_GpuSchedule" class="headerlink" title="GLES2Decoder and GpuSchedule"></a>GLES2Decoder and GpuSchedule</h3><p>GpuSchedule是CommandBufferEngine的继承类，CommandBufferEngine的作用是操作CommandBuffer，在接受到请求以后由CommandBufferEngine进行操作；接下来是GLES2Decoder，他是CommonDecoder的子类，他完成的功能是将从CommandBuffer当中读出（读出的操作通过CommandBufferEngine完成）的命令解码并执行。GLES2Decoder的解码部分代码应该是简单逻辑，执行部分这是直接转发调用到传递给他的gfx::GLContext上。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> CommandBufferEngine &#123;</span><br><span class="line">  <span class="comment">// Gets the base address and size of a registered shared memory buffer.</span></span><br><span class="line">  <span class="comment">// Parameters:</span></span><br><span class="line">  <span class="comment">//   shm_id: the identifier for the shared memory buffer.</span></span><br><span class="line">  <span class="keyword">virtual</span> scoped_refptr&lt;gpu::Buffer&gt; GetSharedMemoryBuffer(int32 shm_id) = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Sets the token value.</span></span><br><span class="line">  <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">set_token</span><span class="params">(int32 token)</span> </span>= <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Sets the shared memory buffer used for commands.</span></span><br><span class="line">  <span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">SetGetBuffer</span><span class="params">(int32 transfer_buffer_id)</span> </span>= <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Sets the "get" pointer. Return false if offset is out of range.</span></span><br><span class="line">  <span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">SetGetOffset</span><span class="params">(int32 offset)</span> </span>= <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Gets the "get" pointer.</span></span><br><span class="line">  <span class="function"><span class="keyword">virtual</span> int32 <span class="title">GetGetOffset</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// This class schedules commands that have been flushed. They are received </span></span><br><span class="line"><span class="comment">// via a command buffer and forwarded to a command parser. TODO(apatrick): // This class should not know about the decoder. Do not add additional </span></span><br><span class="line"><span class="comment">// dependencies on it.</span></span><br><span class="line"><span class="keyword">class</span> GPU_EXPORT GpuScheduler</span><br><span class="line">    : NON_EXPORTED_BASE(<span class="keyword">public</span> CommandBufferEngine),</span><br><span class="line">      <span class="keyword">public</span> base::SupportsWeakPtr&lt;GpuScheduler&gt; &#123;</span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">  GpuScheduler(CommandBufferServiceBase* command_buffer,</span><br><span class="line">               AsyncAPIInterface* handler,</span><br><span class="line">               gles2::GLES2Decoder* decoder);</span><br><span class="line">  ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="GPU_Client-Side"><a href="#GPU_Client-Side" class="headerlink" title="GPU Client-Side"></a>GPU Client-Side</h2><h3 id="GPU_C-S_Communication"><a href="#GPU_C-S_Communication" class="headerlink" title="GPU C-S Communication"></a>GPU C-S Communication</h3><p>这一接会详细讲述C-S的通信过程，包括如下主题</p>
-<ul>
-<li>ShareMemory的id如何交换</li>
-<li>CommandBuffer的读取和写入</li>
-<li>如何进行大的数据交换（Texture）</li>
-<li>ComandBuffer的写入过程</li>
-<li>Texture数据交换</li>
-</ul>
-<h2 id="u7591_u95EE"><a href="#u7591_u95EE" class="headerlink" title="疑问"></a>疑问</h2><ul>
-<li>在//webkit/common/gpu/初始化过程中，指定的gfx::Rect大小为1，这显然是不可能的进行真实渲染的，这个初始化的默认Render Target如何使用呢？还是gpu会创建新的FrameBuffer?</li>
-</ul>
-<p>当创建的是ViewSurface时（对应的是offscreen surface），指定的大小没有实际意义。 在真正创建时，会通过native api获得窗口的大小。参考//ui/gl/gl_surface_egl.cc中NativeViewGLSurfaceEGL的初始化过程。</p>
-<ul>
-<li>WebKit的GLView显然是一个Offscreen，那么当GLView的glBindFramebuffer(GL_FRAMEBUFFER, 0)时，如何处理呢，显然这样做会导致整个窗口的绘制，这是WebGLView根本不可能做到的事情？</li>
-</ul>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -685,6 +645,8 @@
     <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
   
     <li><a href="/tags/skia/">skia</a><small>1</small></li>
+  
+    <li><a href="/tags/svn/">svn</a><small>1</small></li>
   
     <li><a href="/tags/toolchain/">toolchain</a><small>1</small></li>
   

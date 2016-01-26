@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Shadowmap Devnotes | azer3D</title>
+  <title>svn-setup | azer3D</title>
   <meta name="author" content="lenxyang@gmail.com">
   
-  <meta name="description" content="Shadowmap (DevNotes)Troubles使用 Light Camera 渲染时，没有 Pixel Stage在使用 Light Camera 渲染时，从 Visual Studio 的图形诊断看，Vertex Stage 是正常的，但是 PixelStage 就没有内容了。原因是：对">
+  <meta name="description" content="架设 svn 服务器架设 http(https) 服务器1# &amp;#23433;&amp;#35013; apache svn &amp;#27169;&amp;#22359;&amp;#10;apt-get install apache2 libapache2-mod-svn&amp;#10;&amp;#10;# &amp;#36890;&amp;#36807;">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="Shadowmap Devnotes"/>
+  <meta property="og:title" content="svn-setup"/>
   <meta property="og:site_name" content="azer3D"/>
 
   
@@ -51,21 +51,20 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/d3d11/shadowmap_devnotes/">2016-01-25</a></time>
+        <time datetime="2016-01-26T07:12:55.000Z"><a href="/2016/01/26/svn/svn-setup/">2016-01-26</a></time>
       
       
   
-    <h1 class="title">Shadowmap Devnotes</h1>
+    <h1 class="title">svn-setup</h1>
   
 
     </header>
     <div class="entry">
       
-        <h1 id="Shadowmap__28DevNotes_29"><a href="#Shadowmap__28DevNotes_29" class="headerlink" title="Shadowmap (DevNotes)"></a>Shadowmap (DevNotes)</h1><h2 id="Troubles"><a href="#Troubles" class="headerlink" title="Troubles"></a>Troubles</h2><h3 id="u4F7F_u7528_Light_Camera__u6E32_u67D3_u65F6_uFF0C_u6CA1_u6709_Pixel_Stage"><a href="#u4F7F_u7528_Light_Camera__u6E32_u67D3_u65F6_uFF0C_u6CA1_u6709_Pixel_Stage" class="headerlink" title="使用 Light Camera 渲染时，没有 Pixel Stage"></a>使用 Light Camera 渲染时，没有 Pixel Stage</h3><p>在使用 Light Camera 渲染时，从 Visual Studio 的图形诊断看，Vertex Stage 是正常的，但是 PixelStage 就没有内容了。<br>原因是：对于 Light Camera 来说, 这些对象都是不可见的。</p>
-<h3 id="u5224_u65AD_u6295_u5F71_u5750_u6807_u662F_u5426_u6B63_u786E"><a href="#u5224_u65AD_u6295_u5F71_u5750_u6807_u662F_u5426_u6B63_u786E" class="headerlink" title="判断投影坐标是否正确"></a>判断投影坐标是否正确</h3><p>可以直接将深度绘制出来，不进行其他任何计算，看是否符合预期</p>
-<h3 id="Texturemap__u4E0E_shadowmap__u6DF7_u6DC6"><a href="#Texturemap__u4E0E_shadowmap__u6DF7_u6DC6" class="headerlink" title="Texturemap 与 shadowmap 混淆"></a>Texturemap 与 shadowmap 混淆</h3><p>对 texturemap 增加后缀后问题解决<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Texture2D texmap : <span class="keyword">register</span>(t0);</span><br><span class="line">Texture2D shadowmap : <span class="keyword">register</span>(t1);</span><br></pre></td></tr></table></figure></p>
-<h3 id="u5BF9_u8C61_u6295_u5F71_u9519_u8BEF"><a href="#u5BF9_u8C61_u6295_u5F71_u9519_u8BEF" class="headerlink" title="对象投影错误"></a>对象投影错误</h3><p>原因是传递的 Light Projection View Matrix 没有乘上物体的 World matrix, 这个错误在当前框架下比较容易犯。</p>
-
+        <h2 id="u67B6_u8BBE_svn__u670D_u52A1_u5668"><a href="#u67B6_u8BBE_svn__u670D_u52A1_u5668" class="headerlink" title="架设 svn 服务器"></a>架设 svn 服务器</h2><h3 id="u67B6_u8BBE_http_28https_29__u670D_u52A1_u5668"><a href="#u67B6_u8BBE_http_28https_29__u670D_u52A1_u5668" class="headerlink" title="架设 http(https) 服务器"></a>架设 http(https) 服务器</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># &#23433;&#35013; apache svn &#27169;&#22359;&#10;apt-get install apache2 libapache2-mod-svn&#10;&#10;# &#36890;&#36807; htpasswd &#29983;&#25104;&#23494;&#30721;&#10;apt-get install apache2-utils</span><br></pre></td></tr></table></figure>
+<p>在  etc/apache2/sites-available/000-default.conf 当中增加一下配置<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">Location</span> /<span class="attribute">svn</span>&gt;</span></span><br><span class="line">   DAV svn</span><br><span class="line">   SVNParentPath /home/svn/repo</span><br><span class="line">   AuthName "SVN Repositories"</span><br><span class="line">   AuthType Basic</span><br><span class="line">   AuthUserFile /home/svn/repo/.svn-auth-file</span><br><span class="line">   Require valid-user</span><br><span class="line"><span class="tag">&lt;/<span class="title">Location</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="u521B_u5EFA_u53EF_u4EE5_u53EF_u4EE5_u8D26_u6237_u7528_u4E8E_u8BBF_u95EE_svn__u5E76_u91CD_u65B0_u542F_u52A8_httpd"><a href="#u521B_u5EFA_u53EF_u4EE5_u53EF_u4EE5_u8D26_u6237_u7528_u4E8E_u8BBF_u95EE_svn__u5E76_u91CD_u65B0_u542F_u52A8_httpd" class="headerlink" title="创建可以可以账户用于访问 svn 并重新启动 httpd"></a>创建可以可以账户用于访问 svn 并重新启动 httpd</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo htpasswd -cs /home/svn/repo/.svn-auth-file yanglei</span><br><span class="line">$ sudo /etc/init.d/apache2 restart</span><br></pre></td></tr></table></figure>
+<h2 id="svn__u6743_u9650_u7BA1_u7406"><a href="#svn__u6743_u9650_u7BA1_u7406" class="headerlink" title="svn 权限管理"></a>svn 权限管理</h2><h2 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h2>
       
     </div>
     <footer>
@@ -74,7 +73,7 @@
         
   
   <div class="tags">
-    <a href="/tags/direct3d/">direct3d</a>, <a href="/tags/effect/">effect</a>
+    <a href="/tags/svn/">svn</a>
   </div>
 
         
@@ -100,7 +99,7 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="fb-comments" data-href="http://lenxyang.github.io/2016/01/25/d3d11/shadowmap_devnotes/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="http://lenxyang.github.io/2016/01/26/svn/svn-setup/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
 </section>
