@@ -1,0 +1,305 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>2016-01 Month Report | azer3D</title>
+  <meta name="author" content="lenxyang@gmail.com">
+  
+  <meta name="description" content="201601 月工作201601
+Framework
+ p0 : 重构 SceneRenderEnvNode  (completed) 
+重构 EffectParamsProvider
+ p0 : EffectParamsProvider 仅仅提供名称，不再提供 UpdateParams 函数，所有">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="2016-01 Month Report"/>
+  <meta property="og:site_name" content="azer3D"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="azer3D" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">azer3D</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/azer/month-report-201601/">2016-01-25</a></time>
+      
+      
+  
+    <h1 class="title">2016-01 Month Report</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="201601__u6708_u5DE5_u4F5C"><a href="#201601__u6708_u5DE5_u4F5C" class="headerlink" title="201601 月工作"></a>201601 月工作</h1><h2 id="201601"><a href="#201601" class="headerlink" title="201601"></a>201601</h2><ul>
+<li>Framework<ul>
+<li><strong> p0 </strong>: 重构 SceneRenderEnvNode <strong> (completed) </strong></li>
+<li>重构 EffectParamsProvider<ul>
+<li><strong> p0 </strong>: EffectParamsProvider 仅仅提供名称，不再提供 UpdateParams 函数，所有更新操作有具体类设计 <strong> (completed) </strong></li>
+<li><strong> p0 </strong>: 将需要的 UpdateParams 移动到 Scene 的框架内完成 <strong> (completed) </strong></li>
+</ul>
+</li>
+<li><strong> p0 </strong>: 重构 SceneRender 并增加 Observer <strong> (completed) </strong></li>
+<li><strong> p0 </strong>: 增加 DepthStencail State 对象 <strong> (completed) </strong></li>
+<li><strong> p0 </strong>: Make enable depth-test by default <strong> (completed) </strong></li>
+<li><strong> p0 </strong>: Refactor code for Geometry Object <strong> (completed) </strong><ul>
+<li>Supply function to create geometry MeshPart  <strong> (completed) </strong></li>
+<li>Support Transform when Geometry while creation  <strong> (completed) </strong></li>
+<li>all relevant code immgriant(Light Objects, Frustrum, Camera Objects and so on) <strong> (completed) </strong></li>
+<li>add Geometry Resource Loader  <strong> (completed) </strong></li>
+<li>samples <strong> (completed) </strong></li>
+</ul>
+</li>
+<li><strong> p0 </strong>: Common light struct in HLSL</li>
+<li><strong> p1 </strong>: 重构 Picking Object 相关代码</li>
+<li><strong> p1 </strong>: Resource 加载增加 Buffer 机制</li>
+<li><strong> p1 </strong>: D3D Vertex Layout Buffer(Donnot create differet object for same layout in DirectX11)</li>
+<li><strong> p2 </strong>: Multiple Constants Buffer support in HLSL</li>
+</ul>
+</li>
+<li>Scene Management<ul>
+<li><strong> p0 </strong>: Frustrum Culling</li>
+<li><strong> p1 </strong>: BSP Scene Node</li>
+</ul>
+</li>
+<li>Render Framework<ul>
+<li><strong> p0 </strong>: Scene Render Framework With Shadowmap support <strong> (completed) </strong></li>
+<li><strong> p1 </strong>: Scene Render Framework With Stencil Reflection support</li>
+<li><strong> p1 </strong>: Deferred Shadering</li>
+<li><strong> p2 </strong>: Multithread Rendering</li>
+</ul>
+</li>
+<li>Simple Effects<ul>
+<li>Stencil based techniques<ul>
+<li><strong> p0 </strong>: Reflection</li>
+<li><strong> p0 </strong>: Shadow Volumn</li>
+</ul>
+</li>
+<li>Compute Shader<ul>
+<li><strong> p0 </strong>: Simple</li>
+<li><strong> p0 </strong>: Blur Demo</li>
+<li><strong> p0 </strong>: shadow pcf</li>
+<li><strong> p1 </strong>: FFT Transform</li>
+</ul>
+</li>
+<li>Shadow Map<ul>
+<li><strong> p0 </strong>: Simple Demo <strong> (completed) </strong></li>
+<li><strong> p0 </strong>: PCF shadow</li>
+<li><strong> p0 </strong>: CS based PCF shadow</li>
+<li><strong> p0 </strong>: Multiple-light support</li>
+<li><strong> p0 </strong>: Directional Light Support</li>
+</ul>
+</li>
+<li>Tessellation<ul>
+<li><strong> p0 </strong>: basic    <strong> (completed) </strong></li>
+<li><strong> p0 </strong>: tessellation based terrain</li>
+<li><strong> p0 </strong>: details map</li>
+</ul>
+</li>
+<li><strong> p1 </strong>: SSAO</li>
+<li><strong> p1 </strong>: Stream Partice</li>
+<li><strong> p1 </strong>: Animation</li>
+<li><strong> p2 </strong>: HDR</li>
+<li><strong> p2 </strong>: Water</li>
+</ul>
+</li>
+<li>UI<ul>
+<li><strong> p0 </strong> : Multiple Scene In Render Window <strong> (completed) </strong></li>
+<li><strong> p1 </strong> : Multiple Effect Level</li>
+<li><strong> p1 </strong>: Assets Window and Views</li>
+<li><strong> p2 </strong>: Snapshot View of all resources</li>
+<li><strong> p2 </strong>: Direct3D Parameters</li>
+<li><strong> p2 </strong>: Add Footbar For Pane</li>
+<li><strong> p2 </strong>: Float Textfield Controller</li>
+<li><strong> p2 </strong>: Material Property UI </li>
+<li><strong> p2 </strong>: Mesh Property UI<ul>
+<li>Mesh part and its vertex format</li>
+<li>Mesh path in repository</li>
+<li>Mesh render controller (framewire, culling model, normal …)</li>
+</ul>
+</li>
+<li><strong> p2 </strong>: Load UI config from file</li>
+</ul>
+</li>
+<li>Game Resources<ul>
+<li>WOW Model data(Skinned mesh)</li>
+<li>Wow Map data</li>
+</ul>
+</li>
+<li>Books &amp; Papers<ul>
+<li>Book: 3D Game Programming with Direct3D 11</li>
+<li>Book: Real-Time Readering</li>
+<li>Book: Programming Vertex Geometry and Pixel Shaders</li>
+<li>Book: Advanced Lighting and Materials With Shaders</li>
+<li>AMD Paper: Practical Parallax Occlusion Mapping for Highly Detailed Surface Rendering</li>
+<li><a href="http://colour-science.org/posts/the-importance-of-terminology-and-srgb-uncertainty/" target="_blank" rel="external">The Importance of Terminology and sRGB Uncertainty</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="20160115"><a href="#20160115" class="headerlink" title="20160115"></a>20160115</h3><ul>
+<li>增加生成 Entity 的 Geometry 接口  <strong> (completed) </strong></li>
+<li>设置 SpotLight 的 Controller mesh kCullNone <strong> (completed) </strong></li>
+<li>重新实现 GridLine  <strong> (completed) </strong></li>
+<li>重新实现 AxisFrame  <strong> (completed) </strong></li>
+<li>重构 SceneNode Bounding Box 相关代码  <strong> (completed) </strong></li>
+<li>修复 UIRender 渲染多次的问题， 以及 Blending Object 渲染顺序的问题  <strong> (completed) </strong></li>
+<li>DirLightController 选取有问题  <strong> (completed) </strong></li>
+<li>实现 VertexData 和 IndiceData 合并的功能</li>
+</ul>
+<h3 id="20160117"><a href="#20160117" class="headerlink" title="20160117"></a>20160117</h3><ul>
+<li>Stencil Buffer based Reflection 如何融入到现有渲染框架当中</li>
+</ul>
+<h3 id="20160119"><a href="#20160119" class="headerlink" title="20160119"></a>20160119</h3><ul>
+<li>Tessellation Triangle<h3 id="20160120"><a href="#20160120" class="headerlink" title="20160120"></a>20160120</h3><ul>
+<li>Tessellation Quad</li>
+<li>build Direct3D Cookbook samples</li>
+<li>Tessellation based terrain (TODO)</li>
+<li>Tessellation based detailmap (TODO)</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/azer3d/">azer3d</a>
+  </div>
+
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://lenxyang.github.io/2016/01/25/azer/month-report-201601/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜尋">
+    <input type="hidden" name="q" value="site:lenxyang.github.io">
+  </form>
+</div>
+
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">標籤</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/3d/">3d</a><small>1</small></li>
+  
+    <li><a href="/tags/azer3d/">azer3d</a><small>1</small></li>
+  
+    <li><a href="/tags/chromium/">chromium</a><small>2</small></li>
+  
+    <li><a href="/tags/direct3d/">direct3d</a><small>2</small></li>
+  
+    <li><a href="/tags/docker/">docker</a><small>2</small></li>
+  
+    <li><a href="/tags/effect/">effect</a><small>1</small></li>
+  
+    <li><a href="/tags/fuse/">fuse</a><small>1</small></li>
+  
+    <li><a href="/tags/gdi/">gdi</a><small>1</small></li>
+  
+    <li><a href="/tags/gn/">gn</a><small>1</small></li>
+  
+    <li><a href="/tags/hdfs/">hdfs</a><small>2</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/skia/">skia</a><small>1</small></li>
+  
+    <li><a href="/tags/toolchain/">toolchain</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 lenxyang@gmail.com
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
