@@ -3,16 +3,16 @@
 <head>
   <meta charset="utf-8">
   
-  <title>svn-access-control | azer3D</title>
+  <title>2016-01 Direct3D10 Samples Monblur | azer3D</title>
   <meta name="author" content="lenxyang@gmail.com">
   
-  <meta name="description" content="Svn Access Control参考
-Version Control with Subversion(1.7)">
+  <meta name="description" content="Monblur10Problems从 hlsl 的代码看， gs 的输出是每次对三角形的一边处理多次，而后生成 triangle。通过一条边生成的 triangle 有意义吗？ 莫非是一次通过对一条边的变换生成三角形？
+1#define MAX_TIME_STEPS 3&amp;#10;void Extru">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="svn-access-control"/>
+  <meta property="og:title" content="2016-01 Direct3D10 Samples Monblur"/>
   <meta property="og:site_name" content="azer3D"/>
 
   
@@ -52,20 +52,18 @@ Version Control with Subversion(1.7)">
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-01-26T07:12:55.000Z"><a href="/2016/01/26/svn/svn-access-control/">2016-01-26</a></time>
+        <time datetime="2016-01-28T07:50:23.247Z"><a href="/2016/01/28/d3d11/monblur10/">2016-01-28</a></time>
       
       
   
-    <h1 class="title">svn-access-control</h1>
+    <h1 class="title">2016-01 Direct3D10 Samples Monblur</h1>
   
 
     </header>
     <div class="entry">
       
-        <h1 id="Svn_Access_Control"><a href="#Svn_Access_Control" class="headerlink" title="Svn Access Control"></a>Svn Access Control</h1><h2 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h2><ul>
-<li><a href="http://svnbook.red-bean.com/en/1.7/index.html" target="_blank" rel="external">Version Control with Subversion(1.7)</a></li>
-</ul>
-
+        <h1 id="Monblur10"><a href="#Monblur10" class="headerlink" title="Monblur10"></a>Monblur10</h1><h2 id="Problems"><a href="#Problems" class="headerlink" title="Problems"></a>Problems</h2><p>从 hlsl 的代码看， gs 的输出是每次对三角形的一边处理多次，而后生成 triangle。通过一条边生成的 triangle 有意义吗？ 莫非是一次通过对一条边的变换生成三角形？</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#define MAX_TIME_STEPS 3&#10;void ExtrudeEdge( VSMotionBlurOut v1, &#10;                  VSMotionBlurOut v2, &#10;                  uniform uint iStep,&#10;                  inout TriangleStream&#60;GSMotionBlurOut&#62; SceneTriangleStream ) &#123;&#10;    GSMotionBlurOut oV1;&#10;    GSMotionBlurOut oV2;&#10;    ....&#10;    SceneTriangleStream.Append( oV2 );&#10;    SceneTriangleStream.Append( oV1 );&#10;&#125;&#10;&#10;void ExtrudeBlurEdges( VSMotionBlurOut v1,&#10;                      VSMotionBlurOut v2,&#10;                      inout TriangleStream&#60;GSMotionBlurOut&#62; SceneTriangleStream,&#10;                      uniform bool FrontSide ) &#123;           &#10;    uint iStart = 0;&#10;    uint iEnd = MAX_TIME_STEPS;&#10;    &#10;    [unroll] for(uint i=iStart; i&#60;iEnd; i++)&#10;    &#123;       &#10;        ExtrudeEdge( v1, v2, i, SceneTriangleStream );&#10;    &#125;&#10;&#10;    SceneTriangleStream.RestartStrip();&#10;&#125;&#10;&#10;[maxvertexcount(30)]&#10;void GSMotionBlurMain( triangle VSMotionBlurOut In[3], &#10;                       inout TriangleStream&#60;GSMotionBlurOut&#62; SceneTriangleStream, &#10;                       uniform bool bFrontSide ) &#123;&#10;  ExtrudeBlurEdges( In[0], In[1], SceneTriangleStream, bFrontSide );&#10;  ExtrudeBlurEdges( In[1], In[2], SceneTriangleStream, bFrontSide );&#10;  ExtrudeBlurEdges( In[2], In[0], SceneTriangleStream, bFrontSide );&#10;&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer>
@@ -74,7 +72,7 @@ Version Control with Subversion(1.7)">
         
   
   <div class="tags">
-    <a href="/tags/svn/">svn</a>
+    <a href="/tags/direct3d/">direct3d</a>
   </div>
 
         
@@ -100,7 +98,7 @@ Version Control with Subversion(1.7)">
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="fb-comments" data-href="http://lenxyang.github.io/2016/01/26/svn/svn-access-control/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="http://lenxyang.github.io/2016/01/28/d3d11/monblur10/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
 </section>
