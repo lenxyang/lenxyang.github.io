@@ -50,7 +50,41 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-01-28T07:51:00.022Z"><a href="/2016/01/28/d3d11/monblur10/">2016-01-28</a></time>
+        <time datetime="2016-01-28T08:10:55.573Z"><a href="/2016/01/28/d3d11/detailmap/">2016-01-28</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/01/28/d3d11/detailmap/">2016-01 Direct3D11 Samples - Tessellation1</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="Detailmap"><a href="#Detailmap" class="headerlink" title="Detailmap"></a>Detailmap</h1><h2 id="Tessellation_based_method"><a href="#Tessellation_based_method" class="headerlink" title="Tessellation based method"></a>Tessellation based method</h2><p>Detailmap(Tessellation based) 能够在渲染管线级别上决定几何体的细节，比起 normalmap 和 parallex mapping 要真是的多。(normalmap 无法处理遮挡关系，如果细节起伏较大会失真; parallex mapping 一定程度上解决了遮挡关系的问题，但如果某个高度变化到不可见状态时，parallex mapping 是没办法处理的)</p>
+<p>Tessellation based method 还有诸多优点</p>
+<h2 id="DevNotes"><a href="#DevNotes" class="headerlink" title="DevNotes"></a>DevNotes</h2>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-01-28T07:52:22.538Z"><a href="/2016/01/28/d3d11/monblur10/">2016-01-28</a></time>
       
       
   
@@ -62,6 +96,7 @@
       
         <h1 id="Monblur10"><a href="#Monblur10" class="headerlink" title="Monblur10"></a>Monblur10</h1><h2 id="Problems"><a href="#Problems" class="headerlink" title="Problems"></a>Problems</h2><p>从 hlsl 的代码看， gs 的输出是每次对三角形的一边处理多次，而后生成 triangle。通过一条边生成的 triangle 有意义吗？ 莫非是一次通过对一条边的变换生成三角形？</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">define</span> MAX_TIME_STEPS <span class="number">3</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ExtrudeEdge</span><span class="params">( VSMotionBlurOut v1, </span><br><span class="line">                  VSMotionBlurOut v2, </span><br><span class="line">                  uniform uint iStep,</span><br><span class="line">                  inout TriangleStream&lt;GSMotionBlurOut&gt; SceneTriangleStream )</span> </span>&#123;</span><br><span class="line">    GSMotionBlurOut oV1;</span><br><span class="line">    GSMotionBlurOut oV2;</span><br><span class="line">    ....</span><br><span class="line">    SceneTriangleStream.Append( oV2 );</span><br><span class="line">    SceneTriangleStream.Append( oV1 );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ExtrudeBlurEdges</span><span class="params">( VSMotionBlurOut v1,</span><br><span class="line">                      VSMotionBlurOut v2,</span><br><span class="line">                      inout TriangleStream&lt;GSMotionBlurOut&gt; SceneTriangleStream,</span><br><span class="line">                      uniform <span class="keyword">bool</span> FrontSide )</span> </span>&#123;           </span><br><span class="line">    uint iStart = <span class="number">0</span>;</span><br><span class="line">    uint iEnd = MAX_TIME_STEPS;</span><br><span class="line">    </span><br><span class="line">    [unroll] <span class="keyword">for</span>(uint i=iStart; i&lt;iEnd; i++)</span><br><span class="line">    &#123;       </span><br><span class="line">        ExtrudeEdge( v1, v2, i, SceneTriangleStream );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    SceneTriangleStream.RestartStrip();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[maxvertexcount(<span class="number">30</span>)]</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">GSMotionBlurMain</span><span class="params">( triangle VSMotionBlurOut In[<span class="number">3</span>], </span><br><span class="line">                       inout TriangleStream&lt;GSMotionBlurOut&gt; SceneTriangleStream, </span><br><span class="line">                       uniform <span class="keyword">bool</span> bFrontSide )</span> </span>&#123;</span><br><span class="line">  ExtrudeBlurEdges( In[<span class="number">0</span>], In[<span class="number">1</span>], SceneTriangleStream, bFrontSide );</span><br><span class="line">  ExtrudeBlurEdges( In[<span class="number">1</span>], In[<span class="number">2</span>], SceneTriangleStream, bFrontSide );</span><br><span class="line">  ExtrudeBlurEdges( In[<span class="number">2</span>], In[<span class="number">0</span>], SceneTriangleStream, bFrontSide );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Alpha_to_Converage"><a href="#Alpha_to_Converage" class="headerlink" title="Alpha to Converage"></a>Alpha to Converage</h2>
       
     </div>
     <footer>
@@ -214,50 +249,6 @@
 <li><a href="http://blog.scottlowe.org/2013/09/04/introducing-linux-network-namespaces/" target="_blank" rel="external">Scott’s Weblog: Introducing Linux Network Namespaces</a></li>
 <li><a href="https://en.wikipedia.org/wiki/UnionFS" target="_blank" rel="external">Wiki: UnionFS</a></li>
 <li><a href="http://dockerpool.com/static/books/docker_practice/index.html" target="_blank" rel="external">Docker</a></li>
-</ul>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/hexo/hexo-setup/">2016-01-25</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/01/25/hexo/hexo-setup/">hexo-setup</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="Hexo-setup"><a href="#Hexo-setup" class="headerlink" title="Hexo-setup"></a>Hexo-setup</h1><h2 id="u5B89_u88C5_hexo"><a href="#u5B89_u88C5_hexo" class="headerlink" title="安装 hexo"></a>安装 hexo</h2><h2 id="hexo__u57FA_u7840_u64CD_u4F5C"><a href="#hexo__u57FA_u7840_u64CD_u4F5C" class="headerlink" title="hexo 基础操作"></a>hexo 基础操作</h2><h2 id="u90E8_u7F72_u5230_github"><a href="#u90E8_u7F72_u5230_github" class="headerlink" title="部署到 github"></a>部署到 github</h2><h3 id="u5EFA_u7ACB_u4FE1_u4EFB_u5173_u7CFB"><a href="#u5EFA_u7ACB_u4FE1_u4EFB_u5173_u7CFB" class="headerlink" title="建立信任关系"></a>建立信任关系</h3><p>hexo 需要将生成的内容 push 到 git 服务器上。 使用 ssh 的协议能够免密码 push。具体操作是将 ssh-keygen 生成的 public key 文件添加到 github 的 deploy key 当中。</p>
-<h3 id="u4FEE_u6539__config"><a href="#u4FEE_u6539__config" class="headerlink" title="修改 _config"></a>修改 _config</h3><p>修改 _config.yaml<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: http://hexo.io/docs/deployment.html</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: git@github.com:lenxyang/lenxyang.github.io.git</span><br></pre></td></tr></table></figure></p>
-<h2 id="u5B89_u88C5_u4E3B_u9898"><a href="#u5B89_u88C5_u4E3B_u9898" class="headerlink" title="安装主题"></a>安装主题</h2><h3 id="u5C06_u4E3B_u9898_u4FDD_u5B58_u5728_themes__u76EE_u5F55_u4E0B"><a href="#u5C06_u4E3B_u9898_u4FDD_u5B58_u5728_themes__u76EE_u5F55_u4E0B" class="headerlink" title="将主题保存在 themes 目录下"></a>将主题保存在 themes 目录下</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/hexojs/hexo-theme-light.git themes/light</span><br></pre></td></tr></table></figure>
-<h3 id="u4FEE_u6539__config-yaml"><a href="#u4FEE_u6539__config-yaml" class="headerlink" title="修改 _config.yaml"></a>修改 _config.yaml</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Extensions</span></span><br><span class="line"><span class="comment">## Plugins: http://hexo.io/plugins/</span></span><br><span class="line"><span class="comment">## Themes: http://hexo.io/themes/</span></span><br><span class="line"><span class="comment">## theme: landscape</span></span><br><span class="line">theme: light</span><br></pre></td></tr></table></figure>
-<h2 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h2><h3 id="u8FD0_u884C_hexo__u662F_u63D0_u793A__u201C/usr/bin/env_3A_node_3A_No_such_file_or_directory_u201D"><a href="#u8FD0_u884C_hexo__u662F_u63D0_u793A__u201C/usr/bin/env_3A_node_3A_No_such_file_or_directory_u201D" class="headerlink" title="运行 hexo 是提示 “/usr/bin/env: node: No such file or directory”"></a>运行 hexo 是提示 “/usr/bin/env: node: No such file or directory”</h3><p>最简单的办法是</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install nodejs-legacy</span><br></pre></td></tr></table></figure>
-<h3 id="hexo_deploy_3A_ERROR_Deployer_not_found_3A_github"><a href="#hexo_deploy_3A_ERROR_Deployer_not_found_3A_github" class="headerlink" title="hexo deploy: ERROR Deployer not found: github"></a>hexo deploy: ERROR Deployer not found: github</h3><p>hexo 从 3.0 以后，type 由 github 变为了 git。毕竟主要有一个 git repository 就可以部署了，并非 github 不可。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: http://hexo.io/docs/deployment.html</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: git@github.com:lenxyang/lenxyang.github.io.git</span><br></pre></td></tr></table></figure>
-<h2 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h2><ul>
-<li><a href="https://nodejs.org/en/download/package-manager/" target="_blank" rel="external">Installing Node.js via package manager</a></li>
-<li><a href="https://www.zhihu.com/question/24422335" target="_blank" rel="external">知乎: 有哪些好看的 Hexo 主题？</a></li>
 </ul>
 
       
@@ -649,7 +640,7 @@
   
     <li><a href="/tags/chromium/">chromium</a><small>2</small></li>
   
-    <li><a href="/tags/direct3d/">direct3d</a><small>3</small></li>
+    <li><a href="/tags/direct3d/">direct3d</a><small>4</small></li>
   
     <li><a href="/tags/docker/">docker</a><small>2</small></li>
   

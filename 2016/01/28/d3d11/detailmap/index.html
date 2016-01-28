@@ -3,13 +3,15 @@
 <head>
   <meta charset="utf-8">
   
-  <title>第 2 頁 | 彙整：2016 | azer3D</title>
+  <title>2016-01 Direct3D11 Samples - Tessellation1 | azer3D</title>
   <meta name="author" content="lenxyang@gmail.com">
+  
+  <meta name="description" content="DetailmapTessellation based methodDetailmap(Tessellation based) 能够在渲染管线级别上决定几何体的细节，比起 normalmap 和 parallex mapping 要真是的多。(normalmap 无法处理遮挡关系，如果细节起伏较大会">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="2016-01 Direct3D11 Samples - Tessellation1"/>
   <meta property="og:site_name" content="azer3D"/>
 
   
@@ -43,73 +45,64 @@
 <div class="clearfix"></div>
 </header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper">
-<h2 class="archive-title">2016</h2>
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-01-28T08:10:55.573Z"><a href="/2016/01/28/d3d11/detailmap/">2016-01-28</a></time>
+      
+      
+  
+    <h1 class="title">2016-01 Direct3D11 Samples - Tessellation1</h1>
+  
 
-
-  <div class="archive">
-    
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/d3d11/shadowmap_devnotes/">2016-01-25</a></time>
-            
-              <h1 class="title"><a href="/2016/01/25/d3d11/shadowmap_devnotes/">Shadowmap Devnotes</a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/skia/skia-tricks/">2016-01-25</a></time>
-            
-              <h1 class="title"><a href="/2016/01/25/skia/skia-tricks/">Skia Tricks</a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/hexo/hexo-setup/">2016-01-25</a></time>
-            
-              <h1 class="title"><a href="/2016/01/25/hexo/hexo-setup/">hexo-setup</a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/chromium/gpu-client-site-mode/">2016-01-25</a></time>
-            
-              <h1 class="title"><a href="/2016/01/25/chromium/gpu-client-site-mode/">GPU Server-Client Mode</a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/chromium/build-with-gn/">2016-01-25</a></time>
-            
-              <h1 class="title"><a href="/2016/01/25/chromium/build-with-gn/">Build Chromium with GN</a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
+    </header>
+    <div class="entry">
+      
+        <h1 id="Detailmap"><a href="#Detailmap" class="headerlink" title="Detailmap"></a>Detailmap</h1><h2 id="Tessellation_based_method"><a href="#Tessellation_based_method" class="headerlink" title="Tessellation based method"></a>Tessellation based method</h2><p>Detailmap(Tessellation based) 能够在渲染管线级别上决定几何体的细节，比起 normalmap 和 parallex mapping 要真是的多。(normalmap 无法处理遮挡关系，如果细节起伏较大会失真; parallex mapping 一定程度上解决了遮挡关系的问题，但如果某个高度变化到不可见状态时，parallex mapping 是没办法处理的)</p>
+<p>Tessellation based method 还有诸多优点</p>
+<h2 id="DevNotes"><a href="#DevNotes" class="headerlink" title="DevNotes"></a>DevNotes</h2>
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/direct3d/">direct3d</a>
   </div>
+
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://lenxyang.github.io/2016/01/28/d3d11/detailmap/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
