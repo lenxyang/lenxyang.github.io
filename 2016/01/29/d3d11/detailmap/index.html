@@ -51,7 +51,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-01-29T02:21:25.514Z"><a href="/2016/01/29/d3d11/detailmap/">2016-01-29</a></time>
+        <time datetime="2016-01-29T08:47:43.874Z"><a href="/2016/01/29/d3d11/detailmap/">2016-01-29</a></time>
       
       
   
@@ -65,7 +65,11 @@
 <p>Tessellation based method 还有诸多优点</p>
 <h2 id="u5B9E_u73B0_u7EC6_u8282"><a href="#u5B9E_u73B0_u7EC6_u8282" class="headerlink" title="实现细节"></a>实现细节</h2><h3 id="Density_Map"><a href="#Density_Map" class="headerlink" title="Density Map"></a>Density Map</h3><p>Tessellation 的分割参数 (Hull Constants Shader) 与很多因素相关，具体可以分成动态及静态两种；具体来说，与摄像头的距离是动态的，与摄像头的方向夹角这些因素是动态的；此外，Mesh 对象本身的特征是静态的，高度变化较为剧烈的地方应该采用较密集的分割，变化平缓的地方采用较少的分割。高度图是静态的，所以可以采用离线或者加载时刻生成的办法生成一张分割参数的 Texture，用来帮助 Tessellation 的 Hull Constants Shader 的性能</p>
 <p>具体可以参考 CreateDensityMapFromHeightMap</p>
-<h2 id="DevNotes"><a href="#DevNotes" class="headerlink" title="DevNotes"></a>DevNotes</h2>
+<h2 id="DevNotes"><a href="#DevNotes" class="headerlink" title="DevNotes"></a>DevNotes</h2><h1 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="http://http.developer.nvidia.com/GPUGems2/gpugems2_chapter07.html" target="_blank" rel="external">GPU Gems 2: Chapter 7. Adaptive Tessellation of Subdivision Surfaces with Displacement Mapping</a></li>
+<li>Direct3D Rendering CookBook: Chapter 6 Adding Surface Detail with Normal and Displacement Mapping</li>
+</ul>
+
       
     </div>
     <footer>
@@ -127,7 +131,7 @@
   
     <li><a href="/tags/chromium/">chromium</a><small>2</small></li>
   
-    <li><a href="/tags/direct3d/">direct3d</a><small>4</small></li>
+    <li><a href="/tags/direct3d/">direct3d</a><small>6</small></li>
   
     <li><a href="/tags/docker/">docker</a><small>2</small></li>
   

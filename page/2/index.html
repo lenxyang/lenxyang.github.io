@@ -205,6 +205,107 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/hdfs/setup-hdfs-on-docker/">2016-01-25</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/01/25/hdfs/setup-hdfs-on-docker/">Setup HDFS on Docker</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="u4F7F_u7528_Docker__u5EFA_u7ACB_HDFS__u96C6_u7FA4"><a href="#u4F7F_u7528_Docker__u5EFA_u7ACB_HDFS__u96C6_u7FA4" class="headerlink" title="使用 Docker 建立 HDFS 集群"></a>使用 Docker 建立 HDFS 集群</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">$ sudo docker pull docker.io/centos</span><br></pre></td></tr></table></figure>
+<h2 id="u521B_u5EFA_u955C_u50CF"><a href="#u521B_u5EFA_u955C_u50CF" class="headerlink" title="创建镜像"></a>创建镜像</h2><h3 id="u914D_u7F6E_DNS__u670D_u52A1_u5668"><a href="#u914D_u7F6E_DNS__u670D_u52A1_u5668" class="headerlink" title="配置 DNS 服务器"></a>配置 DNS 服务器</h3><p>Docker 配置静态 IP 比较麻烦，/etc/hosts 文件在启动 docker 时自动生成，之前的更改可能被覆盖，为 docker 集群提供一个 DNS 服务是个不错的方法，一个 DNS 缓存服务器就足够用了，完全不需要完整的服务（架设，配置都比较麻烦）。</p>
+<p>DNS 缓存服务我们采用 dnsmasq，具体方法参考 <a href="https://wiredcraft.com/blog/dns-and-docker-containers/" target="_blank" rel="external">DNS AND DOCKER CONTAINERS</a></p>
+<h4 id="u542F_u52A8_u670D_u52A1"><a href="#u542F_u52A8_u670D_u52A1" class="headerlink" title="启动服务"></a>启动服务</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">docker run <span class="operator">-d</span> dnsmasq /bin/sh -c <span class="string">"/sbin/dnsmasq; while true; do echo sleep; sleep 1; done"</span></span><br></pre></td></tr></table></figure>
+<h3 id="u914D_u7F6E_DNS"><a href="#u914D_u7F6E_DNS" class="headerlink" title="配置 DNS"></a>配置 DNS</h3><p>启动是通过 docker 参数指定 dns 服务及机器名</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">$ sudo docker run -dns <span class="number">177.17</span>.<span class="number">0.1</span> -h hostname imagename binary</span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过 nscenter 连接 docker</span></span><br><span class="line">$ PID=$(docker inspect --format <span class="string">"&#123;&#123; .State.Pid &#125;&#125;"</span> &lt;container&gt;) <span class="comment"># 获得容器的第一个进程 id</span></span><br><span class="line">$ nsenter --target <span class="variable">$PID</span> --mount --uts --ipc --net --pid</span><br></pre></td></tr></table></figure>
+<h2 id="u914D_u7F6E_Hadoop"><a href="#u914D_u7F6E_Hadoop" class="headerlink" title="配置 Hadoop"></a>配置 Hadoop</h2><h3 id="u914D_u7F6E_u4FE1_u4EFB_u5173_u7CFB"><a href="#u914D_u7F6E_u4FE1_u4EFB_u5173_u7CFB" class="headerlink" title="配置信任关系"></a>配置信任关系</h3><p>hadoop 通过 RASPublicKey 认证的 ssh 访问，必须为所有机器建立信任关系。</p>
+<h3 id="u914D_u7F6E_Single_Node"><a href="#u914D_u7F6E_Single_Node" class="headerlink" title="配置 Single Node"></a>配置 Single Node</h3><h4 id="u914D_u7F6E_/etc/hadoop/core-site-xml"><a href="#u914D_u7F6E_/etc/hadoop/core-site-xml" class="headerlink" title="配置 /etc/hadoop/core-site.xml"></a>配置 /etc/hadoop/core-site.xml</h4><figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">&lt;configuration&gt;</span></span><br><span class="line">  <span class="variable">&lt;property&gt;</span></span><br><span class="line">    <span class="variable">&lt;name&gt;</span>fs.<span class="keyword">default</span>.name<span class="variable">&lt;/name&gt;</span></span><br><span class="line">    <span class="variable">&lt;value&gt;</span>hdfs://node1:<span class="number">49000</span><span class="variable">&lt;/value&gt;</span></span><br><span class="line">  <span class="variable">&lt;/property&gt;</span></span><br><span class="line">  <span class="variable">&lt;property&gt;</span></span><br><span class="line">    <span class="variable">&lt;name&gt;</span>hadoop.tmp.dir<span class="variable">&lt;/name&gt;</span></span><br><span class="line">    <span class="variable">&lt;value&gt;</span>/home/hadoop/var<span class="variable">&lt;/value&gt;</span></span><br><span class="line">  <span class="variable">&lt;/property&gt;</span></span><br><span class="line"><span class="variable">&lt;/configuration&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="u914D_u7F6E_/etc/hadoop/hdfs-site-xml"><a href="#u914D_u7F6E_/etc/hadoop/hdfs-site-xml" class="headerlink" title="配置 /etc/hadoop/hdfs-site.xml"></a>配置 /etc/hadoop/hdfs-site.xml</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">configuration</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">name</span>&gt;</span>dfs.replication<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">value</span>&gt;</span>1<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="u683C_u5F0F_u5316_dfs"><a href="#u683C_u5F0F_u5316_dfs" class="headerlink" title="格式化 dfs"></a>格式化 dfs</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">hadoop namenode -format</span><br></pre></td></tr></table></figure>
+<h3 id="u542F_u52A8_hdfs"><a href="#u542F_u52A8_hdfs" class="headerlink" title="启动 hdfs"></a>启动 hdfs</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">~/hadoop-<span class="number">2.6</span>.<span class="number">0</span>/sbin/start-dfs.sh</span><br></pre></td></tr></table></figure>
+<h2 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h2><h3 id="u90E8_u7F72_dnsmasq__u65F6_u51FA_u73B0_u9519_u8BEF__u201Csetting_capabilities_failed_3A_Operation_not_permitted_u201D"><a href="#u90E8_u7F72_dnsmasq__u65F6_u51FA_u73B0_u9519_u8BEF__u201Csetting_capabilities_failed_3A_Operation_not_permitted_u201D" class="headerlink" title="部署 dnsmasq 时出现错误 “setting capabilities failed: Operation not permitted”"></a>部署 dnsmasq 时出现错误 “setting capabilities failed: Operation not permitted”</h3><p>具体解决办法，修改 /etc/dnsmaqs.conf<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">user=root</span><br></pre></td></tr></table></figure></p>
+<p>参考 <a href="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=514214" target="_blank" rel="external">Debian Bug report logs - #514214 dnsmasq crashes if fails to set capabilities</a></p>
+<h3 id="u8FDE_u63A5_ssh__u670D_u52A1_u662F_u51FA_u73B0__u201Cssh_Read_from_socket_failed_3A_Connection_reset_by_peer_u201D"><a href="#u8FDE_u63A5_ssh__u670D_u52A1_u662F_u51FA_u73B0__u201Cssh_Read_from_socket_failed_3A_Connection_reset_by_peer_u201D" class="headerlink" title="连接 ssh 服务是出现 “ssh Read from socket failed: Connection reset by peer”"></a>连接 ssh 服务是出现 “ssh Read from socket failed: Connection reset by peer”</h3><p>docker image 可能是安装非常初步的操作系统，各种错误都用可能出现。这个问题是 sshd 异常中断导致的，可以使用 /sbin/sshd -d 启动程序，而后通过 ssh 连接服务，sshd 会打印足够的日志来诊断问题。</p>
+<h1 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="http://tecadmin.net/setup-dns-server-on-centos-redhat/" target="_blank" rel="external">How to Setup DNS (Bind) Server on CentOS/RHEL 7/6/5</a></li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/hdfs/fuse-on-hdfs/">2016-01-25</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/01/25/hdfs/fuse-on-hdfs/">fuse driver for HDFS</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h1><h2 id="u7F16_u8BD1_libhdfs"><a href="#u7F16_u8BD1_libhdfs" class="headerlink" title="编译 libhdfs"></a>编译 libhdfs</h2><p>使用 cdh 版本的 hadoop, 默认 libhdfs 不会编译</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="variable">$&#123;hadoop_client&#125;</span>/src/hadoop-mapreduce1-project/src/c++/libhdfs</span><br><span class="line">./bootstrap.sh</span><br><span class="line">./configure</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
+<h2 id="u53EF_u80FD_u9047_u5230_u7684_u95EE_u9898"><a href="#u53EF_u80FD_u9047_u5230_u7684_u95EE_u9898" class="headerlink" title="可能遇到的问题"></a>可能遇到的问题</h2><ul>
+<li>cc1: error: unrecognized command line option “-m”</li>
+</ul>
+<p>gcc 使用 -m 选项指定 target arch, 出现这个错误的原因是 -m 后面没有跟参数。在所有没有参数的 -m 后面增加 64 即可</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CFLAGS = -g -O2 -DOS_LINUX -DDSO_DLFCN -DCPU=\<span class="string">"amd64\" -m64</span><br><span class="line">LDFLAGS =  -m64 -L/usr/jdk_home/jre/lib/amd64/server</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>include/stddef.h:211: error: duplicate ‘unsigned</li>
+</ul>
+<p>这个错误是因为 Makefile 当中包含</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-Dsize_t=unsigned\ int</span><br></pre></td></tr></table></figure>
+<h2 id="fuse__u603B_u662F_u4EE5_4096__u4E3A_u5355_u4F4D_u8BFB_u5199"><a href="#fuse__u603B_u662F_u4EE5_4096__u4E3A_u5355_u4F4D_u8BFB_u5199" class="headerlink" title="fuse 总是以 4096 为单位读写"></a>fuse 总是以 4096 为单位读写</h2><p>启动时增加 options, 注意 big_writes 必须启用，否则其他选项不起作用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-o max_readahead=<span class="number">1024000</span> -omax_write=<span class="number">1024000</span> -obig_writes</span><br></pre></td></tr></table></figure>
+<h2 id="u5176_u4ED6_u7528_u6237_u65E0_u6CD5_u8BBF_u95EE_fuse__u8DEF_u5F84"><a href="#u5176_u4ED6_u7528_u6237_u65E0_u6CD5_u8BBF_u95EE_fuse__u8DEF_u5F84" class="headerlink" title="其他用户无法访问 fuse 路径"></a>其他用户无法访问 fuse 路径</h2><p>在挂载 mdfs 之后，如果使用其他账户进行操作会出现 “ls: cannot access test: Permission denied” 错误。这是 fuse 的配置导致</p>
+<p>修改 /etc/fuse.conf</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user_allow_other</span><br></pre></td></tr></table></figure>
+<p>此外运行 mdfs 时增加 <strong><em> -oallow_other </em></strong> ， 问题就解决了</p>
+<h2 id="java-lang-UnsupportedClassVersionError"><a href="#java-lang-UnsupportedClassVersionError" class="headerlink" title="java.lang.UnsupportedClassVersionError"></a>java.lang.UnsupportedClassVersionError</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Exception <span class="keyword">in</span> thread <span class="string">"main"</span> java.lang.UnsupportedClassVersionError: org/apache/hadoop/conf/Configuration : Unsupported major.minor version <span class="number">51.0</span></span><br><span class="line">   at java.lang.ClassLoader.defineClass1(Native Method)</span><br><span class="line">   at java.lang.ClassLoader.defineClass(ClassLoader.java:<span class="number">634</span>)</span><br><span class="line">   ...</span><br></pre></td></tr></table></figure>
+<p>这很有可能是机器上安装了多个 java 版本且使用了错误的版本导致的</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/chromium/gpu-client-site-mode/">2016-01-25</a></time>
       
       
@@ -333,47 +434,23 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/docker/fast-introduce-to-docker/">2016-01-25</a></time>
+        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/d3d11/tools/">2016-01-25</a></time>
       
       
   
-    <h1 class="title"><a href="/2016/01/25/docker/fast-introduce-to-docker/">fast-introduce-to-docker</a></h1>
+    <h1 class="title"><a href="/2016/01/25/d3d11/tools/">3D Tools</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <h1 id="Docker__u5FEB_u901F_u4ECB_u7ECD"><a href="#Docker__u5FEB_u901F_u4ECB_u7ECD" class="headerlink" title="Docker 快速介绍"></a>Docker 快速介绍</h1><p>本文档主要目的是说明 docker 的最简单也是最核心的功能。</p>
-<p>Docker 的最重要功能是系统镜像(包括系统内核、系统库、系统程序及数据)，例如服务端程序依赖于 NLP 模块、NLP 词典以及对应.so文件。 不过的服务程序可能不便，但这几个基本模块都需要。在这种情形下，我们可以按照当前内核基础上创建一个镜像，并在此镜像内部加入 NLP 的 so 及字典文件。</p>
-<p>接下来我们将使用最简单的代码及依赖关系说明如何 Docker 进行快速部署。</p>
-<h2 id="u955C_u50CF_u64CD_u4F5C"><a href="#u955C_u50CF_u64CD_u4F5C" class="headerlink" title="镜像操作"></a>镜像操作</h2><h3 id="u83B7_u5F97_u955C_u50CF"><a href="#u83B7_u5F97_u955C_u50CF" class="headerlink" title="获得镜像"></a>获得镜像</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line"><span class="comment"># 获得本地 images</span></span><br><span class="line">$ sudo docker images</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从 repository 获得 images</span></span><br><span class="line">$ sudo docker pull</span><br></pre></td></tr></table></figure>
-<h3 id="docker_commit__u65B9_u5F0F_u521B_u5EFA_u955C_u50CF"><a href="#docker_commit__u65B9_u5F0F_u521B_u5EFA_u955C_u50CF" class="headerlink" title="docker commit 方式创建镜像"></a>docker commit 方式创建镜像</h3><h4 id="u4FEE_u6539_u955C_u50CF"><a href="#u4FEE_u6539_u955C_u50CF" class="headerlink" title="修改镜像"></a>修改镜像</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line"><span class="comment"># -t: allocate an tty, -i: interactive</span></span><br><span class="line">$ sudo docker run -i -t ubuntu /bin/bash</span><br><span class="line">$ apt-get install nginx</span><br></pre></td></tr></table></figure>
-<h4 id="u67E5_u770B_u5F53_u524D_u6B63_u5728_u4F7F_u7528_u7684_u955C_u50CF"><a href="#u67E5_u770B_u5F53_u524D_u6B63_u5728_u4F7F_u7528_u7684_u955C_u50CF" class="headerlink" title="查看当前正在使用的镜像"></a>查看当前正在使用的镜像</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">[root@localhost yanglei]$ docker ps</span><br><span class="line">CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES</span><br><span class="line"><span class="number">5</span>f969df0af99        ubuntu              <span class="string">"/bin/bash"</span>         <span class="number">4</span> minutes ago       Up <span class="number">4</span> minutes                            fervent_kirch</span><br></pre></td></tr></table></figure>
-<h4 id="u4FDD_u5B58_u4FEE_u6539"><a href="#u4FDD_u5B58_u4FEE_u6539" class="headerlink" title="保存修改"></a>保存修改</h4><p>保存我们的修改，注意保存的 container 而非 image, container 可以从 docker 的 bin/bash 的命令行提是获得，也可以按照上面 docker ps 的方式获得<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">$ sudo docker commit -m <span class="string">"install nginx"</span> <span class="operator">-a</span> <span class="string">"lenxyang"</span> <span class="number">5</span>f969df0af99 ubuntu_with_nginx</span><br></pre></td></tr></table></figure></p>
-<h3 id="Dockerfile__u5F62_u5F0F_u521B_u5EFA_u955C_u50CF"><a href="#Dockerfile__u5F62_u5F0F_u521B_u5EFA_u955C_u50CF" class="headerlink" title="Dockerfile 形式创建镜像"></a>Dockerfile 形式创建镜像</h3><p>创建一个目录并在目录下创建一个名为 Dockerfile 的文件，内容如下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">FROM ubuntu:<span class="number">14.04</span></span><br><span class="line">MAINTAINER Docker Newbee &lt;newbee@docker.com&gt;</span><br><span class="line">$ apt-get install nginx</span><br></pre></td></tr></table></figure>
-<p>而后运行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line"><span class="comment"># -t 表示 tag name</span></span><br><span class="line">$ sudo docker build -t=<span class="string">"ouruser/sinatra:v2"</span></span><br></pre></td></tr></table></figure>
-<h3 id="u5220_u9664"><a href="#u5220_u9664" class="headerlink" title="删除"></a>删除</h3><p>删除命令有两个 rm 和 rmi， 其中 rm 的对象是 container, 而 rmi 的对象是 image.</p>
-<h3 id="u4FDD_u5B58_u548C_u5BFC_u5165"><a href="#u4FDD_u5B58_u548C_u5BFC_u5165" class="headerlink" title="保存和导入"></a>保存和导入</h3><p>创建好的镜像可以通过 load 和 save 命令导入和保存<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">$ docker save -o file.tar imagename</span><br><span class="line">$ docker load --input file.tar</span><br><span class="line">$ docker load &lt; file.tar</span><br></pre></td></tr></table></figure></p>
-<h2 id="u5BB9_u5668_28Container_29_u64CD_u4F5C"><a href="#u5BB9_u5668_28Container_29_u64CD_u4F5C" class="headerlink" title="容器(Container)操作"></a>容器(Container)操作</h2><p>Container 是 镜像运行起来之后的概念，其关系类似于 process 和 program。之前介绍容器是也提到了 Container 的操作(docker run -i -t ..)</p>
-<h3 id="u542F_u52A8"><a href="#u542F_u52A8" class="headerlink" title="启动"></a>启动</h3><p>Container 基本是以程序的生命周期来进行的，如 docker -r -i … /bin/bash， 在 /bin/bash 退出时(如运行 exit 命令), 则整个 docker 都退出了。 Container 也可以以类似 (nohup ./run.sh &amp;) 的形式运行，及 daemon 形态。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">$ docker run <span class="operator">-d</span> imagename /bin/bash -C <span class="string">"while (true); do sleep(1); done"</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="u505C_u6B62"><a href="#u505C_u6B62" class="headerlink" title="停止"></a>停止</h3><p>通过 docker ps 查看正在运行的 container id, 而后通过<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bash</span></span><br><span class="line">$ sudo docker stop contain_id</span><br></pre></td></tr></table></figure></p>
-<h3 id="Attach"><a href="#Attach" class="headerlink" title="Attach"></a>Attach</h3><p>docker 对进行除了提供  stop 之外，还提供了 start, restart。此时我们需要考虑如何登录到 container 上了，毕竟未没有 tty 啦。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bash</span></span><br><span class="line">$ sudo docker attach container_id</span><br></pre></td></tr></table></figure></p>
-<p>attach 有一个问题，attach 之后，其他 attach 的用户就被挂起了, nsenter 可以解决这个问题。</p>
-<h3 id="nsenter"><a href="#nsenter" class="headerlink" title="nsenter"></a>nsenter</h3><p>nsenter 可以访问指定进行的系统名字空间<br><figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">$</span> <span class="comment">sudo</span> <span class="comment">nsenter</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">target</span> <span class="comment">10981</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">mount</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">uts</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">ipc</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">net</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">pid</span></span><br></pre></td></tr></table></figure></p>
-<p>需要注意是 target 并不是 docker 的 container id, 而是 host machine 的 pid，命令 docker inspect 可以提供帮助<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker <span class="keyword">inspect</span> --<span class="keyword">format</span> <span class="string">"&#123;&#123; .State.Pid &#125;&#125;"</span> container_id</span><br></pre></td></tr></table></figure></p>
-<h2 id="Data_Volumns"><a href="#Data_Volumns" class="headerlink" title="Data Volumns"></a>Data Volumns</h2><p>前面提到 nlp 的字典，这些字典通常非常巨大，如果每一个 image 保存一份，过于浪费数据了。还在 docker 有 Data Volumn，可以帮助多个 Container 共享内容。</p>
-<h2 id="u7F51_u7EDC_u8BBF_u95EE"><a href="#u7F51_u7EDC_u8BBF_u95EE" class="headerlink" title="网络访问"></a>网络访问</h2><p>在 ubuntu 上安装 nginx 并启动后，从 docker 主机上可以通过 netstat 查看<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">root@<span class="number">83</span>d0ba715246:/$ netstat -nptl</span><br><span class="line">Active Internet connections (only servers)</span><br><span class="line">Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name</span><br><span class="line">tcp        <span class="number">0</span>      <span class="number">0</span> <span class="number">0.0</span>.<span class="number">0.0</span>:<span class="number">80</span>              <span class="number">0.0</span>.<span class="number">0.0</span>:*               LISTEN      <span class="number">34</span>/nginx</span><br><span class="line">tcp6       <span class="number">0</span>      <span class="number">0</span> :::<span class="number">80</span>                   :::*                    LISTEN      <span class="number">34</span>/nginx</span><br></pre></td></tr></table></figure></p>
-<p>但在 Host Machine 上却看不到</p>
-<p>docker 提供命令在启动是进行端口映射<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># 绑定指定端口</span></span><br><span class="line">$ sudo docker run -d -p <span class="number">5000</span>:<span class="number">5000</span> ...</span><br><span class="line"></span><br><span class="line"><span class="preprocessor"># 绑定到本机 ip 地址</span></span><br><span class="line">$ sudo docker run -d -p <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">5000</span>:<span class="number">5000</span> ...</span><br><span class="line"></span><br><span class="line"><span class="preprocessor"># 绑定 udp 端口</span></span><br><span class="line">$ sudo docker run -d -p <span class="number">5000</span>:<span class="number">5000</span>/udp ...</span><br><span class="line"></span><br><span class="line"><span class="preprocessor"># 将本地任意一个端口绑定到 container <span class="number">5000</span> 上</span></span><br><span class="line">$ sudo docker run -d -p <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>::<span class="number">5000</span> ...</span><br></pre></td></tr></table></figure></p>
-<h3 id="u67E5_u770B_u7AEF_u53E3_u6620_u5C04"><a href="#u67E5_u770B_u7AEF_u53E3_u6620_u5C04" class="headerlink" title="查看端口映射"></a>查看端口映射</h3><figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker <span class="foreign"><span class="keyword">port</span> containerid</span></span><br></pre></td></tr></table></figure>
-<h1 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h1><h2 id="Permission_denied_when_visit_Volumne_data"><a href="#Permission_denied_when_visit_Volumne_data" class="headerlink" title="Permission denied when visit Volumne data"></a>Permission denied when visit Volumne data</h2><p>尝试使用 flags –privileged=true</p>
-<h1 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h1><ul>
-<li><a href="http://docs.docker.com/engine/userguide/dockerimages/" target="_blank" rel="external">Docker: Build your own images</a></li>
-<li><a href="http://blog.scottlowe.org/2013/09/04/introducing-linux-network-namespaces/" target="_blank" rel="external">Scott’s Weblog: Introducing Linux Network Namespaces</a></li>
-<li><a href="https://en.wikipedia.org/wiki/UnionFS" target="_blank" rel="external">Wiki: UnionFS</a></li>
-<li><a href="http://dockerpool.com/static/books/docker_practice/index.html" target="_blank" rel="external">Docker</a></li>
+        <h1 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h1><h2 id="u6A21_u578B_u63D0_u53D6_u5DE5_u5177"><a href="#u6A21_u578B_u63D0_u53D6_u5DE5_u5177" class="headerlink" title="模型提取工具"></a>模型提取工具</h2><ul>
+<li><a href="http://www.deep-shadows.com/hax/3DRipperDX.htm" target="_blank" rel="external">3D Ripper DX</a></li>
+</ul>
+<h2 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h2><ul>
+<li><a href="http://www.bundysoft.com/L3DT/" target="_blank" rel="external">L3DT - Large 3D Terrain Generator</a></li>
+<li><a href="http://planetside.co.uk/" target="_blank" rel="external">Terragen-3D</a></li>
+<li><a href="http://www.ogre3d.org/tikiwiki/DCC+Tools#Terrain_generation" target="_blank" rel="external">OGRE DCC Tools</a></li>
 </ul>
 
       
@@ -420,7 +497,7 @@
   
     <li><a href="/tags/chromium/">chromium</a><small>2</small></li>
   
-    <li><a href="/tags/direct3d/">direct3d</a><small>4</small></li>
+    <li><a href="/tags/direct3d/">direct3d</a><small>6</small></li>
   
     <li><a href="/tags/docker/">docker</a><small>2</small></li>
   
