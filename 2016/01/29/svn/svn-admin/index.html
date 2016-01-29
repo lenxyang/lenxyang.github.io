@@ -3,16 +3,16 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tessellation Devnotes | azer3D</title>
+  <title>svn-admin | azer3D</title>
   <meta name="author" content="lenxyang@gmail.com">
   
-  <meta name="description" content="Tessellation (DevNotes)Troubles Shooting渲染 quad 时只能出现两个对角三角形，而非4个三角形问题发生在插值函数上
-12345DsOutput ds_main(...) &amp;#123;  float3 v1 = lerp(quad[0].position.xy">
+  <meta name="description" content="svn Partical Backup and Reloadpartical dump通过 svnadmin dump 和 svndumpfilter 可以实现 dump 部分库的方法
+1svnadmin dump /home/svn/repo/projname | svndumpfilter --">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="Tessellation Devnotes"/>
+  <meta property="og:title" content="svn-admin"/>
   <meta property="og:site_name" content="azer3D"/>
 
   
@@ -52,19 +52,23 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/d3d11/tessellation_devnotes/">2016-01-25</a></time>
+        <time datetime="2016-01-29T03:52:55.000Z"><a href="/2016/01/29/svn/svn-admin/">2016-01-29</a></time>
       
       
   
-    <h1 class="title">Tessellation Devnotes</h1>
+    <h1 class="title">svn-admin</h1>
   
 
     </header>
     <div class="entry">
       
-        <h1 id="Tessellation__28DevNotes_29"><a href="#Tessellation__28DevNotes_29" class="headerlink" title="Tessellation (DevNotes)"></a>Tessellation (DevNotes)</h1><h2 id="Troubles_Shooting"><a href="#Troubles_Shooting" class="headerlink" title="Troubles Shooting"></a>Troubles Shooting</h2><h3 id="u6E32_u67D3_quad__u65F6_u53EA_u80FD_u51FA_u73B0_u4E24_u4E2A_u5BF9_u89D2_u4E09_u89D2_u5F62_uFF0C_u800C_u975E4_u4E2A_u4E09_u89D2_u5F62"><a href="#u6E32_u67D3_quad__u65F6_u53EA_u80FD_u51FA_u73B0_u4E24_u4E2A_u5BF9_u89D2_u4E09_u89D2_u5F62_uFF0C_u800C_u975E4_u4E2A_u4E09_u89D2_u5F62" class="headerlink" title="渲染 quad 时只能出现两个对角三角形，而非4个三角形"></a>渲染 quad 时只能出现两个对角三角形，而非4个三角形</h3><p>问题发生在插值函数上</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">DsOutput <span class="title">ds_main</span><span class="params">(...)</span> </span>&#123;</span><br><span class="line">  float3 v1 = lerp(quad[<span class="number">0</span>].position.xyz, quad[<span class="number">1</span>].position.xyz, uv.x);</span><br><span class="line">  float3 v2 = lerp(quad[<span class="number">3</span>].position.xyz, quad[<span class="number">2</span>].position.xyz, uv.x);</span><br><span class="line">  output.position = mul(pvw, float4(lerp(v1, v2, uv.y), <span class="number">1.0f</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>开始是将 v2 的插值顺序写反了 (quad[3], quad[2])<br>注意：azer3d 采用的是右手坐标系</p>
+        <h2 id="svn_Partical_Backup_and_Reload"><a href="#svn_Partical_Backup_and_Reload" class="headerlink" title="svn Partical Backup and Reload"></a>svn Partical Backup and Reload</h2><h3 id="partical_dump"><a href="#partical_dump" class="headerlink" title="partical dump"></a>partical dump</h3><p>通过 svnadmin dump 和 svndumpfilter 可以实现 dump 部分库的方法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svnadmin dump /home/svn/repo/projname | svndumpfilter --drop-empty-revs include /proj &gt; dump-file</span><br></pre></td></tr></table></figure>
+<p>某些情况下可能出现<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svndumpfilter fails <span class="keyword">with</span> “Invalid <span class="keyword">copy</span> source path…” <span class="keyword">error</span></span><br></pre></td></tr></table></figure></p>
+<p>通过选项 –drop-empty-revs 可以忽略问题</p>
+<ul>
+<li>svndumpfilter 不太好用，推荐使用 <a href="http://furius.ca/pubcode/pub/conf/bin/svndumpfilter3.html" target="_blank" rel="external">svndumpfilter3</a></li>
+</ul>
 
       
     </div>
@@ -74,7 +78,7 @@
         
   
   <div class="tags">
-    <a href="/tags/direct3d/">direct3d</a>
+    <a href="/tags/svn/">svn</a>, <a href="/tags/toolchain/">toolchain</a>
   </div>
 
         
@@ -100,7 +104,7 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="fb-comments" data-href="http://lenxyang.github.io/2016/01/25/d3d11/tessellation_devnotes/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="http://lenxyang.github.io/2016/01/29/svn/svn-admin/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
 </section>
