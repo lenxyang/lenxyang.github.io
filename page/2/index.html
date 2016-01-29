@@ -50,19 +50,47 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/d3d11/tessellation_devnotes/">2016-01-25</a></time>
+        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/azer/month-report-201511/">2016-01-25</a></time>
       
       
   
-    <h1 class="title"><a href="/2016/01/25/d3d11/tessellation_devnotes/">Tessellation Devnotes</a></h1>
+    <h1 class="title"><a href="/2016/01/25/azer/month-report-201511/">2015-11 Month Report</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <h1 id="Tessellation__28DevNotes_29"><a href="#Tessellation__28DevNotes_29" class="headerlink" title="Tessellation (DevNotes)"></a>Tessellation (DevNotes)</h1><h2 id="Troubles_Shooting"><a href="#Troubles_Shooting" class="headerlink" title="Troubles Shooting"></a>Troubles Shooting</h2><h3 id="u6E32_u67D3_quad__u65F6_u53EA_u80FD_u51FA_u73B0_u4E24_u4E2A_u5BF9_u89D2_u4E09_u89D2_u5F62_uFF0C_u800C_u975E4_u4E2A_u4E09_u89D2_u5F62"><a href="#u6E32_u67D3_quad__u65F6_u53EA_u80FD_u51FA_u73B0_u4E24_u4E2A_u5BF9_u89D2_u4E09_u89D2_u5F62_uFF0C_u800C_u975E4_u4E2A_u4E09_u89D2_u5F62" class="headerlink" title="渲染 quad 时只能出现两个对角三角形，而非4个三角形"></a>渲染 quad 时只能出现两个对角三角形，而非4个三角形</h3><p>问题发生在插值函数上</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">DsOutput <span class="title">ds_main</span><span class="params">(...)</span> </span>&#123;</span><br><span class="line">  float3 v1 = lerp(quad[<span class="number">0</span>].position.xyz, quad[<span class="number">1</span>].position.xyz, uv.x);</span><br><span class="line">  float3 v2 = lerp(quad[<span class="number">3</span>].position.xyz, quad[<span class="number">2</span>].position.xyz, uv.x);</span><br><span class="line">  output.position = mul(pvw, float4(lerp(v1, v2, uv.y), <span class="number">1.0f</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>开始是将 v2 的插值顺序写反了 (quad[3], quad[2])<br>注意：azer3d 采用的是右手坐标系</p>
+        <h1 id="201511__u6708_u5DE5_u4F5C"><a href="#201511__u6708_u5DE5_u4F5C" class="headerlink" title="201511 月工作"></a>201511 月工作</h1><h2 id="20151101_7E2015117"><a href="#20151101_7E2015117" class="headerlink" title="20151101~2015117"></a>20151101~2015117</h2><ul>
+<li>UI frameword<ul>
+<li>重构 nelf/Toolbar(completed, 20151102)</li>
+<li>window shortcut(doing)</li>
+<li>Effect UI</li>
+<li>Simple Material Window</li>
+<li>window dock(Visual Studio Style)</li>
+</ul>
+</li>
+<li>Object Controller<ul>
+<li>Rotation Controller(completed, 20151102)</li>
+<li>Translation Controller(20151103)</li>
+<li>Scale Controller(20151105)</li>
+<li>Picking Helper(20151105)</li>
+</ul>
+</li>
+<li>Light Controller<ul>
+<li>Spot Light Mesh(2015117)</li>
+<li>Directional Light Mesh(2015117)</li>
+<li>Point Light Mesh(2015117)</li>
+<li>Light Parameters UI</li>
+</ul>
+</li>
+<li>Others<ul>
+<li>追查渲染速度变慢的原因(新的 mesh 框架) (20151103)<ul>
+<li>原因是 cow.obj 有300多个 meshpart, 默认情况下每一个 meshpart 都会切换一次 effect, GpuConstantTable 等，因此就导致的速度很慢。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
       
     </div>
@@ -434,23 +462,219 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/d3d11/tools/">2016-01-25</a></time>
+        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/docker/fast-introduce-to-docker/">2016-01-25</a></time>
       
       
   
-    <h1 class="title"><a href="/2016/01/25/d3d11/tools/">3D Tools</a></h1>
+    <h1 class="title"><a href="/2016/01/25/docker/fast-introduce-to-docker/">fast-introduce-to-docker</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <h1 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h1><h2 id="u6A21_u578B_u63D0_u53D6_u5DE5_u5177"><a href="#u6A21_u578B_u63D0_u53D6_u5DE5_u5177" class="headerlink" title="模型提取工具"></a>模型提取工具</h2><ul>
-<li><a href="http://www.deep-shadows.com/hax/3DRipperDX.htm" target="_blank" rel="external">3D Ripper DX</a></li>
+        <h1 id="Docker__u5FEB_u901F_u4ECB_u7ECD"><a href="#Docker__u5FEB_u901F_u4ECB_u7ECD" class="headerlink" title="Docker 快速介绍"></a>Docker 快速介绍</h1><p>本文档主要目的是说明 docker 的最简单也是最核心的功能。</p>
+<p>Docker 的最重要功能是系统镜像(包括系统内核、系统库、系统程序及数据)，例如服务端程序依赖于 NLP 模块、NLP 词典以及对应.so文件。 不过的服务程序可能不便，但这几个基本模块都需要。在这种情形下，我们可以按照当前内核基础上创建一个镜像，并在此镜像内部加入 NLP 的 so 及字典文件。</p>
+<p>接下来我们将使用最简单的代码及依赖关系说明如何 Docker 进行快速部署。</p>
+<h2 id="u955C_u50CF_u64CD_u4F5C"><a href="#u955C_u50CF_u64CD_u4F5C" class="headerlink" title="镜像操作"></a>镜像操作</h2><h3 id="u83B7_u5F97_u955C_u50CF"><a href="#u83B7_u5F97_u955C_u50CF" class="headerlink" title="获得镜像"></a>获得镜像</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line"><span class="comment"># 获得本地 images</span></span><br><span class="line">$ sudo docker images</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从 repository 获得 images</span></span><br><span class="line">$ sudo docker pull</span><br></pre></td></tr></table></figure>
+<h3 id="docker_commit__u65B9_u5F0F_u521B_u5EFA_u955C_u50CF"><a href="#docker_commit__u65B9_u5F0F_u521B_u5EFA_u955C_u50CF" class="headerlink" title="docker commit 方式创建镜像"></a>docker commit 方式创建镜像</h3><h4 id="u4FEE_u6539_u955C_u50CF"><a href="#u4FEE_u6539_u955C_u50CF" class="headerlink" title="修改镜像"></a>修改镜像</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line"><span class="comment"># -t: allocate an tty, -i: interactive</span></span><br><span class="line">$ sudo docker run -i -t ubuntu /bin/bash</span><br><span class="line">$ apt-get install nginx</span><br></pre></td></tr></table></figure>
+<h4 id="u67E5_u770B_u5F53_u524D_u6B63_u5728_u4F7F_u7528_u7684_u955C_u50CF"><a href="#u67E5_u770B_u5F53_u524D_u6B63_u5728_u4F7F_u7528_u7684_u955C_u50CF" class="headerlink" title="查看当前正在使用的镜像"></a>查看当前正在使用的镜像</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">[root@localhost yanglei]$ docker ps</span><br><span class="line">CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES</span><br><span class="line"><span class="number">5</span>f969df0af99        ubuntu              <span class="string">"/bin/bash"</span>         <span class="number">4</span> minutes ago       Up <span class="number">4</span> minutes                            fervent_kirch</span><br></pre></td></tr></table></figure>
+<h4 id="u4FDD_u5B58_u4FEE_u6539"><a href="#u4FDD_u5B58_u4FEE_u6539" class="headerlink" title="保存修改"></a>保存修改</h4><p>保存我们的修改，注意保存的 container 而非 image, container 可以从 docker 的 bin/bash 的命令行提是获得，也可以按照上面 docker ps 的方式获得<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">$ sudo docker commit -m <span class="string">"install nginx"</span> <span class="operator">-a</span> <span class="string">"lenxyang"</span> <span class="number">5</span>f969df0af99 ubuntu_with_nginx</span><br></pre></td></tr></table></figure></p>
+<h3 id="Dockerfile__u5F62_u5F0F_u521B_u5EFA_u955C_u50CF"><a href="#Dockerfile__u5F62_u5F0F_u521B_u5EFA_u955C_u50CF" class="headerlink" title="Dockerfile 形式创建镜像"></a>Dockerfile 形式创建镜像</h3><p>创建一个目录并在目录下创建一个名为 Dockerfile 的文件，内容如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">FROM ubuntu:<span class="number">14.04</span></span><br><span class="line">MAINTAINER Docker Newbee &lt;newbee@docker.com&gt;</span><br><span class="line">$ apt-get install nginx</span><br></pre></td></tr></table></figure>
+<p>而后运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line"><span class="comment"># -t 表示 tag name</span></span><br><span class="line">$ sudo docker build -t=<span class="string">"ouruser/sinatra:v2"</span></span><br></pre></td></tr></table></figure>
+<h3 id="u5220_u9664"><a href="#u5220_u9664" class="headerlink" title="删除"></a>删除</h3><p>删除命令有两个 rm 和 rmi， 其中 rm 的对象是 container, 而 rmi 的对象是 image.</p>
+<h3 id="u4FDD_u5B58_u548C_u5BFC_u5165"><a href="#u4FDD_u5B58_u548C_u5BFC_u5165" class="headerlink" title="保存和导入"></a>保存和导入</h3><p>创建好的镜像可以通过 load 和 save 命令导入和保存<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">$ docker save -o file.tar imagename</span><br><span class="line">$ docker load --input file.tar</span><br><span class="line">$ docker load &lt; file.tar</span><br></pre></td></tr></table></figure></p>
+<h2 id="u5BB9_u5668_28Container_29_u64CD_u4F5C"><a href="#u5BB9_u5668_28Container_29_u64CD_u4F5C" class="headerlink" title="容器(Container)操作"></a>容器(Container)操作</h2><p>Container 是 镜像运行起来之后的概念，其关系类似于 process 和 program。之前介绍容器是也提到了 Container 的操作(docker run -i -t ..)</p>
+<h3 id="u542F_u52A8"><a href="#u542F_u52A8" class="headerlink" title="启动"></a>启动</h3><p>Container 基本是以程序的生命周期来进行的，如 docker -r -i … /bin/bash， 在 /bin/bash 退出时(如运行 exit 命令), 则整个 docker 都退出了。 Container 也可以以类似 (nohup ./run.sh &amp;) 的形式运行，及 daemon 形态。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">$ docker run <span class="operator">-d</span> imagename /bin/bash -C <span class="string">"while (true); do sleep(1); done"</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="u505C_u6B62"><a href="#u505C_u6B62" class="headerlink" title="停止"></a>停止</h3><p>通过 docker ps 查看正在运行的 container id, 而后通过<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bash</span></span><br><span class="line">$ sudo docker stop contain_id</span><br></pre></td></tr></table></figure></p>
+<h3 id="Attach"><a href="#Attach" class="headerlink" title="Attach"></a>Attach</h3><p>docker 对进行除了提供  stop 之外，还提供了 start, restart。此时我们需要考虑如何登录到 container 上了，毕竟未没有 tty 啦。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bash</span></span><br><span class="line">$ sudo docker attach container_id</span><br></pre></td></tr></table></figure></p>
+<p>attach 有一个问题，attach 之后，其他 attach 的用户就被挂起了, nsenter 可以解决这个问题。</p>
+<h3 id="nsenter"><a href="#nsenter" class="headerlink" title="nsenter"></a>nsenter</h3><p>nsenter 可以访问指定进行的系统名字空间<br><figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">$</span> <span class="comment">sudo</span> <span class="comment">nsenter</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">target</span> <span class="comment">10981</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">mount</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">uts</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">ipc</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">net</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">pid</span></span><br></pre></td></tr></table></figure></p>
+<p>需要注意是 target 并不是 docker 的 container id, 而是 host machine 的 pid，命令 docker inspect 可以提供帮助<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker <span class="keyword">inspect</span> --<span class="keyword">format</span> <span class="string">"&#123;&#123; .State.Pid &#125;&#125;"</span> container_id</span><br></pre></td></tr></table></figure></p>
+<h2 id="Data_Volumns"><a href="#Data_Volumns" class="headerlink" title="Data Volumns"></a>Data Volumns</h2><p>前面提到 nlp 的字典，这些字典通常非常巨大，如果每一个 image 保存一份，过于浪费数据了。还在 docker 有 Data Volumn，可以帮助多个 Container 共享内容。</p>
+<h2 id="u7F51_u7EDC_u8BBF_u95EE"><a href="#u7F51_u7EDC_u8BBF_u95EE" class="headerlink" title="网络访问"></a>网络访问</h2><p>在 ubuntu 上安装 nginx 并启动后，从 docker 主机上可以通过 netstat 查看<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">root@<span class="number">83</span>d0ba715246:/$ netstat -nptl</span><br><span class="line">Active Internet connections (only servers)</span><br><span class="line">Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name</span><br><span class="line">tcp        <span class="number">0</span>      <span class="number">0</span> <span class="number">0.0</span>.<span class="number">0.0</span>:<span class="number">80</span>              <span class="number">0.0</span>.<span class="number">0.0</span>:*               LISTEN      <span class="number">34</span>/nginx</span><br><span class="line">tcp6       <span class="number">0</span>      <span class="number">0</span> :::<span class="number">80</span>                   :::*                    LISTEN      <span class="number">34</span>/nginx</span><br></pre></td></tr></table></figure></p>
+<p>但在 Host Machine 上却看不到</p>
+<p>docker 提供命令在启动是进行端口映射<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># 绑定指定端口</span></span><br><span class="line">$ sudo docker run -d -p <span class="number">5000</span>:<span class="number">5000</span> ...</span><br><span class="line"></span><br><span class="line"><span class="preprocessor"># 绑定到本机 ip 地址</span></span><br><span class="line">$ sudo docker run -d -p <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">5000</span>:<span class="number">5000</span> ...</span><br><span class="line"></span><br><span class="line"><span class="preprocessor"># 绑定 udp 端口</span></span><br><span class="line">$ sudo docker run -d -p <span class="number">5000</span>:<span class="number">5000</span>/udp ...</span><br><span class="line"></span><br><span class="line"><span class="preprocessor"># 将本地任意一个端口绑定到 container <span class="number">5000</span> 上</span></span><br><span class="line">$ sudo docker run -d -p <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>::<span class="number">5000</span> ...</span><br></pre></td></tr></table></figure></p>
+<h3 id="u67E5_u770B_u7AEF_u53E3_u6620_u5C04"><a href="#u67E5_u770B_u7AEF_u53E3_u6620_u5C04" class="headerlink" title="查看端口映射"></a>查看端口映射</h3><figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker <span class="foreign"><span class="keyword">port</span> containerid</span></span><br></pre></td></tr></table></figure>
+<h1 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h1><h2 id="Permission_denied_when_visit_Volumne_data"><a href="#Permission_denied_when_visit_Volumne_data" class="headerlink" title="Permission denied when visit Volumne data"></a>Permission denied when visit Volumne data</h2><p>尝试使用 flags –privileged=true</p>
+<h1 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="http://docs.docker.com/engine/userguide/dockerimages/" target="_blank" rel="external">Docker: Build your own images</a></li>
+<li><a href="http://blog.scottlowe.org/2013/09/04/introducing-linux-network-namespaces/" target="_blank" rel="external">Scott’s Weblog: Introducing Linux Network Namespaces</a></li>
+<li><a href="https://en.wikipedia.org/wiki/UnionFS" target="_blank" rel="external">Wiki: UnionFS</a></li>
+<li><a href="http://dockerpool.com/static/books/docker_practice/index.html" target="_blank" rel="external">Docker</a></li>
 </ul>
-<h2 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h2><ul>
-<li><a href="http://www.bundysoft.com/L3DT/" target="_blank" rel="external">L3DT - Large 3D Terrain Generator</a></li>
-<li><a href="http://planetside.co.uk/" target="_blank" rel="external">Terragen-3D</a></li>
-<li><a href="http://www.ogre3d.org/tikiwiki/DCC+Tools#Terrain_generation" target="_blank" rel="external">OGRE DCC Tools</a></li>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/azer/month-report-201601/">2016-01-25</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/01/25/azer/month-report-201601/">2016-01 Month Report</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="201601__u6708_u5DE5_u4F5C"><a href="#201601__u6708_u5DE5_u4F5C" class="headerlink" title="201601 月工作"></a>201601 月工作</h1><h2 id="201601"><a href="#201601" class="headerlink" title="201601"></a>201601</h2><ul>
+<li>Framework<ul>
+<li><strong> p0 </strong>: 重构 SceneRenderEnvNode <strong> (completed) </strong></li>
+<li>重构 EffectParamsProvider<ul>
+<li><strong> p0 </strong>: EffectParamsProvider 仅仅提供名称，不再提供 UpdateParams 函数，所有更新操作有具体类设计 <strong> (completed) </strong></li>
+<li><strong> p0 </strong>: 将需要的 UpdateParams 移动到 Scene 的框架内完成 <strong> (completed) </strong></li>
+</ul>
+</li>
+<li><strong> p0 </strong>: 重构 SceneRender 并增加 Observer <strong> (completed) </strong></li>
+<li><strong> p0 </strong>: 增加 DepthStencail State 对象 <strong> (completed) </strong></li>
+<li><strong> p0 </strong>: Make enable depth-test by default <strong> (completed) </strong></li>
+<li><strong> p0 </strong>: Refactor code for Geometry Object <strong> (completed) </strong><ul>
+<li>Supply function to create geometry MeshPart  <strong> (completed) </strong></li>
+<li>Support Transform when Geometry while creation  <strong> (completed) </strong></li>
+<li>all relevant code immgriant(Light Objects, Frustrum, Camera Objects and so on) <strong> (completed) </strong></li>
+<li>add Geometry Resource Loader  <strong> (completed) </strong></li>
+<li>samples <strong> (completed) </strong></li>
+</ul>
+</li>
+<li><strong> p0 </strong>: Common light struct in HLSL</li>
+<li><strong> p1 </strong>: 重构 Picking Object 相关代码</li>
+<li><strong> p1 </strong>: Resource 加载增加 Buffer 机制</li>
+<li><strong> p1 </strong>: D3D Vertex Layout Buffer(Donnot create differet object for same layout in DirectX11)</li>
+<li><strong> p2 </strong>: Multiple Constants Buffer support in HLSL</li>
+</ul>
+</li>
+<li>Scene Management<ul>
+<li><strong> p0 </strong>: Load SDKMesh data <strong> (completed) </strong></li>
+<li><strong> p0 </strong>: Frustrum Culling</li>
+<li><strong> p1 </strong>: BSP Scene Node</li>
+</ul>
+</li>
+<li>Render Framework<ul>
+<li><strong> p0 </strong>: Scene Render Framework With Shadowmap support <strong> (completed) </strong></li>
+<li><strong> p1 </strong>: Scene Render Framework With Stencil Reflection support</li>
+<li><strong> p1 </strong>: Deferred Shadering</li>
+<li><strong> p2 </strong>: Multithread Rendering</li>
+</ul>
+</li>
+<li>Simple Effects<ul>
+<li>Common<ul>
+<li><span style="color:blue;"> <strong> p0 </strong>: picking </span></li>
+<li><strong> p1 </strong>: instanceing</li>
+<li><strong> p1 </strong>: montion blur</li>
+<li><strong> p1 </strong>: Alpha to converage</li>
+</ul>
+</li>
+<li>Stencil based techniques<ul>
+<li><span style="color:blue;"> <strong> p0 </strong>: Reflection </span></li>
+<li><strong> p0 </strong>: Shadow Volumn</li>
+</ul>
+</li>
+<li>Compute Shader<ul>
+<li><strong> p0 </strong>: Simple  <strong> (completed) </strong></li>
+<li><span style="color:blue;"> <strong> p0 </strong>: Blur Demo </span></li>
+<li><span style="color:blue;"><strong> p0 </strong>: shadow pcf </span></li>
+<li><strong> p1 </strong>: FFT Transform</li>
+</ul>
+</li>
+<li>Shadow Map<ul>
+<li><strong> p0 </strong>: Simple Demo <strong> (completed) </strong></li>
+<li><span style="color:red;"> <strong> p0 </strong>: PCF shadow </span></li>
+<li><span style="color:red;"> <strong> p0 </strong>: CS based PCF shadow </span></li>
+<li><span style="color:red;"> <strong> p0 </strong>: Multiple-light support </span></li>
+<li><span style="color:red;"> <strong> p0 </strong>: Directional Light Support </span></li>
+</ul>
+</li>
+<li>Tessellation<ul>
+<li><strong> p0 </strong>: basic    <strong> (completed) </strong></li>
+<li><strong> p0 </strong>: details map <strong> (completed) </strong></li>
+<li><span style="color:blue;"> <strong> p0 </strong>: decay </span></li>
+<li><span style="color:blue;"> <strong> p0 </strong>: tessellation based terrain </span></li>
+</ul>
+</li>
+<li><span style="color:red;"> <strong> p1 </strong>: SSAO </span></li>
+<li><span style="color:red;"> <strong> p1 </strong>: Stream Partice </span></li>
+<li><span style="color:red;"> <strong> p1 </strong>: Animation </span></li>
+<li><strong> p2 </strong>: HDR</li>
+<li><strong> p2 </strong>: Water</li>
+</ul>
+</li>
+<li>UI<ul>
+<li><strong> p0 </strong> : Multiple Scene In Render Window <strong> (completed) </strong></li>
+<li><strong> p1 </strong> : Multiple Effect Level</li>
+<li><strong> p1 </strong>: Assets Window and Views</li>
+<li><strong> p2 </strong>: Snapshot View of all resources</li>
+<li><strong> p2 </strong>: Direct3D Parameters</li>
+<li><strong> p2 </strong>: Add Footbar For Pane</li>
+<li><strong> p2 </strong>: Float Textfield Controller</li>
+<li><strong> p2 </strong>: Material Property UI </li>
+<li><strong> p2 </strong>: Mesh Property UI<ul>
+<li>Mesh part and its vertex format</li>
+<li>Mesh path in repository</li>
+<li>Mesh render controller (framewire, culling model, normal …)</li>
+</ul>
+</li>
+<li><strong> p2 </strong>: Load UI config from file</li>
+</ul>
+</li>
+<li>Game Resources<ul>
+<li>WOW Model data(Skinned mesh)</li>
+<li>Wow Map data</li>
+</ul>
+</li>
+<li>Books &amp; Papers<ul>
+<li>Book: 3D Game Programming with Direct3D 11</li>
+<li>Book: Real-Time Readering</li>
+<li>Book: Programming Vertex Geometry and Pixel Shaders</li>
+<li>Book: Advanced Lighting and Materials With Shaders</li>
+<li>AMD Paper: Practical Parallax Occlusion Mapping for Highly Detailed Surface Rendering</li>
+<li><a href="http://colour-science.org/posts/the-importance-of-terminology-and-srgb-uncertainty/" target="_blank" rel="external">The Importance of Terminology and sRGB Uncertainty</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="20160115"><a href="#20160115" class="headerlink" title="20160115"></a>20160115</h3><ul>
+<li>增加生成 Entity 的 Geometry 接口  <strong> (completed) </strong></li>
+<li>设置 SpotLight 的 Controller mesh kCullNone <strong> (completed) </strong></li>
+<li>重新实现 GridLine  <strong> (completed) </strong></li>
+<li>重新实现 AxisFrame  <strong> (completed) </strong></li>
+<li>重构 SceneNode Bounding Box 相关代码  <strong> (completed) </strong></li>
+<li>修复 UIRender 渲染多次的问题， 以及 Blending Object 渲染顺序的问题  <strong> (completed) </strong></li>
+<li>DirLightController 选取有问题  <strong> (completed) </strong></li>
+<li>实现 VertexData 和 IndiceData 合并的功能</li>
+</ul>
+<h3 id="20160117"><a href="#20160117" class="headerlink" title="20160117"></a>20160117</h3><ul>
+<li>Stencil Buffer based Reflection 如何融入到现有渲染框架当中</li>
+</ul>
+<h3 id="20160119"><a href="#20160119" class="headerlink" title="20160119"></a>20160119</h3><ul>
+<li>Tessellation Triangle</li>
+</ul>
+<h3 id="20160120"><a href="#20160120" class="headerlink" title="20160120"></a>20160120</h3><ul>
+<li>Tessellation Quad</li>
+<li>build Direct3D Cookbook samples</li>
+</ul>
+<h3 id="20160127"><a href="#20160127" class="headerlink" title="20160127"></a>20160127</h3><ul>
+<li>Tessellation based detailmap</li>
+</ul>
+<h3 id="20160128"><a href="#20160128" class="headerlink" title="20160128"></a>20160128</h3><ul>
+<li>Tessellation based terrain (TODO)</li>
 </ul>
 
       
@@ -474,6 +698,8 @@
     <a href="/" class="alignleft prev">上一頁</a>
   
   
+    <a href="/page/3/" class="alignright next">下一頁</a>
+  
   <div class="clearfix"></div>
 </nav></div></div>
     <aside id="sidebar" class="alignright">
@@ -493,7 +719,7 @@
   
     <li><a href="/tags/3d/">3d</a><small>1</small></li>
   
-    <li><a href="/tags/azer3d/">azer3d</a><small>2</small></li>
+    <li><a href="/tags/azer3d/">azer3d</a><small>4</small></li>
   
     <li><a href="/tags/chromium/">chromium</a><small>2</small></li>
   

@@ -3,15 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Shadowmap Devnotes | azer3D</title>
+  <title>2015-12 Month Report | azer3D</title>
   <meta name="author" content="lenxyang@gmail.com">
   
-  <meta name="description" content="Shadowmap (DevNotes)Troubles使用 Light Camera 渲染时，没有 Pixel Stage在使用 Light Camera 渲染时，从 Visual Studio 的图形诊断看，Vertex Stage 是正常的，但是 PixelStage 就没有内容了。原因是：对">
+  <meta name="description" content="201512 月工作201512
+Framework
+Refactor the mesh framework with VertexBufferGroup   (completed) 
+Load Model with Multislot-vertex Desc supported  (complet">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="Shadowmap Devnotes"/>
+  <meta property="og:title" content="2015-12 Month Report"/>
   <meta property="og:site_name" content="azer3D"/>
 
   
@@ -51,20 +54,88 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/d3d11/shadowmap_devnotes/">2016-01-25</a></time>
+        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/azer/month-report-201512/">2016-01-25</a></time>
       
       
   
-    <h1 class="title">Shadowmap Devnotes</h1>
+    <h1 class="title">2015-12 Month Report</h1>
   
 
     </header>
     <div class="entry">
       
-        <h1 id="Shadowmap__28DevNotes_29"><a href="#Shadowmap__28DevNotes_29" class="headerlink" title="Shadowmap (DevNotes)"></a>Shadowmap (DevNotes)</h1><h2 id="Troubles"><a href="#Troubles" class="headerlink" title="Troubles"></a>Troubles</h2><h3 id="u4F7F_u7528_Light_Camera__u6E32_u67D3_u65F6_uFF0C_u6CA1_u6709_Pixel_Stage"><a href="#u4F7F_u7528_Light_Camera__u6E32_u67D3_u65F6_uFF0C_u6CA1_u6709_Pixel_Stage" class="headerlink" title="使用 Light Camera 渲染时，没有 Pixel Stage"></a>使用 Light Camera 渲染时，没有 Pixel Stage</h3><p>在使用 Light Camera 渲染时，从 Visual Studio 的图形诊断看，Vertex Stage 是正常的，但是 PixelStage 就没有内容了。<br>原因是：对于 Light Camera 来说, 这些对象都是不可见的。</p>
-<h3 id="u5224_u65AD_u6295_u5F71_u5750_u6807_u662F_u5426_u6B63_u786E"><a href="#u5224_u65AD_u6295_u5F71_u5750_u6807_u662F_u5426_u6B63_u786E" class="headerlink" title="判断投影坐标是否正确"></a>判断投影坐标是否正确</h3><p>可以直接将深度绘制出来，不进行其他任何计算，看是否符合预期</p>
-<h3 id="Texturemap__u4E0E_shadowmap__u6DF7_u6DC6"><a href="#Texturemap__u4E0E_shadowmap__u6DF7_u6DC6" class="headerlink" title="Texturemap 与 shadowmap 混淆"></a>Texturemap 与 shadowmap 混淆</h3><p>对 texturemap 增加后缀后问题解决<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Texture2D texmap : <span class="keyword">register</span>(t0);</span><br><span class="line">Texture2D shadowmap : <span class="keyword">register</span>(t1);</span><br></pre></td></tr></table></figure></p>
-<h3 id="u5BF9_u8C61_u6295_u5F71_u9519_u8BEF"><a href="#u5BF9_u8C61_u6295_u5F71_u9519_u8BEF" class="headerlink" title="对象投影错误"></a>对象投影错误</h3><p>原因是传递的 Light Projection View Matrix 没有乘上物体的 World matrix, 这个错误在当前框架下比较容易犯。</p>
+        <h1 id="201512__u6708_u5DE5_u4F5C"><a href="#201512__u6708_u5DE5_u4F5C" class="headerlink" title="201512 月工作"></a>201512 月工作</h1><h2 id="201512"><a href="#201512" class="headerlink" title="201512"></a>201512</h2><ul>
+<li>Framework<ul>
+<li>Refactor the mesh framework with VertexBufferGroup  <strong> (completed) </strong></li>
+<li>Load Model with Multislot-vertex Desc supported <strong> (completed) </strong></li>
+<li>Common Resource Framework <strong> (completed) </strong></li>
+<li>Resource Loader(VertexDesc, Material, Light, Scene, Mesh)  <strong> (completed) </strong></li>
+<li>Vertex Layout Object as Class <strong> (completed) </strong></li>
+<li>RenderState <strong> (completed) </strong></li>
+</ul>
+</li>
+<li>Scene Management<ul>
+<li>Refactor Scene Framework to support multiple lights <strong> (completed)</strong></li>
+</ul>
+</li>
+<li>Render Framework<ul>
+<li>Multi-Effect Rendering  <strong> (completed) </strong></li>
+<li>Generate an Scene Render Tree from Scene Tree <strong> (completed) </strong></li>
+<li>universe light structure</li>
+<li>Instanced Rendering Support <strong> (wont, should be completed by app layer) </strong></li>
+</ul>
+</li>
+<li>Simple Effects<ul>
+<li>Light Source Effect <strong>(completed)</strong></li>
+<li>Phong Lighting Effect <strong>(completed)</strong></li>
+<li>Simple Material <strong>(completed)</strong></li>
+<li>Render Normal (Geometry Shader based) <strong>(completed)</strong></li>
+<li>Direct3D11 Samples<ul>
+<li>Sample Texture <strong>(completed)</strong></li>
+<li>Normal Mapping <strong>(completed)</strong></li>
+<li>Parallax Mapping <strong>(completed)</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>UI<ul>
+<li>switch from multiple Scene Render</li>
+<li>Property Window and framework<ul>
+<li>Property Observer the InteractiveContext to get Selected Node <strong> (completed) </strong></li>
+<li>InteractiveContext Observer The SceneTreeView to get Selected Node by UI clicked</li>
+<li>Scene Node Property UI <strong> (completed) </strong></li>
+<li>Transform Property UI <strong> (completed) </strong></li>
+</ul>
+</li>
+<li>Light Control Objects<ul>
+<li>SpotLight Controller <strong>(completed)</strong></li>
+<li>PointLight Controller <strong> (completed)</strong></li>
+<li>DirLight Controller  <strong> (completed) </strong></li>
+</ul>
+</li>
+<li>Light Souce Params UI<ul>
+<li>ColorProperty UI <strong> (completed) </strong></li>
+<li>SpotLight Attenuation UI <strong>(completed)</strong></li>
+<li>PointLight Attenuation UI <strong>(completed)</strong></li>
+<li>z-buffer UI</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Books &amp; Papers<ul>
+<li>Book: 3D Game Programming with Direct3D 11</li>
+<li>Book: Real-Time Readering</li>
+<li>Book: Programming Vertex Geometry and Pixel Shaders</li>
+<li>Book: Advanced Lighting and Materials With Shaders</li>
+<li>AMD Paper: Practical Parallax Occlusion Mapping for Highly Detailed Surface Rendering</li>
+</ul>
+</li>
+<li>Others<ul>
+<li>HLSL Include 机制 <strong> (completed)</strong></li>
+<li>Load ifs format model</li>
+</ul>
+</li>
+</ul>
 
       
     </div>
@@ -74,7 +145,7 @@
         
   
   <div class="tags">
-    <a href="/tags/direct3d/">direct3d</a>, <a href="/tags/effect/">effect</a>
+    <a href="/tags/azer3d/">azer3d</a>
   </div>
 
         
@@ -100,7 +171,7 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="fb-comments" data-href="http://lenxyang.github.io/2016/01/25/d3d11/shadowmap_devnotes/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="http://lenxyang.github.io/2016/01/25/azer/month-report-201512/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
 </section>
