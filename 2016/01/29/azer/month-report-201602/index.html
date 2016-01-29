@@ -3,16 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tessellation Devnotes | azer3D</title>
+  <title>2016-02 Month Report | azer3D</title>
   <meta name="author" content="lenxyang@gmail.com">
   
-  <meta name="description" content="Tessellation (DevNotes)Troubles Shooting渲染 quad 时只能出现两个对角三角形，而非4个三角形问题发生在插值函数上
-12345DsOutput ds_main(...) &amp;#123;  float3 v1 = lerp(quad[0].position.xy">
+  <meta name="description" content="201602 月工作201602
+Framework
+ p1 : Resource 加载增加 Buffer 机制
+ p1 : D3D Vertex Layout Buffer(Donnot create differet object for same layout in DirectX11)
+ p">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="Tessellation Devnotes"/>
+  <meta property="og:title" content="2016-02 Month Report"/>
   <meta property="og:site_name" content="azer3D"/>
 
   
@@ -52,19 +55,100 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/d3d11/tessellation_devnotes/">2016-01-25</a></time>
+        <time datetime="2016-01-29T02:34:00.000Z"><a href="/2016/01/29/azer/month-report-201602/">2016-01-29</a></time>
       
       
   
-    <h1 class="title">Tessellation Devnotes</h1>
+    <h1 class="title">2016-02 Month Report</h1>
   
 
     </header>
     <div class="entry">
       
-        <h1 id="Tessellation__28DevNotes_29"><a href="#Tessellation__28DevNotes_29" class="headerlink" title="Tessellation (DevNotes)"></a>Tessellation (DevNotes)</h1><h2 id="Troubles_Shooting"><a href="#Troubles_Shooting" class="headerlink" title="Troubles Shooting"></a>Troubles Shooting</h2><h3 id="u6E32_u67D3_quad__u65F6_u53EA_u80FD_u51FA_u73B0_u4E24_u4E2A_u5BF9_u89D2_u4E09_u89D2_u5F62_uFF0C_u800C_u975E4_u4E2A_u4E09_u89D2_u5F62"><a href="#u6E32_u67D3_quad__u65F6_u53EA_u80FD_u51FA_u73B0_u4E24_u4E2A_u5BF9_u89D2_u4E09_u89D2_u5F62_uFF0C_u800C_u975E4_u4E2A_u4E09_u89D2_u5F62" class="headerlink" title="渲染 quad 时只能出现两个对角三角形，而非4个三角形"></a>渲染 quad 时只能出现两个对角三角形，而非4个三角形</h3><p>问题发生在插值函数上</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">DsOutput <span class="title">ds_main</span><span class="params">(...)</span> </span>&#123;</span><br><span class="line">  float3 v1 = lerp(quad[<span class="number">0</span>].position.xyz, quad[<span class="number">1</span>].position.xyz, uv.x);</span><br><span class="line">  float3 v2 = lerp(quad[<span class="number">3</span>].position.xyz, quad[<span class="number">2</span>].position.xyz, uv.x);</span><br><span class="line">  output.position = mul(pvw, float4(lerp(v1, v2, uv.y), <span class="number">1.0f</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>开始是将 v2 的插值顺序写反了 (quad[3], quad[2])<br>注意：azer3d 采用的是右手坐标系</p>
+        <h1 id="201602__u6708_u5DE5_u4F5C"><a href="#201602__u6708_u5DE5_u4F5C" class="headerlink" title="201602 月工作"></a>201602 月工作</h1><h2 id="201602"><a href="#201602" class="headerlink" title="201602"></a>201602</h2><ul>
+<li>Framework<ul>
+<li><strong> p1 </strong>: Resource 加载增加 Buffer 机制</li>
+<li><strong> p1 </strong>: D3D Vertex Layout Buffer(Donnot create differet object for same layout in DirectX11)</li>
+<li><strong> p2 </strong>: Multiple Constants Buffer support in HLSL</li>
+</ul>
+</li>
+<li>Scene Management<ul>
+<li><strong> p0 </strong>: Frustrum Culling</li>
+<li><strong> p1 </strong>: BSP Scene Node</li>
+</ul>
+</li>
+<li>Render Framework<ul>
+<li><strong> p1 </strong>: Scene Render Framework With Stencil Reflection support</li>
+<li><strong> p1 </strong>: Deferred Shadering</li>
+<li><strong> p2 </strong>: Multithread Rendering</li>
+</ul>
+</li>
+<li>Simple Effects<ul>
+<li>Common<ul>
+<li><strong> p1 </strong>: instanceing</li>
+<li><strong> p1 </strong>: montion blur</li>
+<li><strong> p1 </strong>: Alpha to converage</li>
+</ul>
+</li>
+<li>Stencil based techniques<ul>
+<li><strong> p0 </strong>: Reflection</li>
+<li><strong> p0 </strong>: Shadow Volumn</li>
+</ul>
+</li>
+<li>Compute Shader<ul>
+<li><strong> p0 </strong>: Blur Demo</li>
+<li><strong> p0 </strong>: shadow pcf</li>
+<li><strong> p1 </strong>: FFT Transform</li>
+</ul>
+</li>
+<li>Shadow Map<ul>
+<li><strong> p0 </strong>: PCF shadow</li>
+<li><strong> p0 </strong>: CS based PCF shadow</li>
+<li><strong> p0 </strong>: Multiple-light support</li>
+<li><strong> p0 </strong>: Directional Light Support</li>
+</ul>
+</li>
+<li>Tessellation<ul>
+<li><strong> p0 </strong>: tessellation based terrain</li>
+<li><strong> p0 </strong>: decay</li>
+</ul>
+</li>
+<li><strong> p1 </strong>: SSAO</li>
+<li><strong> p1 </strong>: Stream Partice</li>
+<li><strong> p1 </strong>: Animation</li>
+<li><strong> p2 </strong>: HDR</li>
+<li><strong> p2 </strong>: Water</li>
+</ul>
+</li>
+<li>UI<ul>
+<li><strong> p1 </strong> : Multiple Effect Level</li>
+<li><strong> p1 </strong>: Assets Window and Views</li>
+<li><strong> p2 </strong>: Snapshot View of all resources</li>
+<li><strong> p2 </strong>: Direct3D Parameters</li>
+<li><strong> p2 </strong>: Add Footbar For Pane</li>
+<li><strong> p2 </strong>: Float Textfield Controller</li>
+<li><strong> p2 </strong>: Material Property UI </li>
+<li><strong> p2 </strong>: Mesh Property UI<ul>
+<li>Mesh part and its vertex format</li>
+<li>Mesh path in repository</li>
+<li>Mesh render controller (framewire, culling model, normal …)</li>
+</ul>
+</li>
+<li><strong> p2 </strong>: Load UI config from file</li>
+</ul>
+</li>
+<li>Game Resources<ul>
+<li>WOW Model data(Skinned mesh)</li>
+<li>Wow Map data</li>
+</ul>
+</li>
+<li>Books &amp; Papers<ul>
+<li>Book: Real-Time Readering</li>
+<li>Book: Advanced Lighting and Materials With Shaders</li>
+<li><a href="http://colour-science.org/posts/the-importance-of-terminology-and-srgb-uncertainty/" target="_blank" rel="external">The Importance of Terminology and sRGB Uncertainty</a></li>
+</ul>
+</li>
+</ul>
 
       
     </div>
@@ -74,7 +158,7 @@
         
   
   <div class="tags">
-    <a href="/tags/direct3d/">direct3d</a>
+    <a href="/tags/azer3d/">azer3d</a>
   </div>
 
         
@@ -100,7 +184,7 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="fb-comments" data-href="http://lenxyang.github.io/2016/01/25/d3d11/tessellation_devnotes/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="http://lenxyang.github.io/2016/01/29/azer/month-report-201602/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
 </section>
