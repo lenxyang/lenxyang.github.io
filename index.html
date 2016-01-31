@@ -488,24 +488,20 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/d3d11/tools/">2016-01-25</a></time>
+        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/d3d11/shadowmap_devnotes/">2016-01-25</a></time>
       
       
   
-    <h1 class="title"><a href="/2016/01/25/d3d11/tools/">3D Tools</a></h1>
+    <h1 class="title"><a href="/2016/01/25/d3d11/shadowmap_devnotes/">Shadowmap Devnotes</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <h1 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h1><h2 id="u6A21_u578B_u63D0_u53D6_u5DE5_u5177"><a href="#u6A21_u578B_u63D0_u53D6_u5DE5_u5177" class="headerlink" title="模型提取工具"></a>模型提取工具</h2><ul>
-<li><a href="http://www.deep-shadows.com/hax/3DRipperDX.htm" target="_blank" rel="external">3D Ripper DX</a></li>
-</ul>
-<h2 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h2><ul>
-<li><a href="http://www.bundysoft.com/L3DT/" target="_blank" rel="external">L3DT - Large 3D Terrain Generator</a></li>
-<li><a href="http://planetside.co.uk/" target="_blank" rel="external">Terragen-3D</a></li>
-<li><a href="http://www.ogre3d.org/tikiwiki/DCC+Tools#Terrain_generation" target="_blank" rel="external">OGRE DCC Tools</a></li>
-</ul>
+        <h1 id="Shadowmap__28DevNotes_29"><a href="#Shadowmap__28DevNotes_29" class="headerlink" title="Shadowmap (DevNotes)"></a>Shadowmap (DevNotes)</h1><h2 id="Troubles"><a href="#Troubles" class="headerlink" title="Troubles"></a>Troubles</h2><h3 id="u4F7F_u7528_Light_Camera__u6E32_u67D3_u65F6_uFF0C_u6CA1_u6709_Pixel_Stage"><a href="#u4F7F_u7528_Light_Camera__u6E32_u67D3_u65F6_uFF0C_u6CA1_u6709_Pixel_Stage" class="headerlink" title="使用 Light Camera 渲染时，没有 Pixel Stage"></a>使用 Light Camera 渲染时，没有 Pixel Stage</h3><p>在使用 Light Camera 渲染时，从 Visual Studio 的图形诊断看，Vertex Stage 是正常的，但是 PixelStage 就没有内容了。<br>原因是：对于 Light Camera 来说, 这些对象都是不可见的。</p>
+<h3 id="u5224_u65AD_u6295_u5F71_u5750_u6807_u662F_u5426_u6B63_u786E"><a href="#u5224_u65AD_u6295_u5F71_u5750_u6807_u662F_u5426_u6B63_u786E" class="headerlink" title="判断投影坐标是否正确"></a>判断投影坐标是否正确</h3><p>可以直接将深度绘制出来，不进行其他任何计算，看是否符合预期</p>
+<h3 id="Texturemap__u4E0E_shadowmap__u6DF7_u6DC6"><a href="#Texturemap__u4E0E_shadowmap__u6DF7_u6DC6" class="headerlink" title="Texturemap 与 shadowmap 混淆"></a>Texturemap 与 shadowmap 混淆</h3><p>对 texturemap 增加后缀后问题解决<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Texture2D texmap : <span class="keyword">register</span>(t0);</span><br><span class="line">Texture2D shadowmap : <span class="keyword">register</span>(t1);</span><br></pre></td></tr></table></figure></p>
+<h3 id="u5BF9_u8C61_u6295_u5F71_u9519_u8BEF"><a href="#u5BF9_u8C61_u6295_u5F71_u9519_u8BEF" class="headerlink" title="对象投影错误"></a>对象投影错误</h3><p>原因是传递的 Light Projection View Matrix 没有乘上物体的 World matrix, 这个错误在当前框架下比较容易犯。</p>
 
       
     </div>

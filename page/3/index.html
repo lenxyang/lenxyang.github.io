@@ -50,6 +50,178 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/azer/month-report-201601/">2016-01-25</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/01/25/azer/month-report-201601/">2016-01 Month Report</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="201601__u6708_u5DE5_u4F5C"><a href="#201601__u6708_u5DE5_u4F5C" class="headerlink" title="201601 月工作"></a>201601 月工作</h1><h2 id="201601"><a href="#201601" class="headerlink" title="201601"></a>201601</h2><ul>
+<li>Framework<ul>
+<li><strong> p0 </strong>: 重构 SceneRenderEnvNode <strong> (completed) </strong></li>
+<li>重构 EffectParamsProvider<ul>
+<li><strong> p0 </strong>: EffectParamsProvider 仅仅提供名称，不再提供 UpdateParams 函数，所有更新操作有具体类设计 <strong> (completed) </strong></li>
+<li><strong> p0 </strong>: 将需要的 UpdateParams 移动到 Scene 的框架内完成 <strong> (completed) </strong></li>
+</ul>
+</li>
+<li><strong> p0 </strong>: 重构 SceneRender 并增加 Observer <strong> (completed) </strong></li>
+<li><strong> p0 </strong>: 增加 DepthStencail State 对象 <strong> (completed) </strong></li>
+<li><strong> p0 </strong>: Make enable depth-test by default <strong> (completed) </strong></li>
+<li><strong> p0 </strong>: Refactor code for Geometry Object <strong> (completed) </strong><ul>
+<li>Supply function to create geometry MeshPart  <strong> (completed) </strong></li>
+<li>Support Transform when Geometry while creation  <strong> (completed) </strong></li>
+<li>all relevant code immgriant(Light Objects, Frustrum, Camera Objects and so on) <strong> (completed) </strong></li>
+<li>add Geometry Resource Loader  <strong> (completed) </strong></li>
+<li>samples <strong> (completed) </strong></li>
+</ul>
+</li>
+<li><strong> p0 </strong>: Common light struct in HLSL</li>
+<li><strong> p1 </strong>: 重构 Picking Object 相关代码</li>
+<li><strong> p1 </strong>: Resource 加载增加 Buffer 机制</li>
+<li><strong> p1 </strong>: D3D Vertex Layout Buffer(Donnot create differet object for same layout in DirectX11)</li>
+<li><strong> p2 </strong>: Multiple Constants Buffer support in HLSL</li>
+</ul>
+</li>
+<li>Scene Management<ul>
+<li><strong> p0 </strong>: Load SDKMesh data <strong> (completed) </strong></li>
+<li><strong> p0 </strong>: Frustrum Culling</li>
+<li><strong> p1 </strong>: BSP Scene Node</li>
+</ul>
+</li>
+<li>Render Framework<ul>
+<li><strong> p0 </strong>: Scene Render Framework With Shadowmap support <strong> (completed) </strong></li>
+<li><strong> p1 </strong>: Scene Render Framework With Stencil Reflection support</li>
+<li><strong> p1 </strong>: Deferred Shadering</li>
+<li><strong> p2 </strong>: Multithread Rendering</li>
+</ul>
+</li>
+<li>Simple Effects<ul>
+<li>Common<ul>
+<li><span style="color:blue;"> <strong> p0 </strong>: picking </span></li>
+<li><strong> p1 </strong>: instanceing</li>
+<li><strong> p1 </strong>: montion blur</li>
+<li><strong> p1 </strong>: Alpha to converage</li>
+</ul>
+</li>
+<li>Stencil based techniques<ul>
+<li><span style="color:blue;"> <strong> p0 </strong>: Reflection </span></li>
+<li><strong> p0 </strong>: Shadow Volumn</li>
+</ul>
+</li>
+<li>Compute Shader<ul>
+<li><strong> p0 </strong>: Simple  <strong> (completed) </strong></li>
+<li><strong> p0 </strong>: Blur Demo <strong> (completed) </strong></li>
+<li><span style="color:blue;"><strong> p0 </strong>: shadow pcf </span></li>
+<li><strong> p1 </strong>: FFT Transform</li>
+</ul>
+</li>
+<li>Shadow Map<ul>
+<li><strong> p0 </strong>: Simple Demo <strong> (completed) </strong></li>
+<li><span style="color:red;"> <strong> p0 </strong>: PCF shadow </span></li>
+<li><span style="color:red;"> <strong> p0 </strong>: CS based PCF shadow </span></li>
+<li><span style="color:red;"> <strong> p0 </strong>: Multiple-light support </span></li>
+<li><span style="color:red;"> <strong> p0 </strong>: Directional Light Support </span></li>
+</ul>
+</li>
+<li>Tessellation<ul>
+<li><strong> p0 </strong>: basic    <strong> (completed) </strong></li>
+<li><strong> p0 </strong>: details map <strong> (completed) </strong></li>
+<li><span style="color:blue;"> <strong> p0 </strong>: decay </span></li>
+<li><span style="color:blue;"> <strong> p0 </strong>: tessellation based terrain </span></li>
+</ul>
+</li>
+<li><span style="color:red;"> <strong> p1 </strong>: SSAO </span></li>
+<li><span style="color:red;"> <strong> p1 </strong>: Stream Partice </span></li>
+<li><span style="color:red;"> <strong> p1 </strong>: Animation </span></li>
+<li><strong> p2 </strong>: HDR</li>
+<li><strong> p2 </strong>: Water</li>
+</ul>
+</li>
+<li>UI<ul>
+<li><strong> p0 </strong> : Multiple Scene In Render Window <strong> (completed) </strong></li>
+<li><strong> p1 </strong> : Multiple Effect Level</li>
+<li><strong> p1 </strong>: Assets Window and Views</li>
+<li><strong> p2 </strong>: Snapshot View of all resources</li>
+<li><strong> p2 </strong>: Direct3D Parameters</li>
+<li><strong> p2 </strong>: Add Footbar For Pane</li>
+<li><strong> p2 </strong>: Float Textfield Controller</li>
+<li><strong> p2 </strong>: Material Property UI </li>
+<li><strong> p2 </strong>: Mesh Property UI<ul>
+<li>Mesh part and its vertex format</li>
+<li>Mesh path in repository</li>
+<li>Mesh render controller (framewire, culling model, normal …)</li>
+</ul>
+</li>
+<li><strong> p2 </strong>: Load UI config from file</li>
+</ul>
+</li>
+<li>Game Resources<ul>
+<li>WOW Model data(Skinned mesh)</li>
+<li>Wow Map data</li>
+</ul>
+</li>
+<li>Books &amp; Papers<ul>
+<li>Book: 3D Game Programming with Direct3D 11</li>
+<li>Book: Real-Time Readering</li>
+<li>Book: Programming Vertex Geometry and Pixel Shaders</li>
+<li>Book: Advanced Lighting and Materials With Shaders</li>
+<li>AMD Paper: Practical Parallax Occlusion Mapping for Highly Detailed Surface Rendering</li>
+<li><a href="http://colour-science.org/posts/the-importance-of-terminology-and-srgb-uncertainty/" target="_blank" rel="external">The Importance of Terminology and sRGB Uncertainty</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="20160115"><a href="#20160115" class="headerlink" title="20160115"></a>20160115</h3><ul>
+<li>增加生成 Entity 的 Geometry 接口  <strong> (completed) </strong></li>
+<li>设置 SpotLight 的 Controller mesh kCullNone <strong> (completed) </strong></li>
+<li>重新实现 GridLine  <strong> (completed) </strong></li>
+<li>重新实现 AxisFrame  <strong> (completed) </strong></li>
+<li>重构 SceneNode Bounding Box 相关代码  <strong> (completed) </strong></li>
+<li>修复 UIRender 渲染多次的问题， 以及 Blending Object 渲染顺序的问题  <strong> (completed) </strong></li>
+<li>DirLightController 选取有问题  <strong> (completed) </strong></li>
+<li>实现 VertexData 和 IndiceData 合并的功能</li>
+</ul>
+<h3 id="20160117"><a href="#20160117" class="headerlink" title="20160117"></a>20160117</h3><ul>
+<li>Stencil Buffer based Reflection 如何融入到现有渲染框架当中</li>
+</ul>
+<h3 id="20160119"><a href="#20160119" class="headerlink" title="20160119"></a>20160119</h3><ul>
+<li>Tessellation Triangle</li>
+</ul>
+<h3 id="20160120"><a href="#20160120" class="headerlink" title="20160120"></a>20160120</h3><ul>
+<li>Tessellation Quad</li>
+<li>build Direct3D Cookbook samples</li>
+</ul>
+<h3 id="20160127"><a href="#20160127" class="headerlink" title="20160127"></a>20160127</h3><ul>
+<li>Tessellation based detailmap</li>
+</ul>
+<h3 id="20160128"><a href="#20160128" class="headerlink" title="20160128"></a>20160128</h3><ul>
+<li>Tessellation based terrain (TODO)</li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/azer/month-report-201512/">2016-01-25</a></time>
       
       
@@ -132,42 +304,6 @@
 </ul>
 </li>
 </ul>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/d3d11/shadowmap_devnotes/">2016-01-25</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/01/25/d3d11/shadowmap_devnotes/">Shadowmap Devnotes</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="Shadowmap__28DevNotes_29"><a href="#Shadowmap__28DevNotes_29" class="headerlink" title="Shadowmap (DevNotes)"></a>Shadowmap (DevNotes)</h1><h2 id="Troubles"><a href="#Troubles" class="headerlink" title="Troubles"></a>Troubles</h2><h3 id="u4F7F_u7528_Light_Camera__u6E32_u67D3_u65F6_uFF0C_u6CA1_u6709_Pixel_Stage"><a href="#u4F7F_u7528_Light_Camera__u6E32_u67D3_u65F6_uFF0C_u6CA1_u6709_Pixel_Stage" class="headerlink" title="使用 Light Camera 渲染时，没有 Pixel Stage"></a>使用 Light Camera 渲染时，没有 Pixel Stage</h3><p>在使用 Light Camera 渲染时，从 Visual Studio 的图形诊断看，Vertex Stage 是正常的，但是 PixelStage 就没有内容了。<br>原因是：对于 Light Camera 来说, 这些对象都是不可见的。</p>
-<h3 id="u5224_u65AD_u6295_u5F71_u5750_u6807_u662F_u5426_u6B63_u786E"><a href="#u5224_u65AD_u6295_u5F71_u5750_u6807_u662F_u5426_u6B63_u786E" class="headerlink" title="判断投影坐标是否正确"></a>判断投影坐标是否正确</h3><p>可以直接将深度绘制出来，不进行其他任何计算，看是否符合预期</p>
-<h3 id="Texturemap__u4E0E_shadowmap__u6DF7_u6DC6"><a href="#Texturemap__u4E0E_shadowmap__u6DF7_u6DC6" class="headerlink" title="Texturemap 与 shadowmap 混淆"></a>Texturemap 与 shadowmap 混淆</h3><p>对 texturemap 增加后缀后问题解决<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Texture2D texmap : <span class="keyword">register</span>(t0);</span><br><span class="line">Texture2D shadowmap : <span class="keyword">register</span>(t1);</span><br></pre></td></tr></table></figure></p>
-<h3 id="u5BF9_u8C61_u6295_u5F71_u9519_u8BEF"><a href="#u5BF9_u8C61_u6295_u5F71_u9519_u8BEF" class="headerlink" title="对象投影错误"></a>对象投影错误</h3><p>原因是传递的 Light Projection View Matrix 没有乘上物体的 World matrix, 这个错误在当前框架下比较容易犯。</p>
 
       
     </div>
