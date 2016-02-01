@@ -3,13 +3,16 @@
 <head>
   <meta charset="utf-8">
   
-  <title>3d | azer3D</title>
+  <title>Stencil Buffer | azer3D</title>
   <meta name="author" content="lenxyang@gmail.com">
+  
+  <meta name="description" content="Stencil BufferMirror based on Stencil Buffer基于 Stencil Buffer 的镜面效果的基本思想是：将所有可以被反射的物体在镜面映射的角度进行渲染，使用 Stencil Buffer 作为渲染的可接受范围（此范围实际就是镜子的范围）
+基于 Stenci">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="Stencil Buffer"/>
   <meta property="og:site_name" content="azer3D"/>
 
   
@@ -43,25 +46,76 @@
 <div class="clearfix"></div>
 </header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper">
-<h2 class="archive-title tag">3d</h2>
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-02-01T07:21:00.000Z"><a href="/2016/02/01/d3d11/stencil/">2016-02-01</a></time>
+      
+      
+  
+    <h1 class="title">Stencil Buffer</h1>
+  
 
+    </header>
+    <div class="entry">
+      
+        <h1 id="Stencil_Buffer"><a href="#Stencil_Buffer" class="headerlink" title="Stencil Buffer"></a>Stencil Buffer</h1><h2 id="Mirror_based_on_Stencil_Buffer"><a href="#Mirror_based_on_Stencil_Buffer" class="headerlink" title="Mirror based on Stencil Buffer"></a>Mirror based on Stencil Buffer</h2><p>基于 Stencil Buffer 的镜面效果的基本思想是：将所有可以被反射的物体在镜面映射的角度进行渲染，使用 Stencil Buffer 作为渲染的可接受范围（此范围实际就是镜子的范围）</p>
+<p>基于 Stencil 的镜面映射基本步骤如下</p>
+<ul>
+<li>绘制基本场景</li>
+<li>清理 Stencil Buffer 状态，</li>
+<li>仅仅在 Stencil Buffer 上渲染镜子<ul>
+<li>写入 stencil buffer</li>
+<li>不写 depth buffer (否则镜子后面的世界没办法通过深度测试)</li>
+</ul>
+</li>
+<li>在 stencil test passed 的情况下，渲染所有镜面映射的物体</li>
+<li>渲染镜子 (开启 blending)</li>
+</ul>
+<h3 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h3><p>对 Geometry 进行镜面映射后，他的 FontFace 顺序会改变，如果是 CounterClockWise 需要变化成 ClockWise</p>
 
-  <div class="archive">
-    
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/d3d11/tools/">2016-01-25</a></time>
-            
-              <h1 class="title"><a href="/2016/01/25/d3d11/tools/">3D Tools</a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/direct3d/">direct3d</a>
   </div>
+
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://lenxyang.github.io/2016/02/01/d3d11/stencil/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
