@@ -64,6 +64,10 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">DsOutput <span class="title">ds_main</span><span class="params">(...)</span> </span>&#123;</span><br><span class="line">  float3 v1 = lerp(quad[<span class="number">0</span>].position.xyz, quad[<span class="number">1</span>].position.xyz, uv.x);</span><br><span class="line">  float3 v2 = lerp(quad[<span class="number">3</span>].position.xyz, quad[<span class="number">2</span>].position.xyz, uv.x);</span><br><span class="line">  output.position = mul(pvw, float4(lerp(v1, v2, uv.y), <span class="number">1.0f</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>开始是将 v2 的插值顺序写反了 (quad[3], quad[2])<br>注意：azer3d 采用的是右手坐标系</p>
 <h3 id="Terrain_Hull_Constants_Shader__u8BA1_u7B97"><a href="#Terrain_Hull_Constants_Shader__u8BA1_u7B97" class="headerlink" title="Terrain Hull Constants Shader 计算"></a>Terrain Hull Constants Shader 计算</h3><p>Terrain 的 Constants Shader 计算是基于距离的计算（深度或者到摄像头的具体），其基本思想是距离越大分割越少，不过有一点需要注意：并非距离越远分割越少，而是超过一定距离之后就不在分割（或者仅仅分割一次）。</p>
+<h3 id="Terrain_Quad_Tessellation__u5206_u5272_u9519_u8BEF"><a href="#Terrain_Quad_Tessellation__u5206_u5272_u9519_u8BEF" class="headerlink" title="Terrain Quad Tessellation 分割错误"></a>Terrain Quad Tessellation 分割错误</h3><h2 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="http://www.mistal-research.com/terrainTessellation.php" target="_blank" rel="external">GPU Pro 4: GPU Terrain Subdivision and Tessellation</a></li>
+<li></li>
+</ul>
 
       
     </div>
