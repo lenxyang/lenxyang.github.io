@@ -368,6 +368,7 @@
 <li>Terrain Tessellation: Grid</li>
 <li>Terrain Tessellation: Heightmap</li>
 <li>Terrain Tessellation: Normal</li>
+<li>Terrain Tessellation: Normal Render</li>
 <li>Terrain Tessellation: Texture</li>
 </ul>
 
@@ -531,7 +532,9 @@
     </header>
     <div class="entry">
       
-        <h1 id="Svn_Access_Control"><a href="#Svn_Access_Control" class="headerlink" title="Svn Access Control"></a>Svn Access Control</h1><h2 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h2><ul>
+        <h1 id="Svn_Access_Control"><a href="#Svn_Access_Control" class="headerlink" title="Svn Access Control"></a>Svn Access Control</h1><h2 id="Svn_Access_Control-1"><a href="#Svn_Access_Control-1" class="headerlink" title="Svn Access Control"></a>Svn Access Control</h2><p>默认情况下 SVN 使用 DAS 方式管理权限直接配置在服务器端，不过这样做的坏处时权限管理必须访问 SVN 服务器才能够完成。</p>
+<p>较为方便的方法是在 Repositiory 当中增加特殊文件表达权限管理，在 checkin 的时候（通过 svn 的 hook 机制）自动生成 DAS 权限管理文件</p>
+<h3 id="start-commit"><a href="#start-commit" class="headerlink" title="start-commit"></a>start-commit</h3><h2 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h2><ul>
 <li><a href="http://svnbook.red-bean.com/en/1.7/index.html" target="_blank" rel="external">Version Control with Subversion(1.7)</a></li>
 </ul>
 
