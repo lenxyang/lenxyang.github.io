@@ -427,23 +427,20 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-01-27T07:49:00.000Z"><a href="/2016/01/27/d3d11/detailmap/">2016-01-27</a></time>
+        <time datetime="2016-01-26T07:12:55.000Z"><a href="/2016/01/26/svn/svn-access-control/">2016-01-26</a></time>
       
       
   
-    <h1 class="title"><a href="/2016/01/27/d3d11/detailmap/">Direct3D11 Samples - Tessellation1</a></h1>
+    <h1 class="title"><a href="/2016/01/26/svn/svn-access-control/">svn-access-control</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <h1 id="Detailmap"><a href="#Detailmap" class="headerlink" title="Detailmap"></a>Detailmap</h1><h2 id="Tessellation_based_method"><a href="#Tessellation_based_method" class="headerlink" title="Tessellation based method"></a>Tessellation based method</h2><p>Detailmap(Tessellation based) 能够在渲染管线级别上决定几何体的细节，比起 normalmap 和 parallex mapping 要真是的多。(normalmap 无法处理遮挡关系，如果细节起伏较大会失真; parallex mapping 一定程度上解决了遮挡关系的问题，但如果某个高度变化到不可见状态时，parallex mapping 是没办法处理的)</p>
-<p>Tessellation based method 还有诸多优点</p>
-<h2 id="u5B9E_u73B0_u7EC6_u8282"><a href="#u5B9E_u73B0_u7EC6_u8282" class="headerlink" title="实现细节"></a>实现细节</h2><h3 id="Density_Map"><a href="#Density_Map" class="headerlink" title="Density Map"></a>Density Map</h3><p>Tessellation 的分割参数 (Hull Constants Shader) 与很多因素相关，具体可以分成动态及静态两种；具体来说，与摄像头的距离是动态的，与摄像头的方向夹角这些因素是动态的；此外，Mesh 对象本身的特征是静态的，高度变化较为剧烈的地方应该采用较密集的分割，变化平缓的地方采用较少的分割。高度图是静态的，所以可以采用离线或者加载时刻生成的办法生成一张分割参数的 Texture，用来帮助 Tessellation 的 Hull Constants Shader 的性能</p>
-<p>具体可以参考 CreateDensityMapFromHeightMap</p>
-<h2 id="DevNotes"><a href="#DevNotes" class="headerlink" title="DevNotes"></a>DevNotes</h2><h1 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h1><ul>
-<li><a href="http://http.developer.nvidia.com/GPUGems2/gpugems2_chapter07.html" target="_blank" rel="external">GPU Gems 2: Chapter 7. Adaptive Tessellation of Subdivision Surfaces with Displacement Mapping</a></li>
-<li>Direct3D Rendering CookBook: Chapter 6 Adding Surface Detail with Normal and Displacement Mapping</li>
+        <h1 id="Svn_Access_Control"><a href="#Svn_Access_Control" class="headerlink" title="Svn Access Control"></a>Svn Access Control</h1><h2 id="Svn_Access_Control-1"><a href="#Svn_Access_Control-1" class="headerlink" title="Svn Access Control"></a>Svn Access Control</h2><p>默认情况下 SVN 使用 DAS 方式管理权限直接配置在服务器端，不过这样做的坏处时权限管理必须访问 SVN 服务器才能够完成。</p>
+<p>较为方便的方法是在 Repositiory 当中增加特殊文件表达权限管理，在 checkin 的时候（通过 svn 的 hook 机制）自动生成 DAS 权限管理文件</p>
+<h3 id="start-commit"><a href="#start-commit" class="headerlink" title="start-commit"></a>start-commit</h3><h2 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="http://svnbook.red-bean.com/en/1.7/index.html" target="_blank" rel="external">Version Control with Subversion(1.7)</a></li>
 </ul>
 
       
@@ -522,20 +519,23 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-01-26T07:12:55.000Z"><a href="/2016/01/26/svn/svn-access-control/">2016-01-26</a></time>
+        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/d3d11/tools/">2016-01-25</a></time>
       
       
   
-    <h1 class="title"><a href="/2016/01/26/svn/svn-access-control/">svn-access-control</a></h1>
+    <h1 class="title"><a href="/2016/01/25/d3d11/tools/">3D Tools</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <h1 id="Svn_Access_Control"><a href="#Svn_Access_Control" class="headerlink" title="Svn Access Control"></a>Svn Access Control</h1><h2 id="Svn_Access_Control-1"><a href="#Svn_Access_Control-1" class="headerlink" title="Svn Access Control"></a>Svn Access Control</h2><p>默认情况下 SVN 使用 DAS 方式管理权限直接配置在服务器端，不过这样做的坏处时权限管理必须访问 SVN 服务器才能够完成。</p>
-<p>较为方便的方法是在 Repositiory 当中增加特殊文件表达权限管理，在 checkin 的时候（通过 svn 的 hook 机制）自动生成 DAS 权限管理文件</p>
-<h3 id="start-commit"><a href="#start-commit" class="headerlink" title="start-commit"></a>start-commit</h3><h2 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h2><ul>
-<li><a href="http://svnbook.red-bean.com/en/1.7/index.html" target="_blank" rel="external">Version Control with Subversion(1.7)</a></li>
+        <h1 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h1><h2 id="u6A21_u578B_u63D0_u53D6_u5DE5_u5177"><a href="#u6A21_u578B_u63D0_u53D6_u5DE5_u5177" class="headerlink" title="模型提取工具"></a>模型提取工具</h2><ul>
+<li><a href="http://www.deep-shadows.com/hax/3DRipperDX.htm" target="_blank" rel="external">3D Ripper DX</a></li>
+</ul>
+<h2 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h2><ul>
+<li><a href="http://www.bundysoft.com/L3DT/" target="_blank" rel="external">L3DT - Large 3D Terrain Generator</a></li>
+<li><a href="http://planetside.co.uk/" target="_blank" rel="external">Terragen-3D</a></li>
+<li><a href="http://www.ogre3d.org/tikiwiki/DCC+Tools#Terrain_generation" target="_blank" rel="external">OGRE DCC Tools</a></li>
 </ul>
 
       
@@ -582,7 +582,7 @@
   
     <li><a href="/tags/chromium/">chromium</a><small>2</small></li>
   
-    <li><a href="/tags/direct3d/">direct3d</a><small>9</small></li>
+    <li><a href="/tags/direct3d/">direct3d</a><small>8</small></li>
   
     <li><a href="/tags/docker/">docker</a><small>2</small></li>
   
