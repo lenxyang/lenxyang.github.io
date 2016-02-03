@@ -50,6 +50,74 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-02-03T06:23:00.000Z"><a href="/2016/02/03/graphics/water/">2016-02-03</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/02/03/graphics/water/">Water</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="Water"><a href="#Water" class="headerlink" title="Water"></a>Water</h1><h1 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h1>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-02-03T06:23:00.000Z"><a href="/2016/02/03/graphics/terrain/">2016-02-03</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/02/03/graphics/terrain/">Terrain</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="Terrain"><a href="#Terrain" class="headerlink" title="Terrain"></a>Terrain</h1><h1 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="http://www.terrain.dk/" target="_blank" rel="external">Rendering Very Large, Very Detailed Terrains</a></li>
+<li><a href="http://www.mistal-research.com/terrainTessellation.php" target="_blank" rel="external">GPU Pro 4: GPU Terrain Subdivision and Tessellation</a></li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-02-03T06:23:00.000Z"><a href="/2016/02/03/d3d11/particle/">2016-02-03</a></time>
       
       
@@ -421,6 +489,10 @@
 <li><strong> p2 </strong>: Load UI config from file</li>
 </ul>
 </li>
+<li>Unittest<ul>
+<li><strong> p2 </strong>: Add unittest to azer</li>
+</ul>
+</li>
 <li>Game Resources<ul>
 <li>WOW Model data(Skinned mesh)</li>
 <li>Wow Map data</li>
@@ -468,80 +540,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-01-28T07:52:22.538Z"><a href="/2016/01/28/d3d11/monblur10/">2016-01-28</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/01/28/d3d11/monblur10/">2016-01 Direct3D10 Samples - Monblur</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="Monblur10"><a href="#Monblur10" class="headerlink" title="Monblur10"></a>Monblur10</h1><h2 id="Problems"><a href="#Problems" class="headerlink" title="Problems"></a>Problems</h2><p>从 hlsl 的代码看， gs 的输出是每次对三角形的一边处理多次，而后生成 triangle。通过一条边生成的 triangle 有意义吗？ 莫非是一次通过对一条边的变换生成三角形？</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">define</span> MAX_TIME_STEPS <span class="number">3</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ExtrudeEdge</span><span class="params">( VSMotionBlurOut v1, </span><br><span class="line">                  VSMotionBlurOut v2, </span><br><span class="line">                  uniform uint iStep,</span><br><span class="line">                  inout TriangleStream&lt;GSMotionBlurOut&gt; SceneTriangleStream )</span> </span>&#123;</span><br><span class="line">    GSMotionBlurOut oV1;</span><br><span class="line">    GSMotionBlurOut oV2;</span><br><span class="line">    ....</span><br><span class="line">    SceneTriangleStream.Append( oV2 );</span><br><span class="line">    SceneTriangleStream.Append( oV1 );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ExtrudeBlurEdges</span><span class="params">( VSMotionBlurOut v1,</span><br><span class="line">                      VSMotionBlurOut v2,</span><br><span class="line">                      inout TriangleStream&lt;GSMotionBlurOut&gt; SceneTriangleStream,</span><br><span class="line">                      uniform <span class="keyword">bool</span> FrontSide )</span> </span>&#123;           </span><br><span class="line">    uint iStart = <span class="number">0</span>;</span><br><span class="line">    uint iEnd = MAX_TIME_STEPS;</span><br><span class="line">    </span><br><span class="line">    [unroll] <span class="keyword">for</span>(uint i=iStart; i&lt;iEnd; i++)</span><br><span class="line">    &#123;       </span><br><span class="line">        ExtrudeEdge( v1, v2, i, SceneTriangleStream );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    SceneTriangleStream.RestartStrip();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[maxvertexcount(<span class="number">30</span>)]</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">GSMotionBlurMain</span><span class="params">( triangle VSMotionBlurOut In[<span class="number">3</span>], </span><br><span class="line">                       inout TriangleStream&lt;GSMotionBlurOut&gt; SceneTriangleStream, </span><br><span class="line">                       uniform <span class="keyword">bool</span> bFrontSide )</span> </span>&#123;</span><br><span class="line">  ExtrudeBlurEdges( In[<span class="number">0</span>], In[<span class="number">1</span>], SceneTriangleStream, bFrontSide );</span><br><span class="line">  ExtrudeBlurEdges( In[<span class="number">1</span>], In[<span class="number">2</span>], SceneTriangleStream, bFrontSide );</span><br><span class="line">  ExtrudeBlurEdges( In[<span class="number">2</span>], In[<span class="number">0</span>], SceneTriangleStream, bFrontSide );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="Alpha_to_Converage"><a href="#Alpha_to_Converage" class="headerlink" title="Alpha to Converage"></a>Alpha to Converage</h2>
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-01-27T07:49:00.000Z"><a href="/2016/01/27/d3d11/detailmap/">2016-01-27</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/01/27/d3d11/detailmap/">Direct3D11 Detailmap</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="Detailmap"><a href="#Detailmap" class="headerlink" title="Detailmap"></a>Detailmap</h1><h2 id="Tessellation_based_method"><a href="#Tessellation_based_method" class="headerlink" title="Tessellation based method"></a>Tessellation based method</h2><p>Detailmap(Tessellation based) 能够在渲染管线级别上决定几何体的细节，比起 normalmap 和 parallex mapping 要真是的多。(normalmap 无法处理遮挡关系，如果细节起伏较大会失真; parallex mapping 一定程度上解决了遮挡关系的问题，但如果某个高度变化到不可见状态时，parallex mapping 是没办法处理的)</p>
-<p>Tessellation based method 还有诸多优点</p>
-<h2 id="u5B9E_u73B0_u7EC6_u8282"><a href="#u5B9E_u73B0_u7EC6_u8282" class="headerlink" title="实现细节"></a>实现细节</h2><h3 id="Density_Map"><a href="#Density_Map" class="headerlink" title="Density Map"></a>Density Map</h3><p>Tessellation 的分割参数 (Hull Constants Shader) 与很多因素相关，具体可以分成动态及静态两种；具体来说，与摄像头的距离是动态的，与摄像头的方向夹角这些因素是动态的；此外，Mesh 对象本身的特征是静态的，高度变化较为剧烈的地方应该采用较密集的分割，变化平缓的地方采用较少的分割。高度图是静态的，所以可以采用离线或者加载时刻生成的办法生成一张分割参数的 Texture，用来帮助 Tessellation 的 Hull Constants Shader 的性能</p>
-<p>具体可以参考 CreateDensityMapFromHeightMap</p>
-<h2 id="DevNotes"><a href="#DevNotes" class="headerlink" title="DevNotes"></a>DevNotes</h2><h1 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h1><ul>
-<li><a href="http://http.developer.nvidia.com/GPUGems2/gpugems2_chapter07.html" target="_blank" rel="external">GPU Gems 2: Chapter 7. Adaptive Tessellation of Subdivision Surfaces with Displacement Mapping</a></li>
-<li>Direct3D Rendering CookBook: Chapter 6 Adding Surface Detail with Normal and Displacement Mapping</li>
-</ul>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -570,6 +568,8 @@
     <li><a href="/tags/azer3d/">azer3d</a><small>4</small></li>
   
     <li><a href="/tags/chromium/">chromium</a><small>2</small></li>
+  
+    <li><a href="/tags/computer-graphics/">computer graphics</a><small>2</small></li>
   
     <li><a href="/tags/direct3d/">direct3d</a><small>11</small></li>
   
