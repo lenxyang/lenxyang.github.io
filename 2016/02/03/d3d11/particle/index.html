@@ -3,15 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Direct3D11 Particle System | azer3D</title>
+  <title>Direct3D11 Particle System Devnotes | azer3D</title>
   <meta name="author" content="lenxyang@gmail.com">
   
-  <meta name="description" content="Particle">
+  <meta name="description" content="ParticleNotes
+用于 Stream Out 的 VertexBuffer 必须使用 kBindTargetStreamOut
+需要 3 个 VertexBuffer, 初始化和两个输入输出补丁切换的 VertexBuffer
+VertexBuffer 的大小需要按照最多的粒子数指定 (初">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="Direct3D11 Particle System"/>
+  <meta property="og:title" content="Direct3D11 Particle System Devnotes"/>
   <meta property="og:site_name" content="azer3D"/>
 
   
@@ -55,13 +58,21 @@
       
       
   
-    <h1 class="title">Direct3D11 Particle System</h1>
+    <h1 class="title">Direct3D11 Particle System Devnotes</h1>
   
 
     </header>
     <div class="entry">
       
-        <h1 id="Particle"><a href="#Particle" class="headerlink" title="Particle"></a>Particle</h1>
+        <h1 id="Particle"><a href="#Particle" class="headerlink" title="Particle"></a>Particle</h1><h2 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h2><ul>
+<li>用于 Stream Out 的 VertexBuffer 必须使用 kBindTargetStreamOut</li>
+<li>需要 3 个 VertexBuffer, 初始化和两个输入输出补丁切换的 VertexBuffer</li>
+<li>VertexBuffer 的大小需要按照最多的粒子数指定 (初始化的 VertexBuffer 不需要)</li>
+<li>在绘制 VertexBuffer 时，需要将其从 StreamOut Stage 上解除绑定</li>
+<li>使用 DrawAuto，以便 DirectX 自行决定绘制的粒子数</li>
+</ul>
+<h2 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h2><p>### </p>
+
       
     </div>
     <footer>
@@ -123,15 +134,17 @@
   
     <li><a href="/tags/azer3d/">azer3d</a><small>4</small></li>
   
+    <li><a href="/tags/books/">books</a><small>1</small></li>
+  
     <li><a href="/tags/chromium/">chromium</a><small>2</small></li>
   
-    <li><a href="/tags/computer-graphics/">computer graphics</a><small>2</small></li>
+    <li><a href="/tags/computer-graphics/">computer graphics</a><small>3</small></li>
   
     <li><a href="/tags/direct3d/">direct3d</a><small>11</small></li>
   
     <li><a href="/tags/docker/">docker</a><small>2</small></li>
   
-    <li><a href="/tags/effect/">effect</a><small>1</small></li>
+    <li><a href="/tags/effect/">effect</a><small>2</small></li>
   
     <li><a href="/tags/fuse/">fuse</a><small>1</small></li>
   

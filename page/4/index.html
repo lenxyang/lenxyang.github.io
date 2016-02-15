@@ -3,16 +3,13 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Direct3D11 VertexBuffer | azer3D</title>
+  <title>第 4 頁 | azer3D</title>
   <meta name="author" content="lenxyang@gmail.com">
-  
-  <meta name="description" content="Vertex Buffer TricksMulti-Stream VertexBufferPer-Instance VertexBuffer参考
-GPU Gems 2: Chapter 5 Optimizing Resource Management with Multistreaming">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="Direct3D11 VertexBuffer"/>
+  
   <meta property="og:site_name" content="azer3D"/>
 
   
@@ -46,24 +43,94 @@ GPU Gems 2: Chapter 5 Optimizing Resource Management with Multistreaming">
 <div class="clearfix"></div>
 </header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  <article class="post">
   
   <div class="post-content">
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-02-03T02:35:00.000Z"><a href="/2016/02/03/d3d11/vertex_buffer/">2016-02-03</a></time>
+        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/azer/month-report-201512/">2016-01-25</a></time>
       
       
   
-    <h1 class="title">Direct3D11 VertexBuffer</h1>
+    <h1 class="title"><a href="/2016/01/25/azer/month-report-201512/">2015-12 Month Report</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <h1 id="Vertex_Buffer_Tricks"><a href="#Vertex_Buffer_Tricks" class="headerlink" title="Vertex Buffer Tricks"></a>Vertex Buffer Tricks</h1><h2 id="Multi-Stream_VertexBuffer"><a href="#Multi-Stream_VertexBuffer" class="headerlink" title="Multi-Stream VertexBuffer"></a>Multi-Stream VertexBuffer</h2><h2 id="Per-Instance_VertexBuffer"><a href="#Per-Instance_VertexBuffer" class="headerlink" title="Per-Instance VertexBuffer"></a>Per-Instance VertexBuffer</h2><h1 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h1><ul>
-<li><a href="http://http.developer.nvidia.com/GPUGems2/gpugems2_chapter05.html" target="_blank" rel="external">GPU Gems 2: Chapter 5 Optimizing Resource Management with Multistreaming </a></li>
+        <h1 id="201512__u6708_u5DE5_u4F5C"><a href="#201512__u6708_u5DE5_u4F5C" class="headerlink" title="201512 月工作"></a>201512 月工作</h1><h2 id="201512"><a href="#201512" class="headerlink" title="201512"></a>201512</h2><ul>
+<li>Framework<ul>
+<li>Refactor the mesh framework with VertexBufferGroup  <strong> (completed) </strong></li>
+<li>Load Model with Multislot-vertex Desc supported <strong> (completed) </strong></li>
+<li>Common Resource Framework <strong> (completed) </strong></li>
+<li>Resource Loader(VertexDesc, Material, Light, Scene, Mesh)  <strong> (completed) </strong></li>
+<li>Vertex Layout Object as Class <strong> (completed) </strong></li>
+<li>RenderState <strong> (completed) </strong></li>
+</ul>
+</li>
+<li>Scene Management<ul>
+<li>Refactor Scene Framework to support multiple lights <strong> (completed)</strong></li>
+</ul>
+</li>
+<li>Render Framework<ul>
+<li>Multi-Effect Rendering  <strong> (completed) </strong></li>
+<li>Generate an Scene Render Tree from Scene Tree <strong> (completed) </strong></li>
+<li>universe light structure</li>
+<li>Instanced Rendering Support <strong> (wont, should be completed by app layer) </strong></li>
+</ul>
+</li>
+<li>Simple Effects<ul>
+<li>Light Source Effect <strong>(completed)</strong></li>
+<li>Phong Lighting Effect <strong>(completed)</strong></li>
+<li>Simple Material <strong>(completed)</strong></li>
+<li>Render Normal (Geometry Shader based) <strong>(completed)</strong></li>
+<li>Direct3D11 Samples<ul>
+<li>Sample Texture <strong>(completed)</strong></li>
+<li>Normal Mapping <strong>(completed)</strong></li>
+<li>Parallax Mapping <strong>(completed)</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>UI<ul>
+<li>switch from multiple Scene Render</li>
+<li>Property Window and framework<ul>
+<li>Property Observer the InteractiveContext to get Selected Node <strong> (completed) </strong></li>
+<li>InteractiveContext Observer The SceneTreeView to get Selected Node by UI clicked</li>
+<li>Scene Node Property UI <strong> (completed) </strong></li>
+<li>Transform Property UI <strong> (completed) </strong></li>
+</ul>
+</li>
+<li>Light Control Objects<ul>
+<li>SpotLight Controller <strong>(completed)</strong></li>
+<li>PointLight Controller <strong> (completed)</strong></li>
+<li>DirLight Controller  <strong> (completed) </strong></li>
+</ul>
+</li>
+<li>Light Souce Params UI<ul>
+<li>ColorProperty UI <strong> (completed) </strong></li>
+<li>SpotLight Attenuation UI <strong>(completed)</strong></li>
+<li>PointLight Attenuation UI <strong>(completed)</strong></li>
+<li>z-buffer UI</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Books &amp; Papers<ul>
+<li>Book: 3D Game Programming with Direct3D 11</li>
+<li>Book: Real-Time Readering</li>
+<li>Book: Programming Vertex Geometry and Pixel Shaders</li>
+<li>Book: Advanced Lighting and Materials With Shaders</li>
+<li>AMD Paper: Practical Parallax Occlusion Mapping for Highly Detailed Surface Rendering</li>
+</ul>
+</li>
+<li>Others<ul>
+<li>HLSL Include 机制 <strong> (completed)</strong></li>
+<li>Load ifs format model</li>
+</ul>
+</li>
 </ul>
 
       
@@ -72,12 +139,6 @@ GPU Gems 2: Chapter 5 Optimizing Resource Management with Multistreaming">
       
         
         
-  
-  <div class="tags">
-    <a href="/tags/direct3d/">direct3d</a>
-  </div>
-
-        
       
       <div class="clearfix"></div>
     </footer>
@@ -85,27 +146,16 @@ GPU Gems 2: Chapter 5 Optimizing Resource Management with Multistreaming">
 </article>
 
 
-<section id="comment">
-  <h1 class="title">留言</h1>
 
+
+
+<nav id="pagination">
   
-      <div id="fb-root"></div>
-<script>
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-</script>
-
-<div class="fb-comments" data-href="http://lenxyang.github.io/2016/02/03/d3d11/vertex_buffer/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
-      
+    <a href="/page/3/" class="alignleft prev">上一頁</a>
   
-</section>
-
-</div></div>
+  
+  <div class="clearfix"></div>
+</nav></div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
   <form action="//google.com/search" method="get" accept-charset="utf-8">

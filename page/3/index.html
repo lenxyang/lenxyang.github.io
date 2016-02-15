@@ -50,6 +50,55 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/hdfs/setup-hdfs-on-docker/">2016-01-25</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/01/25/hdfs/setup-hdfs-on-docker/">Setup HDFS on Docker</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="u4F7F_u7528_Docker__u5EFA_u7ACB_HDFS__u96C6_u7FA4"><a href="#u4F7F_u7528_Docker__u5EFA_u7ACB_HDFS__u96C6_u7FA4" class="headerlink" title="使用 Docker 建立 HDFS 集群"></a>使用 Docker 建立 HDFS 集群</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">$ sudo docker pull docker.io/centos</span><br></pre></td></tr></table></figure>
+<h2 id="u521B_u5EFA_u955C_u50CF"><a href="#u521B_u5EFA_u955C_u50CF" class="headerlink" title="创建镜像"></a>创建镜像</h2><h3 id="u914D_u7F6E_DNS__u670D_u52A1_u5668"><a href="#u914D_u7F6E_DNS__u670D_u52A1_u5668" class="headerlink" title="配置 DNS 服务器"></a>配置 DNS 服务器</h3><p>Docker 配置静态 IP 比较麻烦，/etc/hosts 文件在启动 docker 时自动生成，之前的更改可能被覆盖，为 docker 集群提供一个 DNS 服务是个不错的方法，一个 DNS 缓存服务器就足够用了，完全不需要完整的服务（架设，配置都比较麻烦）。</p>
+<p>DNS 缓存服务我们采用 dnsmasq，具体方法参考 <a href="https://wiredcraft.com/blog/dns-and-docker-containers/" target="_blank" rel="external">DNS AND DOCKER CONTAINERS</a></p>
+<h4 id="u542F_u52A8_u670D_u52A1"><a href="#u542F_u52A8_u670D_u52A1" class="headerlink" title="启动服务"></a>启动服务</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">docker run <span class="operator">-d</span> dnsmasq /bin/sh -c <span class="string">"/sbin/dnsmasq; while true; do echo sleep; sleep 1; done"</span></span><br></pre></td></tr></table></figure>
+<h3 id="u914D_u7F6E_DNS"><a href="#u914D_u7F6E_DNS" class="headerlink" title="配置 DNS"></a>配置 DNS</h3><p>启动是通过 docker 参数指定 dns 服务及机器名</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">$ sudo docker run -dns <span class="number">177.17</span>.<span class="number">0.1</span> -h hostname imagename binary</span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过 nscenter 连接 docker</span></span><br><span class="line">$ PID=$(docker inspect --format <span class="string">"&#123;&#123; .State.Pid &#125;&#125;"</span> &lt;container&gt;) <span class="comment"># 获得容器的第一个进程 id</span></span><br><span class="line">$ nsenter --target <span class="variable">$PID</span> --mount --uts --ipc --net --pid</span><br></pre></td></tr></table></figure>
+<h2 id="u914D_u7F6E_Hadoop"><a href="#u914D_u7F6E_Hadoop" class="headerlink" title="配置 Hadoop"></a>配置 Hadoop</h2><h3 id="u914D_u7F6E_u4FE1_u4EFB_u5173_u7CFB"><a href="#u914D_u7F6E_u4FE1_u4EFB_u5173_u7CFB" class="headerlink" title="配置信任关系"></a>配置信任关系</h3><p>hadoop 通过 RASPublicKey 认证的 ssh 访问，必须为所有机器建立信任关系。</p>
+<h3 id="u914D_u7F6E_Single_Node"><a href="#u914D_u7F6E_Single_Node" class="headerlink" title="配置 Single Node"></a>配置 Single Node</h3><h4 id="u914D_u7F6E_/etc/hadoop/core-site-xml"><a href="#u914D_u7F6E_/etc/hadoop/core-site-xml" class="headerlink" title="配置 /etc/hadoop/core-site.xml"></a>配置 /etc/hadoop/core-site.xml</h4><figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">&lt;configuration&gt;</span></span><br><span class="line">  <span class="variable">&lt;property&gt;</span></span><br><span class="line">    <span class="variable">&lt;name&gt;</span>fs.<span class="keyword">default</span>.name<span class="variable">&lt;/name&gt;</span></span><br><span class="line">    <span class="variable">&lt;value&gt;</span>hdfs://node1:<span class="number">49000</span><span class="variable">&lt;/value&gt;</span></span><br><span class="line">  <span class="variable">&lt;/property&gt;</span></span><br><span class="line">  <span class="variable">&lt;property&gt;</span></span><br><span class="line">    <span class="variable">&lt;name&gt;</span>hadoop.tmp.dir<span class="variable">&lt;/name&gt;</span></span><br><span class="line">    <span class="variable">&lt;value&gt;</span>/home/hadoop/var<span class="variable">&lt;/value&gt;</span></span><br><span class="line">  <span class="variable">&lt;/property&gt;</span></span><br><span class="line"><span class="variable">&lt;/configuration&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="u914D_u7F6E_/etc/hadoop/hdfs-site-xml"><a href="#u914D_u7F6E_/etc/hadoop/hdfs-site-xml" class="headerlink" title="配置 /etc/hadoop/hdfs-site.xml"></a>配置 /etc/hadoop/hdfs-site.xml</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">configuration</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">name</span>&gt;</span>dfs.replication<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">value</span>&gt;</span>1<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="u683C_u5F0F_u5316_dfs"><a href="#u683C_u5F0F_u5316_dfs" class="headerlink" title="格式化 dfs"></a>格式化 dfs</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">hadoop namenode -format</span><br></pre></td></tr></table></figure>
+<h3 id="u542F_u52A8_hdfs"><a href="#u542F_u52A8_hdfs" class="headerlink" title="启动 hdfs"></a>启动 hdfs</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">~/hadoop-<span class="number">2.6</span>.<span class="number">0</span>/sbin/start-dfs.sh</span><br></pre></td></tr></table></figure>
+<h2 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h2><h3 id="u90E8_u7F72_dnsmasq__u65F6_u51FA_u73B0_u9519_u8BEF__u201Csetting_capabilities_failed_3A_Operation_not_permitted_u201D"><a href="#u90E8_u7F72_dnsmasq__u65F6_u51FA_u73B0_u9519_u8BEF__u201Csetting_capabilities_failed_3A_Operation_not_permitted_u201D" class="headerlink" title="部署 dnsmasq 时出现错误 “setting capabilities failed: Operation not permitted”"></a>部署 dnsmasq 时出现错误 “setting capabilities failed: Operation not permitted”</h3><p>具体解决办法，修改 /etc/dnsmaqs.conf<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">user=root</span><br></pre></td></tr></table></figure></p>
+<p>参考 <a href="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=514214" target="_blank" rel="external">Debian Bug report logs - #514214 dnsmasq crashes if fails to set capabilities</a></p>
+<h3 id="u8FDE_u63A5_ssh__u670D_u52A1_u662F_u51FA_u73B0__u201Cssh_Read_from_socket_failed_3A_Connection_reset_by_peer_u201D"><a href="#u8FDE_u63A5_ssh__u670D_u52A1_u662F_u51FA_u73B0__u201Cssh_Read_from_socket_failed_3A_Connection_reset_by_peer_u201D" class="headerlink" title="连接 ssh 服务是出现 “ssh Read from socket failed: Connection reset by peer”"></a>连接 ssh 服务是出现 “ssh Read from socket failed: Connection reset by peer”</h3><p>docker image 可能是安装非常初步的操作系统，各种错误都用可能出现。这个问题是 sshd 异常中断导致的，可以使用 /sbin/sshd -d 启动程序，而后通过 ssh 连接服务，sshd 会打印足够的日志来诊断问题。</p>
+<h1 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="http://tecadmin.net/setup-dns-server-on-centos-redhat/" target="_blank" rel="external">How to Setup DNS (Bind) Server on CentOS/RHEL 7/6/5</a></li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/docker/fast-introduce-to-docker/">2016-01-25</a></time>
       
       
@@ -149,73 +198,36 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/hdfs/setup-hdfs-on-docker/">2016-01-25</a></time>
+        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/hdfs/fuse-on-hdfs/">2016-01-25</a></time>
       
       
   
-    <h1 class="title"><a href="/2016/01/25/hdfs/setup-hdfs-on-docker/">Setup HDFS on Docker</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="u4F7F_u7528_Docker__u5EFA_u7ACB_HDFS__u96C6_u7FA4"><a href="#u4F7F_u7528_Docker__u5EFA_u7ACB_HDFS__u96C6_u7FA4" class="headerlink" title="使用 Docker 建立 HDFS 集群"></a>使用 Docker 建立 HDFS 集群</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">$ sudo docker pull docker.io/centos</span><br></pre></td></tr></table></figure>
-<h2 id="u521B_u5EFA_u955C_u50CF"><a href="#u521B_u5EFA_u955C_u50CF" class="headerlink" title="创建镜像"></a>创建镜像</h2><h3 id="u914D_u7F6E_DNS__u670D_u52A1_u5668"><a href="#u914D_u7F6E_DNS__u670D_u52A1_u5668" class="headerlink" title="配置 DNS 服务器"></a>配置 DNS 服务器</h3><p>Docker 配置静态 IP 比较麻烦，/etc/hosts 文件在启动 docker 时自动生成，之前的更改可能被覆盖，为 docker 集群提供一个 DNS 服务是个不错的方法，一个 DNS 缓存服务器就足够用了，完全不需要完整的服务（架设，配置都比较麻烦）。</p>
-<p>DNS 缓存服务我们采用 dnsmasq，具体方法参考 <a href="https://wiredcraft.com/blog/dns-and-docker-containers/" target="_blank" rel="external">DNS AND DOCKER CONTAINERS</a></p>
-<h4 id="u542F_u52A8_u670D_u52A1"><a href="#u542F_u52A8_u670D_u52A1" class="headerlink" title="启动服务"></a>启动服务</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">docker run <span class="operator">-d</span> dnsmasq /bin/sh -c <span class="string">"/sbin/dnsmasq; while true; do echo sleep; sleep 1; done"</span></span><br></pre></td></tr></table></figure>
-<h3 id="u914D_u7F6E_DNS"><a href="#u914D_u7F6E_DNS" class="headerlink" title="配置 DNS"></a>配置 DNS</h3><p>启动是通过 docker 参数指定 dns 服务及机器名</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">$ sudo docker run -dns <span class="number">177.17</span>.<span class="number">0.1</span> -h hostname imagename binary</span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过 nscenter 连接 docker</span></span><br><span class="line">$ PID=$(docker inspect --format <span class="string">"&#123;&#123; .State.Pid &#125;&#125;"</span> &lt;container&gt;) <span class="comment"># 获得容器的第一个进程 id</span></span><br><span class="line">$ nsenter --target <span class="variable">$PID</span> --mount --uts --ipc --net --pid</span><br></pre></td></tr></table></figure>
-<h2 id="u914D_u7F6E_Hadoop"><a href="#u914D_u7F6E_Hadoop" class="headerlink" title="配置 Hadoop"></a>配置 Hadoop</h2><h3 id="u914D_u7F6E_u4FE1_u4EFB_u5173_u7CFB"><a href="#u914D_u7F6E_u4FE1_u4EFB_u5173_u7CFB" class="headerlink" title="配置信任关系"></a>配置信任关系</h3><p>hadoop 通过 RASPublicKey 认证的 ssh 访问，必须为所有机器建立信任关系。</p>
-<h3 id="u914D_u7F6E_Single_Node"><a href="#u914D_u7F6E_Single_Node" class="headerlink" title="配置 Single Node"></a>配置 Single Node</h3><h4 id="u914D_u7F6E_/etc/hadoop/core-site-xml"><a href="#u914D_u7F6E_/etc/hadoop/core-site-xml" class="headerlink" title="配置 /etc/hadoop/core-site.xml"></a>配置 /etc/hadoop/core-site.xml</h4><figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">&lt;configuration&gt;</span></span><br><span class="line">  <span class="variable">&lt;property&gt;</span></span><br><span class="line">    <span class="variable">&lt;name&gt;</span>fs.<span class="keyword">default</span>.name<span class="variable">&lt;/name&gt;</span></span><br><span class="line">    <span class="variable">&lt;value&gt;</span>hdfs://node1:<span class="number">49000</span><span class="variable">&lt;/value&gt;</span></span><br><span class="line">  <span class="variable">&lt;/property&gt;</span></span><br><span class="line">  <span class="variable">&lt;property&gt;</span></span><br><span class="line">    <span class="variable">&lt;name&gt;</span>hadoop.tmp.dir<span class="variable">&lt;/name&gt;</span></span><br><span class="line">    <span class="variable">&lt;value&gt;</span>/home/hadoop/var<span class="variable">&lt;/value&gt;</span></span><br><span class="line">  <span class="variable">&lt;/property&gt;</span></span><br><span class="line"><span class="variable">&lt;/configuration&gt;</span></span><br></pre></td></tr></table></figure>
-<h4 id="u914D_u7F6E_/etc/hadoop/hdfs-site-xml"><a href="#u914D_u7F6E_/etc/hadoop/hdfs-site-xml" class="headerlink" title="配置 /etc/hadoop/hdfs-site.xml"></a>配置 /etc/hadoop/hdfs-site.xml</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">configuration</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">name</span>&gt;</span>dfs.replication<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">value</span>&gt;</span>1<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="u683C_u5F0F_u5316_dfs"><a href="#u683C_u5F0F_u5316_dfs" class="headerlink" title="格式化 dfs"></a>格式化 dfs</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">hadoop namenode -format</span><br></pre></td></tr></table></figure>
-<h3 id="u542F_u52A8_hdfs"><a href="#u542F_u52A8_hdfs" class="headerlink" title="启动 hdfs"></a>启动 hdfs</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">~/hadoop-<span class="number">2.6</span>.<span class="number">0</span>/sbin/start-dfs.sh</span><br></pre></td></tr></table></figure>
-<h2 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h2><h3 id="u90E8_u7F72_dnsmasq__u65F6_u51FA_u73B0_u9519_u8BEF__u201Csetting_capabilities_failed_3A_Operation_not_permitted_u201D"><a href="#u90E8_u7F72_dnsmasq__u65F6_u51FA_u73B0_u9519_u8BEF__u201Csetting_capabilities_failed_3A_Operation_not_permitted_u201D" class="headerlink" title="部署 dnsmasq 时出现错误 “setting capabilities failed: Operation not permitted”"></a>部署 dnsmasq 时出现错误 “setting capabilities failed: Operation not permitted”</h3><p>具体解决办法，修改 /etc/dnsmaqs.conf<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">user=root</span><br></pre></td></tr></table></figure></p>
-<p>参考 <a href="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=514214" target="_blank" rel="external">Debian Bug report logs - #514214 dnsmasq crashes if fails to set capabilities</a></p>
-<h3 id="u8FDE_u63A5_ssh__u670D_u52A1_u662F_u51FA_u73B0__u201Cssh_Read_from_socket_failed_3A_Connection_reset_by_peer_u201D"><a href="#u8FDE_u63A5_ssh__u670D_u52A1_u662F_u51FA_u73B0__u201Cssh_Read_from_socket_failed_3A_Connection_reset_by_peer_u201D" class="headerlink" title="连接 ssh 服务是出现 “ssh Read from socket failed: Connection reset by peer”"></a>连接 ssh 服务是出现 “ssh Read from socket failed: Connection reset by peer”</h3><p>docker image 可能是安装非常初步的操作系统，各种错误都用可能出现。这个问题是 sshd 异常中断导致的，可以使用 /sbin/sshd -d 启动程序，而后通过 ssh 连接服务，sshd 会打印足够的日志来诊断问题。</p>
-<h1 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h1><ul>
-<li><a href="http://tecadmin.net/setup-dns-server-on-centos-redhat/" target="_blank" rel="external">How to Setup DNS (Bind) Server on CentOS/RHEL 7/6/5</a></li>
-</ul>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/d3d11/tools/">2016-01-25</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/01/25/d3d11/tools/">3D Tools</a></h1>
+    <h1 class="title"><a href="/2016/01/25/hdfs/fuse-on-hdfs/">fuse driver for HDFS</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <h1 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h1><h2 id="u6A21_u578B_u63D0_u53D6_u5DE5_u5177"><a href="#u6A21_u578B_u63D0_u53D6_u5DE5_u5177" class="headerlink" title="模型提取工具"></a>模型提取工具</h2><ul>
-<li><a href="http://www.deep-shadows.com/hax/3DRipperDX.htm" target="_blank" rel="external">3D Ripper DX</a></li>
+        <h1 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h1><h2 id="u7F16_u8BD1_libhdfs"><a href="#u7F16_u8BD1_libhdfs" class="headerlink" title="编译 libhdfs"></a>编译 libhdfs</h2><p>使用 cdh 版本的 hadoop, 默认 libhdfs 不会编译</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="variable">$&#123;hadoop_client&#125;</span>/src/hadoop-mapreduce1-project/src/c++/libhdfs</span><br><span class="line">./bootstrap.sh</span><br><span class="line">./configure</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
+<h2 id="u53EF_u80FD_u9047_u5230_u7684_u95EE_u9898"><a href="#u53EF_u80FD_u9047_u5230_u7684_u95EE_u9898" class="headerlink" title="可能遇到的问题"></a>可能遇到的问题</h2><ul>
+<li>cc1: error: unrecognized command line option “-m”</li>
 </ul>
-<h2 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h2><ul>
-<li><a href="http://www.bundysoft.com/L3DT/" target="_blank" rel="external">L3DT - Large 3D Terrain Generator</a></li>
-<li><a href="http://planetside.co.uk/" target="_blank" rel="external">Terragen-3D</a></li>
-<li><a href="http://www.ogre3d.org/tikiwiki/DCC+Tools#Terrain_generation" target="_blank" rel="external">OGRE DCC Tools</a></li>
+<p>gcc 使用 -m 选项指定 target arch, 出现这个错误的原因是 -m 后面没有跟参数。在所有没有参数的 -m 后面增加 64 即可</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CFLAGS = -g -O2 -DOS_LINUX -DDSO_DLFCN -DCPU=\<span class="string">"amd64\" -m64</span><br><span class="line">LDFLAGS =  -m64 -L/usr/jdk_home/jre/lib/amd64/server</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>include/stddef.h:211: error: duplicate ‘unsigned</li>
 </ul>
+<p>这个错误是因为 Makefile 当中包含</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-Dsize_t=unsigned\ int</span><br></pre></td></tr></table></figure>
+<h2 id="fuse__u603B_u662F_u4EE5_4096__u4E3A_u5355_u4F4D_u8BFB_u5199"><a href="#fuse__u603B_u662F_u4EE5_4096__u4E3A_u5355_u4F4D_u8BFB_u5199" class="headerlink" title="fuse 总是以 4096 为单位读写"></a>fuse 总是以 4096 为单位读写</h2><p>启动时增加 options, 注意 big_writes 必须启用，否则其他选项不起作用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-o max_readahead=<span class="number">1024000</span> -omax_write=<span class="number">1024000</span> -obig_writes</span><br></pre></td></tr></table></figure>
+<h2 id="u5176_u4ED6_u7528_u6237_u65E0_u6CD5_u8BBF_u95EE_fuse__u8DEF_u5F84"><a href="#u5176_u4ED6_u7528_u6237_u65E0_u6CD5_u8BBF_u95EE_fuse__u8DEF_u5F84" class="headerlink" title="其他用户无法访问 fuse 路径"></a>其他用户无法访问 fuse 路径</h2><p>在挂载 mdfs 之后，如果使用其他账户进行操作会出现 “ls: cannot access test: Permission denied” 错误。这是 fuse 的配置导致</p>
+<p>修改 /etc/fuse.conf</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user_allow_other</span><br></pre></td></tr></table></figure>
+<p>此外运行 mdfs 时增加 <strong><em> -oallow_other </em></strong> ， 问题就解决了</p>
+<h2 id="java-lang-UnsupportedClassVersionError"><a href="#java-lang-UnsupportedClassVersionError" class="headerlink" title="java.lang.UnsupportedClassVersionError"></a>java.lang.UnsupportedClassVersionError</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Exception <span class="keyword">in</span> thread <span class="string">"main"</span> java.lang.UnsupportedClassVersionError: org/apache/hadoop/conf/Configuration : Unsupported major.minor version <span class="number">51.0</span></span><br><span class="line">   at java.lang.ClassLoader.defineClass1(Native Method)</span><br><span class="line">   at java.lang.ClassLoader.defineClass(ClassLoader.java:<span class="number">634</span>)</span><br><span class="line">   ...</span><br></pre></td></tr></table></figure>
+<p>这很有可能是机器上安装了多个 java 版本且使用了错误的版本导致的</p>
 
       
     </div>
@@ -256,6 +268,53 @@
 <figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!c++</span></span><br><span class="line">  SkBitmap* bitmap = new SkBitmap<span class="comment">;</span></span><br><span class="line">  bitmap-&gt;allocN32Pixels<span class="list">(<span class="keyword">mipmap</span>.width, mipmap.height)</span><span class="comment">;</span></span><br><span class="line">  memcpy<span class="list">(<span class="keyword">bitmap-&gt;getAddr32</span><span class="list">(<span class="number">0</span>, <span class="number">0</span>)</span>, mipmap.data, <span class="number">4</span> <span class="variable">* mipmap.width *</span> mipmap.height)</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
 <h3 id="IDirect3D11Texture2D_u65E0_u6CD5_u8F6C_u6362_u4E3ASkBitmap"><a href="#IDirect3D11Texture2D_u65E0_u6CD5_u8F6C_u6362_u4E3ASkBitmap" class="headerlink" title="IDirect3D11Texture2D无法转换为SkBitmap"></a>IDirect3D11Texture2D无法转换为SkBitmap</h3><p>创建具有CPURead模式的Texture并将它读入SkBitmap，通过canvas-&gt;Draw 显示出来以后会发现他的 蓝色和红色是相反的，无论SkBitmap设置成什么模式都不行<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#!c++</span><br><span class="line">  info_ = SkImageInfo::MakeN32(<span class="built_in">size</span>.<span class="variable">width</span>(), <span class="built_in">size</span>.<span class="variable">height</span>(), kOpaque_SkAlphaType);</span><br><span class="line">  info_ = SkImageInfo::Make(<span class="built_in">size</span>.<span class="variable">width</span>(), <span class="built_in">size</span>.<span class="variable">height</span>(),</span><br><span class="line">                              kBGRA_8888_SkColorType, kOpaque_SkAlphaType);</span><br><span class="line">  info_ = SkImageInfo::Make(<span class="built_in">size</span>.<span class="variable">width</span>(), <span class="built_in">size</span>.<span class="variable">height</span>(),</span><br><span class="line">                              kRGBA_8888_SkColorType, kOpaque_SkAlphaType);</span><br><span class="line">  bitmap_.allocN32Pixels(<span class="built_in">size</span>.<span class="variable">width</span>(), <span class="built_in">size</span>.<span class="variable">height</span>());</span><br><span class="line">  bitmap_.allocPixels(info_);</span><br><span class="line"></span><br><span class="line">  TexturePtr tex = overlay_-&gt;GetTexture();</span><br><span class="line">  CHECK(tex-&gt;CopyTo(texture_.<span class="built_in">get</span>()));</span><br><span class="line">  Texture::MapData mapdata = texture_-&gt;<span class="built_in">map</span>(kReadOnly);</span><br><span class="line">  <span class="comment">// bitmap_.installPixels(info_, mapdata.pdata, mapdata.row_pitch);</span></span><br><span class="line">  memcpy(bitmap_.getPixels(), mapdata.pdata, <span class="number">256</span> * <span class="number">256</span> * <span class="number">4</span>);</span><br><span class="line">  texture_-&gt;unmap();</span><br><span class="line">  gfx::ImageSkia img = gfx::ImageSkia::CreateFrom1xBitmap(bitmap_);</span><br><span class="line">  canvas-&gt;DrawImageInt(img, <span class="number">0</span>, <span class="number">0</span>, <span class="number">256</span>, <span class="number">256</span>,</span><br><span class="line">                       <span class="number">0</span>, <span class="number">0</span>, <span class="keyword">this</span>-&gt;<span class="variable">width</span>(), <span class="keyword">this</span>-&gt;<span class="variable">height</span>(), <span class="keyword">true</span>);</span><br></pre></td></tr></table></figure></p>
 <p>但是用 KRGBA_8888 时，似乎连颜色都没有了，通过 shader 将 B 和 R 交换位置后输出，通过MakeN32模式就没有问题了。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/d3d11/tessellation_devnotes/">2016-01-25</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/01/25/d3d11/tessellation_devnotes/">Tessellation Devnotes</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="Tessellation__28DevNotes_29"><a href="#Tessellation__28DevNotes_29" class="headerlink" title="Tessellation (DevNotes)"></a>Tessellation (DevNotes)</h1><h2 id="Troubles_Shooting"><a href="#Troubles_Shooting" class="headerlink" title="Troubles Shooting"></a>Troubles Shooting</h2><h3 id="u6E32_u67D3_quad__u65F6_u53EA_u80FD_u51FA_u73B0_u4E24_u4E2A_u5BF9_u89D2_u4E09_u89D2_u5F62_uFF0C_u800C_u975E4_u4E2A_u4E09_u89D2_u5F62"><a href="#u6E32_u67D3_quad__u65F6_u53EA_u80FD_u51FA_u73B0_u4E24_u4E2A_u5BF9_u89D2_u4E09_u89D2_u5F62_uFF0C_u800C_u975E4_u4E2A_u4E09_u89D2_u5F62" class="headerlink" title="渲染 quad 时只能出现两个对角三角形，而非4个三角形"></a>渲染 quad 时只能出现两个对角三角形，而非4个三角形</h3><p>问题发生在插值函数上</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">DsOutput <span class="title">ds_main</span><span class="params">(...)</span> </span>&#123;</span><br><span class="line">  float3 v1 = lerp(quad[<span class="number">0</span>].position.xyz, quad[<span class="number">1</span>].position.xyz, uv.x);</span><br><span class="line">  float3 v2 = lerp(quad[<span class="number">3</span>].position.xyz, quad[<span class="number">2</span>].position.xyz, uv.x);</span><br><span class="line">  output.position = mul(pvw, float4(lerp(v1, v2, uv.y), <span class="number">1.0f</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>开始是将 v2 的插值顺序写反了 (quad[3], quad[2])<br>注意：azer3d 采用的是右手坐标系</p>
+<h3 id="Terrain_Hull_Constants_Shader__u8BA1_u7B97"><a href="#Terrain_Hull_Constants_Shader__u8BA1_u7B97" class="headerlink" title="Terrain Hull Constants Shader 计算"></a>Terrain Hull Constants Shader 计算</h3><p>Terrain 的 Constants Shader 计算是基于距离的计算（深度或者到摄像头的具体），其基本思想是距离越大分割越少，不过有一点需要注意：并非距离越远分割越少，而是超过一定距离之后就不在分割（或者仅仅分割一次）。</p>
+<h3 id="Terrain_Quad_Tessellation__u5206_u5272_u4E0D_u7B26_u5408_u9884_u671F"><a href="#Terrain_Quad_Tessellation__u5206_u5272_u4E0D_u7B26_u5408_u9884_u671F" class="headerlink" title="Terrain Quad Tessellation 分割不符合预期"></a>Terrain Quad Tessellation 分割不符合预期</h3><p>观察到的现象：分割的数量没有规律，似乎在近处少，处在某个地方是分割的最多。为了修复这个问题尝试使用 “固定点” 代替 eyepos 作为距离计算的基点，发现分割似乎仍然与 eyepos 有关。后来通过 Visual studio 的调试工具观察，发现某些常量的值异常。</p>
+<p>最终确定是因为 HLSL 对全部变量不支持操作的， 将四个全局变量移动到函数内部，结果符合预期.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span><br><span class="line">  放在这里是不行的</span><br><span class="line">float gMinDist = 20.0f;</span><br><span class="line">float gMaxDist = 50.0f;</span><br><span class="line">float gMinTess = 0.0f;</span><br><span class="line">float gMaxTess = 6.0f;</span><br><span class="line">*/</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">float</span> <span class="title">CalcTesFactor</span><span class="params">(in float4 p)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">float</span> gMinDist = <span class="number">20.0f</span>;</span><br><span class="line">  <span class="keyword">float</span> gMaxDist = <span class="number">50.0f</span>;</span><br><span class="line">  <span class="keyword">float</span> gMinTess = <span class="number">0.0f</span>;</span><br><span class="line">  <span class="keyword">float</span> gMaxTess = <span class="number">6.0f</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">float</span> d = distance(p.xyz, eyepos);</span><br><span class="line">  <span class="keyword">float</span> s = saturate((d - gMinDist) / (gMaxDist - gMinDist));</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">pow</span>(<span class="number">2</span>, lerp(gMaxTess, gMinTess, s));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="u907F_u514D_u9F9F_u88C2"><a href="#u907F_u514D_u9F9F_u88C2" class="headerlink" title="避免龟裂"></a>避免龟裂</h3><p>从直观上将只要保证任意一条边的分割是一致的就可以避免龟裂(边可能被多个三角形共享)，做到这点并不困难只要根据这个边的两个顶点计算 Hull Constants Shader 就可以保证了。</p>
+<p>不过除此之外，还有一些其他隐含约束需要考虑，以 Quad 为例，他的顶点的顺序是在 IndexBuffer 当中指定的，而 Hull Constants Shader 的边的顺序是隐含约定的</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> HSCOutput &#123;</span><br><span class="line">  <span class="comment">// top left bottom right</span></span><br><span class="line">  <span class="keyword">float</span> edge[<span class="number">4</span>]: SV_TessFactor;</span><br><span class="line">  <span class="keyword">float</span> inside[<span class="number">2</span>]:  SV_InsideTessFactor;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>如果计算边的分割使用的错误的顶点的话也会出问题</p>
+<h2 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="http://www.mistal-research.com/terrainTessellation.php" target="_blank" rel="external">GPU Pro 4: GPU Terrain Subdivision and Tessellation</a></li>
+<li>Hardware Accelerated Displacement Mapping for Image Based Rendering</li>
+</ul>
 
       
     </div>
@@ -406,36 +465,47 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/hdfs/fuse-on-hdfs/">2016-01-25</a></time>
+        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/azer/month-report-201511/">2016-01-25</a></time>
       
       
   
-    <h1 class="title"><a href="/2016/01/25/hdfs/fuse-on-hdfs/">fuse driver for HDFS</a></h1>
+    <h1 class="title"><a href="/2016/01/25/azer/month-report-201511/">2015-11 Month Report</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <h1 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h1><h2 id="u7F16_u8BD1_libhdfs"><a href="#u7F16_u8BD1_libhdfs" class="headerlink" title="编译 libhdfs"></a>编译 libhdfs</h2><p>使用 cdh 版本的 hadoop, 默认 libhdfs 不会编译</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="variable">$&#123;hadoop_client&#125;</span>/src/hadoop-mapreduce1-project/src/c++/libhdfs</span><br><span class="line">./bootstrap.sh</span><br><span class="line">./configure</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
-<h2 id="u53EF_u80FD_u9047_u5230_u7684_u95EE_u9898"><a href="#u53EF_u80FD_u9047_u5230_u7684_u95EE_u9898" class="headerlink" title="可能遇到的问题"></a>可能遇到的问题</h2><ul>
-<li>cc1: error: unrecognized command line option “-m”</li>
+        <h1 id="201511__u6708_u5DE5_u4F5C"><a href="#201511__u6708_u5DE5_u4F5C" class="headerlink" title="201511 月工作"></a>201511 月工作</h1><h2 id="20151101_7E2015117"><a href="#20151101_7E2015117" class="headerlink" title="20151101~2015117"></a>20151101~2015117</h2><ul>
+<li>UI frameword<ul>
+<li>重构 nelf/Toolbar(completed, 20151102)</li>
+<li>window shortcut(doing)</li>
+<li>Effect UI</li>
+<li>Simple Material Window</li>
+<li>window dock(Visual Studio Style)</li>
 </ul>
-<p>gcc 使用 -m 选项指定 target arch, 出现这个错误的原因是 -m 后面没有跟参数。在所有没有参数的 -m 后面增加 64 即可</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CFLAGS = -g -O2 -DOS_LINUX -DDSO_DLFCN -DCPU=\<span class="string">"amd64\" -m64</span><br><span class="line">LDFLAGS =  -m64 -L/usr/jdk_home/jre/lib/amd64/server</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>include/stddef.h:211: error: duplicate ‘unsigned</li>
+</li>
+<li>Object Controller<ul>
+<li>Rotation Controller(completed, 20151102)</li>
+<li>Translation Controller(20151103)</li>
+<li>Scale Controller(20151105)</li>
+<li>Picking Helper(20151105)</li>
 </ul>
-<p>这个错误是因为 Makefile 当中包含</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-Dsize_t=unsigned\ int</span><br></pre></td></tr></table></figure>
-<h2 id="fuse__u603B_u662F_u4EE5_4096__u4E3A_u5355_u4F4D_u8BFB_u5199"><a href="#fuse__u603B_u662F_u4EE5_4096__u4E3A_u5355_u4F4D_u8BFB_u5199" class="headerlink" title="fuse 总是以 4096 为单位读写"></a>fuse 总是以 4096 为单位读写</h2><p>启动时增加 options, 注意 big_writes 必须启用，否则其他选项不起作用</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-o max_readahead=<span class="number">1024000</span> -omax_write=<span class="number">1024000</span> -obig_writes</span><br></pre></td></tr></table></figure>
-<h2 id="u5176_u4ED6_u7528_u6237_u65E0_u6CD5_u8BBF_u95EE_fuse__u8DEF_u5F84"><a href="#u5176_u4ED6_u7528_u6237_u65E0_u6CD5_u8BBF_u95EE_fuse__u8DEF_u5F84" class="headerlink" title="其他用户无法访问 fuse 路径"></a>其他用户无法访问 fuse 路径</h2><p>在挂载 mdfs 之后，如果使用其他账户进行操作会出现 “ls: cannot access test: Permission denied” 错误。这是 fuse 的配置导致</p>
-<p>修改 /etc/fuse.conf</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user_allow_other</span><br></pre></td></tr></table></figure>
-<p>此外运行 mdfs 时增加 <strong><em> -oallow_other </em></strong> ， 问题就解决了</p>
-<h2 id="java-lang-UnsupportedClassVersionError"><a href="#java-lang-UnsupportedClassVersionError" class="headerlink" title="java.lang.UnsupportedClassVersionError"></a>java.lang.UnsupportedClassVersionError</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Exception <span class="keyword">in</span> thread <span class="string">"main"</span> java.lang.UnsupportedClassVersionError: org/apache/hadoop/conf/Configuration : Unsupported major.minor version <span class="number">51.0</span></span><br><span class="line">   at java.lang.ClassLoader.defineClass1(Native Method)</span><br><span class="line">   at java.lang.ClassLoader.defineClass(ClassLoader.java:<span class="number">634</span>)</span><br><span class="line">   ...</span><br></pre></td></tr></table></figure>
-<p>这很有可能是机器上安装了多个 java 版本且使用了错误的版本导致的</p>
+</li>
+<li>Light Controller<ul>
+<li>Spot Light Mesh(2015117)</li>
+<li>Directional Light Mesh(2015117)</li>
+<li>Point Light Mesh(2015117)</li>
+<li>Light Parameters UI</li>
+</ul>
+</li>
+<li>Others<ul>
+<li>追查渲染速度变慢的原因(新的 mesh 框架) (20151103)<ul>
+<li>原因是 cow.obj 有300多个 meshpart, 默认情况下每一个 meshpart 都会切换一次 effect, GpuConstantTable 等，因此就导致的速度很慢。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
       
     </div>
@@ -622,115 +692,13 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/azer/month-report-201512/">2016-01-25</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/01/25/azer/month-report-201512/">2015-12 Month Report</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="201512__u6708_u5DE5_u4F5C"><a href="#201512__u6708_u5DE5_u4F5C" class="headerlink" title="201512 月工作"></a>201512 月工作</h1><h2 id="201512"><a href="#201512" class="headerlink" title="201512"></a>201512</h2><ul>
-<li>Framework<ul>
-<li>Refactor the mesh framework with VertexBufferGroup  <strong> (completed) </strong></li>
-<li>Load Model with Multislot-vertex Desc supported <strong> (completed) </strong></li>
-<li>Common Resource Framework <strong> (completed) </strong></li>
-<li>Resource Loader(VertexDesc, Material, Light, Scene, Mesh)  <strong> (completed) </strong></li>
-<li>Vertex Layout Object as Class <strong> (completed) </strong></li>
-<li>RenderState <strong> (completed) </strong></li>
-</ul>
-</li>
-<li>Scene Management<ul>
-<li>Refactor Scene Framework to support multiple lights <strong> (completed)</strong></li>
-</ul>
-</li>
-<li>Render Framework<ul>
-<li>Multi-Effect Rendering  <strong> (completed) </strong></li>
-<li>Generate an Scene Render Tree from Scene Tree <strong> (completed) </strong></li>
-<li>universe light structure</li>
-<li>Instanced Rendering Support <strong> (wont, should be completed by app layer) </strong></li>
-</ul>
-</li>
-<li>Simple Effects<ul>
-<li>Light Source Effect <strong>(completed)</strong></li>
-<li>Phong Lighting Effect <strong>(completed)</strong></li>
-<li>Simple Material <strong>(completed)</strong></li>
-<li>Render Normal (Geometry Shader based) <strong>(completed)</strong></li>
-<li>Direct3D11 Samples<ul>
-<li>Sample Texture <strong>(completed)</strong></li>
-<li>Normal Mapping <strong>(completed)</strong></li>
-<li>Parallax Mapping <strong>(completed)</strong></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>UI<ul>
-<li>switch from multiple Scene Render</li>
-<li>Property Window and framework<ul>
-<li>Property Observer the InteractiveContext to get Selected Node <strong> (completed) </strong></li>
-<li>InteractiveContext Observer The SceneTreeView to get Selected Node by UI clicked</li>
-<li>Scene Node Property UI <strong> (completed) </strong></li>
-<li>Transform Property UI <strong> (completed) </strong></li>
-</ul>
-</li>
-<li>Light Control Objects<ul>
-<li>SpotLight Controller <strong>(completed)</strong></li>
-<li>PointLight Controller <strong> (completed)</strong></li>
-<li>DirLight Controller  <strong> (completed) </strong></li>
-</ul>
-</li>
-<li>Light Souce Params UI<ul>
-<li>ColorProperty UI <strong> (completed) </strong></li>
-<li>SpotLight Attenuation UI <strong>(completed)</strong></li>
-<li>PointLight Attenuation UI <strong>(completed)</strong></li>
-<li>z-buffer UI</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Books &amp; Papers<ul>
-<li>Book: 3D Game Programming with Direct3D 11</li>
-<li>Book: Real-Time Readering</li>
-<li>Book: Programming Vertex Geometry and Pixel Shaders</li>
-<li>Book: Advanced Lighting and Materials With Shaders</li>
-<li>AMD Paper: Practical Parallax Occlusion Mapping for Highly Detailed Surface Rendering</li>
-</ul>
-</li>
-<li>Others<ul>
-<li>HLSL Include 机制 <strong> (completed)</strong></li>
-<li>Load ifs format model</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
     <a href="/page/2/" class="alignleft prev">上一頁</a>
   
+  
+    <a href="/page/4/" class="alignright next">下一頁</a>
   
   <div class="clearfix"></div>
 </nav></div></div>
@@ -755,15 +723,17 @@
   
     <li><a href="/tags/azer3d/">azer3d</a><small>4</small></li>
   
+    <li><a href="/tags/books/">books</a><small>1</small></li>
+  
     <li><a href="/tags/chromium/">chromium</a><small>2</small></li>
   
-    <li><a href="/tags/computer-graphics/">computer graphics</a><small>2</small></li>
+    <li><a href="/tags/computer-graphics/">computer graphics</a><small>3</small></li>
   
     <li><a href="/tags/direct3d/">direct3d</a><small>11</small></li>
   
     <li><a href="/tags/docker/">docker</a><small>2</small></li>
   
-    <li><a href="/tags/effect/">effect</a><small>1</small></li>
+    <li><a href="/tags/effect/">effect</a><small>2</small></li>
   
     <li><a href="/tags/fuse/">fuse</a><small>1</small></li>
   

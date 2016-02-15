@@ -50,6 +50,157 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-01-29T02:34:00.000Z"><a href="/2016/01/29/azer/month-report-201602/">2016-01-29</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/01/29/azer/month-report-201602/">2016-02 Month Report</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="201602__u6708_u5DE5_u4F5C"><a href="#201602__u6708_u5DE5_u4F5C" class="headerlink" title="201602 月工作"></a>201602 月工作</h1><h2 id="201602"><a href="#201602" class="headerlink" title="201602"></a>201602</h2><p>当前的目标是尽量熟悉所有的基础 Effect，并将所有的 Effect 融入到一个统一的可配置且高效的框架之内，目前框架已经基本成型，不过 Effect 还有很多不熟悉。</p>
+<p>本月的时间较少，主要安排仍然是熟悉基础 Effect，目标是 3 月份开始整个系统的工作。此外 探索通用光照系统：所有计算光照的 HLSL 应该接口统一。</p>
+<p>本月的时间不多，年前一周，年后两周，且能够工作的时间不多。</p>
+<ul>
+<li>Framework<ul>
+<li><strong> p1 </strong>: Resource 加载增加 Buffer 机制</li>
+<li><strong> p1 </strong>: D3D Vertex Layout Buffer(Donnot create differet object for same layout in DirectX11)</li>
+<li><strong> p2 </strong>: Multiple Constants Buffer support in HLSL</li>
+</ul>
+</li>
+<li>Scene Management<ul>
+<li><strong> p0 </strong>: Frustrum Culling</li>
+<li><strong> p1 </strong>: BSP Scene Node</li>
+</ul>
+</li>
+<li>Render Framework<ul>
+<li><strong> p1 </strong>: Scene Render Framework With Stencil Reflection support</li>
+<li><strong> p1 </strong>: Deferred Shadering</li>
+<li><strong> p2 </strong>: Multithread Rendering</li>
+</ul>
+</li>
+<li>Simple Effects<ul>
+<li>Common<ul>
+<li><strong> p0 </strong>: instanceing</li>
+<li><strong> p0 </strong>: montion blur</li>
+<li><strong> p0 </strong>: Alpha to converage</li>
+</ul>
+</li>
+<li>Stencil based techniques<ul>
+<li><strong> p0 </strong>: Reflection <strong> (completed) </strong></li>
+<li><strong> p0 </strong>: Shadow Volumn</li>
+</ul>
+</li>
+<li>Compute Shader<ul>
+<li><strong> p1 </strong>: FFT Transform</li>
+</ul>
+</li>
+<li>Shadow Map<ul>
+<li><strong> p0 </strong>: PCF shadow</li>
+<li><strong> p0 </strong>: CS based PCF shadow</li>
+<li><strong> p0 </strong>: Multiple-light support</li>
+<li><strong> p0 </strong>: Directional Light Support</li>
+</ul>
+</li>
+<li>Tessellation<ul>
+<li><strong> p0 </strong>: tessellation based terrain <strong> (completed) </strong></li>
+<li><strong> p0 </strong>: decay</li>
+</ul>
+</li>
+<li>Environment Mapping *<ul>
+<li><strong> p0 </strong>: Cubemap based environement mapping</li>
+<li><strong> p0 </strong>: Geometry Shader based Cubemap mapping</li>
+<li><strong> p0 </strong>: Multi-thread Cubemapping generation</li>
+</ul>
+</li>
+<li><strong> p0 </strong>: Stream Partice</li>
+<li><strong> p1 </strong>: SSAO</li>
+<li><strong> p0 </strong>: Animation</li>
+<li><strong> p0 </strong>: HDR</li>
+<li><strong> p1 </strong>: Water</li>
+</ul>
+</li>
+<li>Terrain System<ul>
+<li><strong> p1 </strong>: Tree-based Culling</li>
+<li><strong> p1 </strong>: clipping</li>
+</ul>
+</li>
+<li>UI<ul>
+<li><strong> p1 </strong> : Multiple Effect Level</li>
+<li><strong> p1 </strong>: Assets Window and Views</li>
+<li><strong> p2 </strong>: Snapshot View of all resources</li>
+<li><strong> p2 </strong>: Direct3D Parameters</li>
+<li><strong> p2 </strong>: Add Footbar For Pane</li>
+<li><strong> p2 </strong>: Float Textfield Controller</li>
+<li><strong> p2 </strong>: Material Property UI </li>
+<li><strong> p2 </strong>: Mesh Property UI<ul>
+<li>Mesh part and its vertex format</li>
+<li>Mesh path in repository</li>
+<li>Mesh render controller (framewire, culling model, normal …)</li>
+</ul>
+</li>
+<li><strong> p2 </strong>: Load UI config from file</li>
+</ul>
+</li>
+<li>Unittest<ul>
+<li><strong> p2 </strong>: Add unittest to azer</li>
+</ul>
+</li>
+<li>Game Resources<ul>
+<li>WOW Model data(Skinned mesh)</li>
+<li>Wow Map data</li>
+</ul>
+</li>
+<li>Books &amp; Papers<ul>
+<li>Book: Real-Time Readering</li>
+<li>Book: Advanced Lighting and Materials With Shaders</li>
+<li><a href="http://colour-science.org/posts/the-importance-of-terminology-and-srgb-uncertainty/" target="_blank" rel="external">The Importance of Terminology and sRGB Uncertainty</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="Bug"><a href="#Bug" class="headerlink" title="Bug"></a>Bug</h2><ul>
+<li><strong> p0 </strong>: Image cannot Load data with mipmap</li>
+</ul>
+<h2 id="Daily_Report"><a href="#Daily_Report" class="headerlink" title="Daily Report"></a>Daily Report</h2><h3 id="20160201"><a href="#20160201" class="headerlink" title="20160201"></a>20160201</h3><ul>
+<li>Stencil based Reflection</li>
+</ul>
+<h3 id="20160202"><a href="#20160202" class="headerlink" title="20160202"></a>20160202</h3><ul>
+<li>Terrain Tessellation: Grid</li>
+<li>Terrain Tessellation: Heightmap</li>
+<li>Terrain Tessellation: Normal</li>
+<li>Terrain Tessellation: Normal Render</li>
+</ul>
+<h3 id="20160203"><a href="#20160203" class="headerlink" title="20160203"></a>20160203</h3><ul>
+<li>Fixbug: Tessellation Hull Constants Shader</li>
+<li>Load Texture 2D Array </li>
+<li>Terrain Tessellation: Texture</li>
+<li>Stream Partice ?</li>
+<li>Picking ?</li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-01-28T07:52:22.538Z"><a href="/2016/01/28/d3d11/monblur10/">2016-01-28</a></time>
       
       
@@ -305,30 +456,23 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/d3d11/tessellation_devnotes/">2016-01-25</a></time>
+        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/d3d11/tools/">2016-01-25</a></time>
       
       
   
-    <h1 class="title"><a href="/2016/01/25/d3d11/tessellation_devnotes/">Tessellation Devnotes</a></h1>
+    <h1 class="title"><a href="/2016/01/25/d3d11/tools/">3D Tools</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <h1 id="Tessellation__28DevNotes_29"><a href="#Tessellation__28DevNotes_29" class="headerlink" title="Tessellation (DevNotes)"></a>Tessellation (DevNotes)</h1><h2 id="Troubles_Shooting"><a href="#Troubles_Shooting" class="headerlink" title="Troubles Shooting"></a>Troubles Shooting</h2><h3 id="u6E32_u67D3_quad__u65F6_u53EA_u80FD_u51FA_u73B0_u4E24_u4E2A_u5BF9_u89D2_u4E09_u89D2_u5F62_uFF0C_u800C_u975E4_u4E2A_u4E09_u89D2_u5F62"><a href="#u6E32_u67D3_quad__u65F6_u53EA_u80FD_u51FA_u73B0_u4E24_u4E2A_u5BF9_u89D2_u4E09_u89D2_u5F62_uFF0C_u800C_u975E4_u4E2A_u4E09_u89D2_u5F62" class="headerlink" title="渲染 quad 时只能出现两个对角三角形，而非4个三角形"></a>渲染 quad 时只能出现两个对角三角形，而非4个三角形</h3><p>问题发生在插值函数上</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">DsOutput <span class="title">ds_main</span><span class="params">(...)</span> </span>&#123;</span><br><span class="line">  float3 v1 = lerp(quad[<span class="number">0</span>].position.xyz, quad[<span class="number">1</span>].position.xyz, uv.x);</span><br><span class="line">  float3 v2 = lerp(quad[<span class="number">3</span>].position.xyz, quad[<span class="number">2</span>].position.xyz, uv.x);</span><br><span class="line">  output.position = mul(pvw, float4(lerp(v1, v2, uv.y), <span class="number">1.0f</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>开始是将 v2 的插值顺序写反了 (quad[3], quad[2])<br>注意：azer3d 采用的是右手坐标系</p>
-<h3 id="Terrain_Hull_Constants_Shader__u8BA1_u7B97"><a href="#Terrain_Hull_Constants_Shader__u8BA1_u7B97" class="headerlink" title="Terrain Hull Constants Shader 计算"></a>Terrain Hull Constants Shader 计算</h3><p>Terrain 的 Constants Shader 计算是基于距离的计算（深度或者到摄像头的具体），其基本思想是距离越大分割越少，不过有一点需要注意：并非距离越远分割越少，而是超过一定距离之后就不在分割（或者仅仅分割一次）。</p>
-<h3 id="Terrain_Quad_Tessellation__u5206_u5272_u4E0D_u7B26_u5408_u9884_u671F"><a href="#Terrain_Quad_Tessellation__u5206_u5272_u4E0D_u7B26_u5408_u9884_u671F" class="headerlink" title="Terrain Quad Tessellation 分割不符合预期"></a>Terrain Quad Tessellation 分割不符合预期</h3><p>观察到的现象：分割的数量没有规律，似乎在近处少，处在某个地方是分割的最多。为了修复这个问题尝试使用 “固定点” 代替 eyepos 作为距离计算的基点，发现分割似乎仍然与 eyepos 有关。后来通过 Visual studio 的调试工具观察，发现某些常量的值异常。</p>
-<p>最终确定是因为 HLSL 对全部变量不支持操作的， 将四个全局变量移动到函数内部，结果符合预期.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span><br><span class="line">  放在这里是不行的</span><br><span class="line">float gMinDist = 20.0f;</span><br><span class="line">float gMaxDist = 50.0f;</span><br><span class="line">float gMinTess = 0.0f;</span><br><span class="line">float gMaxTess = 6.0f;</span><br><span class="line">*/</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">float</span> <span class="title">CalcTesFactor</span><span class="params">(in float4 p)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">float</span> gMinDist = <span class="number">20.0f</span>;</span><br><span class="line">  <span class="keyword">float</span> gMaxDist = <span class="number">50.0f</span>;</span><br><span class="line">  <span class="keyword">float</span> gMinTess = <span class="number">0.0f</span>;</span><br><span class="line">  <span class="keyword">float</span> gMaxTess = <span class="number">6.0f</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">float</span> d = distance(p.xyz, eyepos);</span><br><span class="line">  <span class="keyword">float</span> s = saturate((d - gMinDist) / (gMaxDist - gMinDist));</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">pow</span>(<span class="number">2</span>, lerp(gMaxTess, gMinTess, s));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="u907F_u514D_u9F9F_u88C2"><a href="#u907F_u514D_u9F9F_u88C2" class="headerlink" title="避免龟裂"></a>避免龟裂</h3><p>从直观上将只要保证任意一条边的分割是一致的就可以避免龟裂(边可能被多个三角形共享)，做到这点并不困难只要根据这个边的两个顶点计算 Hull Constants Shader 就可以保证了。</p>
-<p>不过除此之外，还有一些其他隐含约束需要考虑，以 Quad 为例，他的顶点的顺序是在 IndexBuffer 当中指定的，而 Hull Constants Shader 的边的顺序是隐含约定的</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> HSCOutput &#123;</span><br><span class="line">  <span class="comment">// top left bottom right</span></span><br><span class="line">  <span class="keyword">float</span> edge[<span class="number">4</span>]: SV_TessFactor;</span><br><span class="line">  <span class="keyword">float</span> inside[<span class="number">2</span>]:  SV_InsideTessFactor;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>如果计算边的分割使用的错误的顶点的话也会出问题</p>
-<h2 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h2><ul>
-<li><a href="http://www.mistal-research.com/terrainTessellation.php" target="_blank" rel="external">GPU Pro 4: GPU Terrain Subdivision and Tessellation</a></li>
-<li>Hardware Accelerated Displacement Mapping for Image Based Rendering</li>
+        <h1 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h1><h2 id="u6A21_u578B_u63D0_u53D6_u5DE5_u5177"><a href="#u6A21_u578B_u63D0_u53D6_u5DE5_u5177" class="headerlink" title="模型提取工具"></a>模型提取工具</h2><ul>
+<li><a href="http://www.deep-shadows.com/hax/3DRipperDX.htm" target="_blank" rel="external">3D Ripper DX</a></li>
+</ul>
+<h2 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h2><ul>
+<li><a href="http://www.bundysoft.com/L3DT/" target="_blank" rel="external">L3DT - Large 3D Terrain Generator</a></li>
+<li><a href="http://planetside.co.uk/" target="_blank" rel="external">Terragen-3D</a></li>
+<li><a href="http://www.ogre3d.org/tikiwiki/DCC+Tools#Terrain_generation" target="_blank" rel="external">OGRE DCC Tools</a></li>
 </ul>
 
       
@@ -366,69 +510,6 @@
 <h3 id="u5224_u65AD_u6295_u5F71_u5750_u6807_u662F_u5426_u6B63_u786E"><a href="#u5224_u65AD_u6295_u5F71_u5750_u6807_u662F_u5426_u6B63_u786E" class="headerlink" title="判断投影坐标是否正确"></a>判断投影坐标是否正确</h3><p>可以直接将深度绘制出来，不进行其他任何计算，看是否符合预期</p>
 <h3 id="Texturemap__u4E0E_shadowmap__u6DF7_u6DC6"><a href="#Texturemap__u4E0E_shadowmap__u6DF7_u6DC6" class="headerlink" title="Texturemap 与 shadowmap 混淆"></a>Texturemap 与 shadowmap 混淆</h3><p>对 texturemap 增加后缀后问题解决<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Texture2D texmap : <span class="keyword">register</span>(t0);</span><br><span class="line">Texture2D shadowmap : <span class="keyword">register</span>(t1);</span><br></pre></td></tr></table></figure></p>
 <h3 id="u5BF9_u8C61_u6295_u5F71_u9519_u8BEF"><a href="#u5BF9_u8C61_u6295_u5F71_u9519_u8BEF" class="headerlink" title="对象投影错误"></a>对象投影错误</h3><p>原因是传递的 Light Projection View Matrix 没有乘上物体的 World matrix, 这个错误在当前框架下比较容易犯。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/azer/month-report-201511/">2016-01-25</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/01/25/azer/month-report-201511/">2015-11 Month Report</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="201511__u6708_u5DE5_u4F5C"><a href="#201511__u6708_u5DE5_u4F5C" class="headerlink" title="201511 月工作"></a>201511 月工作</h1><h2 id="20151101_7E2015117"><a href="#20151101_7E2015117" class="headerlink" title="20151101~2015117"></a>20151101~2015117</h2><ul>
-<li>UI frameword<ul>
-<li>重构 nelf/Toolbar(completed, 20151102)</li>
-<li>window shortcut(doing)</li>
-<li>Effect UI</li>
-<li>Simple Material Window</li>
-<li>window dock(Visual Studio Style)</li>
-</ul>
-</li>
-<li>Object Controller<ul>
-<li>Rotation Controller(completed, 20151102)</li>
-<li>Translation Controller(20151103)</li>
-<li>Scale Controller(20151105)</li>
-<li>Picking Helper(20151105)</li>
-</ul>
-</li>
-<li>Light Controller<ul>
-<li>Spot Light Mesh(2015117)</li>
-<li>Directional Light Mesh(2015117)</li>
-<li>Point Light Mesh(2015117)</li>
-<li>Light Parameters UI</li>
-</ul>
-</li>
-<li>Others<ul>
-<li>追查渲染速度变慢的原因(新的 mesh 框架) (20151103)<ul>
-<li>原因是 cow.obj 有300多个 meshpart, 默认情况下每一个 meshpart 都会切换一次 effect, GpuConstantTable 等，因此就导致的速度很慢。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
 
       
     </div>
@@ -520,15 +601,17 @@
   
     <li><a href="/tags/azer3d/">azer3d</a><small>4</small></li>
   
+    <li><a href="/tags/books/">books</a><small>1</small></li>
+  
     <li><a href="/tags/chromium/">chromium</a><small>2</small></li>
   
-    <li><a href="/tags/computer-graphics/">computer graphics</a><small>2</small></li>
+    <li><a href="/tags/computer-graphics/">computer graphics</a><small>3</small></li>
   
     <li><a href="/tags/direct3d/">direct3d</a><small>11</small></li>
   
     <li><a href="/tags/docker/">docker</a><small>2</small></li>
   
-    <li><a href="/tags/effect/">effect</a><small>1</small></li>
+    <li><a href="/tags/effect/">effect</a><small>2</small></li>
   
     <li><a href="/tags/fuse/">fuse</a><small>1</small></li>
   
