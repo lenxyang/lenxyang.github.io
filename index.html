@@ -89,6 +89,78 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-02-16T01:23:00.000Z"><a href="/2016/02/16/toolchain/gcc/">2016-02-16</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/02/16/toolchain/gcc/">gcc</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="GCC_Tricks"><a href="#GCC_Tricks" class="headerlink" title="GCC Tricks"></a>GCC Tricks</h1><h2 id="u53BB_u6389_debug_info"><a href="#u53BB_u6389_debug_info" class="headerlink" title="去掉 debug info"></a>去掉 debug info</h2><p>一般情况下 debug info 是不需要的，发布时可以包括两个版本带有调试信息和不带调试信息的，上线使用不带调试信息的，如果出现 core 在使用带有调试信息的追问题。（某些时候带宽真的是问题，发布的程序越小越好）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strip -g -S <span class="operator">-d</span> .build/opt/targets/wolong/auditing/wuliao/wolong_wuliao_auditing</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-02-03T06:23:00.000Z"><a href="/2016/02/03/graphics/water/">2016-02-03</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/02/03/graphics/water/">Water</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="Water"><a href="#Water" class="headerlink" title="Water"></a>Water</h1><h2 id="Survey"><a href="#Survey" class="headerlink" title="Survey"></a>Survey</h2><h3 id="Physical_Models"><a href="#Physical_Models" class="headerlink" title="Physical Models"></a>Physical Models</h3><h3 id="FFT_based"><a href="#FFT_based" class="headerlink" title="FFT based"></a>FFT based</h3><p>Tessendorf 的论文是 FFT 模拟 Water 的开端；Keith Lantz 的两篇文章详细介绍了 FFT Water 的实现过程，而且有代码。</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
+<li><a href="http://graphics.ucsd.edu/courses/rendering/2005/jdewall/tessendorf.pdf" target="_blank" rel="external">Tessendorf, Jerry, Simulating Ocean Water</a></li>
+<li><a href="http://www.keithlantz.net/2011/10/ocean-simulation-part-one-using-the-discrete-fourier-transform/" target="_blank" rel="external">Keith Lantz: OCEAN SIMULATION PART ONE: USING THE DISCRETE FOURIER TRANSFORM</a></li>
+<li><a href="http://www.keithlantz.net/2011/11/ocean-simulation-part-two-using-the-fast-fourier-transform/" target="_blank" rel="external">Keith Lantz: OCEAN SIMULATION PART TWO: USING THE FAST FOURIER TRANSFORM</a></li>
+<li><a href="http://http.developer.nvidia.com/GPUGems/gpugems_ch01.html" target="_blank" rel="external">GPU Gems: Effective Water Simulation from Physical Models</a></li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-02-03T06:23:00.000Z"><a href="/2016/02/03/graphics/terrain/">2016-02-03</a></time>
       
       
@@ -150,45 +222,6 @@
 <li><a href="https://msdn.microsoft.com/en-us/library/windows/desktop/bb205121.aspx" target="_blank" rel="external">MSDN: Stream-Out Stage</a></li>
 <li><a href="https://msdn.microsoft.com/en-us/library/windows/desktop/bb205122.aspx" target="_blank" rel="external">MSDN: Getting Started with the Stream-Output Stage</a></li>
 <li><a href="https://directtovideo.wordpress.com/2009/10/06/a-thoroughly-modern-particle-system/" target="_blank" rel="external">a thoroughly modern particle system</a> 非常漂亮的 demo</li>
-</ul>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-02-03T06:23:00.000Z"><a href="/2016/02/03/graphics/water/">2016-02-03</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/02/03/graphics/water/">Water</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="Water"><a href="#Water" class="headerlink" title="Water"></a>Water</h1><h2 id="Survey"><a href="#Survey" class="headerlink" title="Survey"></a>Survey</h2><h3 id="Physical_Models"><a href="#Physical_Models" class="headerlink" title="Physical Models"></a>Physical Models</h3><h3 id="FFT_based"><a href="#FFT_based" class="headerlink" title="FFT based"></a>FFT based</h3><p>Tessendorf 的论文是 FFT 模拟 Water 的开端；Keith Lantz 的两篇文章详细介绍了 FFT Water 的实现过程，而且有代码。</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
-<li><a href="http://graphics.ucsd.edu/courses/rendering/2005/jdewall/tessendorf.pdf" target="_blank" rel="external">Tessendorf, Jerry, Simulating Ocean Water</a></li>
-<li><a href="http://www.keithlantz.net/2011/10/ocean-simulation-part-one-using-the-discrete-fourier-transform/" target="_blank" rel="external">Keith Lantz: OCEAN SIMULATION PART ONE: USING THE DISCRETE FOURIER TRANSFORM</a></li>
-<li><a href="http://www.keithlantz.net/2011/11/ocean-simulation-part-two-using-the-fast-fourier-transform/" target="_blank" rel="external">Keith Lantz: OCEAN SIMULATION PART TWO: USING THE FAST FOURIER TRANSFORM</a></li>
-<li><a href="http://http.developer.nvidia.com/GPUGems/gpugems_ch01.html" target="_blank" rel="external">GPU Gems: Effective Water Simulation from Physical Models</a></li>
 </ul>
 
       
@@ -412,47 +445,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-01-29T03:52:55.000Z"><a href="/2016/01/29/depot_tools/svn-admin/">2016-01-29</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/01/29/depot_tools/svn-admin/">svn-admin</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h2 id="svn_Partical_Backup_and_Reload"><a href="#svn_Partical_Backup_and_Reload" class="headerlink" title="svn Partical Backup and Reload"></a>svn Partical Backup and Reload</h2><h3 id="partical_dump"><a href="#partical_dump" class="headerlink" title="partical dump"></a>partical dump</h3><p>通过 svnadmin dump 和 svndumpfilter 可以实现 dump 部分库的方法</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svnadmin dump /home/svn/repo/projname | svndumpfilter --drop-empty-revs include /proj &gt; dump-file</span><br></pre></td></tr></table></figure>
-<p>某些情况下可能出现<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svndumpfilter fails <span class="keyword">with</span> “Invalid <span class="keyword">copy</span> source path…” <span class="keyword">error</span></span><br></pre></td></tr></table></figure></p>
-<p>通过选项 –drop-empty-revs 可以忽略问题</p>
-<ul>
-<li>svndumpfilter 不太好用，推荐使用 <a href="http://furius.ca/pubcode/pub/conf/bin/svndumpfilter3.html" target="_blank" rel="external">svndumpfilter3</a></li>
-</ul>
-<h3 id="svn_revert"><a href="#svn_revert" class="headerlink" title="svn revert"></a>svn revert</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svnadmin import /home/svn/repo/<span class="variable">$&#123;repo_name&#125;</span> &lt; dumpfile</span><br></pre></td></tr></table></figure>
-<h3 id="git-svn__u8FC1_u79FB"><a href="#git-svn__u8FC1_u79FB" class="headerlink" title="git-svn 迁移"></a>git-svn 迁移</h3><p>通过 git-svn 也能完成迁移，不好的地方在于作者信息可能无法完全保留</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -496,9 +488,13 @@
   
     <li><a href="/tags/fuse/">fuse</a><small>1</small></li>
   
+    <li><a href="/tags/gcc/">gcc</a><small>1</small></li>
+  
     <li><a href="/tags/gdi/">gdi</a><small>1</small></li>
   
     <li><a href="/tags/gn/">gn</a><small>1</small></li>
+  
+    <li><a href="/tags/gnu/">gnu</a><small>1</small></li>
   
     <li><a href="/tags/hdfs/">hdfs</a><small>2</small></li>
   
@@ -508,7 +504,7 @@
   
     <li><a href="/tags/svn/">svn</a><small>3</small></li>
   
-    <li><a href="/tags/toolchain/">toolchain</a><small>5</small></li>
+    <li><a href="/tags/toolchain/">toolchain</a><small>6</small></li>
   
     <li><a href="/tags/version-control/">version control</a><small>3</small></li>
   
