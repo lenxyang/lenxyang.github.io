@@ -73,7 +73,7 @@ VertexBuffer 的大小需要按照最多的粒子数指定 (初">
 <li>创建 DrawAuto 的 Geometry Shader 时，使用 <strong><em> CreateGeometryShaderWithStreamOut </em></strong> 创建 Geometry Shader</li>
 </ul>
 <p>最后一点最为重要，网上的大部分 demo 都用到了微软 Technique 框架，通过框架编译代码通常会很简单。在对照写 c 代码时很有可能漏掉这个细节。</p>
-<h2 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h2><p>### </p>
+<h2 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h2><h3 id="u5C55_u73B0_u4E00_u6BB5_u65F6_u95F4_u540E_Particle__u7684_u6E32_u67D3_u5BF9_u8C61_u6D88_u5931_u4E86"><a href="#u5C55_u73B0_u4E00_u6BB5_u65F6_u95F4_u540E_Particle__u7684_u6E32_u67D3_u5BF9_u8C61_u6D88_u5931_u4E86" class="headerlink" title="展现一段时间后 Particle 的渲染对象消失了"></a>展现一段时间后 Particle 的渲染对象消失了</h3><p>猜测可能是因为 VertexBuffer 设置太小，导致 Emitt 例子无法加入其中导致消息，将 VertexBuffer 加大后问题解决。</p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
 <li><a href="https://msdn.microsoft.com/en-us/library/windows/desktop/bb205121.aspx" target="_blank" rel="external">MSDN: Stream-Out Stage</a></li>
 <li><a href="https://msdn.microsoft.com/en-us/library/windows/desktop/bb205122.aspx" target="_blank" rel="external">MSDN: Getting Started with the Stream-Output Stage</a></li>
