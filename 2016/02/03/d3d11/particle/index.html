@@ -70,7 +70,7 @@ VertexBuffer 的大小需要按照最多的粒子数指定 (初">
 <li>VertexBuffer 的大小需要按照最多的粒子数指定 (初始化的 VertexBuffer 不需要)</li>
 <li>在绘制 VertexBuffer 时，需要将其从 StreamOut Stage 上解除绑定</li>
 <li>使用 DrawAuto，以便 DirectX 自行决定绘制的粒子数</li>
-<li>创建 DrawAuto 的 Geometry Shader 时，使用 <strong><em> CreateGeometryShaderWithStreamOutput </em></strong> 创建 Geometry Shader</li>
+<li>创建 DrawAuto 的 Geometry Shader 时，使用 <strong><em> CreateGeometryShaderWithStreamOut </em></strong> 创建 Geometry Shader</li>
 </ul>
 <p>最后一点最为重要，网上的大部分 demo 都用到了微软 Technique 框架，如果不是用这个框架就需要使用代码编译，最容易犯的错误就是最后一个。</p>
 <h2 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h2><p>### </p>
