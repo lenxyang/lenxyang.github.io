@@ -50,6 +50,87 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-02-17T10:45:44.730Z"><a href="/2016/02/17/d3d11/direct3d11/">2016-02-17</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/02/17/d3d11/direct3d11/">Direct3D 11</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
+<li><a href="http://richardssoftware.net/Home/DirectX11Tutorials" target="_blank" rel="external">SlimDX DirectX 11 Tutorials</a></li>
+<li><a href="http://www.rastertek.com/tutindex.html" target="_blank" rel="external">Rastertek Tutorial</a></li>
+<li><a href="http://ogldev.atspace.co.uk/" target="_blank" rel="external">Ogldev Tutorial</a></li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-02-17T10:43:00.079Z"><a href="/2016/02/17/d3d11/decal/">2016-02-17</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/02/17/d3d11/decal/">Decal</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="Decal"><a href="#Decal" class="headerlink" title="Decal"></a>Decal</h1><h2 id="Tessellation_based_method"><a href="#Tessellation_based_method" class="headerlink" title="Tessellation based method"></a>Tessellation based method</h2><p>Tessellation based 的方法能够不影响固有程序流程做到 decal, 调优方面的工作基本全部都在 hlsl 内部，这种方法有非常好的适用性。</p>
+<p>此方法的流程如下</p>
+<ul>
+<li>确定 hit position: 找到与 mesh 匹配的点</li>
+<li>在 ds 当中将 decal texture 映射到 hit position 上</li>
+<li>而后计算 displacement </li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="http://twvideo01.ubm-us.net/o1/vault/gdc10/slides/Bilodeau_Bill_Direct3D11TutorialTessellation.pdf" target="_blank" rel="external">AMD: Direct3D 11 Tutorial: Tessellation</a></li>
+<li>Direct3D Rendering CookBook: Chapter 6 Adding Surface Detail with Normal and Displacement Mapping</li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-02-17T07:58:00.000Z"><a href="/2016/02/17/graphics/hdr/">2016-02-17</a></time>
       
       
@@ -67,6 +148,7 @@
 <li><a href="http://www.cs.utah.edu/~reinhard/cdrom/tonemap.pdf" target="_blank" rel="external">Photographic Tone Reproduction for Digital Images</a></li>
 <li><a href="https://msdn.microsoft.com/en-us/library/windows/desktop/bb173486.aspx" target="_blank" rel="external">MSDN: HDR Lighting (Direct3D 9)</a></li>
 <li><a href="http://gamedev.stackexchange.com/questions/12528/how-does-hdr-work" target="_blank" rel="external">StackExchange: how does HDR work?</a></li>
+<li><a href="https://www.cg.tuwien.ac.at/research/publications/2007/Luksch_2007_RHR/Luksch_2007_RHR-RealtimeHDR%20.pdf" target="_blank" rel="external">Luksch: Realtime HDR Rendering</a></li>
 </ul>
 
       
@@ -165,6 +247,45 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-02-03T06:23:00.000Z"><a href="/2016/02/03/graphics/water/">2016-02-03</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/02/03/graphics/water/">Water</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="Water"><a href="#Water" class="headerlink" title="Water"></a>Water</h1><h2 id="Survey"><a href="#Survey" class="headerlink" title="Survey"></a>Survey</h2><h3 id="Physical_Models"><a href="#Physical_Models" class="headerlink" title="Physical Models"></a>Physical Models</h3><h3 id="FFT_based"><a href="#FFT_based" class="headerlink" title="FFT based"></a>FFT based</h3><p>Tessendorf 的论文是 FFT 模拟 Water 的开端；Keith Lantz 的两篇文章详细介绍了 FFT Water 的实现过程，而且有代码。</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
+<li><a href="http://graphics.ucsd.edu/courses/rendering/2005/jdewall/tessendorf.pdf" target="_blank" rel="external">Tessendorf, Jerry, Simulating Ocean Water</a></li>
+<li><a href="http://www.keithlantz.net/2011/10/ocean-simulation-part-one-using-the-discrete-fourier-transform/" target="_blank" rel="external">Keith Lantz: OCEAN SIMULATION PART ONE: USING THE DISCRETE FOURIER TRANSFORM</a></li>
+<li><a href="http://www.keithlantz.net/2011/11/ocean-simulation-part-two-using-the-fast-fourier-transform/" target="_blank" rel="external">Keith Lantz: OCEAN SIMULATION PART TWO: USING THE FAST FOURIER TRANSFORM</a></li>
+<li><a href="http://http.developer.nvidia.com/GPUGems/gpugems_ch01.html" target="_blank" rel="external">GPU Gems: Effective Water Simulation from Physical Models</a></li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-02-03T06:23:00.000Z"><a href="/2016/02/03/graphics/terrain/">2016-02-03</a></time>
       
       
@@ -175,7 +296,7 @@
     </header>
     <div class="entry">
       
-        <h1 id="Terrain"><a href="#Terrain" class="headerlink" title="Terrain"></a>Terrain</h1><h1 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h1><ul>
+        <h1 id="Terrain"><a href="#Terrain" class="headerlink" title="Terrain"></a>Terrain</h1><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
 <li><a href="http://www.terrain.dk/" target="_blank" rel="external">Rendering Very Large, Very Detailed Terrains</a></li>
 <li><a href="http://www.mistal-research.com/terrainTessellation.php" target="_blank" rel="external">GPU Pro 4: GPU Terrain Subdivision and Tessellation</a></li>
 <li><a href="http://www.lighthouse3d.com/opengl/terrain/index.php?introduction" target="_blank" rel="external">Lighthouse3d.com: Terrain Tutorial</a></li>
@@ -226,45 +347,6 @@
 <li><a href="https://msdn.microsoft.com/en-us/library/windows/desktop/bb205121.aspx" target="_blank" rel="external">MSDN: Stream-Out Stage</a></li>
 <li><a href="https://msdn.microsoft.com/en-us/library/windows/desktop/bb205122.aspx" target="_blank" rel="external">MSDN: Getting Started with the Stream-Output Stage</a></li>
 <li><a href="https://directtovideo.wordpress.com/2009/10/06/a-thoroughly-modern-particle-system/" target="_blank" rel="external">a thoroughly modern particle system</a> 非常漂亮的 demo</li>
-</ul>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-02-03T06:23:00.000Z"><a href="/2016/02/03/graphics/water/">2016-02-03</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/02/03/graphics/water/">Water</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="Water"><a href="#Water" class="headerlink" title="Water"></a>Water</h1><h2 id="Survey"><a href="#Survey" class="headerlink" title="Survey"></a>Survey</h2><h3 id="Physical_Models"><a href="#Physical_Models" class="headerlink" title="Physical Models"></a>Physical Models</h3><h3 id="FFT_based"><a href="#FFT_based" class="headerlink" title="FFT based"></a>FFT based</h3><p>Tessendorf 的论文是 FFT 模拟 Water 的开端；Keith Lantz 的两篇文章详细介绍了 FFT Water 的实现过程，而且有代码。</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
-<li><a href="http://graphics.ucsd.edu/courses/rendering/2005/jdewall/tessendorf.pdf" target="_blank" rel="external">Tessendorf, Jerry, Simulating Ocean Water</a></li>
-<li><a href="http://www.keithlantz.net/2011/10/ocean-simulation-part-one-using-the-discrete-fourier-transform/" target="_blank" rel="external">Keith Lantz: OCEAN SIMULATION PART ONE: USING THE DISCRETE FOURIER TRANSFORM</a></li>
-<li><a href="http://www.keithlantz.net/2011/11/ocean-simulation-part-two-using-the-fast-fourier-transform/" target="_blank" rel="external">Keith Lantz: OCEAN SIMULATION PART TWO: USING THE FAST FOURIER TRANSFORM</a></li>
-<li><a href="http://http.developer.nvidia.com/GPUGems/gpugems_ch01.html" target="_blank" rel="external">GPU Gems: Effective Water Simulation from Physical Models</a></li>
 </ul>
 
       
@@ -376,81 +458,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-01-31T03:23:00.000Z"><a href="/2016/01/31/d3d11/compute_shader/">2016-01-31</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/01/31/d3d11/compute_shader/">Direct3D11 Samples - Compute Shader</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="Compute_Shader"><a href="#Compute_Shader" class="headerlink" title="Compute Shader"></a>Compute Shader</h1><h2 id="Dispatch__u548C_numthreads"><a href="#Dispatch__u548C_numthreads" class="headerlink" title="Dispatch 和 numthreads"></a>Dispatch 和 numthreads</h2><h2 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h2><h3 id="Use_Renderer_Target_as_Input_Value"><a href="#Use_Renderer_Target_as_Input_Value" class="headerlink" title="Use Renderer Target as Input Value"></a>Use Renderer Target as Input Value</h3><p>blur 等操作通常使用 Render Target 绑定的 Texture 作为输入。常见的错误是使用此 Render Target 作为输出时，同时将 Texture 作为输入，DirectX 会强制将资源设置为 NULL。</p>
-<h3 id="Constants_Values"><a href="#Constants_Values" class="headerlink" title="Constants Values"></a>Constants Values</h3><p>HLSL 的 常量设置似乎有些限制<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cs_main</span><span class="params">(...)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> <span class="keyword">float</span> w[<span class="number">5</span>] = ...</span><br><span class="line">  int2 xy = int2(dtid.x, dtid.y);</span><br><span class="line">  float4 v = input[int2(dtid.x - <span class="number">2</span>, dtid.y)] * w[<span class="number">0</span>];</span><br><span class="line">  v += input[int2(dtid.x - <span class="number">1</span>, dtid.y)] * w[<span class="number">1</span>];</span><br><span class="line">  ...</span><br><span class="line">  ouptut[xy] = v;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">float</span> w[<span class="number">5</span>] = ...</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或者</span></span><br><span class="line"><span class="comment">/*</span><br><span class="line">cbuffer cbSetting &#123;</span><br><span class="line">  float w[5] = ...</span><br><span class="line">&#125;</span><br><span class="line">*/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cs_main</span><span class="params">(...)</span> </span>&#123;</span><br><span class="line">  int2 xy = int2(dtid.x, dtid.y);</span><br><span class="line">  float4 v = input[int2(dtid.x - <span class="number">2</span>, dtid.y)] * w[<span class="number">0</span>];</span><br><span class="line">  v += input[int2(dtid.x - <span class="number">1</span>, dtid.y)] * w[<span class="number">1</span>];</span><br><span class="line">  ...</span><br><span class="line">  ouptut[xy] = v;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上面的代码唯一的不同是：第一部分将常量放在 cs_main 内部。第二部分代码无法工作，通过 visual studio 的 graphic 调试工具看 w 的值全部为 0</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-01-29T11:07:23.213Z"><a href="/2016/01/29/d3d11/picking/">2016-01-29</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/01/29/d3d11/picking/">2016-01 Picking</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="Picking"><a href="#Picking" class="headerlink" title="Picking"></a>Picking</h1><h2 id="u4E00_u822C_u7684_Picking__u65B9_u6CD5"><a href="#u4E00_u822C_u7684_Picking__u65B9_u6CD5" class="headerlink" title="一般的 Picking 方法"></a>一般的 Picking 方法</h2><p>Picking 的步骤</p>
-<ul>
-<li>通过树结构快速判断，寻找候选物体</li>
-<li>判断平面是否属于某个物体 (通过 Bounding Volumn 判断)</li>
-<li>在物体每部进行判断是否属于某个三角形</li>
-</ul>
-<p>前两步比较容易，因为树结构和 Bounding Volumn 在很多地方都需要，因此这些数据比较容易获取；第三步就复杂了，因为三角形数据一般来说只是存储在 hardware buffer 当中的。</p>
-<h2 id="u57FA_u4E8E_GPU__u7684_u65B9_u6CD5"><a href="#u57FA_u4E8E_GPU__u7684_u65B9_u6CD5" class="headerlink" title="基于 GPU 的方法"></a>基于 GPU 的方法</h2>
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -486,7 +493,7 @@
   
     <li><a href="/tags/computer-graphics/">computer graphics</a><small>4</small></li>
   
-    <li><a href="/tags/direct3d/">direct3d</a><small>11</small></li>
+    <li><a href="/tags/direct3d/">direct3d</a><small>12</small></li>
   
     <li><a href="/tags/docker/">docker</a><small>2</small></li>
   

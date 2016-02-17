@@ -50,82 +50,23 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/d3d11/shadowmap_devnotes/">2016-01-25</a></time>
+        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/d3d11/tools/">2016-01-25</a></time>
       
       
   
-    <h1 class="title"><a href="/2016/01/25/d3d11/shadowmap_devnotes/">Shadowmap Devnotes</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="Shadowmap__28DevNotes_29"><a href="#Shadowmap__28DevNotes_29" class="headerlink" title="Shadowmap (DevNotes)"></a>Shadowmap (DevNotes)</h1><h2 id="Troubles"><a href="#Troubles" class="headerlink" title="Troubles"></a>Troubles</h2><h3 id="u4F7F_u7528_Light_Camera__u6E32_u67D3_u65F6_uFF0C_u6CA1_u6709_Pixel_Stage"><a href="#u4F7F_u7528_Light_Camera__u6E32_u67D3_u65F6_uFF0C_u6CA1_u6709_Pixel_Stage" class="headerlink" title="使用 Light Camera 渲染时，没有 Pixel Stage"></a>使用 Light Camera 渲染时，没有 Pixel Stage</h3><p>在使用 Light Camera 渲染时，从 Visual Studio 的图形诊断看，Vertex Stage 是正常的，但是 PixelStage 就没有内容了。<br>原因是：对于 Light Camera 来说, 这些对象都是不可见的。</p>
-<h3 id="u5224_u65AD_u6295_u5F71_u5750_u6807_u662F_u5426_u6B63_u786E"><a href="#u5224_u65AD_u6295_u5F71_u5750_u6807_u662F_u5426_u6B63_u786E" class="headerlink" title="判断投影坐标是否正确"></a>判断投影坐标是否正确</h3><p>可以直接将深度绘制出来，不进行其他任何计算，看是否符合预期</p>
-<h3 id="Texturemap__u4E0E_shadowmap__u6DF7_u6DC6"><a href="#Texturemap__u4E0E_shadowmap__u6DF7_u6DC6" class="headerlink" title="Texturemap 与 shadowmap 混淆"></a>Texturemap 与 shadowmap 混淆</h3><p>对 texturemap 增加后缀后问题解决<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Texture2D texmap : <span class="keyword">register</span>(t0);</span><br><span class="line">Texture2D shadowmap : <span class="keyword">register</span>(t1);</span><br></pre></td></tr></table></figure></p>
-<h3 id="u5BF9_u8C61_u6295_u5F71_u9519_u8BEF"><a href="#u5BF9_u8C61_u6295_u5F71_u9519_u8BEF" class="headerlink" title="对象投影错误"></a>对象投影错误</h3><p>原因是传递的 Light Projection View Matrix 没有乘上物体的 World matrix, 这个错误在当前框架下比较容易犯。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/azer/month-report-201511/">2016-01-25</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/01/25/azer/month-report-201511/">2015-11 Month Report</a></h1>
+    <h1 class="title"><a href="/2016/01/25/d3d11/tools/">3D Tools</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <h1 id="201511__u6708_u5DE5_u4F5C"><a href="#201511__u6708_u5DE5_u4F5C" class="headerlink" title="201511 月工作"></a>201511 月工作</h1><h2 id="20151101_7E2015117"><a href="#20151101_7E2015117" class="headerlink" title="20151101~2015117"></a>20151101~2015117</h2><ul>
-<li>UI frameword<ul>
-<li>重构 nelf/Toolbar(completed, 20151102)</li>
-<li>window shortcut(doing)</li>
-<li>Effect UI</li>
-<li>Simple Material Window</li>
-<li>window dock(Visual Studio Style)</li>
+        <h1 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h1><h2 id="u6A21_u578B_u63D0_u53D6_u5DE5_u5177"><a href="#u6A21_u578B_u63D0_u53D6_u5DE5_u5177" class="headerlink" title="模型提取工具"></a>模型提取工具</h2><ul>
+<li><a href="http://www.deep-shadows.com/hax/3DRipperDX.htm" target="_blank" rel="external">3D Ripper DX</a></li>
 </ul>
-</li>
-<li>Object Controller<ul>
-<li>Rotation Controller(completed, 20151102)</li>
-<li>Translation Controller(20151103)</li>
-<li>Scale Controller(20151105)</li>
-<li>Picking Helper(20151105)</li>
-</ul>
-</li>
-<li>Light Controller<ul>
-<li>Spot Light Mesh(2015117)</li>
-<li>Directional Light Mesh(2015117)</li>
-<li>Point Light Mesh(2015117)</li>
-<li>Light Parameters UI</li>
-</ul>
-</li>
-<li>Others<ul>
-<li>追查渲染速度变慢的原因(新的 mesh 框架) (20151103)<ul>
-<li>原因是 cow.obj 有300多个 meshpart, 默认情况下每一个 meshpart 都会切换一次 effect, GpuConstantTable 等，因此就导致的速度很慢。</li>
-</ul>
-</li>
-</ul>
-</li>
+<h2 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h2><ul>
+<li><a href="http://www.bundysoft.com/L3DT/" target="_blank" rel="external">L3DT - Large 3D Terrain Generator</a></li>
+<li><a href="http://planetside.co.uk/" target="_blank" rel="external">Terragen-3D</a></li>
+<li><a href="http://www.ogre3d.org/tikiwiki/DCC+Tools#Terrain_generation" target="_blank" rel="external">OGRE DCC Tools</a></li>
 </ul>
 
       
@@ -233,42 +174,6 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/d3d11/hlsl_devnotes/">2016-01-25</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/01/25/d3d11/hlsl_devnotes/">HLSL Devnotes</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="HLSL_DevNotes"><a href="#HLSL_DevNotes" class="headerlink" title="HLSL DevNotes"></a>HLSL DevNotes</h1><h2 id="u5168_u5C40_u53D8_u91CF"><a href="#u5168_u5C40_u53D8_u91CF" class="headerlink" title="全局变量"></a>全局变量</h2><p>HLSL 的全局变量似乎与预期不一致, 以下代码所有的复制都无效，只能通过 #define 来定义常量</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span> gMinDist = <span class="number">20.0f</span>;</span><br><span class="line"><span class="keyword">float</span> gMaxDist = <span class="number">50.0f</span>;</span><br><span class="line"><span class="keyword">float</span> gMinTess = <span class="number">0.0f</span>;</span><br><span class="line"><span class="keyword">float</span> gMaxTess = <span class="number">6.0f</span>;</span><br></pre></td></tr></table></figure>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">float</span> gMinDist = <span class="number">20.0f</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">float</span> gMaxDist = <span class="number">50.0f</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">float</span> gMinTess = <span class="number">0.0f</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">float</span> gMaxTess = <span class="number">6.0f</span>;</span><br></pre></td></tr></table></figure>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cbuffer buffer &#123;</span><br><span class="line"><span class="keyword">float</span> gMinDist = <span class="number">20.0f</span>;</span><br><span class="line"><span class="keyword">float</span> gMaxDist = <span class="number">50.0f</span>;</span><br><span class="line"><span class="keyword">float</span> gMinTess = <span class="number">0.0f</span>;</span><br><span class="line"><span class="keyword">float</span> gMaxTess = <span class="number">6.0f</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h2><h3 id="fcx"><a href="#fcx" class="headerlink" title="fcx"></a>fcx</h3><h4 id="u7F16_u8BD1_u6587_u4EF6"><a href="#u7F16_u8BD1_u6587_u4EF6" class="headerlink" title="编译文件"></a>编译文件</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fxc<span class="class">.exe</span> /Tvs_5_0 /Evs_main  demo/base/hlsl/inst_tex<span class="class">.vs</span><span class="class">.hlsl</span></span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
         <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/hdfs/setup-hdfs-on-docker/">2016-01-25</a></time>
       
       
@@ -297,6 +202,42 @@
 <li><a href="http://tecadmin.net/setup-dns-server-on-centos-redhat/" target="_blank" rel="external">How to Setup DNS (Bind) Server on CentOS/RHEL 7/6/5</a></li>
 </ul>
 
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/d3d11/hlsl_devnotes/">2016-01-25</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/01/25/d3d11/hlsl_devnotes/">HLSL Devnotes</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="HLSL_DevNotes"><a href="#HLSL_DevNotes" class="headerlink" title="HLSL DevNotes"></a>HLSL DevNotes</h1><h2 id="u5168_u5C40_u53D8_u91CF"><a href="#u5168_u5C40_u53D8_u91CF" class="headerlink" title="全局变量"></a>全局变量</h2><p>HLSL 的全局变量似乎与预期不一致, 以下代码所有的复制都无效，只能通过 #define 来定义常量</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span> gMinDist = <span class="number">20.0f</span>;</span><br><span class="line"><span class="keyword">float</span> gMaxDist = <span class="number">50.0f</span>;</span><br><span class="line"><span class="keyword">float</span> gMinTess = <span class="number">0.0f</span>;</span><br><span class="line"><span class="keyword">float</span> gMaxTess = <span class="number">6.0f</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">float</span> gMinDist = <span class="number">20.0f</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">float</span> gMaxDist = <span class="number">50.0f</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">float</span> gMinTess = <span class="number">0.0f</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">float</span> gMaxTess = <span class="number">6.0f</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cbuffer buffer &#123;</span><br><span class="line"><span class="keyword">float</span> gMinDist = <span class="number">20.0f</span>;</span><br><span class="line"><span class="keyword">float</span> gMaxDist = <span class="number">50.0f</span>;</span><br><span class="line"><span class="keyword">float</span> gMinTess = <span class="number">0.0f</span>;</span><br><span class="line"><span class="keyword">float</span> gMaxTess = <span class="number">6.0f</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h2><h3 id="fcx"><a href="#fcx" class="headerlink" title="fcx"></a>fcx</h3><h4 id="u7F16_u8BD1_u6587_u4EF6"><a href="#u7F16_u8BD1_u6587_u4EF6" class="headerlink" title="编译文件"></a>编译文件</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fxc<span class="class">.exe</span> /Tvs_5_0 /Evs_main  demo/base/hlsl/inst_tex<span class="class">.vs</span><span class="class">.hlsl</span></span><br></pre></td></tr></table></figure>
       
     </div>
     <footer>
@@ -382,23 +323,145 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/d3d11/tools/">2016-01-25</a></time>
+        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/hdfs/fuse-on-hdfs/">2016-01-25</a></time>
       
       
   
-    <h1 class="title"><a href="/2016/01/25/d3d11/tools/">3D Tools</a></h1>
+    <h1 class="title"><a href="/2016/01/25/hdfs/fuse-on-hdfs/">fuse driver for HDFS</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <h1 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h1><h2 id="u6A21_u578B_u63D0_u53D6_u5DE5_u5177"><a href="#u6A21_u578B_u63D0_u53D6_u5DE5_u5177" class="headerlink" title="模型提取工具"></a>模型提取工具</h2><ul>
-<li><a href="http://www.deep-shadows.com/hax/3DRipperDX.htm" target="_blank" rel="external">3D Ripper DX</a></li>
+        <h1 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h1><h2 id="u7F16_u8BD1_libhdfs"><a href="#u7F16_u8BD1_libhdfs" class="headerlink" title="编译 libhdfs"></a>编译 libhdfs</h2><p>使用 cdh 版本的 hadoop, 默认 libhdfs 不会编译</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="variable">$&#123;hadoop_client&#125;</span>/src/hadoop-mapreduce1-project/src/c++/libhdfs</span><br><span class="line">./bootstrap.sh</span><br><span class="line">./configure</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
+<h2 id="u53EF_u80FD_u9047_u5230_u7684_u95EE_u9898"><a href="#u53EF_u80FD_u9047_u5230_u7684_u95EE_u9898" class="headerlink" title="可能遇到的问题"></a>可能遇到的问题</h2><ul>
+<li>cc1: error: unrecognized command line option “-m”</li>
 </ul>
-<h2 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h2><ul>
-<li><a href="http://www.bundysoft.com/L3DT/" target="_blank" rel="external">L3DT - Large 3D Terrain Generator</a></li>
-<li><a href="http://planetside.co.uk/" target="_blank" rel="external">Terragen-3D</a></li>
-<li><a href="http://www.ogre3d.org/tikiwiki/DCC+Tools#Terrain_generation" target="_blank" rel="external">OGRE DCC Tools</a></li>
+<p>gcc 使用 -m 选项指定 target arch, 出现这个错误的原因是 -m 后面没有跟参数。在所有没有参数的 -m 后面增加 64 即可</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CFLAGS = -g -O2 -DOS_LINUX -DDSO_DLFCN -DCPU=\<span class="string">"amd64\" -m64</span><br><span class="line">LDFLAGS =  -m64 -L/usr/jdk_home/jre/lib/amd64/server</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>include/stddef.h:211: error: duplicate ‘unsigned</li>
+</ul>
+<p>这个错误是因为 Makefile 当中包含</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-Dsize_t=unsigned\ int</span><br></pre></td></tr></table></figure>
+<h2 id="fuse__u603B_u662F_u4EE5_4096__u4E3A_u5355_u4F4D_u8BFB_u5199"><a href="#fuse__u603B_u662F_u4EE5_4096__u4E3A_u5355_u4F4D_u8BFB_u5199" class="headerlink" title="fuse 总是以 4096 为单位读写"></a>fuse 总是以 4096 为单位读写</h2><p>启动时增加 options, 注意 big_writes 必须启用，否则其他选项不起作用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-o max_readahead=<span class="number">1024000</span> -omax_write=<span class="number">1024000</span> -obig_writes</span><br></pre></td></tr></table></figure>
+<h2 id="u5176_u4ED6_u7528_u6237_u65E0_u6CD5_u8BBF_u95EE_fuse__u8DEF_u5F84"><a href="#u5176_u4ED6_u7528_u6237_u65E0_u6CD5_u8BBF_u95EE_fuse__u8DEF_u5F84" class="headerlink" title="其他用户无法访问 fuse 路径"></a>其他用户无法访问 fuse 路径</h2><p>在挂载 mdfs 之后，如果使用其他账户进行操作会出现 “ls: cannot access test: Permission denied” 错误。这是 fuse 的配置导致</p>
+<p>修改 /etc/fuse.conf</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user_allow_other</span><br></pre></td></tr></table></figure>
+<p>此外运行 mdfs 时增加 <strong><em> -oallow_other </em></strong> ， 问题就解决了</p>
+<h2 id="java-lang-UnsupportedClassVersionError"><a href="#java-lang-UnsupportedClassVersionError" class="headerlink" title="java.lang.UnsupportedClassVersionError"></a>java.lang.UnsupportedClassVersionError</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Exception <span class="keyword">in</span> thread <span class="string">"main"</span> java.lang.UnsupportedClassVersionError: org/apache/hadoop/conf/Configuration : Unsupported major.minor version <span class="number">51.0</span></span><br><span class="line">   at java.lang.ClassLoader.defineClass1(Native Method)</span><br><span class="line">   at java.lang.ClassLoader.defineClass(ClassLoader.java:<span class="number">634</span>)</span><br><span class="line">   ...</span><br></pre></td></tr></table></figure>
+<p>这很有可能是机器上安装了多个 java 版本且使用了错误的版本导致的</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/d3d11/tessellation_devnotes/">2016-01-25</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/01/25/d3d11/tessellation_devnotes/">Tessellation Devnotes</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="Tessellation__28DevNotes_29"><a href="#Tessellation__28DevNotes_29" class="headerlink" title="Tessellation (DevNotes)"></a>Tessellation (DevNotes)</h1><h2 id="Troubles_Shooting"><a href="#Troubles_Shooting" class="headerlink" title="Troubles Shooting"></a>Troubles Shooting</h2><h3 id="u6E32_u67D3_quad__u65F6_u53EA_u80FD_u51FA_u73B0_u4E24_u4E2A_u5BF9_u89D2_u4E09_u89D2_u5F62_uFF0C_u800C_u975E4_u4E2A_u4E09_u89D2_u5F62"><a href="#u6E32_u67D3_quad__u65F6_u53EA_u80FD_u51FA_u73B0_u4E24_u4E2A_u5BF9_u89D2_u4E09_u89D2_u5F62_uFF0C_u800C_u975E4_u4E2A_u4E09_u89D2_u5F62" class="headerlink" title="渲染 quad 时只能出现两个对角三角形，而非4个三角形"></a>渲染 quad 时只能出现两个对角三角形，而非4个三角形</h3><p>问题发生在插值函数上</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">DsOutput <span class="title">ds_main</span><span class="params">(...)</span> </span>&#123;</span><br><span class="line">  float3 v1 = lerp(quad[<span class="number">0</span>].position.xyz, quad[<span class="number">1</span>].position.xyz, uv.x);</span><br><span class="line">  float3 v2 = lerp(quad[<span class="number">3</span>].position.xyz, quad[<span class="number">2</span>].position.xyz, uv.x);</span><br><span class="line">  output.position = mul(pvw, float4(lerp(v1, v2, uv.y), <span class="number">1.0f</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>开始是将 v2 的插值顺序写反了 (quad[3], quad[2])<br>注意：azer3d 采用的是右手坐标系</p>
+<h3 id="Terrain_Hull_Constants_Shader__u8BA1_u7B97"><a href="#Terrain_Hull_Constants_Shader__u8BA1_u7B97" class="headerlink" title="Terrain Hull Constants Shader 计算"></a>Terrain Hull Constants Shader 计算</h3><p>Terrain 的 Constants Shader 计算是基于距离的计算（深度或者到摄像头的具体），其基本思想是距离越大分割越少，不过有一点需要注意：并非距离越远分割越少，而是超过一定距离之后就不在分割（或者仅仅分割一次）。</p>
+<h3 id="Terrain_Quad_Tessellation__u5206_u5272_u4E0D_u7B26_u5408_u9884_u671F"><a href="#Terrain_Quad_Tessellation__u5206_u5272_u4E0D_u7B26_u5408_u9884_u671F" class="headerlink" title="Terrain Quad Tessellation 分割不符合预期"></a>Terrain Quad Tessellation 分割不符合预期</h3><p>观察到的现象：分割的数量没有规律，似乎在近处少，处在某个地方是分割的最多。为了修复这个问题尝试使用 “固定点” 代替 eyepos 作为距离计算的基点，发现分割似乎仍然与 eyepos 有关。后来通过 Visual studio 的调试工具观察，发现某些常量的值异常。</p>
+<p>最终确定是因为 HLSL 对全部变量不支持操作的， 将四个全局变量移动到函数内部，结果符合预期.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span><br><span class="line">  放在这里是不行的</span><br><span class="line">float gMinDist = 20.0f;</span><br><span class="line">float gMaxDist = 50.0f;</span><br><span class="line">float gMinTess = 0.0f;</span><br><span class="line">float gMaxTess = 6.0f;</span><br><span class="line">*/</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">float</span> <span class="title">CalcTesFactor</span><span class="params">(in float4 p)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">float</span> gMinDist = <span class="number">20.0f</span>;</span><br><span class="line">  <span class="keyword">float</span> gMaxDist = <span class="number">50.0f</span>;</span><br><span class="line">  <span class="keyword">float</span> gMinTess = <span class="number">0.0f</span>;</span><br><span class="line">  <span class="keyword">float</span> gMaxTess = <span class="number">6.0f</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">float</span> d = distance(p.xyz, eyepos);</span><br><span class="line">  <span class="keyword">float</span> s = saturate((d - gMinDist) / (gMaxDist - gMinDist));</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">pow</span>(<span class="number">2</span>, lerp(gMaxTess, gMinTess, s));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="u907F_u514D_u9F9F_u88C2"><a href="#u907F_u514D_u9F9F_u88C2" class="headerlink" title="避免龟裂"></a>避免龟裂</h3><p>从直观上将只要保证任意一条边的分割是一致的就可以避免龟裂(边可能被多个三角形共享)，做到这点并不困难只要根据这个边的两个顶点计算 Hull Constants Shader 就可以保证了。</p>
+<p>不过除此之外，还有一些其他隐含约束需要考虑，以 Quad 为例，他的顶点的顺序是在 IndexBuffer 当中指定的，而 Hull Constants Shader 的边的顺序是隐含约定的</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> HSCOutput &#123;</span><br><span class="line">  <span class="comment">// top left bottom right</span></span><br><span class="line">  <span class="keyword">float</span> edge[<span class="number">4</span>]: SV_TessFactor;</span><br><span class="line">  <span class="keyword">float</span> inside[<span class="number">2</span>]:  SV_InsideTessFactor;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>如果计算边的分割使用的错误的顶点的话也会出问题</p>
+<h2 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="http://www.mistal-research.com/terrainTessellation.php" target="_blank" rel="external">GPU Pro 4: GPU Terrain Subdivision and Tessellation</a></li>
+<li>Hardware Accelerated Displacement Mapping for Image Based Rendering</li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/azer/month-report-201511/">2016-01-25</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/01/25/azer/month-report-201511/">2015-11 Month Report</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="201511__u6708_u5DE5_u4F5C"><a href="#201511__u6708_u5DE5_u4F5C" class="headerlink" title="201511 月工作"></a>201511 月工作</h1><h2 id="20151101_7E2015117"><a href="#20151101_7E2015117" class="headerlink" title="20151101~2015117"></a>20151101~2015117</h2><ul>
+<li>UI frameword<ul>
+<li>重构 nelf/Toolbar(completed, 20151102)</li>
+<li>window shortcut(doing)</li>
+<li>Effect UI</li>
+<li>Simple Material Window</li>
+<li>window dock(Visual Studio Style)</li>
+</ul>
+</li>
+<li>Object Controller<ul>
+<li>Rotation Controller(completed, 20151102)</li>
+<li>Translation Controller(20151103)</li>
+<li>Scale Controller(20151105)</li>
+<li>Picking Helper(20151105)</li>
+</ul>
+</li>
+<li>Light Controller<ul>
+<li>Spot Light Mesh(2015117)</li>
+<li>Directional Light Mesh(2015117)</li>
+<li>Point Light Mesh(2015117)</li>
+<li>Light Parameters UI</li>
+</ul>
+</li>
+<li>Others<ul>
+<li>追查渲染速度变慢的原因(新的 mesh 框架) (20151103)<ul>
+<li>原因是 cow.obj 有300多个 meshpart, 默认情况下每一个 meshpart 都会切换一次 effect, GpuConstantTable 等，因此就导致的速度很慢。</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
       
@@ -491,59 +554,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/chromium/build-with-gn/">2016-01-25</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/01/25/chromium/build-with-gn/">Build Chromium with GN</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="Build_Chromium_with_GN"><a href="#Build_Chromium_with_GN" class="headerlink" title="Build Chromium with GN"></a>Build Chromium with GN</h1><h2 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h2><h3 id="msvcr120d-dll__u65E0_u6CD5_u627E_u5230"><a href="#msvcr120d-dll__u65E0_u6CD5_u627E_u5230" class="headerlink" title="msvcr120d.dll 无法找到"></a>msvcr120d.dll 无法找到</h3><p>build/gyp_chromium 会执行 build/vs_toolchain.py 的 copy_runtime 方法，将运行库拷贝过去，但是我们使用的 gn， 似乎目前还没有这个功能。<br>有一点需要注意，自己手动copy的话容易犯错，最好使用 gyp_chromium生成好目录后 copy 过去比较好，注意到一点是如果你的机器是 64 为机器那么应该 copy Debug_x64 的.</p>
-<h3 id="azer_3A_3AInitApp_28_29__u65E0_u6CD5_u6B63_u5E38_u5DE5_u4F5C"><a href="#azer_3A_3AInitApp_28_29__u65E0_u6CD5_u6B63_u5E38_u5DE5_u4F5C" class="headerlink" title="azer::InitApp() 无法正常工作"></a>azer::InitApp() 无法正常工作</h3><p>azer::InitApp 完成 CommandLine 和 AtExitManager 的初始化工作，在main()当中调用了 appinit 之后发现 render.dll 当中依赖于 AtExitManager 的 MessageLoop 仍然无法工作。当如果将 appinit 由 source_set 更改为 AZER_EXPORT 则没有问题。通过调试器发现自始至终程序都没有加载base.dll, 因此判断 is_component_build=false 导致生成的 base 是 static_libarary 进一步导致问题 AtExitManager 在 render.dll 和 可执行程序当中各有一个实例，在一个地方初始化无法完成。</p>
-<h3 id="yasm_CreateProcess__u5931_u8D25"><a href="#yasm_CreateProcess__u5931_u8D25" class="headerlink" title="yasm CreateProcess 失败"></a>yasm CreateProcess 失败</h3><p>这是由于 environment.x64当中的环境变量设置错误，导致无法正确找到cl.exe，将x86_amd64 拷贝到 amd64就可以了<br>此外，即使找到了由于找不到对应的 mspdb120.dll 还是会出现错误，直接将depot_tools\win_toolchain\vs2013_files\VC\bin下的mspdb拷贝过来就好了，此dll是x86和x64共享的。<br>environment.x64 和 environment.x32 是如何获得这些路径的呢？它实际上是 gn 的一个目标，定义在build/config/win/visual_studio_version.gni文件当中，它通过一个脚本build/vs_toolchain.py来获得 visual studio 的相关信息。<br>通过运行： python build\vs_toolchain.py get_toolchain_dir scope 可以看到当前使用的 visual studio 的变量设置，从 build\vs_toolchain.py的代码可以看到其中细节，这些变量全部保存在了 //build/win_toolchain.json 当中，更改他们就可以了，也可以通过环境变量更改；</p>
-<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="special">#</span>!json</span><br><span class="line"><span class="special">&#123;</span></span><br><span class="line">"runtime_dirs": <span class="special">[</span>"E:<span class="command">\\</span>chrome<span class="command">\\</span>depot_tools<span class="command">\\</span>win_toolchain<span class="command">\\</span>vs2013_files<span class="command">\\</span>sys64", "E:<span class="command">\\</span>chrome<span class="command">\\</span>depot_tools<span class="command">\\</span>win_toolchain<span class="command">\\</span>vs2013_files<span class="command">\\</span>sys32"<span class="special">]</span>,</span><br><span class="line">"path": "E:<span class="command">\\</span>chrome<span class="command">\\</span>depot_tools<span class="command">\\</span>win_toolchain<span class="command">\\</span>vs2013_files",</span><br><span class="line">"version": "2013e",</span><br><span class="line">"wdk": "E:<span class="command">\\</span>chrome<span class="command">\\</span>depot_tools<span class="command">\\</span>win_toolchain<span class="command">\\</span>vs2013_files<span class="command">\\</span>wdk",</span><br><span class="line">"win8sdk": "E:<span class="command">\\</span>chrome<span class="command">\\</span>depot_tools<span class="command">\\</span>win_toolchain<span class="command">\\</span>vs2013_files<span class="command">\\</span>win8sdk"</span><br><span class="line"><span class="special">&#125;</span></span><br></pre></td></tr></table></figure>
-<p>此外 depot_tools/win_tools/package_from_installed.py 提供了从已经安装的部分 copy 文件的方式，需要注意的是脚本内部制定了 Visual studio 2013 的安装目录（C:\Program Files (x86)\Microsoft Visual Studio 12.0），如果与预期不一致，可以修改再运行。<br>使用 gclient runhooks 更新 win_toolchain 时，目标目录在 depot_tools/win_tools/data.json 下定义</p>
-<h3 id="build_trace-view__u65F6_u51FA_u73B0_u95EE_u9898"><a href="#build_trace-view__u65F6_u51FA_u73B0_u95EE_u9898" class="headerlink" title="build trace-view 时出现问题"></a>build trace-view 时出现问题</h3><p>更新python到2.7.8</p>
-<h3 id="ninja_3A_error_3A_expected_depfile__u2018gen/ui/strings/ui_strings-d_u2019_to_mention__u2018gen/ui/strings/grit/ui_strings-h_u2019_2C_got__u2018gen_5Cui_5Cstrings_5Cgrit_5Cui_strings-h_u2019"><a href="#ninja_3A_error_3A_expected_depfile__u2018gen/ui/strings/ui_strings-d_u2019_to_mention__u2018gen/ui/strings/grit/ui_strings-h_u2019_2C_got__u2018gen_5Cui_5Cstrings_5Cgrit_5Cui_strings-h_u2019" class="headerlink" title="ninja: error: expected depfile ‘gen/ui/strings/ui_strings.d’ to mention ‘gen/ui/strings/grit/ui_strings.h’, got ‘gen\ui\strings\grit\ui_strings.h’"></a>ninja: error: expected depfile ‘gen/ui/strings/ui_strings.d’ to mention ‘gen/ui/strings/grit/ui_strings.h’, got ‘gen\ui\strings\grit\ui_strings.h’</h3><p>从字符串就可以看出 .d 的路径分割符使用的是 windows 默认的，但实际使用的确实 linux 风格的，直接修改文件’gen/ui/strings/ui_strings.d’， 将所有的’\’替换为 ‘/‘。<br>.d文件还包含一个错误：.d文件采用了wide编码，还需要将\x0去掉<br>通过以下脚本替换所有的</p>
-<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find <span class="keyword">out</span>/dbg/<span class="keyword">gen</span> | grep -<span class="keyword">E</span> <span class="string">"\.d$"</span> | xargs -I % <span class="keyword">sh</span> -c 'sed -i <span class="string">"s/\x0//g"</span> %; sed -i <span class="string">"s/\\\/\//g"</span> %'</span><br></pre></td></tr></table></figure>
-<h3 id="ui/gl__u4E0B_u5927_u91CF_u7684_u9519_u8BEF"><a href="#ui/gl__u4E0B_u5927_u91CF_u7684_u9519_u8BEF" class="headerlink" title="ui/gl 下大量的错误"></a>ui/gl 下大量的错误</h3><p>如果在 ui/gl/gl_bindings.h 当中的 #include <gl gl.h=""> 前添加 #include <windows> 则出现其他错误。<br>是指 -Iinclude 的顺序造成的，实际上他应该引入的是 third_party/mesa/src/include/下的 GL/gl.h 和 GL/glext.h， 将路径改成完成路径就可以编译完成啦。</windows></gl></p>
-<h3 id="link__u65F6_u51FA_u73B0_u9519_u8BEF_uFF1A__u65E0_u6CD5_u7406_u89E3_u7684_u547D_u4EE4_//out/dbg/obj/third_party/ffmpeg/ffmpegsumo-lib"><a href="#link__u65F6_u51FA_u73B0_u9519_u8BEF_uFF1A__u65E0_u6CD5_u7406_u89E3_u7684_u547D_u4EE4_//out/dbg/obj/third_party/ffmpeg/ffmpegsumo-lib" class="headerlink" title="link 时出现错误： 无法理解的命令 //out/dbg/obj/third_party/ffmpeg/ffmpegsumo.lib"></a>link 时出现错误： 无法理解的命令 //out/dbg/obj/third_party/ffmpeg/ffmpegsumo.lib</h3><p>这是由于 third_party/ffmpeg/BUILD.gn 当中的路径使用错误造成的，实际上只要添加依赖就好，但不知道谁依赖他，因此直接<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">libs</span> = [<span class="string">"<span class="variable">$target_out_dir</span>/ffmpegsumo.lib"</span> ]</span><br></pre></td></tr></table></figure></p>
-<p>改成<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="setting">libs = <span class="value">[<span class="string">"ffmpegsumo.dll.lib"</span> ]</span></span></span><br></pre></td></tr></table></figure></p>
-<p>就可以了</p>
-<h3 id="third_party_nss__u7F16_u8BD1_u5931_u8D25"><a href="#third_party_nss__u7F16_u8BD1_u5931_u8D25" class="headerlink" title="third_party nss 编译失败"></a>third_party nss 编译失败</h3><p>发现问题出现在 .asm 文件不会生成编译代码上，原因是 .asm 的文件并没有识别成 asm 代码，将文件copy一份并命名为 .S，同时在 BUILD.gn 当中修改即可。</p>
-<h3 id="libcmt"><a href="#libcmt" class="headerlink" title="libcmt"></a>libcmt</h3><p>连接过程中，可能回报<em>*</em> already defined in MSVCRd.lib 等，base/allocator 封装了 tcmalloc 并将它伪装成了 libcmt.lib，所有的executable都依赖于这个库，将这个库的依赖移除即可<br>此外：如果发现项目目录下没有 BUILD.gn, 那么几有可能是由于 gn 才 .gn定义的 secondary 目录下，目前是 //build/secondary</p>
-<h3 id="gin/function_template-h__u7F16_u8BD1_u9519_u8BEF"><a href="#gin/function_template-h__u7F16_u8BD1_u9519_u8BEF" class="headerlink" title="gin/function_template.h 编译错误"></a>gin/function_template.h 编译错误</h3><p>visual studio 2013需要升级到update 3 以上</p>
-<h3 id="flex__26amp_3B_bison_internal_error"><a href="#flex__26amp_3B_bison_internal_error" class="headerlink" title="flex &amp; bison internal error"></a>flex &amp; bison internal error</h3><p>运行 third_party/cygwin/bin/flex 或者 third_party/cygwin/bin/bison 时，报错 internal error, 通常是由于他们依赖的m4.exe无法找到/usr/shared../m4sugar导致的，third_party/cygwin/setup_mount.bat 提供了解决方法，直接运行它就可以了</p>
-<h3 id="u7F16_u8BD1_u65F6_u6253_u5370_includes__u6587_u4EF6_u7684_u8DEF_u5F84"><a href="#u7F16_u8BD1_u65F6_u6253_u5370_includes__u6587_u4EF6_u7684_u8DEF_u5F84" class="headerlink" title="编译时打印 includes 文件的路径"></a>编译时打印 includes 文件的路径</h3><p>修改 //build/toolchain/win/BUILD.gn 去掉 /showIncludes</p>
-<h3 id="u8FDE_u63A5_u65F6_u62A5_u9519_atlthunk-lib__u65E0_u6CD5_u627E_u5230"><a href="#u8FDE_u63A5_u65F6_u62A5_u9519_atlthunk-lib__u65E0_u6CD5_u627E_u5230" class="headerlink" title="连接时报错 atlthunk.lib 无法找到"></a>连接时报错 atlthunk.lib 无法找到</h3><p>只有当 is_visual_studio_express 为 ture 时，需要此文件（//build/config/win/BUILD.gn）, is_visual_studio_express 通过变量 visual_studio_version 赋值(build/config/win/visual_studio_version.gni:<br> is_visual_studio_express = (visual_studio_version == “2013e”)),<br> 而变量 visual_studio_version 通过 //build/win_toolchain.json 定义，修改它就好了</p>
-<h3 id="u5F88_u591A_undfined_symbols"><a href="#u5F88_u591A_undfined_symbols" class="headerlink" title="很多 undfined symbols"></a>很多 undfined symbols</h3><p>遇到这种问题，可以简单的对照 gyp_chromium 和 gn 生成的link命令就能找到答案了</p>
-<h3 id="u5728gn_gen_out/dbg_u4E0B_u51FA_u73B0_u4E8664"><a href="#u5728gn_gen_out/dbg_u4E0B_u51FA_u73B0_u4E8664" class="headerlink" title="在gn gen out/dbg下出现了64"></a>在gn gen out/dbg下出现了64</h3><p>这是正常的，由于跟多 BUILD.gn 生成的是工具(例如 yasm), 高效的方式是生成的binary与build的机器的CPU arch一致，因此会在root_build_dir下包含一个64的目录。<br>如何做到呢， 可以参考 //BUILD.gn</p>
-<figure class="highlight d"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!javascript</span></span><br><span class="line"><span class="keyword">if</span> (cpu_arch == <span class="string">"x86"</span> || cpu_arch == <span class="string">"x64"</span>) &#123;</span><br><span class="line"># YASM <span class="keyword">is</span> x86/x64 only.</span><br><span class="line">deps += [ <span class="string">"//third_party/yasm($host_toolchain)"</span> ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -581,7 +591,7 @@
   
     <li><a href="/tags/computer-graphics/">computer graphics</a><small>4</small></li>
   
-    <li><a href="/tags/direct3d/">direct3d</a><small>11</small></li>
+    <li><a href="/tags/direct3d/">direct3d</a><small>12</small></li>
   
     <li><a href="/tags/docker/">docker</a><small>2</small></li>
   
