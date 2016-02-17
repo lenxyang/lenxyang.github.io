@@ -258,7 +258,10 @@
     </header>
     <div class="entry">
       
-        <h1 id="Vertex_Buffer_Tricks"><a href="#Vertex_Buffer_Tricks" class="headerlink" title="Vertex Buffer Tricks"></a>Vertex Buffer Tricks</h1><h2 id="Multi-Stream_VertexBuffer"><a href="#Multi-Stream_VertexBuffer" class="headerlink" title="Multi-Stream VertexBuffer"></a>Multi-Stream VertexBuffer</h2><h2 id="Per-Instance_VertexBuffer"><a href="#Per-Instance_VertexBuffer" class="headerlink" title="Per-Instance VertexBuffer"></a>Per-Instance VertexBuffer</h2><h1 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h1><ul>
+        <h1 id="Vertex_Buffer_Tricks"><a href="#Vertex_Buffer_Tricks" class="headerlink" title="Vertex Buffer Tricks"></a>Vertex Buffer Tricks</h1><h2 id="Multi-Stream_VertexBuffer"><a href="#Multi-Stream_VertexBuffer" class="headerlink" title="Multi-Stream VertexBuffer"></a>Multi-Stream VertexBuffer</h2><p>Input Assemble 支持将多个 Vertex Buffer 当作同一个输入（通过 InputLayout 支持），这种操作有诸多好处</p>
+<h3 id="u91CD_u590D_u5229_u7528_u6570_u636E"><a href="#u91CD_u590D_u5229_u7528_u6570_u636E" class="headerlink" title="重复利用数据"></a>重复利用数据</h3><p>以地形为例，顶点数据是变化较大，但是所有的地形的 texcoord 都是类似的，最多就是起始点不同。因此所有的地形 tile 都可以共享一个 texture vertex buffer。</p>
+<h3 id="Instanced_Draw"><a href="#Instanced_Draw" class="headerlink" title="Instanced Draw"></a>Instanced Draw</h3><p>通过 Instance 可以较少渲染 API 调用的数量，但每一个 instance 都有不同的参数设置，如果通过 shader 的 constant buffer 来获得，需要考虑最大长度等问题，还要通过下标访问获得。更简单的方法是通过一个独立的 Vertex Buffer (使用 Per Instance 模式）设置 instance 的参数，在 Input Assemble Stage 中，参数就随顶点一起传入到了 Vertex Stage 当中，更方便灵活。</p>
+<h1 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h1><ul>
 <li><a href="http://http.developer.nvidia.com/GPUGems2/gpugems2_chapter05.html" target="_blank" rel="external">GPU Gems 2: Chapter 5 Optimizing Resource Management with Multistreaming </a></li>
 </ul>
 
