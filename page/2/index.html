@@ -50,6 +50,50 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-01-29T09:34:22.662Z"><a href="/2016/01/29/d3d11/decal/">2016-01-29</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/01/29/d3d11/decal/">2016-01 Decal</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="Decal"><a href="#Decal" class="headerlink" title="Decal"></a>Decal</h1><h2 id="Tessellation_based_method"><a href="#Tessellation_based_method" class="headerlink" title="Tessellation based method"></a>Tessellation based method</h2><p>Tessellation based 的方法能够不影响固有程序流程做到 decal, 调优方面的工作基本全部都在 hlsl 内部，这种方法有非常好的适用性。</p>
+<p>此方法的流程如下</p>
+<ul>
+<li>确定 hit position: 找到与 mesh 匹配的点</li>
+<li>在 ds 当中将 decal texture 映射到 hit position 上</li>
+<li>而后计算 displacement </li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="http://twvideo01.ubm-us.net/o1/vault/gdc10/slides/Bilodeau_Bill_Direct3D11TutorialTessellation.pdf" target="_blank" rel="external">AMD: Direct3D 11 Tutorial: Tessellation</a></li>
+<li>Direct3D Rendering CookBook: Chapter 6 Adding Surface Detail with Normal and Displacement Mapping</li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-01-29T03:52:55.000Z"><a href="/2016/01/29/depot_tools/svn-admin/">2016-01-29</a></time>
       
       
@@ -227,9 +271,9 @@
 <h3 id="20160217"><a href="#20160217" class="headerlink" title="20160217"></a>20160217</h3><ul>
 <li>PerInstance VertexBuffer Support</li>
 <li>Instancing Rendering</li>
+<li>HDR ?</li>
 </ul>
 <h3 id="doing"><a href="#doing" class="headerlink" title="doing"></a><strong> doing </strong></h3><ul>
-<li>HDR ?</li>
 <li>SSAO ?</li>
 <li>Picking ?</li>
 <li>Decay ?</li>
@@ -308,42 +352,6 @@
 <h2 id="DevNotes"><a href="#DevNotes" class="headerlink" title="DevNotes"></a>DevNotes</h2><h1 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h1><ul>
 <li><a href="http://http.developer.nvidia.com/GPUGems2/gpugems2_chapter07.html" target="_blank" rel="external">GPU Gems 2: Chapter 7. Adaptive Tessellation of Subdivision Surfaces with Displacement Mapping</a></li>
 <li>Direct3D Rendering CookBook: Chapter 6 Adding Surface Detail with Normal and Displacement Mapping</li>
-</ul>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-01-26T07:12:55.000Z"><a href="/2016/01/26/depot_tools/android_repo/">2016-01-26</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/01/26/depot_tools/android_repo/">android repo</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="Android_Repo"><a href="#Android_Repo" class="headerlink" title="Android Repo"></a>Android Repo</h1><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
-<li><a href="https://source.android.com/source/using-repo.html" target="_blank" rel="external">Android: Repo command reference</a></li>
-<li><a href="https://android.googlesource.com/tools/repo/+/745b4ad660f8050045b521c4e15b7d3ac0b3d70e/repo" target="_blank" rel="external">Repo code</a></li>
 </ul>
 
       
@@ -512,23 +520,19 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/d3d11/tools/">2016-01-25</a></time>
+        <time datetime="2016-01-26T07:12:55.000Z"><a href="/2016/01/26/depot_tools/android_repo/">2016-01-26</a></time>
       
       
   
-    <h1 class="title"><a href="/2016/01/25/d3d11/tools/">3D Tools</a></h1>
+    <h1 class="title"><a href="/2016/01/26/depot_tools/android_repo/">android repo</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <h1 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h1><h2 id="u6A21_u578B_u63D0_u53D6_u5DE5_u5177"><a href="#u6A21_u578B_u63D0_u53D6_u5DE5_u5177" class="headerlink" title="模型提取工具"></a>模型提取工具</h2><ul>
-<li><a href="http://www.deep-shadows.com/hax/3DRipperDX.htm" target="_blank" rel="external">3D Ripper DX</a></li>
-</ul>
-<h2 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h2><ul>
-<li><a href="http://www.bundysoft.com/L3DT/" target="_blank" rel="external">L3DT - Large 3D Terrain Generator</a></li>
-<li><a href="http://planetside.co.uk/" target="_blank" rel="external">Terragen-3D</a></li>
-<li><a href="http://www.ogre3d.org/tikiwiki/DCC+Tools#Terrain_generation" target="_blank" rel="external">OGRE DCC Tools</a></li>
+        <h1 id="Android_Repo"><a href="#Android_Repo" class="headerlink" title="Android Repo"></a>Android Repo</h1><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
+<li><a href="https://source.android.com/source/using-repo.html" target="_blank" rel="external">Android: Repo command reference</a></li>
+<li><a href="https://android.googlesource.com/tools/repo/+/745b4ad660f8050045b521c4e15b7d3ac0b3d70e/repo" target="_blank" rel="external">Repo code</a></li>
 </ul>
 
       
@@ -552,20 +556,36 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/d3d11/shadowmap_devnotes/">2016-01-25</a></time>
+        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/hdfs/fuse-on-hdfs/">2016-01-25</a></time>
       
       
   
-    <h1 class="title"><a href="/2016/01/25/d3d11/shadowmap_devnotes/">Shadowmap Devnotes</a></h1>
+    <h1 class="title"><a href="/2016/01/25/hdfs/fuse-on-hdfs/">fuse driver for HDFS</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <h1 id="Shadowmap__28DevNotes_29"><a href="#Shadowmap__28DevNotes_29" class="headerlink" title="Shadowmap (DevNotes)"></a>Shadowmap (DevNotes)</h1><h2 id="Troubles"><a href="#Troubles" class="headerlink" title="Troubles"></a>Troubles</h2><h3 id="u4F7F_u7528_Light_Camera__u6E32_u67D3_u65F6_uFF0C_u6CA1_u6709_Pixel_Stage"><a href="#u4F7F_u7528_Light_Camera__u6E32_u67D3_u65F6_uFF0C_u6CA1_u6709_Pixel_Stage" class="headerlink" title="使用 Light Camera 渲染时，没有 Pixel Stage"></a>使用 Light Camera 渲染时，没有 Pixel Stage</h3><p>在使用 Light Camera 渲染时，从 Visual Studio 的图形诊断看，Vertex Stage 是正常的，但是 PixelStage 就没有内容了。<br>原因是：对于 Light Camera 来说, 这些对象都是不可见的。</p>
-<h3 id="u5224_u65AD_u6295_u5F71_u5750_u6807_u662F_u5426_u6B63_u786E"><a href="#u5224_u65AD_u6295_u5F71_u5750_u6807_u662F_u5426_u6B63_u786E" class="headerlink" title="判断投影坐标是否正确"></a>判断投影坐标是否正确</h3><p>可以直接将深度绘制出来，不进行其他任何计算，看是否符合预期</p>
-<h3 id="Texturemap__u4E0E_shadowmap__u6DF7_u6DC6"><a href="#Texturemap__u4E0E_shadowmap__u6DF7_u6DC6" class="headerlink" title="Texturemap 与 shadowmap 混淆"></a>Texturemap 与 shadowmap 混淆</h3><p>对 texturemap 增加后缀后问题解决<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Texture2D texmap : <span class="keyword">register</span>(t0);</span><br><span class="line">Texture2D shadowmap : <span class="keyword">register</span>(t1);</span><br></pre></td></tr></table></figure></p>
-<h3 id="u5BF9_u8C61_u6295_u5F71_u9519_u8BEF"><a href="#u5BF9_u8C61_u6295_u5F71_u9519_u8BEF" class="headerlink" title="对象投影错误"></a>对象投影错误</h3><p>原因是传递的 Light Projection View Matrix 没有乘上物体的 World matrix, 这个错误在当前框架下比较容易犯。</p>
+        <h1 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h1><h2 id="u7F16_u8BD1_libhdfs"><a href="#u7F16_u8BD1_libhdfs" class="headerlink" title="编译 libhdfs"></a>编译 libhdfs</h2><p>使用 cdh 版本的 hadoop, 默认 libhdfs 不会编译</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="variable">$&#123;hadoop_client&#125;</span>/src/hadoop-mapreduce1-project/src/c++/libhdfs</span><br><span class="line">./bootstrap.sh</span><br><span class="line">./configure</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
+<h2 id="u53EF_u80FD_u9047_u5230_u7684_u95EE_u9898"><a href="#u53EF_u80FD_u9047_u5230_u7684_u95EE_u9898" class="headerlink" title="可能遇到的问题"></a>可能遇到的问题</h2><ul>
+<li>cc1: error: unrecognized command line option “-m”</li>
+</ul>
+<p>gcc 使用 -m 选项指定 target arch, 出现这个错误的原因是 -m 后面没有跟参数。在所有没有参数的 -m 后面增加 64 即可</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CFLAGS = -g -O2 -DOS_LINUX -DDSO_DLFCN -DCPU=\<span class="string">"amd64\" -m64</span><br><span class="line">LDFLAGS =  -m64 -L/usr/jdk_home/jre/lib/amd64/server</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>include/stddef.h:211: error: duplicate ‘unsigned</li>
+</ul>
+<p>这个错误是因为 Makefile 当中包含</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-Dsize_t=unsigned\ int</span><br></pre></td></tr></table></figure>
+<h2 id="fuse__u603B_u662F_u4EE5_4096__u4E3A_u5355_u4F4D_u8BFB_u5199"><a href="#fuse__u603B_u662F_u4EE5_4096__u4E3A_u5355_u4F4D_u8BFB_u5199" class="headerlink" title="fuse 总是以 4096 为单位读写"></a>fuse 总是以 4096 为单位读写</h2><p>启动时增加 options, 注意 big_writes 必须启用，否则其他选项不起作用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-o max_readahead=<span class="number">1024000</span> -omax_write=<span class="number">1024000</span> -obig_writes</span><br></pre></td></tr></table></figure>
+<h2 id="u5176_u4ED6_u7528_u6237_u65E0_u6CD5_u8BBF_u95EE_fuse__u8DEF_u5F84"><a href="#u5176_u4ED6_u7528_u6237_u65E0_u6CD5_u8BBF_u95EE_fuse__u8DEF_u5F84" class="headerlink" title="其他用户无法访问 fuse 路径"></a>其他用户无法访问 fuse 路径</h2><p>在挂载 mdfs 之后，如果使用其他账户进行操作会出现 “ls: cannot access test: Permission denied” 错误。这是 fuse 的配置导致</p>
+<p>修改 /etc/fuse.conf</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user_allow_other</span><br></pre></td></tr></table></figure>
+<p>此外运行 mdfs 时增加 <strong><em> -oallow_other </em></strong> ， 问题就解决了</p>
+<h2 id="java-lang-UnsupportedClassVersionError"><a href="#java-lang-UnsupportedClassVersionError" class="headerlink" title="java.lang.UnsupportedClassVersionError"></a>java.lang.UnsupportedClassVersionError</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Exception <span class="keyword">in</span> thread <span class="string">"main"</span> java.lang.UnsupportedClassVersionError: org/apache/hadoop/conf/Configuration : Unsupported major.minor version <span class="number">51.0</span></span><br><span class="line">   at java.lang.ClassLoader.defineClass1(Native Method)</span><br><span class="line">   at java.lang.ClassLoader.defineClass(ClassLoader.java:<span class="number">634</span>)</span><br><span class="line">   ...</span><br></pre></td></tr></table></figure>
+<p>这很有可能是机器上安装了多个 java 版本且使用了错误的版本导致的</p>
 
       
     </div>
@@ -617,7 +637,7 @@
   
     <li><a href="/tags/chromium/">chromium</a><small>2</small></li>
   
-    <li><a href="/tags/computer-graphics/">computer graphics</a><small>3</small></li>
+    <li><a href="/tags/computer-graphics/">computer graphics</a><small>4</small></li>
   
     <li><a href="/tags/direct3d/">direct3d</a><small>11</small></li>
   
