@@ -79,7 +79,7 @@
 </ul>
 </li>
 <li>Render Framework<ul>
-<li><strong> p0 </strong>: Make all light use same interface with HLSL and c++</li>
+<li><strong> p0 </strong>: Make all light use same interface with HLSL and c++  <strong> (completed) </strong></li>
 <li><strong> p1 </strong>: Scene Render Framework With Stencil Reflection support</li>
 <li><strong> p1 </strong>: Deferred Shadering</li>
 <li><strong> p2 </strong>: Multithread Rendering</li>
@@ -190,11 +190,24 @@
 <li>Instancing Rendering</li>
 <li>Cubemap</li>
 </ul>
+<h3 id="20160218"><a href="#20160218" class="headerlink" title="20160218"></a>20160218</h3><ul>
+<li>universeal light<ul>
+<li>由于统一 light 的接口对于后续工作有非常重要的影响，较多任务依赖于他，因此决定现在开始</li>
+</ul>
+</li>
+<li>migrate samples</li>
+</ul>
 <h3 id="doing"><a href="#doing" class="headerlink" title="doing"></a><strong> doing </strong></h3><ul>
 <li>HDR ?</li>
 <li>SSAO ?</li>
 <li>Picking ?</li>
 <li>Decay ?</li>
+<li>加载 dds<ul>
+<li>之前发现问题，带有 mipmap 的 dds 图片加载有问题（这可能也是加载 wow 地形数据出问题的原因）</li>
+<li>另外 soli 加载 DDS 文件实在太慢，因此决定自己实现一套加载图片的库</li>
+<li>支持 dds, bmp, tga</li>
+</ul>
+</li>
 </ul>
 
       
