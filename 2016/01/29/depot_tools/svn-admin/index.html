@@ -71,6 +71,11 @@
 </ul>
 <h3 id="svn_revert"><a href="#svn_revert" class="headerlink" title="svn revert"></a>svn revert</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svnadmin import /home/svn/repo/<span class="variable">$&#123;repo_name&#125;</span> &lt; dumpfile</span><br></pre></td></tr></table></figure>
 <h3 id="git-svn__u8FC1_u79FB"><a href="#git-svn__u8FC1_u79FB" class="headerlink" title="git-svn 迁移"></a>git-svn 迁移</h3><p>通过 git-svn 也能完成迁移，不好的地方在于作者信息可能无法完全保留</p>
+<h2 id="SVN_Hooks"><a href="#SVN_Hooks" class="headerlink" title="SVN Hooks"></a>SVN Hooks</h2><h3 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h3><h4 id="Commit_blocked_by_pre-commit__28exit_code_255_29_with_no_output"><a href="#Commit_blocked_by_pre-commit__28exit_code_255_29_with_no_output" class="headerlink" title="Commit blocked by pre-commit (exit code 255) with no output"></a>Commit blocked by pre-commit (exit code 255) with no output</h4><p>可能的原因包括</p>
+<ul>
+<li>pre-commit 没有可执行权限</li>
+<li>pre-commit 有语法错误</li>
+</ul>
 
       
     </div>

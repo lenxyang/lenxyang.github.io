@@ -6,8 +6,7 @@
   <title>svn-access-control | azer3D</title>
   <meta name="author" content="lenxyang@gmail.com">
   
-  <meta name="description" content="Svn Access ControlSvn Access Control默认情况下 SVN 使用 DAS 方式管理权限直接配置在服务器端，不过这样做的坏处时权限管理必须访问 SVN 服务器才能够完成。
-较为方便的方法是在 Repositiory 当中增加特殊文件表达权限管理，在 checkin 的时">
+  <meta name="description" content="Svn Access Control目录级权限管理修改文件 /etc/httpd/conf/httpd.conf， 增加配置项 AuthzSVNAccessFile123456789101112131415&amp;lt;VirtualHost 0.0.0.0:443&amp;gt;  SSLEngine on  ">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -62,9 +61,12 @@
     </header>
     <div class="entry">
       
-        <h1 id="Svn_Access_Control"><a href="#Svn_Access_Control" class="headerlink" title="Svn Access Control"></a>Svn Access Control</h1><h2 id="Svn_Access_Control-1"><a href="#Svn_Access_Control-1" class="headerlink" title="Svn Access Control"></a>Svn Access Control</h2><p>默认情况下 SVN 使用 DAS 方式管理权限直接配置在服务器端，不过这样做的坏处时权限管理必须访问 SVN 服务器才能够完成。</p>
+        <h1 id="Svn_Access_Control"><a href="#Svn_Access_Control" class="headerlink" title="Svn Access Control"></a>Svn Access Control</h1><h2 id="u76EE_u5F55_u7EA7_u6743_u9650_u7BA1_u7406"><a href="#u76EE_u5F55_u7EA7_u6743_u9650_u7BA1_u7406" class="headerlink" title="目录级权限管理"></a>目录级权限管理</h2><p>修改文件 /etc/httpd/conf/httpd.conf， 增加配置项 AuthzSVNAccessFile<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;VirtualHost <span class="number">0.0</span>.<span class="number">0.0</span>:<span class="number">443</span>&gt;</span><br><span class="line">  SSLEngine on</span><br><span class="line">  SSLCertificateFile      /etc/httpd/ssl/server.csr</span><br><span class="line">  SSLCertificateKeyFile   /etc/httpd/ssl/server.key</span><br><span class="line"></span><br><span class="line">  &lt;Location /svn&gt;</span><br><span class="line">     DAV svn</span><br><span class="line">     SVNParentPath /home/svn/repo</span><br><span class="line">     AuthName <span class="string">"SVN Repositories"</span></span><br><span class="line">     AuthType Basic</span><br><span class="line">     AuthUserFile /home/svn/repo/.htpasswd</span><br><span class="line">     AuthzSVNAccessFile /home/svn/repo/.authz</span><br><span class="line">     Require valid-user</span><br><span class="line">  &lt;/Location&gt;</span><br><span class="line">&lt;/VirtualHost&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="AuthzSVNAccessFile__u6587_u4EF6_u5185_u5BB9"><a href="#AuthzSVNAccessFile__u6587_u4EF6_u5185_u5BB9" class="headerlink" title="AuthzSVNAccessFile 文件内容"></a>AuthzSVNAccessFile 文件内容</h3><p>AuthzSVNAccessFile 的内容看起来是这样</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[svn:/]</span><br><span class="line">* = r</span><br><span class="line">admin = rw</span><br><span class="line">yanglei = rw</span><br></pre></td></tr></table></figure>
+<h2 id="u901A_u8FC7_repo__u6587_u4EF6_u7BA1_u7406_u6743_u9650"><a href="#u901A_u8FC7_repo__u6587_u4EF6_u7BA1_u7406_u6743_u9650" class="headerlink" title="通过 repo 文件管理权限"></a>通过 repo 文件管理权限</h2><p>默认情况下 SVN 使用 DAS 方式管理权限直接配置在服务器端，不过这样做的坏处时权限管理必须访问 SVN 服务器才能够完成。</p>
 <p>较为方便的方法是在 Repositiory 当中增加特殊文件表达权限管理，在 checkin 的时候（通过 svn 的 hook 机制）自动生成 DAS 权限管理文件</p>
-<h3 id="start-commit"><a href="#start-commit" class="headerlink" title="start-commit"></a>start-commit</h3><h2 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h2><ul>
+<h2 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h2><ul>
 <li><a href="http://svnbook.red-bean.com/en/1.7/index.html" target="_blank" rel="external">Version Control with Subversion(1.7)</a></li>
 </ul>
 

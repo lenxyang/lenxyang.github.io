@@ -12,9 +12,7 @@
 根据用户设置 checkout 库 (URL 或者配置文件)
 提交编译机发布库
 
-Reference
-Android: Repo command reference
-Repo code">
+使用场景checkout 代码库1repo co --pub_dir=/home/yanglei/pub wolong base ">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -75,6 +73,9 @@ Repo code">
 <li>根据用户设置 checkout 库 (URL 或者配置文件)</li>
 <li>提交编译机发布库</li>
 </ul>
+<h2 id="u4F7F_u7528_u573A_u666F"><a href="#u4F7F_u7528_u573A_u666F" class="headerlink" title="使用场景"></a>使用场景</h2><h3 id="checkout__u4EE3_u7801_u5E93"><a href="#checkout__u4EE3_u7801_u5E93" class="headerlink" title="checkout 代码库"></a>checkout 代码库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">repo co --pub_dir=/home/yanglei/pub wolong base rpc</span><br></pre></td></tr></table></figure>
+<h3 id="u540C_u6B65_u4EE3_u7801_u5E93"><a href="#u540C_u6B65_u4EE3_u7801_u5E93" class="headerlink" title="同步代码库"></a>同步代码库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">repo sync --ignore_path pub</span><br></pre></td></tr></table></figure>
+<h3 id="public"><a href="#public" class="headerlink" title="public"></a>public</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">repo pub wolong/auditing/base/BUILD.gn@version ...</span><br></pre></td></tr></table></figure>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
 <li><a href="https://source.android.com/source/using-repo.html" target="_blank" rel="external">Android: Repo command reference</a></li>
 <li><a href="https://android.googlesource.com/tools/repo/+/745b4ad660f8050045b521c4e15b7d3ac0b3d70e/repo" target="_blank" rel="external">Repo code</a></li>
