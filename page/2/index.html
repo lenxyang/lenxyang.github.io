@@ -50,6 +50,100 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-02-03T02:35:00.000Z"><a href="/2016/02/03/d3d11/vertex_buffer/">2016-02-03</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/02/03/d3d11/vertex_buffer/">Direct3D11 VertexBuffer</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="Vertex_Buffer_Tricks"><a href="#Vertex_Buffer_Tricks" class="headerlink" title="Vertex Buffer Tricks"></a>Vertex Buffer Tricks</h1><h2 id="Multi-Stream_VertexBuffer"><a href="#Multi-Stream_VertexBuffer" class="headerlink" title="Multi-Stream VertexBuffer"></a>Multi-Stream VertexBuffer</h2><p>Input Assemble 支持将多个 Vertex Buffer 当作同一个输入（通过 InputLayout 支持），这种操作有诸多好处</p>
+<h3 id="u91CD_u590D_u5229_u7528_u6570_u636E"><a href="#u91CD_u590D_u5229_u7528_u6570_u636E" class="headerlink" title="重复利用数据"></a>重复利用数据</h3><p>以地形为例，顶点数据是变化较大，但是所有的地形的 texcoord 都是类似的，最多就是起始点不同。因此所有的地形 tile 都可以共享一个 texture vertex buffer。</p>
+<h3 id="Instanced_Draw"><a href="#Instanced_Draw" class="headerlink" title="Instanced Draw"></a>Instanced Draw</h3><p>通过 Instance 可以较少渲染 API 调用的数量，但每一个 instance 都有不同的参数设置，如果通过 shader 的 constant buffer 来获得，需要考虑最大长度等问题，还要通过下标访问获得。更简单的方法是通过一个独立的 Vertex Buffer (使用 Per Instance 模式）设置 instance 的参数，在 Input Assemble Stage 中，参数就随顶点一起传入到了 Vertex Stage 当中，更方便灵活。</p>
+<h2 id="Input_Format"><a href="#Input_Format" class="headerlink" title="Input Format"></a>Input Format</h2><h2 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h2><h3 id="Use_Vector4_To_Construct_Mat4_in_Instancing_Rendering"><a href="#Use_Vector4_To_Construct_Mat4_in_Instancing_Rendering" class="headerlink" title="Use Vector4 To Construct Mat4 in Instancing Rendering"></a>Use Vector4 To Construct Mat4 in Instancing Rendering</h3><p>在写程序是犯了一个错误，是由于 SEMANTIC NAME 导致的, VSInput 当中的 WORLD 没有增加后缀，他们全部映射到了 WORLD0 上，因此定点无法展现。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Input Layout</span></span><br><span class="line"><span class="keyword">const</span> VertexDesc::Desc kInstVertexDesc[] = &#123;</span><br><span class="line">  &#123;<span class="string">"POSITION"</span>, <span class="number">0</span>, kVec3, <span class="number">0</span>, <span class="number">0</span>, <span class="literal">false</span>&#125;,</span><br><span class="line">  &#123;<span class="string">"NORMAL"</span>, <span class="number">0</span>, kVec3, <span class="number">0</span>, <span class="number">0</span>, <span class="literal">false</span>&#125;,</span><br><span class="line">  &#123;<span class="string">"TEXCOORD"</span>, <span class="number">0</span>, kVec2, <span class="number">0</span>, <span class="number">0</span>, <span class="literal">false</span>&#125;,</span><br><span class="line">  &#123;<span class="string">"WORLD"</span>, <span class="number">0</span>, kVec4, <span class="number">1</span>, <span class="number">1</span>, <span class="literal">false</span>&#125;,</span><br><span class="line">  &#123;<span class="string">"WORLD"</span>, <span class="number">1</span>, kVec4, <span class="number">1</span>, <span class="number">1</span>, <span class="literal">false</span>&#125;,</span><br><span class="line">  &#123;<span class="string">"WORLD"</span>, <span class="number">2</span>, kVec4, <span class="number">1</span>, <span class="number">1</span>, <span class="literal">false</span>&#125;,</span><br><span class="line">  &#123;<span class="string">"WORLD"</span>, <span class="number">3</span>, kVec4, <span class="number">1</span>, <span class="number">1</span>, <span class="literal">false</span>&#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// vertex shader</span></span><br><span class="line"><span class="keyword">struct</span> VSInput &#123;</span><br><span class="line">  float3 position:POSITION;</span><br><span class="line">  float3 normal:NORMAL;</span><br><span class="line">  float2 texcoord: TEXCOORD0;</span><br><span class="line">  float4 world0: WORLD;</span><br><span class="line">  float4 world1: WORLD;</span><br><span class="line">  float4 world2: WORLD;</span><br><span class="line">  float4 world3: WORLD;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">float4x4 world = float4x4(v.world0.x, v.world0.y, v.world0.z, v.world0.w,</span><br><span class="line">                          v.world1.x, v.world1.y, v.world1.z, v.world1.w,</span><br><span class="line">                          v.world2.x, v.world2.y, v.world2.z, v.world2.w,</span><br><span class="line">                          v.world3.x, v.world3.y, v.world3.z, v.world3.w);</span><br></pre></td></tr></table></figure>
+<p>由于 world 变量被设置成 PerInstance，因此在 vsshader 当中 v.world0, v.world1, v.word2 和 v.world3 都是同一个变量，因此无法渲染。</p>
+<h1 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="http://http.developer.nvidia.com/GPUGems2/gpugems2_chapter05.html" target="_blank" rel="external">GPU Gems 2: Chapter 5 Optimizing Resource Management with Multistreaming </a></li>
+<li>Direct3D10 Samples: Instancing10</li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-02-01T07:21:00.000Z"><a href="/2016/02/01/d3d11/stencil/">2016-02-01</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/02/01/d3d11/stencil/">Stencil Buffer</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="Stencil_Buffer"><a href="#Stencil_Buffer" class="headerlink" title="Stencil Buffer"></a>Stencil Buffer</h1><h2 id="Mirror_based_on_Stencil_Buffer"><a href="#Mirror_based_on_Stencil_Buffer" class="headerlink" title="Mirror based on Stencil Buffer"></a>Mirror based on Stencil Buffer</h2><p>基于 Stencil Buffer 的镜面效果的基本思想是：将所有可以被反射的物体在镜面映射的角度进行渲染，使用 Stencil Buffer 作为渲染的可接受范围（此范围实际就是镜子的范围）</p>
+<p>基于 Stencil 的镜面映射基本步骤如下</p>
+<ul>
+<li>绘制基本场景</li>
+<li>清理 Stencil Buffer 状态，</li>
+<li>仅仅在 Stencil Buffer 上渲染镜子<ul>
+<li>设置 stencil buffer 状态</li>
+<li>不写 depth buffer (否则镜子后面的世界没办法通过深度测试)</li>
+</ul>
+</li>
+<li>在 stencil test passed 的情况下，渲染所有镜面映射的物体<ul>
+<li>对比 stencil buffer 的状态，成功时才写入</li>
+</ul>
+</li>
+<li>渲染镜子 (开启 blending)</li>
+</ul>
+<h3 id="u5177_u4F53_u5230_u4EE3_u7801_u4E0A"><a href="#u5177_u4F53_u5230_u4EE3_u7801_u4E0A" class="headerlink" title="具体到代码上"></a>具体到代码上</h3><h4 id="u8BBE_u7F6E_u955C_u5B50_u7684_StencilState"><a href="#u8BBE_u7F6E_u955C_u5B50_u7684_StencilState" class="headerlink" title="设置镜子的 StencilState"></a>设置镜子的 StencilState</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化 StenilState</span></span><br><span class="line">StencilOperStruct oper;</span><br><span class="line">oper.failed_op = kStencilOperKeep;</span><br><span class="line">oper.pass_op = kStencilOperReplace;</span><br><span class="line">oper.depth_failed_op = kStencilOperKeep;</span><br><span class="line">oper.stencil_func = kCompareFuncAlways;</span><br><span class="line">mirror_state_ = rs-&gt;CreateDepthStencilState();</span><br><span class="line">mirror_state_-&gt;EnableStencil(<span class="literal">true</span>);</span><br><span class="line">mirror_state_-&gt;EnableDepthTest(<span class="literal">true</span>);</span><br><span class="line">mirror_state_-&gt;SetDepthWriteMask(<span class="number">0x00</span>);</span><br><span class="line">mirror_state_-&gt;SetStencilMask(<span class="number">0xff</span>, <span class="number">0xff</span>);</span><br><span class="line">mirror_state_-&gt;SetFrontFaceOper(oper);</span><br><span class="line">mirror_state_-&gt;SetBackFaceOper(oper);</span><br><span class="line">...</span><br><span class="line"><span class="comment">// 绘制</span></span><br><span class="line">renderer-&gt;ClearDepthAndStencil(<span class="literal">false</span>, <span class="literal">true</span>, <span class="number">1.0f</span>, <span class="number">0</span>);</span><br><span class="line">renderer-&gt;SetDepthStencilState(mirror_state_, <span class="number">1</span>);</span><br><span class="line">Render ..</span><br></pre></td></tr></table></figure>
+<h4 id="u8BBE_u7F6E_u53CD_u5C04_u7269_u4F53_u7684_StencilState"><a href="#u8BBE_u7F6E_u53CD_u5C04_u7269_u4F53_u7684_StencilState" class="headerlink" title="设置反射物体的 StencilState"></a>设置反射物体的 StencilState</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">oper.failed_op = kStencilOperKeep;</span><br><span class="line">oper.pass_op = kStencilOperKeep;</span><br><span class="line">oper.depth_failed_op = kStencilOperKeep;</span><br><span class="line">oper.stencil_func = kCompareFuncEqual;</span><br><span class="line">reflect_state_ = rs-&gt;CreateDepthStencilState();</span><br><span class="line">reflect_state_-&gt;EnableStencil(<span class="literal">true</span>);</span><br><span class="line">reflect_state_-&gt;EnableDepthTest(<span class="literal">true</span>);</span><br><span class="line">reflect_state_-&gt;SetDepthWriteMask(<span class="number">0xff</span>);</span><br><span class="line">reflect_state_-&gt;SetStencilMask(<span class="number">0xff</span>, <span class="number">0xff</span>);</span><br><span class="line">reflect_state_-&gt;SetFrontFaceOper(oper);</span><br><span class="line">reflect_state_-&gt;SetBackFaceOper(oper);</span><br><span class="line">renderer-&gt;SetDepthStencilState(reflect_state_, <span class="number">1</span>);</span><br><span class="line">Render .</span><br></pre></td></tr></table></figure>
+<p>注意：一定要注意 stencilref 的设置 (SetDepthStencilState 的第二个参数)。第一次绘制镜子时他的作用实际就将 “留下标记”(stencilref 写入到 stencil buffer)，记录那里是镜子的区域；绘制反射物体的时候，采用了 kCompareFuncEqual 方法，之后当 stencilbuffer 的值与 stencilref 的值相同时，stencil test 才能成功，物体才能够绘制。</p>
+<h3 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h3><p>对 Geometry 进行镜面映射后，他的 FontFace 顺序会改变，如果是 CounterClockWise 需要变化成 ClockWise</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-01-31T03:23:00.000Z"><a href="/2016/01/31/d3d11/compute_shader/">2016-01-31</a></time>
       
       
@@ -321,9 +415,10 @@
 <li>loardaeron 的按照新的 light 框架更新</li>
 <li>更新 samples</li>
 </ul>
-<h3 id="doing"><a href="#doing" class="headerlink" title="doing"></a><strong> doing </strong></h3><ul>
+<h3 id="20160220"><a href="#20160220" class="headerlink" title="20160220"></a>20160220</h3><h3 id="doing"><a href="#doing" class="headerlink" title="doing"></a><strong> doing </strong></h3><ul>
 <li>HDR ?</li>
 <li>SSAO ?</li>
+<li>SSR ?</li>
 <li>Picking ?</li>
 <li>Decay ?</li>
 <li>加载 dds<ul>
@@ -332,6 +427,8 @@
 <li>支持 dds, bmp, tga</li>
 </ul>
 </li>
+<li>Renderer -&gt; RenderContext</li>
+<li>RenderSystem -&gt; RenderDevice</li>
 </ul>
 
       
@@ -406,42 +503,6 @@
 <h2 id="DevNotes"><a href="#DevNotes" class="headerlink" title="DevNotes"></a>DevNotes</h2><h1 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h1><ul>
 <li><a href="http://http.developer.nvidia.com/GPUGems2/gpugems2_chapter07.html" target="_blank" rel="external">GPU Gems 2: Chapter 7. Adaptive Tessellation of Subdivision Surfaces with Displacement Mapping</a></li>
 <li>Direct3D Rendering CookBook: Chapter 6 Adding Surface Detail with Normal and Displacement Mapping</li>
-</ul>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-01-26T07:12:55.000Z"><a href="/2016/01/26/depot_tools/android_repo/">2016-01-26</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/01/26/depot_tools/android_repo/">android repo</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="Android_Repo"><a href="#Android_Repo" class="headerlink" title="Android Repo"></a>Android Repo</h1><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
-<li><a href="https://source.android.com/source/using-repo.html" target="_blank" rel="external">Android: Repo command reference</a></li>
-<li><a href="https://android.googlesource.com/tools/repo/+/745b4ad660f8050045b521c4e15b7d3ac0b3d70e/repo" target="_blank" rel="external">Repo code</a></li>
 </ul>
 
       
@@ -550,72 +611,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-01-26T07:12:55.000Z"><a href="/2016/01/26/depot_tools/svn-setup/">2016-01-26</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/01/26/depot_tools/svn-setup/">svn-setup</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h2 id="u67B6_u8BBE_svn__u670D_u52A1_u5668"><a href="#u67B6_u8BBE_svn__u670D_u52A1_u5668" class="headerlink" title="架设 svn 服务器"></a>架设 svn 服务器</h2><h3 id="u521B_u5EFA_svn__u8DEF_u5F84"><a href="#u521B_u5EFA_svn__u8DEF_u5F84" class="headerlink" title="创建 svn 路径"></a>创建 svn 路径</h3><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo adduser svn ...</span><br><span class="line">$ mkdir <span class="regexp">/home/</span>svn<span class="regexp">/repo/</span></span><br><span class="line">$ svnadmin create <span class="regexp">/home/</span>svn<span class="regexp">/repo/</span>test</span><br></pre></td></tr></table></figure>
-<h3 id="u67B6_u8BBE_http_28https_29__u670D_u52A1_u5668"><a href="#u67B6_u8BBE_http_28https_29__u670D_u52A1_u5668" class="headerlink" title="架设 http(https) 服务器"></a>架设 http(https) 服务器</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># &#23433;&#35013; apache svn &#27169;&#22359;&#10;apt-get install apache2 libapache2-mod-svn&#10;&#10;# &#36890;&#36807; htpasswd &#29983;&#25104;&#23494;&#30721;&#10;apt-get install apache2-utils</span><br></pre></td></tr></table></figure>
-<h3 id="u914D_u7F6E_http__u52A0_u8F7D_u9879_u53CA_u8DEF_u5F84"><a href="#u914D_u7F6E_http__u52A0_u8F7D_u9879_u53CA_u8DEF_u5F84" class="headerlink" title="配置 http 加载项及路径"></a>配置 http 加载项及路径</h3><h4 id="u914D_u7F6E_HTTP__u52A0_u8F7D_u9879"><a href="#u914D_u7F6E_HTTP__u52A0_u8F7D_u9879" class="headerlink" title="配置 HTTP 加载项"></a>配置 HTTP 加载项</h4><p>在 /etc/apache2/apache2.conf</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">LoadModule dav_module           modules/mod_dav.so</span><br><span class="line">#LoadModule dav_fs_module       modules/mod_dav_fs.so</span><br><span class="line">LoadModule dav_svn_module       modules/mod_dav_svn.so</span><br><span class="line">LoadModule authz_svn_module     modules/mod_authz_svn.so</span><br></pre></td></tr></table></figure>
-<h4 id="u5728_/etc/apache2/sites-available/000-default-conf__u5F53_u4E2D_u589E_u52A0_u4E00_u4E0B_u914D_u7F6E"><a href="#u5728_/etc/apache2/sites-available/000-default-conf__u5F53_u4E2D_u589E_u52A0_u4E00_u4E0B_u914D_u7F6E" class="headerlink" title="在  /etc/apache2/sites-available/000-default.conf 当中增加一下配置"></a>在  /etc/apache2/sites-available/000-default.conf 当中增加一下配置</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">Location</span> /<span class="attribute">svn</span>&gt;</span></span><br><span class="line">   DAV svn</span><br><span class="line">   SVNParentPath /home/svn/repo</span><br><span class="line">   AuthName "svn"</span><br><span class="line">   AuthType Basic</span><br><span class="line">   AuthUserFile /home/svn/repo/.svn-auth-file</span><br><span class="line">   Require valid-user</span><br><span class="line"><span class="tag">&lt;/<span class="title">Location</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h4 id="u521B_u5EFA_u53EF_u4EE5_u53EF_u4EE5_u8D26_u6237_u7528_u4E8E_u8BBF_u95EE_svn__u5E76_u91CD_u65B0_u542F_u52A8_httpd"><a href="#u521B_u5EFA_u53EF_u4EE5_u53EF_u4EE5_u8D26_u6237_u7528_u4E8E_u8BBF_u95EE_svn__u5E76_u91CD_u65B0_u542F_u52A8_httpd" class="headerlink" title="创建可以可以账户用于访问 svn 并重新启动 httpd"></a>创建可以可以账户用于访问 svn 并重新启动 httpd</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo htpasswd -cs /home/svn/repo/.svn-auth-file yanglei</span><br><span class="line">$ sudo /etc/init.d/apache2 restart</span><br></pre></td></tr></table></figure>
-<p>此时通过 http 已经可以访问 svn 了，直接用浏览器打开</p>
-<h4 id="u4F7F_u7528_svn__u5BA2_u6237_u7AEF_u6D4B_u8BD5"><a href="#u4F7F_u7528_svn__u5BA2_u6237_u7AEF_u6D4B_u8BD5" class="headerlink" title="使用 svn 客户端测试"></a>使用 svn 客户端测试</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn co http://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">8000</span>/svn/<span class="built_in">test</span></span><br></pre></td></tr></table></figure>
-<h3 id="u901A_u8FC7_https__u8BBF_u95EE"><a href="#u901A_u8FC7_https__u8BBF_u95EE" class="headerlink" title="通过 https 访问"></a>通过 https 访问</h3><h4 id="u52A0_u8F7D_ssl_mod"><a href="#u52A0_u8F7D_ssl_mod" class="headerlink" title="加载 ssl_mod"></a>加载 ssl_mod</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在 /etc/apache2/apache2.conf 增加</span></span><br><span class="line">Include /etc/apache2/mods-available/ssl.conf</span><br><span class="line">LoadModule ssl_module /usr/lib/apache2/modules/mod_ssl.so</span><br></pre></td></tr></table></figure>
-<h4 id="u6253_u5F00_u7AEF_u53E3"><a href="#u6253_u5F00_u7AEF_u53E3" class="headerlink" title="打开端口"></a>打开端口</h4><p>默认情况下，ssl 端口是不打开的，直接修改 /etc/apache2/ports.conf 的配置打开端口</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Listen <span class="number">80</span></span><br><span class="line">&lt;IfModule ssl_module&gt;</span><br><span class="line">        Listen <span class="number">443</span></span><br><span class="line">&lt;/IfModule&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="u542F_u7528_u7AD9_u70B9"><a href="#u542F_u7528_u7AD9_u70B9" class="headerlink" title="启用站点"></a>启用站点</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo a2ensite default-ssl.conf</span><br></pre></td></tr></table></figure>
-<h4 id="u751F_u6210_u81EA_u5DF1_u7684_key"><a href="#u751F_u6210_u81EA_u5DF1_u7684_key" class="headerlink" title="生成自己的 key"></a>生成自己的 key</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ sudo mkdir /etc/apache2/ssl</span><br><span class="line">$ sudo openssl req -new -x509 -keyout /etc/apache2/ssl/server.key -out /etc/apache2/ssl/server.csr -days <span class="number">365</span> -nodes</span><br><span class="line">Country Name (<span class="number">2</span> letter code) [AU]:</span><br><span class="line">State or Province Name (full name) [Some-State]:</span><br><span class="line">Locality Name (eg, city) []:</span><br><span class="line">Organization Name (eg, company) [Internet Widgits Pty Ltd]:</span><br><span class="line">Organizational Unit Name (eg, section) []:</span><br><span class="line">Common Name (eg, YOUR name) []:svn</span><br></pre></td></tr></table></figure>
-<p><strong> 注意：</strong> Common Name 最好与站点名称一致否则会出错</p>
-<h4 id="u542F_u52A8_key"><a href="#u542F_u52A8_key" class="headerlink" title="启动 key"></a>启动 key</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># file path: /etc/apache2/sites-available/ssl-default</span><br><span class="line">       #   SSL Engine Switch:</span><br><span class="line">       #   Enable/Disable SSL for this virtual host.</span><br><span class="line">       SSLEngine on</span><br><span class="line">       #   A self-signed (snakeoil) certificate can be created by installing</span><br><span class="line">       #   the ssl-cert package. See</span><br><span class="line">       #   /usr/share/doc/apache2/README.Debian.gz for more info.</span><br><span class="line">       #   If both key and certificate are stored in the same file, only the</span><br><span class="line">       #   SSLCertificateFile directive is needed.</span><br><span class="line">       SSLCertificateFile      /etc/apache2/ssl/server.csr</span><br><span class="line">       SSLCertificateKeyFile   /etc/apache2/ssl/server.key</span><br></pre></td></tr></table></figure>
-<h3 id="u4EE5_svn__u8D26_u6237_u8FD0_u884C"><a href="#u4EE5_svn__u8D26_u6237_u8FD0_u884C" class="headerlink" title="以 svn 账户运行"></a>以 svn 账户运行</h3><h2 id="svn__u6743_u9650_u7BA1_u7406"><a href="#svn__u6743_u9650_u7BA1_u7406" class="headerlink" title="svn 权限管理"></a>svn 权限管理</h2><h2 id="u89E3_u51B3_u7684_u65B9_u6CD5"><a href="#u89E3_u51B3_u7684_u65B9_u6CD5" class="headerlink" title="解决的方法"></a>解决的方法</h2><h3 id="u68C0_u67E5_apache2__u65E5_u5FD7"><a href="#u68C0_u67E5_apache2__u65E5_u5FD7" class="headerlink" title="检查 apache2 日志"></a>检查 apache2 日志</h3><p>如果遇到什么问题，先查看 apache2 的日志，常见的问题答案就在里面。如果希望得到更详细的信息，可以在 /etc/apache2/apache2.conf 当中修改日志级别</p>
-<h3 id="u68C0_u67E5_u7AEF_u53E3_u662F_u5426_u6253_u5F00"><a href="#u68C0_u67E5_u7AEF_u53E3_u662F_u5426_u6253_u5F00" class="headerlink" title="检查端口是否打开"></a>检查端口是否打开</h3><p>在配置 https 服务时，想要确定服务是否已经打开，最简单的办法是通过 netstat 命令查看 443 端口是否打开</p>
-<h2 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h2><h3 id="apache__u7AD9_u70B9_u4E0D_u751F_u6548"><a href="#apache__u7AD9_u70B9_u4E0D_u751F_u6548" class="headerlink" title="apache 站点不生效"></a>apache 站点不生效</h3><p>/etc/apache2/sites-available 的意思是 “可用的网站”，并非 ”生效的网站“。通过 a2ensite 和 a2dissite 启用或停止网站。</p>
-<h3 id="AH00566_3A_request_failed_3A_invalid_characters_in_URI"><a href="#AH00566_3A_request_failed_3A_invalid_characters_in_URI" class="headerlink" title="AH00566: request failed: invalid characters in URI"></a>AH00566: request failed: invalid characters in URI</h3><p>通过 https 访问时报错且 apache2 日志出现 “invalid characters in URI“。最后发现，site-available/default-ssl 所有配置，包含在 <ifmodule ssl_module=""> 当中，实际上并未启动。将 <ifmodule ssl_module=""> 注释掉之后，可以正常的通过 https 访问</ifmodule></ifmodule></p>
-<h2 id="u5728_CentOS__u4E0A_u67B6_u8BBE"><a href="#u5728_CentOS__u4E0A_u67B6_u8BBE" class="headerlink" title="在 CentOS 上架设"></a>在 CentOS 上架设</h2><p>之前描述的 ubuntu 上的架设过程， CentOS 由于 apache 的配置目录有很大不同，所以配置也有差别, 接下来以 RHEL 7 为例介绍</p>
-<h3 id="u5B89_u88C5_u8F6F_u4EF6"><a href="#u5B89_u88C5_u8F6F_u4EF6" class="headerlink" title="安装软件"></a>安装软件</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install httpd.x86_64 mod_dav_svn.x86_64 mod_ssl.x86_64</span><br></pre></td></tr></table></figure>
-<h3 id="u4FEE_u6539_u914D_u7F6E_u6587_u4EF6"><a href="#u4FEE_u6539_u914D_u7F6E_u6587_u4EF6" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><p>CentOS 上的配置与 Ubuntu 有极大不同，Ubuntu 细化了配置，用户需要配置站点级别，而 CentOS 仅仅有最简单的配置。</p>
-<p>修改文件 /etc/httpd/conf/httpd.conf<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;VirtualHost <span class="number">0.0</span>.<span class="number">0.0</span>:<span class="number">443</span>&gt;</span><br><span class="line">  SSLEngine on</span><br><span class="line">  SSLCertificateFile      /etc/httpd/ssl/server.csr</span><br><span class="line">  SSLCertificateKeyFile   /etc/httpd/ssl/server.key</span><br><span class="line"></span><br><span class="line">  &lt;Location /svn&gt;</span><br><span class="line">     DAV svn</span><br><span class="line">     SVNParentPath /home/svn/repo</span><br><span class="line">     AuthName <span class="string">"SVN Repositories"</span></span><br><span class="line">     AuthType Basic</span><br><span class="line">     AuthUserFile /home/svn/repo/.htpasswd</span><br><span class="line">     AuthzSVNAccessFile /home/svn/repo/.authz</span><br><span class="line">     Require valid-user</span><br><span class="line">  &lt;/Location&gt;</span><br><span class="line">&lt;/VirtualHost&gt;</span><br></pre></td></tr></table></figure></p>
-<p>此外还要更改文件 /etc/httpd/conf.d/ssl.conf<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Listen 443 https</span></span><br><span class="line"><span class="comment"># Listen 0.0.0.0:443 https</span></span><br></pre></td></tr></table></figure></p>
-<p>否则 httpd 仅仅监听 ip6 的端口， ipv4 端口不能访问</p>
-<h3 id="u542F_u52A8_u670D_u52A1"><a href="#u542F_u52A8_u670D_u52A1" class="headerlink" title="启动服务"></a>启动服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service httpd restart</span><br></pre></td></tr></table></figure>
-<h3 id="u67E5_u770B_u670D_u52A1_u72B6_u6001_u673A_u65E5_u5FD7"><a href="#u67E5_u770B_u670D_u52A1_u72B6_u6001_u673A_u65E5_u5FD7" class="headerlink" title="查看服务状态机日志"></a>查看服务状态机日志</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status httpd.service</span><br></pre></td></tr></table></figure>
-<h2 id="Trouble_Shooting-1"><a href="#Trouble_Shooting-1" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h2><h3 id="5B_3Aerror_5D__5Bpid_8974_5D__2820014_29Internal_error_3A_Can_u2019t_open_file__u2018/home/svn/repo/xxx/format_u2019_3A_Permission_denied"><a href="#5B_3Aerror_5D__5Bpid_8974_5D__2820014_29Internal_error_3A_Can_u2019t_open_file__u2018/home/svn/repo/xxx/format_u2019_3A_Permission_denied" class="headerlink" title="[:error] [pid 8974] (20014)Internal error: Can’t open file ‘/home/svn/repo/xxx/format’: Permission denied"></a>[:error] [pid 8974] (20014)Internal error: Can’t open file ‘/home/svn/repo/xxx/format’: Permission denied</h3><p>一般来说此错误是没有权限导致的，如果即使授予 777 或者更改 owner 仍然出现此错误的话，有可能是 selinux 导致的，通过命令 setenforce 0 关闭它再尝试。</p>
-<p>如果想要永久关闭 selinux, 可以修改配置文件 /etc/selinux/config</p>
-<h2 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h2><ul>
-<li><a href="https://wiki.archlinux.org/index.php/Subversion_Setup" target="_blank" rel="external">ArchLinux: Subversion Setup</a></li>
-<li><a href="https://help.ubuntu.com/community/Subversion" target="_blank" rel="external">Ubuntu Wiki: Subversion</a></li>
-<li><a href="http://www.apache-ssl.org/" target="_blank" rel="external">Apache-SSL</a></li>
-</ul>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -651,7 +646,7 @@
   
     <li><a href="/tags/chromium/">chromium</a><small>2</small></li>
   
-    <li><a href="/tags/computer-graphics/">computer graphics</a><small>4</small></li>
+    <li><a href="/tags/computer-graphics/">computer graphics</a><small>6</small></li>
   
     <li><a href="/tags/direct3d/">direct3d</a><small>12</small></li>
   
@@ -672,6 +667,8 @@
     <li><a href="/tags/hdfs/">hdfs</a><small>2</small></li>
   
     <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/opensource/">opensource</a><small>1</small></li>
   
     <li><a href="/tags/skia/">skia</a><small>1</small></li>
   
