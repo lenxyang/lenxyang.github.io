@@ -50,6 +50,53 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-02-03T06:23:00.000Z"><a href="/2016/02/03/d3d11/particle/">2016-02-03</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/02/03/d3d11/particle/">Direct3D11 Particle System Devnotes</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="Particle"><a href="#Particle" class="headerlink" title="Particle"></a>Particle</h1><h2 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h2><ul>
+<li>用于 Stream Out 的 VertexBuffer 必须使用 kBindTargetStreamOut</li>
+<li>需要 3 个 VertexBuffer, 初始化和两个输入输出补丁切换的 VertexBuffer</li>
+<li>VertexBuffer 的大小需要按照最多的粒子数指定 (初始化的 VertexBuffer 不需要)</li>
+<li>在绘制 VertexBuffer 时，需要将其从 StreamOut Stage 上解除绑定</li>
+<li>使用 DrawAuto，以便 DirectX 自行决定绘制的粒子数</li>
+<li>创建 DrawAuto 的 Geometry Shader 时，使用 <strong><em> CreateGeometryShaderWithStreamOut </em></strong> 创建 Geometry Shader</li>
+</ul>
+<p>最后一点最为重要，网上的大部分 demo 都用到了微软 Technique 框架，通过框架编译代码通常会很简单。在对照写 c 代码时很有可能漏掉这个细节。</p>
+<h2 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h2><h3 id="u5C55_u73B0_u4E00_u6BB5_u65F6_u95F4_u540E_Particle__u7684_u6E32_u67D3_u5BF9_u8C61_u6D88_u5931_u4E86"><a href="#u5C55_u73B0_u4E00_u6BB5_u65F6_u95F4_u540E_Particle__u7684_u6E32_u67D3_u5BF9_u8C61_u6D88_u5931_u4E86" class="headerlink" title="展现一段时间后 Particle 的渲染对象消失了"></a>展现一段时间后 Particle 的渲染对象消失了</h3><p>猜测可能是因为 VertexBuffer 设置太小，导致 Emitt 例子无法加入其中导致消息，将 VertexBuffer 加大后问题解决。</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
+<li><a href="https://msdn.microsoft.com/en-us/library/windows/desktop/bb205121.aspx" target="_blank" rel="external">MSDN: Stream-Out Stage</a></li>
+<li><a href="https://msdn.microsoft.com/en-us/library/windows/desktop/bb205122.aspx" target="_blank" rel="external">MSDN: Getting Started with the Stream-Output Stage</a></li>
+<li><a href="https://directtovideo.wordpress.com/2009/10/06/a-thoroughly-modern-particle-system/" target="_blank" rel="external">a thoroughly modern particle system</a> 非常漂亮的 demo</li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-02-03T02:35:00.000Z"><a href="/2016/02/03/d3d11/vertex_buffer/">2016-02-03</a></time>
       
       
@@ -415,7 +462,10 @@
 <li>loardaeron 的按照新的 light 框架更新</li>
 <li>更新 samples</li>
 </ul>
-<h3 id="20160220"><a href="#20160220" class="headerlink" title="20160220"></a>20160220</h3><h3 id="doing"><a href="#doing" class="headerlink" title="doing"></a><strong> doing </strong></h3><ul>
+<h3 id="20160220"><a href="#20160220" class="headerlink" title="20160220"></a>20160220</h3><ul>
+<li>建立 shaderlib 并用 grit 保存</li>
+</ul>
+<h3 id="doing"><a href="#doing" class="headerlink" title="doing"></a><strong> doing </strong></h3><ul>
 <li>HDR ?</li>
 <li>SSAO ?</li>
 <li>SSR ?</li>
@@ -565,52 +615,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-01-26T07:12:55.000Z"><a href="/2016/01/26/depot_tools/svn-access-control/">2016-01-26</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/01/26/depot_tools/svn-access-control/">svn-access-control</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="Svn_Access_Control"><a href="#Svn_Access_Control" class="headerlink" title="Svn Access Control"></a>Svn Access Control</h1><h2 id="u76EE_u5F55_u7EA7_u6743_u9650_u7BA1_u7406"><a href="#u76EE_u5F55_u7EA7_u6743_u9650_u7BA1_u7406" class="headerlink" title="目录级权限管理"></a>目录级权限管理</h2><p>修改文件 /etc/httpd/conf/httpd.conf， 增加配置项 AuthzSVNAccessFile<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;VirtualHost <span class="number">0.0</span>.<span class="number">0.0</span>:<span class="number">443</span>&gt;</span><br><span class="line">  SSLEngine on</span><br><span class="line">  SSLCertificateFile      /etc/httpd/ssl/server.csr</span><br><span class="line">  SSLCertificateKeyFile   /etc/httpd/ssl/server.key</span><br><span class="line"></span><br><span class="line">  &lt;Location /svn&gt;</span><br><span class="line">     DAV svn</span><br><span class="line">     SVNParentPath /home/svn/repo</span><br><span class="line">     AuthName <span class="string">"SVN Repositories"</span></span><br><span class="line">     AuthType Basic</span><br><span class="line">     AuthUserFile /home/svn/repo/.htpasswd</span><br><span class="line">     AuthzSVNAccessFile /home/svn/repo/.authz</span><br><span class="line">     Require valid-user</span><br><span class="line">  &lt;/Location&gt;</span><br><span class="line">&lt;/VirtualHost&gt;</span><br></pre></td></tr></table></figure></p>
-<h3 id="AuthzSVNAccessFile__u6587_u4EF6_u5185_u5BB9"><a href="#AuthzSVNAccessFile__u6587_u4EF6_u5185_u5BB9" class="headerlink" title="AuthzSVNAccessFile 文件内容"></a>AuthzSVNAccessFile 文件内容</h3><p>AuthzSVNAccessFile 的内容看起来是这样</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[svn:/]</span><br><span class="line">* = r</span><br><span class="line">admin = rw</span><br><span class="line">yanglei = rw</span><br></pre></td></tr></table></figure>
-<h2 id="u901A_u8FC7_repo__u6587_u4EF6_u7BA1_u7406_u6743_u9650"><a href="#u901A_u8FC7_repo__u6587_u4EF6_u7BA1_u7406_u6743_u9650" class="headerlink" title="通过 repo 文件管理权限"></a>通过 repo 文件管理权限</h2><p>默认情况下 SVN 使用 DAS 方式管理权限直接配置在服务器端，不过这样做的坏处时权限管理必须访问 SVN 服务器才能够完成。</p>
-<p>较为方便的方法是在 Repositiory 当中增加特殊文件表达权限管理，在 checkin 的时候（通过 svn 的 hook 机制）自动生成 DAS 权限管理文件</p>
-<h2 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h2><h3 id="Commit_blocked_by_pre-commit__28exit_code_255_29_with_no_output"><a href="#Commit_blocked_by_pre-commit__28exit_code_255_29_with_no_output" class="headerlink" title="Commit blocked by pre-commit (exit code 255) with no output"></a>Commit blocked by pre-commit (exit code 255) with no output</h3><p>可能的原因包括</p>
-<ul>
-<li>pre-commit 没有可执行权限</li>
-<li>pre-commit 有语法错误</li>
-</ul>
-<h3 id="svn_3A_E175013_3A_Access_to__u2018https_3A//100-85-23-45/svn/test1_u2018_forbidden"><a href="#svn_3A_E175013_3A_Access_to__u2018https_3A//100-85-23-45/svn/test1_u2018_forbidden" class="headerlink" title="svn: E175013: Access to ‘https://100.85.23.45/svn/test1‘ forbidden"></a>svn: E175013: Access to ‘<a href="https://100.85.23.45/svn/test1" target="_blank" rel="external">https://100.85.23.45/svn/test1</a>‘ forbidden</h3><p>有可能 AuthzSVNAccessFile 的路径配置错误了， 查看 /var/log/httpd 的日志确定错误</p>
-<h2 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h2><ul>
-<li><a href="http://svnbook.red-bean.com/en/1.7/index.html" target="_blank" rel="external">Version Control with Subversion(1.7)</a></li>
-</ul>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -648,7 +652,7 @@
   
     <li><a href="/tags/computer-graphics/">computer graphics</a><small>6</small></li>
   
-    <li><a href="/tags/direct3d/">direct3d</a><small>12</small></li>
+    <li><a href="/tags/direct3d/">direct3d</a><small>13</small></li>
   
     <li><a href="/tags/docker/">docker</a><small>2</small></li>
   

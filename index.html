@@ -50,6 +50,42 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-02-20T03:55:00.000Z"><a href="/2016/02/20/d3d11/texture/">2016-02-20</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/02/20/d3d11/texture/">Direct3D11 Texture</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="Texture"><a href="#Texture" class="headerlink" title="Texture"></a>Texture</h1><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
+<li><a href="https://msdn.microsoft.com/en-us/library/windows/desktop/hh308955.aspx" target="_blank" rel="external">MSDN: Texture Block Compression in Direct3D 11</a></li>
+<li><a href="https://msdn.microsoft.com/en-us/library/windows/desktop/bb694531.aspx" target="_blank" rel="external">MSDN: Block Compression (Direct3D 10)</a></li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-02-20T01:38:00.000Z"><a href="/2016/02/20/graphics/reflection/">2016-02-20</a></time>
       
       
@@ -315,30 +351,22 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-02-03T06:23:00.000Z"><a href="/2016/02/03/d3d11/particle/">2016-02-03</a></time>
+        <time datetime="2016-02-03T06:23:00.000Z"><a href="/2016/02/03/graphics/water/">2016-02-03</a></time>
       
       
   
-    <h1 class="title"><a href="/2016/02/03/d3d11/particle/">Direct3D11 Particle System Devnotes</a></h1>
+    <h1 class="title"><a href="/2016/02/03/graphics/water/">Water</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <h1 id="Particle"><a href="#Particle" class="headerlink" title="Particle"></a>Particle</h1><h2 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h2><ul>
-<li>用于 Stream Out 的 VertexBuffer 必须使用 kBindTargetStreamOut</li>
-<li>需要 3 个 VertexBuffer, 初始化和两个输入输出补丁切换的 VertexBuffer</li>
-<li>VertexBuffer 的大小需要按照最多的粒子数指定 (初始化的 VertexBuffer 不需要)</li>
-<li>在绘制 VertexBuffer 时，需要将其从 StreamOut Stage 上解除绑定</li>
-<li>使用 DrawAuto，以便 DirectX 自行决定绘制的粒子数</li>
-<li>创建 DrawAuto 的 Geometry Shader 时，使用 <strong><em> CreateGeometryShaderWithStreamOut </em></strong> 创建 Geometry Shader</li>
-</ul>
-<p>最后一点最为重要，网上的大部分 demo 都用到了微软 Technique 框架，通过框架编译代码通常会很简单。在对照写 c 代码时很有可能漏掉这个细节。</p>
-<h2 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h2><h3 id="u5C55_u73B0_u4E00_u6BB5_u65F6_u95F4_u540E_Particle__u7684_u6E32_u67D3_u5BF9_u8C61_u6D88_u5931_u4E86"><a href="#u5C55_u73B0_u4E00_u6BB5_u65F6_u95F4_u540E_Particle__u7684_u6E32_u67D3_u5BF9_u8C61_u6D88_u5931_u4E86" class="headerlink" title="展现一段时间后 Particle 的渲染对象消失了"></a>展现一段时间后 Particle 的渲染对象消失了</h3><p>猜测可能是因为 VertexBuffer 设置太小，导致 Emitt 例子无法加入其中导致消息，将 VertexBuffer 加大后问题解决。</p>
+        <h1 id="Water"><a href="#Water" class="headerlink" title="Water"></a>Water</h1><h2 id="Survey"><a href="#Survey" class="headerlink" title="Survey"></a>Survey</h2><h3 id="Physical_Models"><a href="#Physical_Models" class="headerlink" title="Physical Models"></a>Physical Models</h3><h3 id="FFT_based"><a href="#FFT_based" class="headerlink" title="FFT based"></a>FFT based</h3><p>Tessendorf 的论文是 FFT 模拟 Water 的开端；Keith Lantz 的两篇文章详细介绍了 FFT Water 的实现过程，而且有代码。</p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
-<li><a href="https://msdn.microsoft.com/en-us/library/windows/desktop/bb205121.aspx" target="_blank" rel="external">MSDN: Stream-Out Stage</a></li>
-<li><a href="https://msdn.microsoft.com/en-us/library/windows/desktop/bb205122.aspx" target="_blank" rel="external">MSDN: Getting Started with the Stream-Output Stage</a></li>
-<li><a href="https://directtovideo.wordpress.com/2009/10/06/a-thoroughly-modern-particle-system/" target="_blank" rel="external">a thoroughly modern particle system</a> 非常漂亮的 demo</li>
+<li><a href="http://graphics.ucsd.edu/courses/rendering/2005/jdewall/tessendorf.pdf" target="_blank" rel="external">Tessendorf, Jerry, Simulating Ocean Water</a></li>
+<li><a href="http://www.keithlantz.net/2011/10/ocean-simulation-part-one-using-the-discrete-fourier-transform/" target="_blank" rel="external">Keith Lantz: OCEAN SIMULATION PART ONE: USING THE DISCRETE FOURIER TRANSFORM</a></li>
+<li><a href="http://www.keithlantz.net/2011/11/ocean-simulation-part-two-using-the-fast-fourier-transform/" target="_blank" rel="external">Keith Lantz: OCEAN SIMULATION PART TWO: USING THE FAST FOURIER TRANSFORM</a></li>
+<li><a href="http://http.developer.nvidia.com/GPUGems/gpugems_ch01.html" target="_blank" rel="external">GPU Gems: Effective Water Simulation from Physical Models</a></li>
 </ul>
 
       
@@ -393,45 +421,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-02-03T06:23:00.000Z"><a href="/2016/02/03/graphics/water/">2016-02-03</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/02/03/graphics/water/">Water</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="Water"><a href="#Water" class="headerlink" title="Water"></a>Water</h1><h2 id="Survey"><a href="#Survey" class="headerlink" title="Survey"></a>Survey</h2><h3 id="Physical_Models"><a href="#Physical_Models" class="headerlink" title="Physical Models"></a>Physical Models</h3><h3 id="FFT_based"><a href="#FFT_based" class="headerlink" title="FFT based"></a>FFT based</h3><p>Tessendorf 的论文是 FFT 模拟 Water 的开端；Keith Lantz 的两篇文章详细介绍了 FFT Water 的实现过程，而且有代码。</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
-<li><a href="http://graphics.ucsd.edu/courses/rendering/2005/jdewall/tessendorf.pdf" target="_blank" rel="external">Tessendorf, Jerry, Simulating Ocean Water</a></li>
-<li><a href="http://www.keithlantz.net/2011/10/ocean-simulation-part-one-using-the-discrete-fourier-transform/" target="_blank" rel="external">Keith Lantz: OCEAN SIMULATION PART ONE: USING THE DISCRETE FOURIER TRANSFORM</a></li>
-<li><a href="http://www.keithlantz.net/2011/11/ocean-simulation-part-two-using-the-fast-fourier-transform/" target="_blank" rel="external">Keith Lantz: OCEAN SIMULATION PART TWO: USING THE FAST FOURIER TRANSFORM</a></li>
-<li><a href="http://http.developer.nvidia.com/GPUGems/gpugems_ch01.html" target="_blank" rel="external">GPU Gems: Effective Water Simulation from Physical Models</a></li>
-</ul>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -467,7 +456,7 @@
   
     <li><a href="/tags/computer-graphics/">computer graphics</a><small>6</small></li>
   
-    <li><a href="/tags/direct3d/">direct3d</a><small>12</small></li>
+    <li><a href="/tags/direct3d/">direct3d</a><small>13</small></li>
   
     <li><a href="/tags/docker/">docker</a><small>2</small></li>
   
