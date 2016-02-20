@@ -134,6 +134,45 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-02-03T06:23:00.000Z"><a href="/2016/02/03/graphics/water/">2016-02-03</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/02/03/graphics/water/">Water</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="Water"><a href="#Water" class="headerlink" title="Water"></a>Water</h1><h2 id="Survey"><a href="#Survey" class="headerlink" title="Survey"></a>Survey</h2><h3 id="Physical_Models"><a href="#Physical_Models" class="headerlink" title="Physical Models"></a>Physical Models</h3><h3 id="FFT_based"><a href="#FFT_based" class="headerlink" title="FFT based"></a>FFT based</h3><p>Tessendorf 的论文是 FFT 模拟 Water 的开端；Keith Lantz 的两篇文章详细介绍了 FFT Water 的实现过程，而且有代码。</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
+<li><a href="http://graphics.ucsd.edu/courses/rendering/2005/jdewall/tessendorf.pdf" target="_blank" rel="external">Tessendorf, Jerry, Simulating Ocean Water</a></li>
+<li><a href="http://www.keithlantz.net/2011/10/ocean-simulation-part-one-using-the-discrete-fourier-transform/" target="_blank" rel="external">Keith Lantz: OCEAN SIMULATION PART ONE: USING THE DISCRETE FOURIER TRANSFORM</a></li>
+<li><a href="http://www.keithlantz.net/2011/11/ocean-simulation-part-two-using-the-fast-fourier-transform/" target="_blank" rel="external">Keith Lantz: OCEAN SIMULATION PART TWO: USING THE FAST FOURIER TRANSFORM</a></li>
+<li><a href="http://http.developer.nvidia.com/GPUGems/gpugems_ch01.html" target="_blank" rel="external">GPU Gems: Effective Water Simulation from Physical Models</a></li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-02-03T02:35:00.000Z"><a href="/2016/02/03/d3d11/vertex_buffer/">2016-02-03</a></time>
       
       
@@ -514,6 +553,9 @@
 <li>支持 dds, bmp, tga</li>
 </ul>
 </li>
+<li>shader binary resource</li>
+</ul>
+<h3 id="Refactor"><a href="#Refactor" class="headerlink" title="Refactor"></a><strong> Refactor </strong></h3><ul>
 <li>Renderer -&gt; RenderContext</li>
 <li>RenderSystem -&gt; RenderDevice</li>
 </ul>
@@ -567,46 +609,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-01-27T07:49:00.000Z"><a href="/2016/01/27/d3d11/detailmap/">2016-01-27</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/01/27/d3d11/detailmap/">Direct3D11 Detailmap</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="Detailmap"><a href="#Detailmap" class="headerlink" title="Detailmap"></a>Detailmap</h1><h2 id="Tessellation_based_method"><a href="#Tessellation_based_method" class="headerlink" title="Tessellation based method"></a>Tessellation based method</h2><p>Detailmap(Tessellation based) 能够在渲染管线级别上决定几何体的细节，比起 normalmap 和 parallex mapping 要真是的多。(normalmap 无法处理遮挡关系，如果细节起伏较大会失真; parallex mapping 一定程度上解决了遮挡关系的问题，但如果某个高度变化到不可见状态时，parallex mapping 是没办法处理的)</p>
-<p>Tessellation based method 还有诸多优点</p>
-<h2 id="u5B9E_u73B0_u7EC6_u8282"><a href="#u5B9E_u73B0_u7EC6_u8282" class="headerlink" title="实现细节"></a>实现细节</h2><h3 id="Density_Map"><a href="#Density_Map" class="headerlink" title="Density Map"></a>Density Map</h3><p>Tessellation 的分割参数 (Hull Constants Shader) 与很多因素相关，具体可以分成动态及静态两种；具体来说，与摄像头的距离是动态的，与摄像头的方向夹角这些因素是动态的；此外，Mesh 对象本身的特征是静态的，高度变化较为剧烈的地方应该采用较密集的分割，变化平缓的地方采用较少的分割。高度图是静态的，所以可以采用离线或者加载时刻生成的办法生成一张分割参数的 Texture，用来帮助 Tessellation 的 Hull Constants Shader 的性能</p>
-<p>具体可以参考 CreateDensityMapFromHeightMap</p>
-<h2 id="DevNotes"><a href="#DevNotes" class="headerlink" title="DevNotes"></a>DevNotes</h2><h1 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h1><ul>
-<li><a href="http://http.developer.nvidia.com/GPUGems2/gpugems2_chapter07.html" target="_blank" rel="external">GPU Gems 2: Chapter 7. Adaptive Tessellation of Subdivision Surfaces with Displacement Mapping</a></li>
-<li>Direct3D Rendering CookBook: Chapter 6 Adding Surface Detail with Normal and Displacement Mapping</li>
-</ul>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -640,7 +642,7 @@
   
     <li><a href="/tags/books/">books</a><small>1</small></li>
   
-    <li><a href="/tags/chromium/">chromium</a><small>2</small></li>
+    <li><a href="/tags/chromium/">chromium</a><small>3</small></li>
   
     <li><a href="/tags/computer-graphics/">computer graphics</a><small>7</small></li>
   
@@ -659,6 +661,8 @@
     <li><a href="/tags/gn/">gn</a><small>1</small></li>
   
     <li><a href="/tags/gnu/">gnu</a><small>1</small></li>
+  
+    <li><a href="/tags/grit/">grit</a><small>1</small></li>
   
     <li><a href="/tags/hdfs/">hdfs</a><small>2</small></li>
   
