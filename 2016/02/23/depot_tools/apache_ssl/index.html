@@ -7,8 +7,7 @@
   <meta name="author" content="lenxyang@gmail.com">
   
   <meta name="description" content="Apapche SSL 配置基本操作查看 crs 信息1openssl x509 -in /etc/httpd/ssl/server.csr -noout -subject
-Reference
-Step-By-Step Configuring SSL Under Apache">
+Trouble ShootingRSA server certificate is a CA certificate (Bas">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -64,6 +63,7 @@ Step-By-Step Configuring SSL Under Apache">
     <div class="entry">
       
         <h1 id="Apapche_SSL__u914D_u7F6E"><a href="#Apapche_SSL__u914D_u7F6E" class="headerlink" title="Apapche SSL 配置"></a>Apapche SSL 配置</h1><h2 id="u57FA_u672C_u64CD_u4F5C"><a href="#u57FA_u672C_u64CD_u4F5C" class="headerlink" title="基本操作"></a>基本操作</h2><h3 id="u67E5_u770B_crs__u4FE1_u606F"><a href="#u67E5_u770B_crs__u4FE1_u606F" class="headerlink" title="查看 crs 信息"></a>查看 crs 信息</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -in /etc/httpd/ssl/server.csr -noout -subject</span><br></pre></td></tr></table></figure>
+<h2 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h2><h3 id="RSA_server_certificate_is_a_CA_certificate__28BasicConstraints_3A_CA__3D_3D_TRUE__21_3F_29"><a href="#RSA_server_certificate_is_a_CA_certificate__28BasicConstraints_3A_CA__3D_3D_TRUE__21_3F_29" class="headerlink" title="RSA server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)"></a>RSA server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)</h3><p>通过 <a href="http://www.onlamp.com/2008/03/04/step-by-step-configuring-ssl-under-apache.html" target="_blank" rel="external">Step-By-Step Configuring SSL Under Apache</a> 配置的 csr key 会出问题，如果使用 <a href="https://devcenter.heroku.com/articles/ssl-certificate-self" target="_blank" rel="external">Creating a Self-Signed SSL Certificate</a>的方法创建不会出现此错误</p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
 <li><a href="http://www.onlamp.com/2008/03/04/step-by-step-configuring-ssl-under-apache.html" target="_blank" rel="external">Step-By-Step Configuring SSL Under Apache</a></li>
 </ul>
