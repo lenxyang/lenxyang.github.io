@@ -89,6 +89,42 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-02-16T01:23:00.000Z"><a href="/2016/02/16/toolchain/gcc/">2016-02-16</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/02/16/toolchain/gcc/">gcc</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="GCC_Tricks"><a href="#GCC_Tricks" class="headerlink" title="GCC Tricks"></a>GCC Tricks</h1><h2 id="u53BB_u6389_debug_info"><a href="#u53BB_u6389_debug_info" class="headerlink" title="去掉 debug info"></a>去掉 debug info</h2><p>一般情况下 debug info 是不需要的，发布时可以包括两个版本带有调试信息和不带调试信息的，上线使用不带调试信息的，如果出现 core 在使用带有调试信息的追问题。（某些时候带宽真的是问题，发布的程序越小越好）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strip -g -S <span class="operator">-d</span> .build/opt/targets/wolong/auditing/wuliao/wolong_wuliao_auditing</span><br></pre></td></tr></table></figure>
+<h2 id="u8FDE_u63A5_u9759_u6001_libgcc_2C_libstdc"><a href="#u8FDE_u63A5_u9759_u6001_libgcc_2C_libstdc" class="headerlink" title="连接静态 libgcc, libstdc"></a>连接静态 libgcc, libstdc</h2><p>libgcc 是非常基础的库，他基本与编译器是绑定的，如果部署的机器 gcc 版本较低，很有可能会因为 libgcc 的版本没办法运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc ... -static-libgcc -static-libstdc++</span><br></pre></td></tr></table></figure>
+<h2 id="u67E5_u770B_u4F9D_u8D56_u5DE5_u5177_ldd"><a href="#u67E5_u770B_u4F9D_u8D56_u5DE5_u5177_ldd" class="headerlink" title="查看依赖工具 ldd"></a>查看依赖工具 ldd</h2><h2 id="symbol_3A_nm"><a href="#symbol_3A_nm" class="headerlink" title="symbol: nm"></a>symbol: nm</h2>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-02-03T06:23:00.000Z"><a href="/2016/02/03/graphics/water/">2016-02-03</a></time>
       
       
@@ -421,203 +457,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-01-29T02:34:00.000Z"><a href="/2016/01/29/azer/month-report-201602/">2016-01-29</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/01/29/azer/month-report-201602/">2016-02 Month Report</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="201602__u6708_u5DE5_u4F5C"><a href="#201602__u6708_u5DE5_u4F5C" class="headerlink" title="201602 月工作"></a>201602 月工作</h1><h2 id="201602"><a href="#201602" class="headerlink" title="201602"></a>201602</h2><p>当前的目标是尽量熟悉所有的基础 Effect，并将所有的 Effect 融入到一个统一的可配置且高效的框架之内，目前框架已经基本成型，不过 Effect 还有很多不熟悉。</p>
-<p>本月的时间较少，主要安排仍然是熟悉基础 Effect，目标是 3 月份开始整个系统的工作。此外 探索通用光照系统：所有计算光照的 HLSL 应该接口统一。</p>
-<p>本月的时间不多，年前一周，年后两周，且能够工作的时间不多。</p>
-<ul>
-<li>Framework<ul>
-<li><strong> p1 </strong>: Resource 加载增加 Buffer 机制</li>
-<li><strong> p1 </strong>: D3D Vertex Layout Buffer(Donnot create differet object for same layout in DirectX11)</li>
-<li><strong> p2 </strong>: Multiple Constants Buffer support in HLSL</li>
-<li><strong> p2 </strong>: Instancing Rendering Support in framework</li>
-</ul>
-</li>
-<li>Scene Management<ul>
-<li><strong> p0 </strong>: Frustrum Culling</li>
-<li><strong> p1 </strong>: BSP Scene Node</li>
-</ul>
-</li>
-<li>Render Framework<ul>
-<li><strong> p0 </strong>: Make all light use same interface with HLSL and c++  <strong> (completed) </strong></li>
-<li><strong> p1 </strong>: Scene Render Framework With Stencil Reflection support</li>
-<li><strong> p1 </strong>: Deferred Shadering</li>
-<li><strong> p2 </strong>: Multithread Rendering</li>
-</ul>
-</li>
-<li>Simple Effects<ul>
-<li>Common<ul>
-<li><strong> p0 </strong>: instanceing  <strong> (completed) </strong></li>
-<li><strong> p0 </strong>: vertex_buffer based instanceing <strong> (completed) </strong></li>
-<li><strong> p2 </strong>: montion blur</li>
-<li><strong> p2 </strong>: Alpha to converage</li>
-</ul>
-</li>
-<li>Stencil based techniques<ul>
-<li><strong> p0 </strong>: Reflection <strong> (completed) </strong></li>
-<li><strong> p1 </strong>: Shadow Volumn</li>
-</ul>
-</li>
-<li>Compute Shader<ul>
-<li><strong> p1 </strong>: FFT Transform</li>
-</ul>
-</li>
-<li>Shadow Map (Need Universe Light Support)<ul>
-<li><strong> p2 </strong>: PCF shadow <strong> (completed) </strong></li>
-<li><strong> p2 </strong>: Multiple-light support</li>
-<li><strong> p2 </strong>: Directional Light Support</li>
-</ul>
-</li>
-<li>Tessellation<ul>
-<li><strong> p0 </strong>: tessellation based terrain <strong> (completed) </strong></li>
-<li><strong> p0 </strong>: decay</li>
-</ul>
-</li>
-<li>Environment Mapping *<ul>
-<li><strong> p0 </strong>: Cubemap based environement mapping <strong> (completed) </strong></li>
-<li><strong> p1 </strong>: Geometry Shader based Cubemap mapping</li>
-<li><strong> p1 </strong>: Multi-thread Cubemapping generation</li>
-</ul>
-</li>
-<li><strong> p0 </strong>: Stream Particle <strong> (completed) </strong></li>
-<li><strong> p0 </strong>: HDR</li>
-<li><strong> p0 </strong>: SSAO</li>
-<li><strong> p1 </strong>: Animation</li>
-<li><strong> p1 </strong>: Water</li>
-</ul>
-</li>
-<li>Terrain System<ul>
-<li><strong> p1 </strong>: Tree-based Culling</li>
-<li><strong> p1 </strong>: clipping</li>
-</ul>
-</li>
-<li>UI<ul>
-<li><strong> p1 </strong>: Multiple Effect Level</li>
-<li><strong> p1 </strong>: Assets Window and Views</li>
-<li><strong> p2 </strong>: Snapshot View of all resources</li>
-<li><strong> p2 </strong>: Direct3D Parameters and Capability</li>
-<li><strong> p2 </strong>: Add Footbar For Pane</li>
-<li><strong> p2 </strong>: Float Textfield Controller</li>
-<li><strong> p2 </strong>: Material Property UI </li>
-<li><strong> p2 </strong>: Mesh Property UI</li>
-<li><strong> p2 </strong>: Load UI config from file</li>
-</ul>
-</li>
-<li>Unittest<ul>
-<li><strong> p2 </strong>: Add unittest to azer</li>
-</ul>
-</li>
-<li>Game Resources<ul>
-<li>WOW Model data(Skinned mesh)</li>
-<li>Wow Map data</li>
-</ul>
-</li>
-<li>Books &amp; Papers<ul>
-<li>Book: Real-Time Readering</li>
-<li>Book: Advanced Lighting and Materials With Shaders</li>
-<li><a href="http://colour-science.org/posts/the-importance-of-terminology-and-srgb-uncertainty/" target="_blank" rel="external">The Importance of Terminology and sRGB Uncertainty</a></li>
-</ul>
-</li>
-</ul>
-<h2 id="Bug"><a href="#Bug" class="headerlink" title="Bug"></a>Bug</h2><ul>
-<li><strong> p0 </strong>: Image cannot Load data with mipmap</li>
-</ul>
-<h2 id="Daily_Report"><a href="#Daily_Report" class="headerlink" title="Daily Report"></a>Daily Report</h2><h3 id="20160201"><a href="#20160201" class="headerlink" title="20160201"></a>20160201</h3><ul>
-<li>Stencil based Reflection</li>
-</ul>
-<h3 id="20160202"><a href="#20160202" class="headerlink" title="20160202"></a>20160202</h3><ul>
-<li>Terrain Tessellation: Grid</li>
-<li>Terrain Tessellation: Heightmap</li>
-<li>Terrain Tessellation: Normal</li>
-<li>Terrain Tessellation: Normal Render</li>
-</ul>
-<h3 id="20160203"><a href="#20160203" class="headerlink" title="20160203"></a>20160203</h3><ul>
-<li>Fixbug: Tessellation Hull Constants Shader</li>
-<li>Load Texture 2D Array </li>
-<li>Terrain Tessellation: Texture</li>
-<li>Stream Partice ?</li>
-</ul>
-<h3 id="20160215"><a href="#20160215" class="headerlink" title="20160215"></a>20160215</h3><ul>
-<li>Refactor Code: GpuProgram -&gt; Shader</li>
-<li>Refactor Code: Remote class VertexShader </li>
-<li>Remove Uncessary Code</li>
-</ul>
-<h3 id="20160216"><a href="#20160216" class="headerlink" title="20160216"></a>20160216</h3><ul>
-<li>Particle completed</li>
-</ul>
-<h3 id="20160217"><a href="#20160217" class="headerlink" title="20160217"></a>20160217</h3><ul>
-<li>PerInstance VertexBuffer Support</li>
-<li>Instancing Rendering</li>
-<li>Cubemap</li>
-</ul>
-<h3 id="20160218"><a href="#20160218" class="headerlink" title="20160218"></a>20160218</h3><ul>
-<li>universeal light<ul>
-<li>由于统一 light 的接口对于后续工作有非常重要的影响，较多任务依赖于他，因此决定现在开始</li>
-</ul>
-</li>
-<li>migrate samples</li>
-</ul>
-<h3 id="20160219"><a href="#20160219" class="headerlink" title="20160219"></a>20160219</h3><ul>
-<li>将 scene 和 resource 移到 azer 当中</li>
-<li>loardaeron 的按照新的 light 框架更新</li>
-<li>更新 samples</li>
-</ul>
-<h3 id="20160220"><a href="#20160220" class="headerlink" title="20160220"></a>20160220</h3><ul>
-<li>建立 shaderlib 并用 grit 保存</li>
-<li>迁移 scene 的 samples</li>
-</ul>
-<h3 id="20160222"><a href="#20160222" class="headerlink" title="20160222"></a>20160222</h3><ul>
-<li>dds 文件格式解析</li>
-</ul>
-<h3 id="doing"><a href="#doing" class="headerlink" title="doing"></a><strong> doing </strong></h3><ul>
-<li>HDR ?</li>
-<li>SSAO ?</li>
-<li>SSR ?</li>
-<li>Picking ?</li>
-<li>Decay ?</li>
-<li>加载 dds<ul>
-<li>之前发现问题，带有 mipmap 的 dds 图片加载有问题（这可能也是加载 wow 地形数据出问题的原因）</li>
-<li>另外 soli 加载 DDS 文件实在太慢，因此决定自己实现一套加载图片的库</li>
-<li>支持 dds, bmp, tga</li>
-</ul>
-</li>
-<li>shader binary resource</li>
-</ul>
-<h3 id="Refactor"><a href="#Refactor" class="headerlink" title="Refactor"></a><strong> Refactor </strong></h3><ul>
-<li>Renderer -&gt; RenderContext</li>
-<li>RenderSystem -&gt; RenderDevice</li>
-</ul>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -646,6 +485,8 @@
     <li><a href="/tags/3d/">3d</a><small>1</small></li>
   
     <li><a href="/tags/android/">android</a><small>1</small></li>
+  
+    <li><a href="/tags/apache/">apache</a><small>1</small></li>
   
     <li><a href="/tags/azer3d/">azer3d</a><small>4</small></li>
   
@@ -684,6 +525,8 @@
     <li><a href="/tags/opensource/">opensource</a><small>1</small></li>
   
     <li><a href="/tags/skia/">skia</a><small>1</small></li>
+  
+    <li><a href="/tags/ssl/">ssl</a><small>1</small></li>
   
     <li><a href="/tags/svn/">svn</a><small>3</small></li>
   
