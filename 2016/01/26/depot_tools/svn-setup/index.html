@@ -91,6 +91,11 @@
 <h3 id="u67E5_u770B_u670D_u52A1_u72B6_u6001_u673A_u65E5_u5FD7"><a href="#u67E5_u770B_u670D_u52A1_u72B6_u6001_u673A_u65E5_u5FD7" class="headerlink" title="查看服务状态机日志"></a>查看服务状态机日志</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status httpd.service</span><br></pre></td></tr></table></figure>
 <h2 id="Trouble_Shooting-1"><a href="#Trouble_Shooting-1" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h2><h3 id="5B_3Aerror_5D__5Bpid_8974_5D__2820014_29Internal_error_3A_Can_u2019t_open_file__u2018/home/svn/repo/xxx/format_u2019_3A_Permission_denied"><a href="#5B_3Aerror_5D__5Bpid_8974_5D__2820014_29Internal_error_3A_Can_u2019t_open_file__u2018/home/svn/repo/xxx/format_u2019_3A_Permission_denied" class="headerlink" title="[:error] [pid 8974] (20014)Internal error: Can’t open file ‘/home/svn/repo/xxx/format’: Permission denied"></a>[:error] [pid 8974] (20014)Internal error: Can’t open file ‘/home/svn/repo/xxx/format’: Permission denied</h3><p>一般来说此错误是没有权限导致的，如果即使授予 777 或者更改 owner 仍然出现此错误的话，有可能是 selinux 导致的，通过命令 setenforce 0 关闭它再尝试。</p>
 <p>如果想要永久关闭 selinux, 可以修改配置文件 /etc/selinux/config</p>
+<h3 id="u5176_u4ED6_u673A_u5668_u65E0_u6CD5_u8BBF_u95EE_https"><a href="#u5176_u4ED6_u673A_u5668_u65E0_u6CD5_u8BBF_u95EE_https" class="headerlink" title="其他机器无法访问 https"></a>其他机器无法访问 https</h3><ul>
+<li>有可能是 IP 设置为 127.0.0.1 造成的，改为 0.0.0.0</li>
+<li>有可能是 iptables 造成的，直接关闭并清理<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">service iptables stop</span><br><span class="line">iptables -F</span><br><span class="line">iptables -X</span><br><span class="line">iptables -Z</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 <h2 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h2><ul>
 <li><a href="https://wiki.archlinux.org/index.php/Subversion_Setup" target="_blank" rel="external">ArchLinux: Subversion Setup</a></li>
 <li><a href="https://help.ubuntu.com/community/Subversion" target="_blank" rel="external">Ubuntu Wiki: Subversion</a></li>
@@ -162,6 +167,8 @@
   
     <li><a href="/tags/chromium/">chromium</a><small>3</small></li>
   
+    <li><a href="/tags/computer/">computer</a><small>1</small></li>
+  
     <li><a href="/tags/computer-graphics/">computer graphics</a><small>7</small></li>
   
     <li><a href="/tags/direct3d/">direct3d</a><small>13</small></li>
@@ -185,6 +192,8 @@
     <li><a href="/tags/hdfs/">hdfs</a><small>2</small></li>
   
     <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/llvm/">llvm</a><small>1</small></li>
   
     <li><a href="/tags/opensource/">opensource</a><small>1</small></li>
   

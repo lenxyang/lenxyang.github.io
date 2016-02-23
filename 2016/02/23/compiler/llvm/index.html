@@ -3,16 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>gcc | azer3D</title>
+  <title>LLVM | azer3D</title>
   <meta name="author" content="lenxyang@gmail.com">
   
-  <meta name="description" content="GCC Tricks去掉 debug info一般情况下 debug info 是不需要的，发布时可以包括两个版本带有调试信息和不带调试信息的，上线使用不带调试信息的，如果出现 core 在使用带有调试信息的追问题。（某些时候带宽真的是问题，发布的程序越小越好）
-1strip -g -S -d .b">
+  <meta name="description" content="LLVMReference
+LLVM Tutorial
+Amazon: Getting Started with LLVM Core Libraries
+CMU LLVM Lecture">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="gcc"/>
+  <meta property="og:title" content="LLVM"/>
   <meta property="og:site_name" content="azer3D"/>
 
   
@@ -52,21 +54,22 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-02-16T01:23:00.000Z"><a href="/2016/02/16/toolchain/gcc/">2016-02-16</a></time>
+        <time datetime="2016-02-23T03:25:47.000Z"><a href="/2016/02/23/compiler/llvm/">2016-02-23</a></time>
       
       
   
-    <h1 class="title">gcc</h1>
+    <h1 class="title">LLVM</h1>
   
 
     </header>
     <div class="entry">
       
-        <h1 id="GCC_Tricks"><a href="#GCC_Tricks" class="headerlink" title="GCC Tricks"></a>GCC Tricks</h1><h2 id="u53BB_u6389_debug_info"><a href="#u53BB_u6389_debug_info" class="headerlink" title="去掉 debug info"></a>去掉 debug info</h2><p>一般情况下 debug info 是不需要的，发布时可以包括两个版本带有调试信息和不带调试信息的，上线使用不带调试信息的，如果出现 core 在使用带有调试信息的追问题。（某些时候带宽真的是问题，发布的程序越小越好）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strip -g -S <span class="operator">-d</span> .build/opt/targets/wolong/auditing/wuliao/wolong_wuliao_auditing</span><br></pre></td></tr></table></figure>
-<h2 id="u8FDE_u63A5_u9759_u6001_libgcc_2C_libstdc"><a href="#u8FDE_u63A5_u9759_u6001_libgcc_2C_libstdc" class="headerlink" title="连接静态 libgcc, libstdc"></a>连接静态 libgcc, libstdc</h2><p>libgcc 是非常基础的库，他基本与编译器是绑定的，如果部署的机器 gcc 版本较低，很有可能会因为 libgcc 的版本没办法运行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc ... -static-libgcc -static-libstdc++</span><br></pre></td></tr></table></figure>
-<h2 id="u67E5_u770B_u4F9D_u8D56_u5DE5_u5177_ldd"><a href="#u67E5_u770B_u4F9D_u8D56_u5DE5_u5177_ldd" class="headerlink" title="查看依赖工具 ldd"></a>查看依赖工具 ldd</h2><h2 id="symbol_3A_nm"><a href="#symbol_3A_nm" class="headerlink" title="symbol: nm"></a>symbol: nm</h2>
+        <h1 id="LLVM"><a href="#LLVM" class="headerlink" title="LLVM"></a>LLVM</h1><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
+<li><a href="http://llvm.org/docs/tutorial/index.html" target="_blank" rel="external">LLVM Tutorial</a></li>
+<li><a href="http://www.amazon.com/Getting-Started-LLVM-Core-Libraries-ebook/dp/B00N2RWMSQ/" target="_blank" rel="external">Amazon: Getting Started with LLVM Core Libraries</a></li>
+<li><a href="http://www.cs.cmu.edu/afs/cs.cmu.edu/academic/class/15745-s14/public/lectures" target="_blank" rel="external">CMU LLVM Lecture</a></li>
+</ul>
+
       
     </div>
     <footer>
@@ -75,7 +78,7 @@
         
   
   <div class="tags">
-    <a href="/tags/gcc/">gcc</a>, <a href="/tags/gnu/">gnu</a>, <a href="/tags/toolchain/">toolchain</a>
+    <a href="/tags/computer/">computer</a>, <a href="/tags/llvm/">llvm</a>
   </div>
 
         
@@ -101,7 +104,7 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="fb-comments" data-href="http://lenxyang.github.io/2016/02/16/toolchain/gcc/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="http://lenxyang.github.io/2016/02/23/compiler/llvm/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
 </section>

@@ -50,86 +50,27 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/d3d11/tools/">2016-01-25</a></time>
+        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/hexo/hexo-setup/">2016-01-25</a></time>
       
       
   
-    <h1 class="title"><a href="/2016/01/25/d3d11/tools/">3D Tools</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h1><h2 id="u6A21_u578B_u63D0_u53D6_u5DE5_u5177"><a href="#u6A21_u578B_u63D0_u53D6_u5DE5_u5177" class="headerlink" title="模型提取工具"></a>模型提取工具</h2><ul>
-<li><a href="http://www.deep-shadows.com/hax/3DRipperDX.htm" target="_blank" rel="external">3D Ripper DX</a></li>
-</ul>
-<h2 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h2><ul>
-<li><a href="http://www.bundysoft.com/L3DT/" target="_blank" rel="external">L3DT - Large 3D Terrain Generator</a></li>
-<li><a href="http://planetside.co.uk/" target="_blank" rel="external">Terragen-3D</a></li>
-<li><a href="http://www.ogre3d.org/tikiwiki/DCC+Tools#Terrain_generation" target="_blank" rel="external">OGRE DCC Tools</a></li>
-</ul>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/azer/month-report-201511/">2016-01-25</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/01/25/azer/month-report-201511/">2015-11 Month Report</a></h1>
+    <h1 class="title"><a href="/2016/01/25/hexo/hexo-setup/">hexo-setup</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <h1 id="201511__u6708_u5DE5_u4F5C"><a href="#201511__u6708_u5DE5_u4F5C" class="headerlink" title="201511 月工作"></a>201511 月工作</h1><h2 id="20151101_7E2015117"><a href="#20151101_7E2015117" class="headerlink" title="20151101~2015117"></a>20151101~2015117</h2><ul>
-<li>UI frameword<ul>
-<li>重构 nelf/Toolbar(completed, 20151102)</li>
-<li>window shortcut(doing)</li>
-<li>Effect UI</li>
-<li>Simple Material Window</li>
-<li>window dock(Visual Studio Style)</li>
-</ul>
-</li>
-<li>Object Controller<ul>
-<li>Rotation Controller(completed, 20151102)</li>
-<li>Translation Controller(20151103)</li>
-<li>Scale Controller(20151105)</li>
-<li>Picking Helper(20151105)</li>
-</ul>
-</li>
-<li>Light Controller<ul>
-<li>Spot Light Mesh(2015117)</li>
-<li>Directional Light Mesh(2015117)</li>
-<li>Point Light Mesh(2015117)</li>
-<li>Light Parameters UI</li>
-</ul>
-</li>
-<li>Others<ul>
-<li>追查渲染速度变慢的原因(新的 mesh 框架) (20151103)<ul>
-<li>原因是 cow.obj 有300多个 meshpart, 默认情况下每一个 meshpart 都会切换一次 effect, GpuConstantTable 等，因此就导致的速度很慢。</li>
-</ul>
-</li>
-</ul>
-</li>
+        <h1 id="Hexo-setup"><a href="#Hexo-setup" class="headerlink" title="Hexo-setup"></a>Hexo-setup</h1><h2 id="u5B89_u88C5_hexo"><a href="#u5B89_u88C5_hexo" class="headerlink" title="安装 hexo"></a>安装 hexo</h2><h2 id="hexo__u57FA_u7840_u64CD_u4F5C"><a href="#hexo__u57FA_u7840_u64CD_u4F5C" class="headerlink" title="hexo 基础操作"></a>hexo 基础操作</h2><h2 id="u90E8_u7F72_u5230_github"><a href="#u90E8_u7F72_u5230_github" class="headerlink" title="部署到 github"></a>部署到 github</h2><h3 id="u5EFA_u7ACB_u4FE1_u4EFB_u5173_u7CFB"><a href="#u5EFA_u7ACB_u4FE1_u4EFB_u5173_u7CFB" class="headerlink" title="建立信任关系"></a>建立信任关系</h3><p>hexo 需要将生成的内容 push 到 git 服务器上。 使用 ssh 的协议能够免密码 push。具体操作是将 ssh-keygen 生成的 public key 文件添加到 github 的 deploy key 当中。</p>
+<h3 id="u4FEE_u6539__config"><a href="#u4FEE_u6539__config" class="headerlink" title="修改 _config"></a>修改 _config</h3><p>修改 _config.yaml<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: http://hexo.io/docs/deployment.html</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: git@github.com:lenxyang/lenxyang.github.io.git</span><br></pre></td></tr></table></figure></p>
+<h2 id="u5B89_u88C5_u4E3B_u9898"><a href="#u5B89_u88C5_u4E3B_u9898" class="headerlink" title="安装主题"></a>安装主题</h2><h3 id="u5C06_u4E3B_u9898_u4FDD_u5B58_u5728_themes__u76EE_u5F55_u4E0B"><a href="#u5C06_u4E3B_u9898_u4FDD_u5B58_u5728_themes__u76EE_u5F55_u4E0B" class="headerlink" title="将主题保存在 themes 目录下"></a>将主题保存在 themes 目录下</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/hexojs/hexo-theme-light.git themes/light</span><br></pre></td></tr></table></figure>
+<h3 id="u4FEE_u6539__config-yaml"><a href="#u4FEE_u6539__config-yaml" class="headerlink" title="修改 _config.yaml"></a>修改 _config.yaml</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Extensions</span></span><br><span class="line"><span class="comment">## Plugins: http://hexo.io/plugins/</span></span><br><span class="line"><span class="comment">## Themes: http://hexo.io/themes/</span></span><br><span class="line"><span class="comment">## theme: landscape</span></span><br><span class="line">theme: light</span><br></pre></td></tr></table></figure>
+<h2 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h2><h3 id="u8FD0_u884C_hexo__u662F_u63D0_u793A__u201C/usr/bin/env_3A_node_3A_No_such_file_or_directory_u201D"><a href="#u8FD0_u884C_hexo__u662F_u63D0_u793A__u201C/usr/bin/env_3A_node_3A_No_such_file_or_directory_u201D" class="headerlink" title="运行 hexo 是提示 “/usr/bin/env: node: No such file or directory”"></a>运行 hexo 是提示 “/usr/bin/env: node: No such file or directory”</h3><p>最简单的办法是</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install nodejs-legacy</span><br></pre></td></tr></table></figure>
+<h3 id="hexo_deploy_3A_ERROR_Deployer_not_found_3A_github"><a href="#hexo_deploy_3A_ERROR_Deployer_not_found_3A_github" class="headerlink" title="hexo deploy: ERROR Deployer not found: github"></a>hexo deploy: ERROR Deployer not found: github</h3><p>hexo 从 3.0 以后，type 由 github 变为了 git。毕竟主要有一个 git repository 就可以部署了，并非 github 不可。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: http://hexo.io/docs/deployment.html</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: git@github.com:lenxyang/lenxyang.github.io.git</span><br></pre></td></tr></table></figure>
+<h2 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://nodejs.org/en/download/package-manager/" target="_blank" rel="external">Installing Node.js via package manager</a></li>
+<li><a href="https://www.zhihu.com/question/24422335" target="_blank" rel="external">知乎: 有哪些好看的 Hexo 主题？</a></li>
 </ul>
 
       
@@ -200,28 +141,121 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/hexo/hexo-setup/">2016-01-25</a></time>
+        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/hdfs/setup-hdfs-on-docker/">2016-01-25</a></time>
       
       
   
-    <h1 class="title"><a href="/2016/01/25/hexo/hexo-setup/">hexo-setup</a></h1>
+    <h1 class="title"><a href="/2016/01/25/hdfs/setup-hdfs-on-docker/">Setup HDFS on Docker</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <h1 id="Hexo-setup"><a href="#Hexo-setup" class="headerlink" title="Hexo-setup"></a>Hexo-setup</h1><h2 id="u5B89_u88C5_hexo"><a href="#u5B89_u88C5_hexo" class="headerlink" title="安装 hexo"></a>安装 hexo</h2><h2 id="hexo__u57FA_u7840_u64CD_u4F5C"><a href="#hexo__u57FA_u7840_u64CD_u4F5C" class="headerlink" title="hexo 基础操作"></a>hexo 基础操作</h2><h2 id="u90E8_u7F72_u5230_github"><a href="#u90E8_u7F72_u5230_github" class="headerlink" title="部署到 github"></a>部署到 github</h2><h3 id="u5EFA_u7ACB_u4FE1_u4EFB_u5173_u7CFB"><a href="#u5EFA_u7ACB_u4FE1_u4EFB_u5173_u7CFB" class="headerlink" title="建立信任关系"></a>建立信任关系</h3><p>hexo 需要将生成的内容 push 到 git 服务器上。 使用 ssh 的协议能够免密码 push。具体操作是将 ssh-keygen 生成的 public key 文件添加到 github 的 deploy key 当中。</p>
-<h3 id="u4FEE_u6539__config"><a href="#u4FEE_u6539__config" class="headerlink" title="修改 _config"></a>修改 _config</h3><p>修改 _config.yaml<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: http://hexo.io/docs/deployment.html</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: git@github.com:lenxyang/lenxyang.github.io.git</span><br></pre></td></tr></table></figure></p>
-<h2 id="u5B89_u88C5_u4E3B_u9898"><a href="#u5B89_u88C5_u4E3B_u9898" class="headerlink" title="安装主题"></a>安装主题</h2><h3 id="u5C06_u4E3B_u9898_u4FDD_u5B58_u5728_themes__u76EE_u5F55_u4E0B"><a href="#u5C06_u4E3B_u9898_u4FDD_u5B58_u5728_themes__u76EE_u5F55_u4E0B" class="headerlink" title="将主题保存在 themes 目录下"></a>将主题保存在 themes 目录下</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/hexojs/hexo-theme-light.git themes/light</span><br></pre></td></tr></table></figure>
-<h3 id="u4FEE_u6539__config-yaml"><a href="#u4FEE_u6539__config-yaml" class="headerlink" title="修改 _config.yaml"></a>修改 _config.yaml</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Extensions</span></span><br><span class="line"><span class="comment">## Plugins: http://hexo.io/plugins/</span></span><br><span class="line"><span class="comment">## Themes: http://hexo.io/themes/</span></span><br><span class="line"><span class="comment">## theme: landscape</span></span><br><span class="line">theme: light</span><br></pre></td></tr></table></figure>
-<h2 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h2><h3 id="u8FD0_u884C_hexo__u662F_u63D0_u793A__u201C/usr/bin/env_3A_node_3A_No_such_file_or_directory_u201D"><a href="#u8FD0_u884C_hexo__u662F_u63D0_u793A__u201C/usr/bin/env_3A_node_3A_No_such_file_or_directory_u201D" class="headerlink" title="运行 hexo 是提示 “/usr/bin/env: node: No such file or directory”"></a>运行 hexo 是提示 “/usr/bin/env: node: No such file or directory”</h3><p>最简单的办法是</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install nodejs-legacy</span><br></pre></td></tr></table></figure>
-<h3 id="hexo_deploy_3A_ERROR_Deployer_not_found_3A_github"><a href="#hexo_deploy_3A_ERROR_Deployer_not_found_3A_github" class="headerlink" title="hexo deploy: ERROR Deployer not found: github"></a>hexo deploy: ERROR Deployer not found: github</h3><p>hexo 从 3.0 以后，type 由 github 变为了 git。毕竟主要有一个 git repository 就可以部署了，并非 github 不可。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: http://hexo.io/docs/deployment.html</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: git@github.com:lenxyang/lenxyang.github.io.git</span><br></pre></td></tr></table></figure>
-<h2 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h2><ul>
-<li><a href="https://nodejs.org/en/download/package-manager/" target="_blank" rel="external">Installing Node.js via package manager</a></li>
-<li><a href="https://www.zhihu.com/question/24422335" target="_blank" rel="external">知乎: 有哪些好看的 Hexo 主题？</a></li>
+        <h1 id="u4F7F_u7528_Docker__u5EFA_u7ACB_HDFS__u96C6_u7FA4"><a href="#u4F7F_u7528_Docker__u5EFA_u7ACB_HDFS__u96C6_u7FA4" class="headerlink" title="使用 Docker 建立 HDFS 集群"></a>使用 Docker 建立 HDFS 集群</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">$ sudo docker pull docker.io/centos</span><br></pre></td></tr></table></figure>
+<h2 id="u521B_u5EFA_u955C_u50CF"><a href="#u521B_u5EFA_u955C_u50CF" class="headerlink" title="创建镜像"></a>创建镜像</h2><h3 id="u914D_u7F6E_DNS__u670D_u52A1_u5668"><a href="#u914D_u7F6E_DNS__u670D_u52A1_u5668" class="headerlink" title="配置 DNS 服务器"></a>配置 DNS 服务器</h3><p>Docker 配置静态 IP 比较麻烦，/etc/hosts 文件在启动 docker 时自动生成，之前的更改可能被覆盖，为 docker 集群提供一个 DNS 服务是个不错的方法，一个 DNS 缓存服务器就足够用了，完全不需要完整的服务（架设，配置都比较麻烦）。</p>
+<p>DNS 缓存服务我们采用 dnsmasq，具体方法参考 <a href="https://wiredcraft.com/blog/dns-and-docker-containers/" target="_blank" rel="external">DNS AND DOCKER CONTAINERS</a></p>
+<h4 id="u542F_u52A8_u670D_u52A1"><a href="#u542F_u52A8_u670D_u52A1" class="headerlink" title="启动服务"></a>启动服务</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">docker run <span class="operator">-d</span> dnsmasq /bin/sh -c <span class="string">"/sbin/dnsmasq; while true; do echo sleep; sleep 1; done"</span></span><br></pre></td></tr></table></figure>
+<h3 id="u914D_u7F6E_DNS"><a href="#u914D_u7F6E_DNS" class="headerlink" title="配置 DNS"></a>配置 DNS</h3><p>启动是通过 docker 参数指定 dns 服务及机器名</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">$ sudo docker run -dns <span class="number">177.17</span>.<span class="number">0.1</span> -h hostname imagename binary</span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过 nscenter 连接 docker</span></span><br><span class="line">$ PID=$(docker inspect --format <span class="string">"&#123;&#123; .State.Pid &#125;&#125;"</span> &lt;container&gt;) <span class="comment"># 获得容器的第一个进程 id</span></span><br><span class="line">$ nsenter --target <span class="variable">$PID</span> --mount --uts --ipc --net --pid</span><br></pre></td></tr></table></figure>
+<h2 id="u914D_u7F6E_Hadoop"><a href="#u914D_u7F6E_Hadoop" class="headerlink" title="配置 Hadoop"></a>配置 Hadoop</h2><h3 id="u914D_u7F6E_u4FE1_u4EFB_u5173_u7CFB"><a href="#u914D_u7F6E_u4FE1_u4EFB_u5173_u7CFB" class="headerlink" title="配置信任关系"></a>配置信任关系</h3><p>hadoop 通过 RASPublicKey 认证的 ssh 访问，必须为所有机器建立信任关系。</p>
+<h3 id="u914D_u7F6E_Single_Node"><a href="#u914D_u7F6E_Single_Node" class="headerlink" title="配置 Single Node"></a>配置 Single Node</h3><h4 id="u914D_u7F6E_/etc/hadoop/core-site-xml"><a href="#u914D_u7F6E_/etc/hadoop/core-site-xml" class="headerlink" title="配置 /etc/hadoop/core-site.xml"></a>配置 /etc/hadoop/core-site.xml</h4><figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">&lt;configuration&gt;</span></span><br><span class="line">  <span class="variable">&lt;property&gt;</span></span><br><span class="line">    <span class="variable">&lt;name&gt;</span>fs.<span class="keyword">default</span>.name<span class="variable">&lt;/name&gt;</span></span><br><span class="line">    <span class="variable">&lt;value&gt;</span>hdfs://node1:<span class="number">49000</span><span class="variable">&lt;/value&gt;</span></span><br><span class="line">  <span class="variable">&lt;/property&gt;</span></span><br><span class="line">  <span class="variable">&lt;property&gt;</span></span><br><span class="line">    <span class="variable">&lt;name&gt;</span>hadoop.tmp.dir<span class="variable">&lt;/name&gt;</span></span><br><span class="line">    <span class="variable">&lt;value&gt;</span>/home/hadoop/var<span class="variable">&lt;/value&gt;</span></span><br><span class="line">  <span class="variable">&lt;/property&gt;</span></span><br><span class="line"><span class="variable">&lt;/configuration&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="u914D_u7F6E_/etc/hadoop/hdfs-site-xml"><a href="#u914D_u7F6E_/etc/hadoop/hdfs-site-xml" class="headerlink" title="配置 /etc/hadoop/hdfs-site.xml"></a>配置 /etc/hadoop/hdfs-site.xml</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">configuration</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">name</span>&gt;</span>dfs.replication<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">value</span>&gt;</span>1<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="u683C_u5F0F_u5316_dfs"><a href="#u683C_u5F0F_u5316_dfs" class="headerlink" title="格式化 dfs"></a>格式化 dfs</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">hadoop namenode -format</span><br></pre></td></tr></table></figure>
+<h3 id="u542F_u52A8_hdfs"><a href="#u542F_u52A8_hdfs" class="headerlink" title="启动 hdfs"></a>启动 hdfs</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">~/hadoop-<span class="number">2.6</span>.<span class="number">0</span>/sbin/start-dfs.sh</span><br></pre></td></tr></table></figure>
+<h2 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h2><h3 id="u90E8_u7F72_dnsmasq__u65F6_u51FA_u73B0_u9519_u8BEF__u201Csetting_capabilities_failed_3A_Operation_not_permitted_u201D"><a href="#u90E8_u7F72_dnsmasq__u65F6_u51FA_u73B0_u9519_u8BEF__u201Csetting_capabilities_failed_3A_Operation_not_permitted_u201D" class="headerlink" title="部署 dnsmasq 时出现错误 “setting capabilities failed: Operation not permitted”"></a>部署 dnsmasq 时出现错误 “setting capabilities failed: Operation not permitted”</h3><p>具体解决办法，修改 /etc/dnsmaqs.conf<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!bash</span></span><br><span class="line">user=root</span><br></pre></td></tr></table></figure></p>
+<p>参考 <a href="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=514214" target="_blank" rel="external">Debian Bug report logs - #514214 dnsmasq crashes if fails to set capabilities</a></p>
+<h3 id="u8FDE_u63A5_ssh__u670D_u52A1_u662F_u51FA_u73B0__u201Cssh_Read_from_socket_failed_3A_Connection_reset_by_peer_u201D"><a href="#u8FDE_u63A5_ssh__u670D_u52A1_u662F_u51FA_u73B0__u201Cssh_Read_from_socket_failed_3A_Connection_reset_by_peer_u201D" class="headerlink" title="连接 ssh 服务是出现 “ssh Read from socket failed: Connection reset by peer”"></a>连接 ssh 服务是出现 “ssh Read from socket failed: Connection reset by peer”</h3><p>docker image 可能是安装非常初步的操作系统，各种错误都用可能出现。这个问题是 sshd 异常中断导致的，可以使用 /sbin/sshd -d 启动程序，而后通过 ssh 连接服务，sshd 会打印足够的日志来诊断问题。</p>
+<h1 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="http://tecadmin.net/setup-dns-server-on-centos-redhat/" target="_blank" rel="external">How to Setup DNS (Bind) Server on CentOS/RHEL 7/6/5</a></li>
 </ul>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/d3d11/shadowmap_devnotes/">2016-01-25</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/01/25/d3d11/shadowmap_devnotes/">Shadowmap Devnotes</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="Shadowmap__28DevNotes_29"><a href="#Shadowmap__28DevNotes_29" class="headerlink" title="Shadowmap (DevNotes)"></a>Shadowmap (DevNotes)</h1><h2 id="Troubles"><a href="#Troubles" class="headerlink" title="Troubles"></a>Troubles</h2><h3 id="u4F7F_u7528_Light_Camera__u6E32_u67D3_u65F6_uFF0C_u6CA1_u6709_Pixel_Stage"><a href="#u4F7F_u7528_Light_Camera__u6E32_u67D3_u65F6_uFF0C_u6CA1_u6709_Pixel_Stage" class="headerlink" title="使用 Light Camera 渲染时，没有 Pixel Stage"></a>使用 Light Camera 渲染时，没有 Pixel Stage</h3><p>在使用 Light Camera 渲染时，从 Visual Studio 的图形诊断看，Vertex Stage 是正常的，但是 PixelStage 就没有内容了。<br>原因是：对于 Light Camera 来说, 这些对象都是不可见的。</p>
+<h3 id="u5224_u65AD_u6295_u5F71_u5750_u6807_u662F_u5426_u6B63_u786E"><a href="#u5224_u65AD_u6295_u5F71_u5750_u6807_u662F_u5426_u6B63_u786E" class="headerlink" title="判断投影坐标是否正确"></a>判断投影坐标是否正确</h3><p>可以直接将深度绘制出来，不进行其他任何计算，看是否符合预期</p>
+<h3 id="Texturemap__u4E0E_shadowmap__u6DF7_u6DC6"><a href="#Texturemap__u4E0E_shadowmap__u6DF7_u6DC6" class="headerlink" title="Texturemap 与 shadowmap 混淆"></a>Texturemap 与 shadowmap 混淆</h3><p>对 texturemap 增加后缀后问题解决<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Texture2D texmap : <span class="keyword">register</span>(t0);</span><br><span class="line">Texture2D shadowmap : <span class="keyword">register</span>(t1);</span><br></pre></td></tr></table></figure></p>
+<h3 id="u5BF9_u8C61_u6295_u5F71_u9519_u8BEF"><a href="#u5BF9_u8C61_u6295_u5F71_u9519_u8BEF" class="headerlink" title="对象投影错误"></a>对象投影错误</h3><p>原因是传递的 Light Projection View Matrix 没有乘上物体的 World matrix, 这个错误在当前框架下比较容易犯。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/hdfs/fuse-on-hdfs/">2016-01-25</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/01/25/hdfs/fuse-on-hdfs/">fuse driver for HDFS</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h1><h2 id="u7F16_u8BD1_libhdfs"><a href="#u7F16_u8BD1_libhdfs" class="headerlink" title="编译 libhdfs"></a>编译 libhdfs</h2><p>使用 cdh 版本的 hadoop, 默认 libhdfs 不会编译</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="variable">$&#123;hadoop_client&#125;</span>/src/hadoop-mapreduce1-project/src/c++/libhdfs</span><br><span class="line">./bootstrap.sh</span><br><span class="line">./configure</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
+<h2 id="u53EF_u80FD_u9047_u5230_u7684_u95EE_u9898"><a href="#u53EF_u80FD_u9047_u5230_u7684_u95EE_u9898" class="headerlink" title="可能遇到的问题"></a>可能遇到的问题</h2><ul>
+<li>cc1: error: unrecognized command line option “-m”</li>
+</ul>
+<p>gcc 使用 -m 选项指定 target arch, 出现这个错误的原因是 -m 后面没有跟参数。在所有没有参数的 -m 后面增加 64 即可</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CFLAGS = -g -O2 -DOS_LINUX -DDSO_DLFCN -DCPU=\<span class="string">"amd64\" -m64</span><br><span class="line">LDFLAGS =  -m64 -L/usr/jdk_home/jre/lib/amd64/server</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>include/stddef.h:211: error: duplicate ‘unsigned</li>
+</ul>
+<p>这个错误是因为 Makefile 当中包含</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-Dsize_t=unsigned\ int</span><br></pre></td></tr></table></figure>
+<h2 id="fuse__u603B_u662F_u4EE5_4096__u4E3A_u5355_u4F4D_u8BFB_u5199"><a href="#fuse__u603B_u662F_u4EE5_4096__u4E3A_u5355_u4F4D_u8BFB_u5199" class="headerlink" title="fuse 总是以 4096 为单位读写"></a>fuse 总是以 4096 为单位读写</h2><p>启动时增加 options, 注意 big_writes 必须启用，否则其他选项不起作用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-o max_readahead=<span class="number">1024000</span> -omax_write=<span class="number">1024000</span> -obig_writes</span><br></pre></td></tr></table></figure>
+<h2 id="u5176_u4ED6_u7528_u6237_u65E0_u6CD5_u8BBF_u95EE_fuse__u8DEF_u5F84"><a href="#u5176_u4ED6_u7528_u6237_u65E0_u6CD5_u8BBF_u95EE_fuse__u8DEF_u5F84" class="headerlink" title="其他用户无法访问 fuse 路径"></a>其他用户无法访问 fuse 路径</h2><p>在挂载 mdfs 之后，如果使用其他账户进行操作会出现 “ls: cannot access test: Permission denied” 错误。这是 fuse 的配置导致</p>
+<p>修改 /etc/fuse.conf</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user_allow_other</span><br></pre></td></tr></table></figure>
+<p>此外运行 mdfs 时增加 <strong><em> -oallow_other </em></strong> ， 问题就解决了</p>
+<h2 id="java-lang-UnsupportedClassVersionError"><a href="#java-lang-UnsupportedClassVersionError" class="headerlink" title="java.lang.UnsupportedClassVersionError"></a>java.lang.UnsupportedClassVersionError</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Exception <span class="keyword">in</span> thread <span class="string">"main"</span> java.lang.UnsupportedClassVersionError: org/apache/hadoop/conf/Configuration : Unsupported major.minor version <span class="number">51.0</span></span><br><span class="line">   at java.lang.ClassLoader.defineClass1(Native Method)</span><br><span class="line">   at java.lang.ClassLoader.defineClass(ClassLoader.java:<span class="number">634</span>)</span><br><span class="line">   ...</span><br></pre></td></tr></table></figure>
+<p>这很有可能是机器上安装了多个 java 版本且使用了错误的版本导致的</p>
 
       
     </div>
@@ -372,20 +406,24 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/d3d11/shadowmap_devnotes/">2016-01-25</a></time>
+        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/skia/skia-tricks/">2016-01-25</a></time>
       
       
   
-    <h1 class="title"><a href="/2016/01/25/d3d11/shadowmap_devnotes/">Shadowmap Devnotes</a></h1>
+    <h1 class="title"><a href="/2016/01/25/skia/skia-tricks/">Skia Tricks</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <h1 id="Shadowmap__28DevNotes_29"><a href="#Shadowmap__28DevNotes_29" class="headerlink" title="Shadowmap (DevNotes)"></a>Shadowmap (DevNotes)</h1><h2 id="Troubles"><a href="#Troubles" class="headerlink" title="Troubles"></a>Troubles</h2><h3 id="u4F7F_u7528_Light_Camera__u6E32_u67D3_u65F6_uFF0C_u6CA1_u6709_Pixel_Stage"><a href="#u4F7F_u7528_Light_Camera__u6E32_u67D3_u65F6_uFF0C_u6CA1_u6709_Pixel_Stage" class="headerlink" title="使用 Light Camera 渲染时，没有 Pixel Stage"></a>使用 Light Camera 渲染时，没有 Pixel Stage</h3><p>在使用 Light Camera 渲染时，从 Visual Studio 的图形诊断看，Vertex Stage 是正常的，但是 PixelStage 就没有内容了。<br>原因是：对于 Light Camera 来说, 这些对象都是不可见的。</p>
-<h3 id="u5224_u65AD_u6295_u5F71_u5750_u6807_u662F_u5426_u6B63_u786E"><a href="#u5224_u65AD_u6295_u5F71_u5750_u6807_u662F_u5426_u6B63_u786E" class="headerlink" title="判断投影坐标是否正确"></a>判断投影坐标是否正确</h3><p>可以直接将深度绘制出来，不进行其他任何计算，看是否符合预期</p>
-<h3 id="Texturemap__u4E0E_shadowmap__u6DF7_u6DC6"><a href="#Texturemap__u4E0E_shadowmap__u6DF7_u6DC6" class="headerlink" title="Texturemap 与 shadowmap 混淆"></a>Texturemap 与 shadowmap 混淆</h3><p>对 texturemap 增加后缀后问题解决<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Texture2D texmap : <span class="keyword">register</span>(t0);</span><br><span class="line">Texture2D shadowmap : <span class="keyword">register</span>(t1);</span><br></pre></td></tr></table></figure></p>
-<h3 id="u5BF9_u8C61_u6295_u5F71_u9519_u8BEF"><a href="#u5BF9_u8C61_u6295_u5F71_u9519_u8BEF" class="headerlink" title="对象投影错误"></a>对象投影错误</h3><p>原因是传递的 Light Projection View Matrix 没有乘上物体的 World matrix, 这个错误在当前框架下比较容易犯。</p>
+        <h1 id="Skia_Ticks"><a href="#Skia_Ticks" class="headerlink" title="Skia Ticks"></a>Skia Ticks</h1><h2 id="Common"><a href="#Common" class="headerlink" title="Common"></a>Common</h2><h3 id="Save_SkBitmap_2C_gfx_3A_3AImageSkia"><a href="#Save_SkBitmap_2C_gfx_3A_3AImageSkia" class="headerlink" title="Save SkBitmap, gfx::ImageSkia"></a>Save SkBitmap, gfx::ImageSkia</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#!c++</span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">"base/files/file_path.h"</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">"base/files/file_util.h"</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">"ui/gfx/codec/png_codec.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">SaveImageSkia</span><span class="params">(<span class="keyword">const</span> gfx::ImageSkia* img, base::FilePath&amp; path)</span> </span>&#123;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;uint8&gt; vec;</span><br><span class="line">  gfx::PNGCodec::EncodeBGRASkBitmap(*img-&gt;bitmap(), <span class="literal">false</span>, &amp;vec);</span><br><span class="line">  <span class="keyword">return</span> base::WriteFile(path, (<span class="keyword">const</span> <span class="keyword">char</span>*)&amp;(vec[<span class="number">0</span>]), vec.size());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h2><h3 id="views_3A_3AImageView__u4E0D_u80FD_u663E_u793A_SkBitmap"><a href="#views_3A_3AImageView__u4E0D_u80FD_u663E_u793A_SkBitmap" class="headerlink" title="views::ImageView 不能显示 SkBitmap"></a>views::ImageView 不能显示 SkBitmap</h3><p>在实现图片显示工具过程中，遇到了一个问题，通过SkBitmap创建的gfx::ImageSkia无法显示在::views::ImageView 控件上。</p>
+<p>以下是创建SkBitmap的代码<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#!c++</span></span><br><span class="line">SkImageInfo info = SkImageInfo::Make(mipmap.width, mipmap.height,</span><br><span class="line">                                       kRGBA_8888_SkColorType,</span><br><span class="line">                                       kOpaque_SkAlphaType);</span><br><span class="line">SkBitmap* bitmap = <span class="keyword">new</span> SkBitmap;</span><br><span class="line">bitmap-&gt;setInfo(info);</span><br><span class="line">bitmap-&gt;allocPixels(info);</span><br><span class="line"><span class="comment">// 开始时，使用的是 bitmap-&gt;SetPiexl(mipmap.data);</span></span><br><span class="line"><span class="built_in">memcpy</span>(bitmap-&gt;getAddr32(<span class="number">0</span>, <span class="number">0</span>), mipmap.data, <span class="number">4</span> * mipmap.width * mipmap.height);</span><br><span class="line">gfx::ImageSkia image = gfx::ImageSkia::CreateFrom1xBitmap(*bitmap);</span><br></pre></td></tr></table></figure></p>
+<p>views::ImageView始终无法显示图像，但采用 gfx::JPEGCodec::Decode 从文件当中读去的数据就可以显示<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#!c++</span></span><br><span class="line">scoped_ptr&lt;SkBitmap&gt; skbitmap(</span><br><span class="line">      gfx::JPEGCodec::Decode((<span class="keyword">unsigned</span> <span class="keyword">char</span>*)contents.c_str(), contents.length()));</span><br><span class="line">gfx::ImageSkia image = gfx::ImageSkia::CreateFrom1xBitmap(*skbitmap.get());</span><br></pre></td></tr></table></figure></p>
+<p>最终按照gfx::JPEGCodec的方式创建SkBitmap问题解决，但还没有找到原因</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!c++</span></span><br><span class="line">  SkBitmap* bitmap = new SkBitmap<span class="comment">;</span></span><br><span class="line">  bitmap-&gt;allocN32Pixels<span class="list">(<span class="keyword">mipmap</span>.width, mipmap.height)</span><span class="comment">;</span></span><br><span class="line">  memcpy<span class="list">(<span class="keyword">bitmap-&gt;getAddr32</span><span class="list">(<span class="number">0</span>, <span class="number">0</span>)</span>, mipmap.data, <span class="number">4</span> <span class="variable">* mipmap.width *</span> mipmap.height)</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<h3 id="IDirect3D11Texture2D_u65E0_u6CD5_u8F6C_u6362_u4E3ASkBitmap"><a href="#IDirect3D11Texture2D_u65E0_u6CD5_u8F6C_u6362_u4E3ASkBitmap" class="headerlink" title="IDirect3D11Texture2D无法转换为SkBitmap"></a>IDirect3D11Texture2D无法转换为SkBitmap</h3><p>创建具有CPURead模式的Texture并将它读入SkBitmap，通过canvas-&gt;Draw 显示出来以后会发现他的 蓝色和红色是相反的，无论SkBitmap设置成什么模式都不行<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#!c++</span><br><span class="line">  info_ = SkImageInfo::MakeN32(<span class="built_in">size</span>.<span class="variable">width</span>(), <span class="built_in">size</span>.<span class="variable">height</span>(), kOpaque_SkAlphaType);</span><br><span class="line">  info_ = SkImageInfo::Make(<span class="built_in">size</span>.<span class="variable">width</span>(), <span class="built_in">size</span>.<span class="variable">height</span>(),</span><br><span class="line">                              kBGRA_8888_SkColorType, kOpaque_SkAlphaType);</span><br><span class="line">  info_ = SkImageInfo::Make(<span class="built_in">size</span>.<span class="variable">width</span>(), <span class="built_in">size</span>.<span class="variable">height</span>(),</span><br><span class="line">                              kRGBA_8888_SkColorType, kOpaque_SkAlphaType);</span><br><span class="line">  bitmap_.allocN32Pixels(<span class="built_in">size</span>.<span class="variable">width</span>(), <span class="built_in">size</span>.<span class="variable">height</span>());</span><br><span class="line">  bitmap_.allocPixels(info_);</span><br><span class="line"></span><br><span class="line">  TexturePtr tex = overlay_-&gt;GetTexture();</span><br><span class="line">  CHECK(tex-&gt;CopyTo(texture_.<span class="built_in">get</span>()));</span><br><span class="line">  Texture::MapData mapdata = texture_-&gt;<span class="built_in">map</span>(kReadOnly);</span><br><span class="line">  <span class="comment">// bitmap_.installPixels(info_, mapdata.pdata, mapdata.row_pitch);</span></span><br><span class="line">  memcpy(bitmap_.getPixels(), mapdata.pdata, <span class="number">256</span> * <span class="number">256</span> * <span class="number">4</span>);</span><br><span class="line">  texture_-&gt;unmap();</span><br><span class="line">  gfx::ImageSkia img = gfx::ImageSkia::CreateFrom1xBitmap(bitmap_);</span><br><span class="line">  canvas-&gt;DrawImageInt(img, <span class="number">0</span>, <span class="number">0</span>, <span class="number">256</span>, <span class="number">256</span>,</span><br><span class="line">                       <span class="number">0</span>, <span class="number">0</span>, <span class="keyword">this</span>-&gt;<span class="variable">width</span>(), <span class="keyword">this</span>-&gt;<span class="variable">height</span>(), <span class="keyword">true</span>);</span><br></pre></td></tr></table></figure></p>
+<p>但是用 KRGBA_8888 时，似乎连颜色都没有了，通过 shader 将 B 和 R 交换位置后输出，通过MakeN32模式就没有问题了。</p>
 
       
     </div>
@@ -709,6 +747,8 @@
   
     <li><a href="/tags/chromium/">chromium</a><small>3</small></li>
   
+    <li><a href="/tags/computer/">computer</a><small>1</small></li>
+  
     <li><a href="/tags/computer-graphics/">computer graphics</a><small>7</small></li>
   
     <li><a href="/tags/direct3d/">direct3d</a><small>13</small></li>
@@ -732,6 +772,8 @@
     <li><a href="/tags/hdfs/">hdfs</a><small>2</small></li>
   
     <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/llvm/">llvm</a><small>1</small></li>
   
     <li><a href="/tags/opensource/">opensource</a><small>1</small></li>
   
