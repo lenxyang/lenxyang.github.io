@@ -3,15 +3,13 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Shadowmap Devnotes | azer3D</title>
+  <title>wow | azer3D</title>
   <meta name="author" content="lenxyang@gmail.com">
-  
-  <meta name="description" content="Shadowmap (DevNotes)Troubles使用 Light Camera 渲染时，没有 Pixel Stage在使用 Light Camera 渲染时，从 Visual Studio 的图形诊断看，Vertex Stage 是正常的，但是 PixelStage 就没有内容了。原因是：对">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="Shadowmap Devnotes"/>
+  
   <meta property="og:site_name" content="azer3D"/>
 
   
@@ -45,66 +43,25 @@
 <div class="clearfix"></div>
 </header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-01-25T08:52:47.000Z"><a href="/2016/01/25/d3d11/shadowmap_devnotes/">2016-01-25</a></time>
-      
-      
-  
-    <h1 class="title">Shadowmap Devnotes</h1>
-  
+    <div id="main-col" class="alignleft"><div id="wrapper">
+<h2 class="archive-title tag">wow</h2>
 
-    </header>
-    <div class="entry">
-      
-        <h1 id="Shadowmap__28DevNotes_29"><a href="#Shadowmap__28DevNotes_29" class="headerlink" title="Shadowmap (DevNotes)"></a>Shadowmap (DevNotes)</h1><h2 id="Troubles"><a href="#Troubles" class="headerlink" title="Troubles"></a>Troubles</h2><h3 id="u4F7F_u7528_Light_Camera__u6E32_u67D3_u65F6_uFF0C_u6CA1_u6709_Pixel_Stage"><a href="#u4F7F_u7528_Light_Camera__u6E32_u67D3_u65F6_uFF0C_u6CA1_u6709_Pixel_Stage" class="headerlink" title="使用 Light Camera 渲染时，没有 Pixel Stage"></a>使用 Light Camera 渲染时，没有 Pixel Stage</h3><p>在使用 Light Camera 渲染时，从 Visual Studio 的图形诊断看，Vertex Stage 是正常的，但是 PixelStage 就没有内容了。<br>原因是：对于 Light Camera 来说, 这些对象都是不可见的。</p>
-<h3 id="u5224_u65AD_u6295_u5F71_u5750_u6807_u662F_u5426_u6B63_u786E"><a href="#u5224_u65AD_u6295_u5F71_u5750_u6807_u662F_u5426_u6B63_u786E" class="headerlink" title="判断投影坐标是否正确"></a>判断投影坐标是否正确</h3><p>可以直接将深度绘制出来，不进行其他任何计算，看是否符合预期</p>
-<h3 id="Texturemap__u4E0E_shadowmap__u6DF7_u6DC6"><a href="#Texturemap__u4E0E_shadowmap__u6DF7_u6DC6" class="headerlink" title="Texturemap 与 shadowmap 混淆"></a>Texturemap 与 shadowmap 混淆</h3><p>对 texturemap 增加后缀后问题解决<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Texture2D texmap : <span class="keyword">register</span>(t0);</span><br><span class="line">Texture2D shadowmap : <span class="keyword">register</span>(t1);</span><br></pre></td></tr></table></figure></p>
-<h3 id="u5BF9_u8C61_u6295_u5F71_u9519_u8BEF"><a href="#u5BF9_u8C61_u6295_u5F71_u9519_u8BEF" class="headerlink" title="对象投影错误"></a>对象投影错误</h3><p>原因是传递的 Light Projection View Matrix 没有乘上物体的 World matrix, 这个错误在当前框架下比较容易犯。</p>
 
-      
-    </div>
-    <footer>
-      
-        
-        
-  
-  <div class="tags">
-    <a href="/tags/direct3d/">direct3d</a>, <a href="/tags/effect/">effect</a>
+  <div class="archive">
+    
+      <article class="post">
+        <div class="post-content">
+          <header>
+            <div class="icon"></div>
+            <time datetime="2016-02-23T08:58:47.000Z"><a href="/2016/02/23/wow/blp_format/">2016-02-23</a></time>
+            
+              <h1 class="title"><a href="/2016/02/23/wow/blp_format/">BLP Texture Format</a></h1>
+            
+          </header>
+        </div>
+      </article>
+    
   </div>
-
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-<section id="comment">
-  <h1 class="title">留言</h1>
-
-  
-      <div id="fb-root"></div>
-<script>
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-</script>
-
-<div class="fb-comments" data-href="http://lenxyang.github.io/2016/01/25/d3d11/shadowmap_devnotes/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
-      
-  
-</section>
-
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">

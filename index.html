@@ -50,6 +50,87 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-02-24T08:52:47.000Z"><a href="/2016/02/24/shell/ssh/">2016-02-24</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/02/24/shell/ssh/">ssh Tricks</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h1><h2 id="u89E3_u51B3_u8D85_u65F6_u95EE_u9898"><a href="#u89E3_u51B3_u8D85_u65F6_u95EE_u9898" class="headerlink" title="解决超时问题"></a>解决超时问题</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl -A | grep net.inet.tcp</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>net.inet.tcp.keepidle - Amount of time, in milliseconds, that the (TCP) connection must be idle before keepalive probes (if enabled) are sent.</p>
+</li>
+<li><p>net.inet.tcp.keepintvl - The interval, in milliseconds, between keepalive probes sent to remote machines. After TCPTV_KEEPCNT (default 8) probes are sent, with no response, the (TCP)connection is dropped.</p>
+</li>
+<li><p>net.inet.tcp.always_keepalive - Assume that SO_KEEPALIVE is set on all TCP connections, the kernel will periodically send a packet to the remote host to verify the connection is still up.</p>
+</li>
+</ul>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
+<li><a href="http://stackoverflow.com/questions/10665267/keep-ssh-session-alive-while-computer-sleep" target="_blank" rel="external">Keep SSH session alive while computer sleep?</a></li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-02-23T08:58:47.000Z"><a href="/2016/02/23/wow/blp_format/">2016-02-23</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/02/23/wow/blp_format/">BLP Texture Format</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="BLP_Texture_Format"><a href="#BLP_Texture_Format" class="headerlink" title="BLP Texture Format"></a>BLP Texture Format</h1><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
+<li><a href="http://wowwiki.wikia.com/wiki/BLP_file" target="_blank" rel="external">wowwiki: BLP File</a></li>
+<li><a href="https://wowdev.wiki/BLP" target="_blank" rel="external">wowdev: BLP File</a></li>
+<li><a href="https://en.wikipedia.org/wiki/S3_Texture_Compression" target="_blank" rel="external">Wikimedia: S3 Texture Compression</a></li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-02-23T07:05:55.000Z"><a href="/2016/02/23/depot_tools/apache_ssl/">2016-02-23</a></time>
       
       
@@ -206,8 +287,41 @@
         <h1 id="Texture"><a href="#Texture" class="headerlink" title="Texture"></a>Texture</h1><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
 <li><a href="https://msdn.microsoft.com/en-us/library/windows/desktop/hh308955.aspx" target="_blank" rel="external">MSDN: Texture Block Compression in Direct3D 11</a></li>
 <li><a href="https://msdn.microsoft.com/en-us/library/windows/desktop/bb694531.aspx" target="_blank" rel="external">MSDN: Block Compression (Direct3D 10)</a></li>
+<li><a href="https://software.intel.com/en-us/articles/fast-cpu-dxt-compression/" target="_blank" rel="external">Intel: Fast CPU DXT Compression</a></li>
 </ul>
 
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-02-20T01:38:00.000Z"><a href="/2016/02/20/opensource/game_engine/">2016-02-20</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/02/20/opensource/game_engine/">OpenSource GameEngine</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="OpenSource_GameEngine"><a href="#OpenSource_GameEngine" class="headerlink" title="OpenSource GameEngine"></a>OpenSource GameEngine</h1><h2 id="G3D_Innovation_Engine"><a href="#G3D_Innovation_Engine" class="headerlink" title="G3D Innovation Engine"></a><a href="http://g3d.sourceforge.net/" target="_blank" rel="external">G3D Innovation Engine</a></h2>
       
     </div>
     <footer>
@@ -265,38 +379,6 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-02-20T01:38:00.000Z"><a href="/2016/02/20/opensource/game_engine/">2016-02-20</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/02/20/opensource/game_engine/">OpenSource GameEngine</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="OpenSource_GameEngine"><a href="#OpenSource_GameEngine" class="headerlink" title="OpenSource GameEngine"></a>OpenSource GameEngine</h1><h2 id="G3D_Innovation_Engine"><a href="#G3D_Innovation_Engine" class="headerlink" title="G3D Innovation Engine"></a><a href="http://g3d.sourceforge.net/" target="_blank" rel="external">G3D Innovation Engine</a></h2>
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
         <time datetime="2016-02-17T10:45:44.730Z"><a href="/2016/02/17/d3d11/direct3d11/">2016-02-17</a></time>
       
       
@@ -311,91 +393,6 @@
 <li><a href="http://richardssoftware.net/Home/DirectX11Tutorials" target="_blank" rel="external">SlimDX DirectX 11 Tutorials</a></li>
 <li><a href="http://www.rastertek.com/tutindex.html" target="_blank" rel="external">Rastertek Tutorial</a></li>
 <li><a href="http://ogldev.atspace.co.uk/" target="_blank" rel="external">Ogldev Tutorial</a></li>
-</ul>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-02-17T10:43:00.079Z"><a href="/2016/02/17/d3d11/decal/">2016-02-17</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/02/17/d3d11/decal/">Decal</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="Decal"><a href="#Decal" class="headerlink" title="Decal"></a>Decal</h1><h2 id="Tessellation_based_method"><a href="#Tessellation_based_method" class="headerlink" title="Tessellation based method"></a>Tessellation based method</h2><p>Tessellation based 的方法能够不影响固有程序流程做到 decal, 调优方面的工作基本全部都在 hlsl 内部，这种方法有非常好的适用性。</p>
-<p>此方法的流程如下</p>
-<ul>
-<li>确定 hit position: 找到与 mesh 匹配的点</li>
-<li>在 ds 当中将 decal texture 映射到 hit position 上</li>
-<li>而后计算 displacement </li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h1 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h1><ul>
-<li><a href="http://twvideo01.ubm-us.net/o1/vault/gdc10/slides/Bilodeau_Bill_Direct3D11TutorialTessellation.pdf" target="_blank" rel="external">AMD: Direct3D 11 Tutorial: Tessellation</a></li>
-<li>Direct3D Rendering CookBook: Chapter 6 Adding Surface Detail with Normal and Displacement Mapping</li>
-</ul>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-02-17T07:58:00.000Z"><a href="/2016/02/17/graphics/hdr/">2016-02-17</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/02/17/graphics/hdr/">High Dynamic Range(HDR)</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="High_Dynamic_Range_28HDR_29"><a href="#High_Dynamic_Range_28HDR_29" class="headerlink" title="High Dynamic Range(HDR)"></a>High Dynamic Range(HDR)</h1><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
-<li>Direct3D9 Samples: HDRLighting Sample</li>
-<li>Direct3D10 Samples: HDRFormats10 </li>
-<li>Direct3D11 Samples: HDRToneMappingCS11</li>
-<li><a href="http://www.cs.utah.edu/~reinhard/cdrom/tonemap.pdf" target="_blank" rel="external">Photographic Tone Reproduction for Digital Images</a></li>
-<li><a href="https://msdn.microsoft.com/en-us/library/windows/desktop/bb173486.aspx" target="_blank" rel="external">MSDN: HDR Lighting (Direct3D 9)</a></li>
-<li><a href="http://gamedev.stackexchange.com/questions/12528/how-does-hdr-work" target="_blank" rel="external">StackExchange: how does HDR work?</a></li>
-<li><a href="https://www.cg.tuwien.ac.at/research/publications/2007/Luksch_2007_RHR/Luksch_2007_RHR-RealtimeHDR%20.pdf" target="_blank" rel="external">Luksch: Realtime HDR Rendering</a></li>
 </ul>
 
       
@@ -462,7 +459,7 @@
   
     <li><a href="/tags/gcc/">gcc</a><small>1</small></li>
   
-    <li><a href="/tags/gdi/">gdi</a><small>1</small></li>
+    <li><a href="/tags/gdi/">gdi</a><small>2</small></li>
   
     <li><a href="/tags/gn/">gn</a><small>1</small></li>
   
@@ -478,7 +475,7 @@
   
     <li><a href="/tags/opensource/">opensource</a><small>1</small></li>
   
-    <li><a href="/tags/skia/">skia</a><small>1</small></li>
+    <li><a href="/tags/skia/">skia</a><small>2</small></li>
   
     <li><a href="/tags/ssl/">ssl</a><small>1</small></li>
   
@@ -487,6 +484,8 @@
     <li><a href="/tags/toolchain/">toolchain</a><small>6</small></li>
   
     <li><a href="/tags/version-control/">version control</a><small>3</small></li>
+  
+    <li><a href="/tags/wow/">wow</a><small>1</small></li>
   
   </ul>
 </div>
