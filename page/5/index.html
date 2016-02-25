@@ -122,7 +122,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://lenxyang.github.io/2016/01/25/skia/skia-tricks/" data-id="cil261wie000dgakd2rq7n05g" class="article-share-link">
+      <a data-url="http://lenxyang.github.io/2016/01/25/skia/skia-tricks/" data-id="cil263w8a000dh2kd50eywu2k" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -217,7 +217,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://lenxyang.github.io/2016/01/25/chromium/gpu-client-site-mode/" data-id="cil261wl3003ngakdsftab3qz" class="article-share-link">
+      <a data-url="http://lenxyang.github.io/2016/01/25/chromium/gpu-client-site-mode/" data-id="cil263wax003nh2kdfxpplem5" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -259,7 +259,7 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Build_Chromium_with_GN"><a href="#Build_Chromium_with_GN" class="headerlink" title="Build Chromium with GN"></a>Build Chromium with GN</h1><h2 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h2><h3 id="msvcr120d-dll__u65E0_u6CD5_u627E_u5230"><a href="#msvcr120d-dll__u65E0_u6CD5_u627E_u5230" class="headerlink" title="msvcr120d.dll 无法找到"></a>msvcr120d.dll 无法找到</h3><p>build/gyp_chromium 会执行 build/vs_toolchain.py 的 copy_runtime 方法，将运行库拷贝过去，但是我们使用的 gn， 似乎目前还没有这个功能。<br>有一点需要注意，自己手动copy的话容易犯错，最好使用 gyp_chromium生成好目录后 copy 过去比较好，注意到一点是如果你的机器是 64 为机器那么应该 copy Debug_x64 的.</p>
+        <h2 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h2><h3 id="msvcr120d-dll__u65E0_u6CD5_u627E_u5230"><a href="#msvcr120d-dll__u65E0_u6CD5_u627E_u5230" class="headerlink" title="msvcr120d.dll 无法找到"></a>msvcr120d.dll 无法找到</h3><p>build/gyp_chromium 会执行 build/vs_toolchain.py 的 copy_runtime 方法，将运行库拷贝过去，但是我们使用的 gn， 似乎目前还没有这个功能。<br>有一点需要注意，自己手动copy的话容易犯错，最好使用 gyp_chromium生成好目录后 copy 过去比较好，注意到一点是如果你的机器是 64 为机器那么应该 copy Debug_x64 的.</p>
 <h3 id="azer_3A_3AInitApp_28_29__u65E0_u6CD5_u6B63_u5E38_u5DE5_u4F5C"><a href="#azer_3A_3AInitApp_28_29__u65E0_u6CD5_u6B63_u5E38_u5DE5_u4F5C" class="headerlink" title="azer::InitApp() 无法正常工作"></a>azer::InitApp() 无法正常工作</h3><p>azer::InitApp 完成 CommandLine 和 AtExitManager 的初始化工作，在main()当中调用了 appinit 之后发现 render.dll 当中依赖于 AtExitManager 的 MessageLoop 仍然无法工作。当如果将 appinit 由 source_set 更改为 AZER_EXPORT 则没有问题。通过调试器发现自始至终程序都没有加载base.dll, 因此判断 is_component_build=false 导致生成的 base 是 static_libarary 进一步导致问题 AtExitManager 在 render.dll 和 可执行程序当中各有一个实例，在一个地方初始化无法完成。</p>
 <h3 id="yasm_CreateProcess__u5931_u8D25"><a href="#yasm_CreateProcess__u5931_u8D25" class="headerlink" title="yasm CreateProcess 失败"></a>yasm CreateProcess 失败</h3><p>这是由于 environment.x64当中的环境变量设置错误，导致无法正确找到cl.exe，将x86_amd64 拷贝到 amd64就可以了<br>此外，即使找到了由于找不到对应的 mspdb120.dll 还是会出现错误，直接将depot_tools\win_toolchain\vs2013_files\VC\bin下的mspdb拷贝过来就好了，此dll是x86和x64共享的。<br>environment.x64 和 environment.x32 是如何获得这些路径的呢？它实际上是 gn 的一个目标，定义在build/config/win/visual_studio_version.gni文件当中，它通过一个脚本build/vs_toolchain.py来获得 visual studio 的相关信息。<br>通过运行： python build\vs_toolchain.py get_toolchain_dir scope 可以看到当前使用的 visual studio 的变量设置，从 build\vs_toolchain.py的代码可以看到其中细节，这些变量全部保存在了 //build/win_toolchain.json 当中，更改他们就可以了，也可以通过环境变量更改；</p>
 <figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="special">#</span>!json</span><br><span class="line"><span class="special">&#123;</span></span><br><span class="line">"runtime_dirs": <span class="special">[</span>"E:<span class="command">\\</span>chrome<span class="command">\\</span>depot_tools<span class="command">\\</span>win_toolchain<span class="command">\\</span>vs2013_files<span class="command">\\</span>sys64", "E:<span class="command">\\</span>chrome<span class="command">\\</span>depot_tools<span class="command">\\</span>win_toolchain<span class="command">\\</span>vs2013_files<span class="command">\\</span>sys32"<span class="special">]</span>,</span><br><span class="line">"path": "E:<span class="command">\\</span>chrome<span class="command">\\</span>depot_tools<span class="command">\\</span>win_toolchain<span class="command">\\</span>vs2013_files",</span><br><span class="line">"version": "2013e",</span><br><span class="line">"wdk": "E:<span class="command">\\</span>chrome<span class="command">\\</span>depot_tools<span class="command">\\</span>win_toolchain<span class="command">\\</span>vs2013_files<span class="command">\\</span>wdk",</span><br><span class="line">"win8sdk": "E:<span class="command">\\</span>chrome<span class="command">\\</span>depot_tools<span class="command">\\</span>win_toolchain<span class="command">\\</span>vs2013_files<span class="command">\\</span>win8sdk"</span><br><span class="line"><span class="special">&#125;</span></span><br></pre></td></tr></table></figure>
@@ -290,7 +290,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://lenxyang.github.io/2016/01/25/chromium/build-with-gn/" data-id="cil261wl5003pgakdkw7qmgdx" class="article-share-link">
+      <a data-url="http://lenxyang.github.io/2016/01/25/chromium/build-with-gn/" data-id="cil263waz003ph2kddldrdv7s" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -373,7 +373,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://lenxyang.github.io/2016/01/25/azer/month-report-201511/" data-id="cil261wht0000gakduk0cc03q" class="article-share-link">
+      <a data-url="http://lenxyang.github.io/2016/01/25/azer/month-report-201511/" data-id="cil263w7q0000h2kdro1v1nyc" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -563,7 +563,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://lenxyang.github.io/2016/01/25/azer/month-report-201601/" data-id="cil261wl8003vgakd7sxc2f94" class="article-share-link">
+      <a data-url="http://lenxyang.github.io/2016/01/25/azer/month-report-201601/" data-id="cil263wb2003vh2kdxbifilgv" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -687,7 +687,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://lenxyang.github.io/2016/01/25/azer/month-report-201512/" data-id="cil261wla003xgakda3al6zfj" class="article-share-link">
+      <a data-url="http://lenxyang.github.io/2016/01/25/azer/month-report-201512/" data-id="cil263wb3003xh2kd22hobmio" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       

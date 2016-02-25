@@ -114,7 +114,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://lenxyang.github.io/2016/02/20/opensource/game_engine/" data-id="cil261wij000lgakd8sj4s2pn" class="article-share-link">
+      <a data-url="http://lenxyang.github.io/2016/02/20/opensource/game_engine/" data-id="cil263w8g000lh2kdojsj8qrb" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -156,7 +156,7 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Reflection"><a href="#Reflection" class="headerlink" title="Reflection"></a>Reflection</h1><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
+        <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
 <li><a href="http://www.gamedev.net/blog/1882/entry-2260950-screen-space-reflections-ssr-we-must-all-accept-yoshi-lol-as-our-lord-and-true-saviour/" target="_blank" rel="external">GameDev: Screen Space Reflections ( SSR ) - We must all accept yoshi_lol as our lord and true </a></li>
 <li><a href="http://casual-effects.blogspot.dk/2014/08/screen-space-ray-tracing.html" target="_blank" rel="external">Screen Space Ray Tracing(with demo in G3D Innovation Engine)</a></li>
 </ul>
@@ -170,7 +170,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://lenxyang.github.io/2016/02/20/graphics/reflection/" data-id="cil261wj9001dgakde0eg8scx" class="article-share-link">
+      <a data-url="http://lenxyang.github.io/2016/02/20/graphics/reflection/" data-id="cil263w93001dh2kddk3ikp05" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -227,7 +227,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://lenxyang.github.io/2016/02/17/d3d11/direct3d11/" data-id="cil261wkl0035gakdm3qug1kl" class="article-share-link">
+      <a data-url="http://lenxyang.github.io/2016/02/17/d3d11/direct3d11/" data-id="cil263wag0035h2kdmzpn4vah" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -291,7 +291,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://lenxyang.github.io/2016/02/17/d3d11/decal/" data-id="cil261wkq0039gakdxgqba4c3" class="article-share-link">
+      <a data-url="http://lenxyang.github.io/2016/02/17/d3d11/decal/" data-id="cil263wak0039h2kdlrv5bcxc" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -352,7 +352,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://lenxyang.github.io/2016/02/17/graphics/hdr/" data-id="cil261wjb001fgakdoqrd816b" class="article-share-link">
+      <a data-url="http://lenxyang.github.io/2016/02/17/graphics/hdr/" data-id="cil263w96001fh2kdwtld8lxf" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -411,7 +411,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://lenxyang.github.io/2016/02/16/graphics/books/" data-id="cil261wjd001hgakdbxepvbcg" class="article-share-link">
+      <a data-url="http://lenxyang.github.io/2016/02/16/graphics/books/" data-id="cil263w98001hh2kd3e53b9dj" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -453,11 +453,11 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="GCC_Tricks"><a href="#GCC_Tricks" class="headerlink" title="GCC Tricks"></a>GCC Tricks</h1><h2 id="u53BB_u6389_debug_info"><a href="#u53BB_u6389_debug_info" class="headerlink" title="去掉 debug info"></a>去掉 debug info</h2><p>一般情况下 debug info 是不需要的，发布时可以包括两个版本带有调试信息和不带调试信息的，上线使用不带调试信息的，如果出现 core 在使用带有调试信息的追问题。（某些时候带宽真的是问题，发布的程序越小越好）</p>
+        <h2 id="GCC_Tricks"><a href="#GCC_Tricks" class="headerlink" title="GCC Tricks"></a>GCC Tricks</h2><h3 id="u53BB_u6389_debug_info"><a href="#u53BB_u6389_debug_info" class="headerlink" title="去掉 debug info"></a>去掉 debug info</h3><p>一般情况下 debug info 是不需要的，发布时可以包括两个版本带有调试信息和不带调试信息的，上线使用不带调试信息的，如果出现 core 在使用带有调试信息的追问题。（某些时候带宽真的是问题，发布的程序越小越好）</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strip -g -S <span class="operator">-d</span> .build/opt/targets/wolong/auditing/wuliao/wolong_wuliao_auditing</span><br></pre></td></tr></table></figure>
-<h2 id="u8FDE_u63A5_u9759_u6001_libgcc_2C_libstdc"><a href="#u8FDE_u63A5_u9759_u6001_libgcc_2C_libstdc" class="headerlink" title="连接静态 libgcc, libstdc"></a>连接静态 libgcc, libstdc</h2><p>libgcc 是非常基础的库，他基本与编译器是绑定的，如果部署的机器 gcc 版本较低，很有可能会因为 libgcc 的版本没办法运行</p>
+<h3 id="u8FDE_u63A5_u9759_u6001_libgcc_2C_libstdc"><a href="#u8FDE_u63A5_u9759_u6001_libgcc_2C_libstdc" class="headerlink" title="连接静态 libgcc, libstdc"></a>连接静态 libgcc, libstdc</h3><p>libgcc 是非常基础的库，他基本与编译器是绑定的，如果部署的机器 gcc 版本较低，很有可能会因为 libgcc 的版本没办法运行</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc ... -static-libgcc -static-libstdc++</span><br></pre></td></tr></table></figure>
-<h2 id="u67E5_u770B_u4F9D_u8D56_u5DE5_u5177_ldd"><a href="#u67E5_u770B_u4F9D_u8D56_u5DE5_u5177_ldd" class="headerlink" title="查看依赖工具 ldd"></a>查看依赖工具 ldd</h2><h2 id="symbol_3A_nm"><a href="#symbol_3A_nm" class="headerlink" title="symbol: nm"></a>symbol: nm</h2>
+<h3 id="u67E5_u770B_u4F9D_u8D56_u5DE5_u5177_ldd"><a href="#u67E5_u770B_u4F9D_u8D56_u5DE5_u5177_ldd" class="headerlink" title="查看依赖工具 ldd"></a>查看依赖工具 ldd</h3><h3 id="symbol_3A_nm"><a href="#symbol_3A_nm" class="headerlink" title="symbol: nm"></a>symbol: nm</h3>
       
     </div>
 
@@ -467,7 +467,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://lenxyang.github.io/2016/02/16/toolchain/gcc/" data-id="cil261wi70006gakdlyycnnfg" class="article-share-link">
+      <a data-url="http://lenxyang.github.io/2016/02/16/toolchain/gcc/" data-id="cil263w840006h2kdnmkd8sl8" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -524,7 +524,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://lenxyang.github.io/2016/02/03/graphics/terrain/" data-id="cil261wj50019gakdkmwb4jqj" class="article-share-link">
+      <a data-url="http://lenxyang.github.io/2016/02/03/graphics/terrain/" data-id="cil263w8z0019h2kd0kqaekiy" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -566,8 +566,8 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Water"><a href="#Water" class="headerlink" title="Water"></a>Water</h1><h2 id="Survey"><a href="#Survey" class="headerlink" title="Survey"></a>Survey</h2><h3 id="Physical_Models"><a href="#Physical_Models" class="headerlink" title="Physical Models"></a>Physical Models</h3><h3 id="FFT_based"><a href="#FFT_based" class="headerlink" title="FFT based"></a>FFT based</h3><p>Tessendorf 的论文是 FFT 模拟 Water 的开端；Keith Lantz 的两篇文章详细介绍了 FFT Water 的实现过程，而且有代码。</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
+        <h2 id="Survey"><a href="#Survey" class="headerlink" title="Survey"></a>Survey</h2><h3 id="Physical_Models"><a href="#Physical_Models" class="headerlink" title="Physical Models"></a>Physical Models</h3><h3 id="FFT_based"><a href="#FFT_based" class="headerlink" title="FFT based"></a>FFT based</h3><p>Tessendorf 的论文是 FFT 模拟 Water 的开端；Keith Lantz 的两篇文章详细介绍了 FFT Water 的实现过程，而且有代码。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
 <li><a href="http://graphics.ucsd.edu/courses/rendering/2005/jdewall/tessendorf.pdf" target="_blank" rel="external">Tessendorf, Jerry, Simulating Ocean Water</a></li>
 <li><a href="http://www.keithlantz.net/2011/10/ocean-simulation-part-one-using-the-discrete-fourier-transform/" target="_blank" rel="external">Keith Lantz: OCEAN SIMULATION PART ONE: USING THE DISCRETE FOURIER TRANSFORM</a></li>
 <li><a href="http://www.keithlantz.net/2011/11/ocean-simulation-part-two-using-the-fast-fourier-transform/" target="_blank" rel="external">Keith Lantz: OCEAN SIMULATION PART TWO: USING THE FAST FOURIER TRANSFORM</a></li>
@@ -583,7 +583,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://lenxyang.github.io/2016/02/03/graphics/water/" data-id="cil261wj20015gakdu7hxfuu3" class="article-share-link">
+      <a data-url="http://lenxyang.github.io/2016/02/03/graphics/water/" data-id="cil263w8u0015h2kdg3qzi8k8" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -650,7 +650,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://lenxyang.github.io/2016/02/03/d3d11/particle/" data-id="cil261wkd002vgakd6819ikph" class="article-share-link">
+      <a data-url="http://lenxyang.github.io/2016/02/03/d3d11/particle/" data-id="cil263wa8002vh2kdz2xmv0z0" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
