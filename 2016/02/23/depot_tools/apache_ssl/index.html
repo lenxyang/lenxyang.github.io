@@ -3,21 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>apache SSL 配置 | azer3D</title>
+  <title>Apache SSL 配置 | azer3D</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Apapche SSL 配置基本操作查看 crs 信息1openssl x509 -in /etc/httpd/ssl/server.csr -noout -subject
-生成 key123456789$ openssl genrsa -des3 -passout pass:x -out /etc/httpd/ssl/server.pass.key 2048...$ openssl rsa -p">
+  <meta name="description" content="基本操作查看 crs 信息1openssl x509 -in /etc/httpd/ssl/server.csr -noout -subject
+生成 key123456789$ openssl genrsa -des3 -passout pass:x -out /etc/httpd/ssl/server.pass.key 2048...$ openssl rsa -passin pass:x -">
 <meta property="og:type" content="article">
-<meta property="og:title" content="apache SSL 配置">
+<meta property="og:title" content="Apache SSL 配置">
 <meta property="og:url" content="http://lenxyang.github.io/2016/02/23/depot_tools/apache_ssl/index.html">
 <meta property="og:site_name" content="azer3D">
-<meta property="og:description" content="Apapche SSL 配置基本操作查看 crs 信息1openssl x509 -in /etc/httpd/ssl/server.csr -noout -subject
-生成 key123456789$ openssl genrsa -des3 -passout pass:x -out /etc/httpd/ssl/server.pass.key 2048...$ openssl rsa -p">
-<meta property="og:updated_time" content="2016-02-23T07:39:53.800Z">
+<meta property="og:description" content="基本操作查看 crs 信息1openssl x509 -in /etc/httpd/ssl/server.csr -noout -subject
+生成 key123456789$ openssl genrsa -des3 -passout pass:x -out /etc/httpd/ssl/server.pass.key 2048...$ openssl rsa -passin pass:x -">
+<meta property="og:updated_time" content="2016-02-25T11:03:16.575Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="apache SSL 配置">
-<meta name="twitter:description" content="Apapche SSL 配置基本操作查看 crs 信息1openssl x509 -in /etc/httpd/ssl/server.csr -noout -subject
-生成 key123456789$ openssl genrsa -des3 -passout pass:x -out /etc/httpd/ssl/server.pass.key 2048...$ openssl rsa -p">
+<meta name="twitter:title" content="Apache SSL 配置">
+<meta name="twitter:description" content="基本操作查看 crs 信息1openssl x509 -in /etc/httpd/ssl/server.csr -noout -subject
+生成 key123456789$ openssl genrsa -des3 -passout pass:x -out /etc/httpd/ssl/server.pass.key 2048...$ openssl rsa -passin pass:x -">
   
     <link rel="alternate" href="/atom.xml" title="azer3D" type="application/atom+xml">
   
@@ -86,7 +86,7 @@
     
   
     <h1 class="article-title" itemprop="name">
-      apache SSL 配置
+      Apache SSL 配置
     </h1>
   
 
@@ -106,10 +106,10 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Apapche_SSL__u914D_u7F6E"><a href="#Apapche_SSL__u914D_u7F6E" class="headerlink" title="Apapche SSL 配置"></a>Apapche SSL 配置</h1><h2 id="u57FA_u672C_u64CD_u4F5C"><a href="#u57FA_u672C_u64CD_u4F5C" class="headerlink" title="基本操作"></a>基本操作</h2><h3 id="u67E5_u770B_crs__u4FE1_u606F"><a href="#u67E5_u770B_crs__u4FE1_u606F" class="headerlink" title="查看 crs 信息"></a>查看 crs 信息</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -in /etc/httpd/ssl/server.csr -noout -subject</span><br></pre></td></tr></table></figure>
+        <h2 id="u57FA_u672C_u64CD_u4F5C"><a href="#u57FA_u672C_u64CD_u4F5C" class="headerlink" title="基本操作"></a>基本操作</h2><h3 id="u67E5_u770B_crs__u4FE1_u606F"><a href="#u67E5_u770B_crs__u4FE1_u606F" class="headerlink" title="查看 crs 信息"></a>查看 crs 信息</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -in /etc/httpd/ssl/server.csr -noout -subject</span><br></pre></td></tr></table></figure>
 <h3 id="u751F_u6210_key"><a href="#u751F_u6210_key" class="headerlink" title="生成 key"></a>生成 key</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ openssl genrsa -des3 -passout pass:x -out /etc/httpd/ssl/server.pass.key <span class="number">2048</span></span><br><span class="line">...</span><br><span class="line">$ openssl rsa -passin pass:x -in /etc/httpd/ssl/server.pass.key -out /etc/httpd/ssl/server.key</span><br><span class="line">writing RSA key</span><br><span class="line">$ rm server.pass.key</span><br><span class="line">$ openssl req -new -key /etc/httpd/ssl/server.key -out /etc/httpd/ssl/server.csr.tmp</span><br><span class="line">Country Name (<span class="number">2</span> letter code) [AU]:US</span><br><span class="line">..</span><br><span class="line">$ openssl x509 -req -days <span class="number">365</span> -in /etc/httpd/ssl/server.csr.tmp -signkey /etc/httpd/ssl/server.key -out /etc/httpd/ssl/server.csr</span><br></pre></td></tr></table></figure>
 <h2 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h2><h3 id="RSA_server_certificate_is_a_CA_certificate__28BasicConstraints_3A_CA__3D_3D_TRUE__21_3F_29"><a href="#RSA_server_certificate_is_a_CA_certificate__28BasicConstraints_3A_CA__3D_3D_TRUE__21_3F_29" class="headerlink" title="RSA server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)"></a>RSA server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)</h3><p>通过 <a href="http://www.onlamp.com/2008/03/04/step-by-step-configuring-ssl-under-apache.html" target="_blank" rel="external">Step-By-Step Configuring SSL Under Apache</a> 配置的 csr key 会出问题，如果使用 <a href="https://devcenter.heroku.com/articles/ssl-certificate-self" target="_blank" rel="external">Creating a Self-Signed SSL Certificate</a>的方法创建不会出现此错误</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
 <li><a href="http://www.onlamp.com/2008/03/04/step-by-step-configuring-ssl-under-apache.html" target="_blank" rel="external">Step-By-Step Configuring SSL Under Apache</a></li>
 </ul>
 
@@ -122,7 +122,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://lenxyang.github.io/2016/02/23/depot_tools/apache_ssl/" data-id="cil25q8g000238mkd4sxdprrb" class="article-share-link">
+      <a data-url="http://lenxyang.github.io/2016/02/23/depot_tools/apache_ssl/" data-id="cil25vzca0023cckdrrb29awz" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       

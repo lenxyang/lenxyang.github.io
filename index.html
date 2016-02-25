@@ -115,7 +115,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://lenxyang.github.io/2016/02/25/mysql/mysqlbinlog/" data-id="cil25q8es000q8mkd2n995pze" class="article-share-link">
+      <a data-url="http://lenxyang.github.io/2016/02/25/mysql/mysqlbinlog/" data-id="cil25vzaz000qcckd89i6xj99" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -174,7 +174,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://lenxyang.github.io/2016/02/25/graphics/shadowmap/" data-id="cil25q8fc001b8mkd3ju5l93t" class="article-share-link">
+      <a data-url="http://lenxyang.github.io/2016/02/25/graphics/shadowmap/" data-id="cil25vzbk001bcckdqeujb3qh" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -216,7 +216,7 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
+        <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
 <li><a href="https://msdn.microsoft.com/en-us/library/windows/desktop/bb509710.aspx" target="_blank" rel="external">MSDN: Offline Compiling</a></li>
 </ul>
 
@@ -229,7 +229,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://lenxyang.github.io/2016/02/25/d3d11/fxc/" data-id="cil25q8gn00318mkdjk7w4jpb" class="article-share-link">
+      <a data-url="http://lenxyang.github.io/2016/02/25/d3d11/fxc/" data-id="cil25vzcy0031cckdm8bqzc86" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -293,7 +293,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://lenxyang.github.io/2016/02/24/shell/ssh/" data-id="cil25q8em000i8mkd1eh09kny" class="article-share-link">
+      <a data-url="http://lenxyang.github.io/2016/02/24/shell/ssh/" data-id="cil25vzav000icckdky4pj1en" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -350,7 +350,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://lenxyang.github.io/2016/02/23/wow/blp_format/" data-id="cil25q8ea00038mkdqt0dbd43" class="article-share-link">
+      <a data-url="http://lenxyang.github.io/2016/02/23/wow/blp_format/" data-id="cil25vzag0003cckddg9r3zpx" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -372,7 +372,7 @@
     
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/23/depot_tools/apache_ssl/">apache SSL 配置</a>
+      <a class="article-title" href="/2016/02/23/depot_tools/apache_ssl/">Apache SSL 配置</a>
     </h1>
   
 
@@ -392,10 +392,10 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Apapche_SSL__u914D_u7F6E"><a href="#Apapche_SSL__u914D_u7F6E" class="headerlink" title="Apapche SSL 配置"></a>Apapche SSL 配置</h1><h2 id="u57FA_u672C_u64CD_u4F5C"><a href="#u57FA_u672C_u64CD_u4F5C" class="headerlink" title="基本操作"></a>基本操作</h2><h3 id="u67E5_u770B_crs__u4FE1_u606F"><a href="#u67E5_u770B_crs__u4FE1_u606F" class="headerlink" title="查看 crs 信息"></a>查看 crs 信息</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -in /etc/httpd/ssl/server.csr -noout -subject</span><br></pre></td></tr></table></figure>
+        <h2 id="u57FA_u672C_u64CD_u4F5C"><a href="#u57FA_u672C_u64CD_u4F5C" class="headerlink" title="基本操作"></a>基本操作</h2><h3 id="u67E5_u770B_crs__u4FE1_u606F"><a href="#u67E5_u770B_crs__u4FE1_u606F" class="headerlink" title="查看 crs 信息"></a>查看 crs 信息</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -in /etc/httpd/ssl/server.csr -noout -subject</span><br></pre></td></tr></table></figure>
 <h3 id="u751F_u6210_key"><a href="#u751F_u6210_key" class="headerlink" title="生成 key"></a>生成 key</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ openssl genrsa -des3 -passout pass:x -out /etc/httpd/ssl/server.pass.key <span class="number">2048</span></span><br><span class="line">...</span><br><span class="line">$ openssl rsa -passin pass:x -in /etc/httpd/ssl/server.pass.key -out /etc/httpd/ssl/server.key</span><br><span class="line">writing RSA key</span><br><span class="line">$ rm server.pass.key</span><br><span class="line">$ openssl req -new -key /etc/httpd/ssl/server.key -out /etc/httpd/ssl/server.csr.tmp</span><br><span class="line">Country Name (<span class="number">2</span> letter code) [AU]:US</span><br><span class="line">..</span><br><span class="line">$ openssl x509 -req -days <span class="number">365</span> -in /etc/httpd/ssl/server.csr.tmp -signkey /etc/httpd/ssl/server.key -out /etc/httpd/ssl/server.csr</span><br></pre></td></tr></table></figure>
 <h2 id="Trouble_Shooting"><a href="#Trouble_Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h2><h3 id="RSA_server_certificate_is_a_CA_certificate__28BasicConstraints_3A_CA__3D_3D_TRUE__21_3F_29"><a href="#RSA_server_certificate_is_a_CA_certificate__28BasicConstraints_3A_CA__3D_3D_TRUE__21_3F_29" class="headerlink" title="RSA server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)"></a>RSA server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)</h3><p>通过 <a href="http://www.onlamp.com/2008/03/04/step-by-step-configuring-ssl-under-apache.html" target="_blank" rel="external">Step-By-Step Configuring SSL Under Apache</a> 配置的 csr key 会出问题，如果使用 <a href="https://devcenter.heroku.com/articles/ssl-certificate-self" target="_blank" rel="external">Creating a Self-Signed SSL Certificate</a>的方法创建不会出现此错误</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
 <li><a href="http://www.onlamp.com/2008/03/04/step-by-step-configuring-ssl-under-apache.html" target="_blank" rel="external">Step-By-Step Configuring SSL Under Apache</a></li>
 </ul>
 
@@ -408,7 +408,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://lenxyang.github.io/2016/02/23/depot_tools/apache_ssl/" data-id="cil25q8g000238mkd4sxdprrb" class="article-share-link">
+      <a data-url="http://lenxyang.github.io/2016/02/23/depot_tools/apache_ssl/" data-id="cil25vzca0023cckdrrb29awz" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -465,7 +465,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://lenxyang.github.io/2016/02/23/compiler/llvm/" data-id="cil25q8gv003d8mkdddge89tx" class="article-share-link">
+      <a data-url="http://lenxyang.github.io/2016/02/23/compiler/llvm/" data-id="cil25vzd6003dcckd31laigu2" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -520,7 +520,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://lenxyang.github.io/2016/02/20/chromium/grit/" data-id="cil25q8gx003i8mkdx86pcv86" class="article-share-link">
+      <a data-url="http://lenxyang.github.io/2016/02/20/chromium/grit/" data-id="cil25vzd7003icckdgac5022b" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -573,7 +573,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://lenxyang.github.io/2016/02/20/graphics/blogs/" data-id="cil25q8fk001l8mkdbslv3o2a" class="article-share-link">
+      <a data-url="http://lenxyang.github.io/2016/02/20/graphics/blogs/" data-id="cil25vzbt001lcckdswjp3y6t" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -630,7 +630,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://lenxyang.github.io/2016/02/20/d3d11/texture/" data-id="cil25q8ga002k8mkd28motldn" class="article-share-link">
+      <a data-url="http://lenxyang.github.io/2016/02/20/d3d11/texture/" data-id="cil25vzcj002kcckdvy7nq1as" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
