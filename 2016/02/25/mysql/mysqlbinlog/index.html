@@ -5,16 +5,16 @@
   
   <title>mysqlbinlog | azer3D</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="mysqlbinlogdump 远程数据1mysqlbinlog -ubinloguser -ppassword -h 10.0.0.1 -P3306 -t --database testdb -v --start-datetime=&quot;2015-10-22 12:00:00&quot; --stop-datetime=&quot;2015-10-22 13:00:00&quot; --read-from-remote-serv">
+  <meta name="description" content="常用命令dump 远程数据1mysqlbinlog -ubinloguser -ppassword -h 10.0.0.1 -P3306 -t --database testdb -v --start-datetime=&quot;2015-10-22 12:00:00&quot; --stop-datetime=&quot;2015-10-22 13:00:00&quot; --read-from-remote-server mysq">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mysqlbinlog">
 <meta property="og:url" content="http://lenxyang.github.io/2016/02/25/mysql/mysqlbinlog/index.html">
 <meta property="og:site_name" content="azer3D">
-<meta property="og:description" content="mysqlbinlogdump 远程数据1mysqlbinlog -ubinloguser -ppassword -h 10.0.0.1 -P3306 -t --database testdb -v --start-datetime=&quot;2015-10-22 12:00:00&quot; --stop-datetime=&quot;2015-10-22 13:00:00&quot; --read-from-remote-serv">
-<meta property="og:updated_time" content="2016-02-25T09:10:22.813Z">
+<meta property="og:description" content="常用命令dump 远程数据1mysqlbinlog -ubinloguser -ppassword -h 10.0.0.1 -P3306 -t --database testdb -v --start-datetime=&quot;2015-10-22 12:00:00&quot; --stop-datetime=&quot;2015-10-22 13:00:00&quot; --read-from-remote-server mysq">
+<meta property="og:updated_time" content="2016-02-25T11:05:05.692Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysqlbinlog">
-<meta name="twitter:description" content="mysqlbinlogdump 远程数据1mysqlbinlog -ubinloguser -ppassword -h 10.0.0.1 -P3306 -t --database testdb -v --start-datetime=&quot;2015-10-22 12:00:00&quot; --stop-datetime=&quot;2015-10-22 13:00:00&quot; --read-from-remote-serv">
+<meta name="twitter:description" content="常用命令dump 远程数据1mysqlbinlog -ubinloguser -ppassword -h 10.0.0.1 -P3306 -t --database testdb -v --start-datetime=&quot;2015-10-22 12:00:00&quot; --stop-datetime=&quot;2015-10-22 13:00:00&quot; --read-from-remote-server mysq">
   
     <link rel="alternate" href="/atom.xml" title="azer3D" type="application/atom+xml">
   
@@ -103,8 +103,8 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="mysqlbinlog"><a href="#mysqlbinlog" class="headerlink" title="mysqlbinlog"></a>mysqlbinlog</h1><h2 id="dump__u8FDC_u7A0B_u6570_u636E"><a href="#dump__u8FDC_u7A0B_u6570_u636E" class="headerlink" title="dump 远程数据"></a>dump 远程数据</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqlbinlog -ubinloguser -ppassword -h <span class="number">10.0</span>.<span class="number">0.1</span> -P3306 -t --database testdb -v --start-datetime=<span class="string">"2015-10-22 12:00:00"</span> --stop-datetime=<span class="string">"2015-10-22 13:00:00"</span> --read-from-remote-server mysql-bin.<span class="number">000000</span></span><br></pre></td></tr></table></figure>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1>
+        <h2 id="u5E38_u7528_u547D_u4EE4"><a href="#u5E38_u7528_u547D_u4EE4" class="headerlink" title="常用命令"></a>常用命令</h2><h3 id="dump__u8FDC_u7A0B_u6570_u636E"><a href="#dump__u8FDC_u7A0B_u6570_u636E" class="headerlink" title="dump 远程数据"></a>dump 远程数据</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqlbinlog -ubinloguser -ppassword -h <span class="number">10.0</span>.<span class="number">0.1</span> -P3306 -t --database testdb -v --start-datetime=<span class="string">"2015-10-22 12:00:00"</span> --stop-datetime=<span class="string">"2015-10-22 13:00:00"</span> --read-from-remote-server mysql-bin.<span class="number">000000</span></span><br></pre></td></tr></table></figure>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2>
       
     </div>
 
@@ -114,7 +114,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://lenxyang.github.io/2016/02/25/mysql/mysqlbinlog/" data-id="cil25xf6e000qdykdyycteqf8" class="article-share-link">
+      <a data-url="http://lenxyang.github.io/2016/02/25/mysql/mysqlbinlog/" data-id="cil25y70b000qeqkdz27yw2bz" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
