@@ -1,0 +1,127 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>2016-03 Month Report | Azer3D</title><link rel="stylesheet" type="text/css" href="/css/normalize.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="/css/pure-min.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">2016-03 Month Report</h1><a id="logo" href="/.">Azer3D</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">2016-03 Month Report</h1><div class="post-meta">Mar 10, 2016<span> | </span><span class="category"><a href="/categories/Azer3D/">Azer3D</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span></div><div class="post-content"><h1 id="201603__u6708_u5DE5_u4F5C"><a href="#201603__u6708_u5DE5_u4F5C" class="headerlink" title="201603 月工作"></a>201603 月工作</h1><h2 id="201602"><a href="#201602" class="headerlink" title="201602"></a>201602</h2><ul>
+<li>Framework<ul>
+<li><strong> p0 </strong>: Mesh 代码重构  <strong> (completed) </strong></li>
+<li><strong> p0 </strong>: Multiple Output Renderer <strong> (completed) </strong></li>
+<li><strong> p0 </strong>: 重构 Interactive 部分代码<ul>
+<li><strong> p0 </strong>: 重构 Geometry 代码 <strong> (completed) </strong></li>
+<li><strong> p0 </strong>: 整理 Transform Object 代码 <strong> (completed) </strong></li>
+<li><strong> p0 </strong>: 整理 Rotate Object 代码 <strong> (completed) </strong></li>
+<li><strong> p0 </strong>: 整理 LightController Object 代码</li>
+<li><strong> p0 </strong>: 增加调节鼠标速度及旋转速度的组件</li>
+</ul>
+</li>
+<li><strong> p0 </strong>: 调整 Effect 结构使其更高效，同时支持批量渲染 <strong> (completed) </strong></li>
+<li><strong> p0 </strong>: 将 shader(vs, ps, gs）各个阶段代码放入一个文件 <strong> (completed) </strong></li>
+<li><strong> p2 </strong>: Multiple Constants Buffer support in HLSL <strong> (completed) </strong></li>
+<li><strong> p1 </strong>: Resource 加载增加 Buffer 机制</li>
+<li><strong> p1 </strong>: D3D Vertex Layout Buffer(Donnot create differet object for same layout in DirectX11)</li>
+<li><strong> p2 </strong>: Instancing Rendering Support in framework</li>
+</ul>
+</li>
+<li>Scene Management<ul>
+<li><strong> p0 </strong>: Frustrum Culling</li>
+<li><strong> p1 </strong>: BSP Scene Node</li>
+</ul>
+</li>
+<li>Render Framework<ul>
+<li><strong> p1 </strong>: Scene Render Framework With Stencil Reflection support</li>
+</ul>
+</li>
+<li>Simple Effects<ul>
+<li>Common<ul>
+<li><strong> p2 </strong>: montion blur <strong> (completed) </strong></li>
+<li><strong> p2 </strong>: Alpha to converage</li>
+</ul>
+</li>
+<li>Stencil based techniques<ul>
+<li><strong> p0 </strong>: Silhouette</li>
+<li><strong> p1 </strong>: Shadow Volumn</li>
+</ul>
+</li>
+<li>Compute Shader<ul>
+<li><strong> p1 </strong>: FFT Transform</li>
+<li><strong> p1 </strong>: CS based FFT Transform</li>
+</ul>
+</li>
+<li>Shadow Map (Need Universe Light Support)<ul>
+<li><strong> p2 </strong>: Multiple-light support</li>
+<li><strong> p2 </strong>: Directional Light Support</li>
+</ul>
+</li>
+<li>Tessellation<ul>
+<li><strong> p0 </strong>: decay</li>
+</ul>
+</li>
+<li>Environment Mapping *<ul>
+<li><strong> p1 </strong>: Geometry Shader based Cubemap mapping</li>
+<li><strong> p1 </strong>: Multi-thread Cubemapping generation</li>
+</ul>
+</li>
+<li><strong> p0 </strong>: HDRFormat</li>
+<li><strong> p0 </strong>: HDRLighting</li>
+<li><strong> p0 </strong>: SSAO</li>
+<li><strong> p1 </strong>: Animation <strong> (completed) </strong></li>
+<li><strong> p1 </strong>: Water Simulation</li>
+<li><strong> p1 </strong>: Water Effects</li>
+</ul>
+</li>
+<li>Terrain System<ul>
+<li><strong> p1 </strong>: Tree-based Culling</li>
+<li><strong> p1 </strong>: clipping</li>
+</ul>
+</li>
+<li>Features<ul>
+<li><strong> p1 </strong>: Deferred Shadering  <strong> (completed) </strong></li>
+<li><strong> p2 </strong>: Multithread Rendering</li>
+</ul>
+</li>
+<li>Unittest<ul>
+<li><strong> p2 </strong>: Add unittest to azer</li>
+</ul>
+</li>
+<li>Game Resources<ul>
+<li>WOW Model data(Skinned mesh)</li>
+<li>Wow Map data</li>
+</ul>
+</li>
+<li>Books &amp; Papers<ul>
+<li>Book: Real-Time Readering</li>
+<li>Book: Advanced Lighting and Materials With Shaders</li>
+<li>Book: HLSL Development Cookbook</li>
+<li><a href="http://colour-science.org/posts/the-importance-of-terminology-and-srgb-uncertainty/" target="_blank" rel="external">The Importance of Terminology and sRGB Uncertainty</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="Bug"><a href="#Bug" class="headerlink" title="Bug"></a>Bug</h2><h2 id="Daily_Report"><a href="#Daily_Report" class="headerlink" title="Daily Report"></a>Daily Report</h2><h3 id="20160310"><a href="#20160310" class="headerlink" title="20160310"></a>20160310</h3><ul>
+<li>SDKMesh Animation</li>
+<li>SDKMesh Animation With NormalMap (with bug)</li>
+</ul>
+<h3 id="20160311"><a href="#20160311" class="headerlink" title="20160311"></a>20160311</h3><ul>
+<li>Refactor Entity</li>
+</ul>
+<h3 id="20160314"><a href="#20160314" class="headerlink" title="20160314"></a>20160314</h3><ul>
+<li>Monblur</li>
+</ul>
+<h3 id="20160322"><a href="#20160322" class="headerlink" title="20160322"></a>20160322</h3><ul>
+<li>整理 Geometry 和 InteractiveController 代码</li>
+<li>整理 HLSL 将各个阶段 HLSL 放入到一个文件当中</li>
+</ul>
+<h3 id="20160323"><a href="#20160323" class="headerlink" title="20160323"></a>20160323</h3><ul>
+<li>Deferred Shading Samples</li>
+</ul>
+<h3 id="20160325"><a href="#20160325" class="headerlink" title="20160325"></a>20160325</h3><ul>
+<li>Light Interactive Controller</li>
+<li></li>
+</ul>
+<h3 id="doing"><a href="#doing" class="headerlink" title="doing"></a><strong> doing </strong></h3><ul>
+<li>ShaodwVolumn</li>
+<li>HDRLighting</li>
+<li>Picking ?</li>
+<li>HDR ?</li>
+<li>SSAO ?</li>
+<li>SSR ?</li>
+<li>Decay ?</li>
+<li>Shadowmap ?</li>
+<li>Water</li>
+</ul>
+</div><a data-url="http://lenxyang.github.io/2016/03/10/work/month-report-201603/" data-id="cir5q34m5000i53pvx8lm2lr0" class="article-share-link">分享到</a><div class="tags"><a href="/tags/azer3d/">azer3d</a></div><div class="post-nav"><a href="/2016/03/12/graphics/shadowvolumn/" class="pre">Shadow Volumn</a><a href="/2016/03/03/linux/network_config/" class="next">Linux Network Config</a></div></div></div></div><div class="pure-u-1-4"><div id="sidebar"><div class="widget"><form action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" class="search-form"><input type="text" name="q" maxlength="20" placeholder="Search" class="search-form-input"/><input type="hidden" name="sitesearch" value="http://lenxyang.github.io"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Azer3D/">Azer3D</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Chromium/">Chromium</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler-LLVM/">Compiler/LLVM</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Computer-Graphics/">Computer Graphics</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/DirectX/">DirectX</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/">Hadoop</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Misc/">Misc</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Operation/">Operation</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Script-Language/">Script Language</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/WOW/">WOW</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dialy/">dialy</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/stroage/">stroage</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/toolchain/">toolchain</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/android/" style="font-size: 15px;">android</a> <a href="/tags/wow/" style="font-size: 15px;">wow</a> <a href="/tags/svn/" style="font-size: 15px;">svn</a> <a href="/tags/version-control/" style="font-size: 15px;">version control</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/toolchain/" style="font-size: 15px;">toolchain</a> <a href="/tags/gcc/" style="font-size: 15px;">gcc</a> <a href="/tags/llvm/" style="font-size: 15px;">llvm</a> <a href="/tags/gdi/" style="font-size: 15px;">gdi</a> <a href="/tags/skia/" style="font-size: 15px;">skia</a> <a href="/tags/mysql/" style="font-size: 15px;">mysql</a> <a href="/tags/perl/" style="font-size: 15px;">perl</a> <a href="/tags/apache2/" style="font-size: 15px;">apache2</a> <a href="/tags/apache/" style="font-size: 15px;">apache</a> <a href="/tags/ssl/" style="font-size: 15px;">ssl</a> <a href="/tags/azer3d/" style="font-size: 15px;">azer3d</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/network/" style="font-size: 15px;">network</a> <a href="/tags/bash/" style="font-size: 15px;">bash</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/hdfs/" style="font-size: 15px;">hdfs</a> <a href="/tags/docker/" style="font-size: 15px;">docker</a> <a href="/tags/fuse/" style="font-size: 15px;">fuse</a> <a href="/tags/effect/" style="font-size: 15px;">effect</a> <a href="/tags/opensource/" style="font-size: 15px;">opensource</a> <a href="/tags/direct3d/" style="font-size: 15px;">direct3d</a> <a href="/tags/shadowmap/" style="font-size: 15px;">shadowmap</a> <a href="/tags/hlsl/" style="font-size: 15px;">hlsl</a> <a href="/tags/directx/" style="font-size: 15px;">directx</a> <a href="/tags/compiler/" style="font-size: 15px;">compiler</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/07/16/toolchain/build_llvm/">build llvm</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/12/graphics/math/">Math</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/11/graphics/course/">Computer Graphics Course</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/script/embed_dart/">embed Dart VM</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/work/month-report-201607/">2016-07 Month Report</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/21/graphics/ambient_occlusion/">Ambient Occlusion</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/15/script/build_dart/">Build Dart Vm</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/11/work/month-report-201606/">2016-06 Month Report</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/06/chromium/trace_event/">Trace Event</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/03/chromium/devnotes_output_surface/">DevNotes Software Output Surface</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div></div><div id="footer">© <a href="/." rel="nofollow">Azer3D.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/jquery.min.js?v=0.0.0"></script><script type="text/javascript" src="/js/totop.js?v=0.0.0"></script><script type="text/javascript" src="/js/fancybox.pack.js?v=0.0.0"></script><script type="text/javascript" src="/js/jquery.fancybox.js?v=0.0.0"></script><link rel="stylesheet" type="text/css" href="/css/jquery.fancybox.css?v=0.0.0"><script type="text/javascript" src="/js/share.js?v=0.0.0"></script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
